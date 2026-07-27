@@ -36,15 +36,23 @@ roadmap, not a property of software. But every row in that table works today.
 
 ## Quick start — see JARVIS and talk to him
 
-This runs on **your computer** (it is not a website). One-time setup, then two commands:
+This runs on **your computer** (it is not a website). Easiest path, no terminal needed:
 
-1. Install [Python 3.10+](https://www.python.org/downloads/) (on Windows, tick "Add to PATH").
-2. Get the code: `git clone` this repo, or GitHub → green **Code** button → **Download ZIP** → unzip.
-3. In a terminal, inside the folder:
+1. Install [Python 3.10+](https://www.python.org/downloads/) (on Windows, tick **"Add python.exe to PATH"**).
+2. GitHub → green **Code** button → **Download ZIP** → unzip it anywhere.
+3. Open the folder and start him:
+   - **Windows:** double-click `Start-JARVIS.bat`
+   - **Mac/Linux:** open a terminal in the folder and run `bash start-jarvis.sh`
+
+The first run installs everything and asks you to paste an Anthropic API key
+(get one at [console.anthropic.com](https://console.anthropic.com) → API keys —
+it's saved so you're only asked once). Then the HUD opens by itself.
+
+Terminal equivalent, if you prefer it:
 
 ```bash
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=sk-ant-...    # from console.anthropic.com  (Windows: set ANTHROPIC_API_KEY=sk-ant-...)
+export ANTHROPIC_API_KEY=sk-ant-...    # Windows: set ANTHROPIC_API_KEY=sk-ant-...
 python -m jarvis web
 ```
 
