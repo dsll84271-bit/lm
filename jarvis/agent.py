@@ -22,10 +22,11 @@ class Jarvis:
         self.speak_replies = speak_replies
 
     # ------------------------------------------------------------------
-    def ask(self, user_text: str, on_text=None) -> str:
+    def ask(self, user_text: str, on_text=None, on_tool=None) -> str:
         """Send one user turn and run the agentic loop to completion.
 
         `on_text` receives streamed text deltas (defaults to stdout).
+        `on_tool(name, brief, ok)` is called after each tool execution.
         Returns the final assistant text.
         """
         if on_text is None:
@@ -77,6 +78,8 @@ class Jarvis:
                 result, is_error = execute(block.name, block.input)
                 if is_error:
                     on_text(f"  ✗ {result[:300]}\n")
+                if on_tool:
+                    on_tool(block.name, _brief(block.input), not is_error)
                 tool_results.append(
                     {
                         "type": "tool_result",

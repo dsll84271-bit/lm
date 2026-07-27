@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.A.R.V.I.S.</title>
+<style>
+  :root {
+    --bg: #030711;
+    --panel: rgba(10, 25, 47, 0.55);
+    --cyan: #35e0ff;
+    --cyan-dim: #1a7f9e;
+    --text: #d7f4fb;
+    --muted: #6fa8b8;
+    --danger: #ff5f56;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(ellipse at 50% 30%, #0a1b33 0%, var(--bg) 65%);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    overflow: hidden;
+  }
+  /* faint grid */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(53,224,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(53,224,255,.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  header {
+    padding: 18px 0 4px; text-align: center; letter-spacing: .45em;
+    font-size: 20px; font-weight: 300; color: var(--cyan);
+    text-shadow: 0 0 12px rgba(53,224,255,.8);
+  }
+  #status { font-size: 11px; letter-spacing: .18em; color: var(--muted); text-align: center; }
+
+  /* ---- Arc reactor ---- */
+  #reactor { position: relative; width: 190px; height: 190px; margin: 14px auto 6px; flex-shrink: 0; }
+  .ring { position: absolute; inset: 0; border-radius: 50%; }
+  .r1 { border: 1.5px solid rgba(53,224,255,.85); box-shadow: 0 0 26px rgba(53,224,255,.55), inset 0 0 22px rgba(53,224,255,.35); }
+  .r2 { inset: 16px; border: 1px dashed rgba(53,224,255,.6); animation: spin 14s linear infinite; }
+  .r3 { inset: 34px; border: 2px solid transparent; border-top-color: var(--cyan); border-bottom-color: var(--cyan-dim); animation: spin 3.5s linear infinite reverse; }
+  .r4 { inset: 52px; border: 1px solid rgba(53,224,255,.45); }
+  .core {
+    position: absolute; inset: 66px; border-radius: 50%;
+    background: radial-gradient(circle, #eaffff 0%, var(--cyan) 42%, rgba(26,127,158,.15) 78%);
+    box-shadow: 0 0 34px rgba(53,224,255,.95);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  .tick { position: absolute; left: 50%; top: 50%; width: 2px; height: 10px; background: var(--cyan); opacity: .7;
+          transform-origin: 0 -84px; margin-top: 84px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { opacity: .85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+  #reactor.busy .r3 { animation-duration: .8s; }
+  #reactor.busy .core { animation-duration: .7s; }
+
+  /* ---- Chat ---- */
+  #chat {
+    width: min(720px, 94vw); flex: 1 1 auto; overflow-y: auto;
+    padding: 10px 6px 14px; scrollbar-width: thin; scrollbar-color: var(--cyan-dim) transparent;
+  }
+  .msg { margin: 9px 0; display: flex; }
+  .msg .bubble {
+    max-width: 84%; padding: 10px 14px; border-radius: 10px; line-height: 1.45; font-size: 14.5px;
+    white-space: pre-wrap; word-wrap: break-word;
+  }
+  .msg.user { justify-content: flex-end; }
+  .msg.user .bubble { background: rgba(53,224,255,.12); border: 1px solid rgba(53,224,255,.35); }
+  .msg.jarvis .bubble { background: var(--panel); border: 1px solid rgba(53,224,255,.18); }
+  .msg.jarvis .who { color: var(--cyan); font-size: 10px; letter-spacing: .25em; display: block; margin-bottom: 4px; }
+  .tool {
+    font-size: 11.5px; color: var(--muted); border-left: 2px solid var(--cyan-dim);
+    margin: 6px 0 6px 12px; padding: 3px 10px; font-family: ui-monospace, Menlo, Consolas, monospace;
+  }
+  .tool.err { border-left-color: var(--danger); color: #ff9b94; }
+  .sys { text-align: center; font-size: 12px; color: var(--muted); margin: 8px 0; }
+
+  /* ---- Input bar ---- */
+  #bar {
+    width: min(720px, 94vw); display: flex; gap: 8px; padding: 10px 0 18px; align-items: center;
+  }
+  #inp {
+    flex: 1; background: rgba(8,20,38,.8); border: 1px solid rgba(53,224,255,.35); border-radius: 8px;
+    color: var(--text); padding: 12px 14px; font-size: 15px; outline: none;
+  }
+  #inp:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(53,224,255,.25); }
+  button {
+    background: rgba(53,224,255,.1); color: var(--cyan); border: 1px solid rgba(53,224,255,.45);
+    border-radius: 8px; padding: 11px 14px; font-size: 15px; cursor: pointer; transition: all .15s;
+  }
+  button:hover { background: rgba(53,224,255,.22); }
+  button.active { background: var(--cyan); color: #04121f; box-shadow: 0 0 14px rgba(53,224,255,.7); }
+  #mic.listening { background: var(--danger); border-color: var(--danger); color: #fff; animation: pulse 1s infinite; }
+</style>
+</head>
+<body>
+  <header>J.A.R.V.I.S.</header>
+  <div id="status">INITIALIZING…</div>
+
+  <div id="reactor">
+    <div class="ring r1"></div><div class="ring r2"></div>
+    <div class="ring r3"></div><div class="ring r4"></div>
+    <div class="core"></div>
+  </div>
+
+  <div id="chat"></div>
+
+  <div id="bar">
+    <button id="mic" title="Hold a conversation by voice (Chrome/Edge)">🎙</button>
+    <input id="inp" placeholder="Speak or type, Sir…" autocomplete="off">
+    <button id="send">Send</button>
+    <button id="mute" class="active" title="Voice replies on/off">🔊</button>
+  </div>
+
+<script>
+const chat = document.getElementById("chat");
+const inp = document.getElementById("inp");
+const reactor = document.getElementById("reactor");
+const micBtn = document.getElementById("mic");
+const muteBtn = document.getElementById("mute");
+let speakOn = true;
+let voice = null;
+
+// add clock ticks around the reactor
+for (let i = 0; i < 24; i++) {
+  const t = document.createElement("div");
+  t.className = "tick";
+  t.style.transform = `rotate(${i * 15}deg)`;
+  document.querySelector(".r1").appendChild(t);
+}
+
+function pickVoice() {
+  const voices = speechSynthesis.getVoices();
+  voice =
+    voices.find(v => /en-GB/i.test(v.lang) && /male|ryan|daniel|arthur|george/i.test(v.name)) ||
+    voices.find(v => /en-GB/i.test(v.lang)) ||
+    voices.find(v => /^en/i.test(v.lang)) || voices[0] || null;
+}
+speechSynthesis.onvoiceschanged = pickVoice;
+pickVoice();
+
+function speak(text) {
+  if (!speakOn || !("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.slice(0, 800));
+  if (voice) u.voice = voice;
+  u.rate = 1.03; u.pitch = 0.92;
+  speechSynthesis.speak(u);
+}
+
+function el(cls, html) {
+  const d = document.createElement("div");
+  d.className = cls;
+  d.innerHTML = html;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  return d;
+}
+function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+function addUser(text) { el("msg user", `<div class="bubble">${esc(text)}</div>`); }
+function addJarvis(text) {
+  el("msg jarvis", `<div class="bubble"><span class="who">JARVIS</span>${esc(text)}</div>`);
+}
+function addTool(line, err) { el("tool" + (err ? " err" : ""), esc(line)); }
+function addSys(text) { el("sys", esc(text)); }
+
+async function send(text) {
+  text = (text || inp.value).trim();
+  if (!text) return;
+  inp.value = "";
+  addUser(text);
+  reactor.classList.add("busy");
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text }),
+    });
+    const data = await res.json();
+    (data.events || []).forEach(e => addTool(`⚙ ${e.tool}(${e.brief})${e.ok ? "" : " ✗"}`, !e.ok));
+    if (data.error) { addSys(data.error); speak("I'm afraid there's a problem, Sir."); }
+    else { addJarvis(data.reply || "…"); speak(data.reply || ""); }
+  } catch (e) {
+    addSys("Connection to the JARVIS server lost. Is `python -m jarvis web` still running?");
+  } finally {
+    reactor.classList.remove("busy");
+  }
+}
+document.getElementById("send").onclick = () => send();
+inp.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+
+// ---- Voice input (Chrome/Edge) ----
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SR) {
+  const rec = new SR();
+  rec.lang = "en-US"; rec.interimResults = false;
+  let listening = false;
+  rec.onresult = ev => { const said = ev.results[0][0].transcript; send(said); };
+  rec.onend = () => { listening = false; micBtn.classList.remove("listening"); };
+  rec.onerror = () => { listening = false; micBtn.classList.remove("listening"); };
+  micBtn.onclick = () => {
+    if (listening) { rec.stop(); return; }
+    speechSynthesis.cancel();
+    listening = true; micBtn.classList.add("listening"); rec.start();
+  };
+} else {
+  micBtn.onclick = () => addSys("Voice input needs Chrome or Edge. Typing works everywhere.");
+}
+
+muteBtn.onclick = () => {
+  speakOn = !speakOn;
+  muteBtn.classList.toggle("active", speakOn);
+  muteBtn.textContent = speakOn ? "🔊" : "🔇";
+  if (!speakOn) speechSynthesis.cancel();
+};
+
+// ---- Boot ----
+(async () => {
+  const statusEl = document.getElementById("status");
+  try {
+    const res = await fetch("/api/status");
+    const s = await res.json();
+    statusEl.textContent =
+      `ONLINE · ${s.model.toUpperCase()} · ACTIONS ${s.allow_actions ? "ARMED" : "SAFE MODE"}`;
+    if (!s.has_key) {
+      statusEl.textContent = "OFFLINE · NO API KEY";
+      addSys("Set ANTHROPIC_API_KEY and restart `python -m jarvis web` to bring me online.");
+      return;
+    }
+    const greeting = s.greeting || "All systems online, Sir. How can I help?";
+    addJarvis(greeting);
+    speak(greeting);
+  } catch {
+    statusEl.textContent = "OFFLINE";
+    addSys("Cannot reach the JARVIS server.");
+  }
+})();
+</script>
+</body>
+</html>

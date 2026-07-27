@@ -153,6 +153,12 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("text")
     s.add_argument("--voice-name", default=None)
 
+    w = sub.add_parser("web", help="open the JARVIS HUD in your browser (voice in + out)")
+    w.add_argument("--port", type=int, default=7870)
+    w.add_argument("--no-browser", action="store_true")
+    w.add_argument("--allow-actions", action="store_true",
+                   help="let JARVIS run shell commands / uploads without asking")
+
     v = sub.add_parser("video", help="video pipeline (works without an API key)")
     vs = v.add_subparsers(dest="vcmd", required=True)
 
@@ -191,6 +197,13 @@ def main() -> int:
         return cmd_speak(args)
     if args.cmd == "video":
         return cmd_video(args)
+    if args.cmd == "web":
+        if args.allow_actions:
+            config.AUTO_APPROVE = True
+        from .server import serve
+
+        serve(port=args.port, open_browser=not args.no_browser)
+        return 0
     return cmd_chat(args)
 
 

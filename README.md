@@ -30,16 +30,30 @@ JARVIS: ⚙ video_cut_silence(...)   removed 74s of dead air
 Honest limits: it does not browse the web, it is not sentient, and "does everything"
 is a roadmap, not a property of software. But every row in that table works today.
 
-## Setup
+## Quick start — see JARVIS and talk to him
+
+This runs on **your computer** (it is not a website). One-time setup, then two commands:
+
+1. Install [Python 3.10+](https://www.python.org/downloads/) (on Windows, tick "Add to PATH").
+2. Get the code: `git clone` this repo, or GitHub → green **Code** button → **Download ZIP** → unzip.
+3. In a terminal, inside the folder:
 
 ```bash
-git clone <this repo> && cd lm
-python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+export ANTHROPIC_API_KEY=sk-ant-...    # from console.anthropic.com  (Windows: set ANTHROPIC_API_KEY=sk-ant-...)
+python -m jarvis web
+```
 
-export ANTHROPIC_API_KEY=sk-ant-...   # console.anthropic.com
-python -m jarvis                       # chat
-python -m jarvis --voice               # chat + spoken replies
+Your browser opens the **JARVIS HUD** — a glowing arc reactor, a chat, a 🎙 button.
+Click the mic and talk to him (Chrome/Edge); he answers out loud. No extra setup:
+your browser provides the microphone and the voice.
+
+Prefer the terminal instead?
+
+```bash
+python -m jarvis                       # chat in the terminal
+python -m jarvis --voice               # terminal chat + spoken replies (edge-tts)
+python -m jarvis web --allow-actions   # HUD, with shell/upload actions enabled
 ```
 
 Optional extras:
@@ -103,7 +117,9 @@ Copy `.env.example`. Highlights: `JARVIS_MODEL` (default `claude-opus-5`),
 
 ```
 jarvis/
-  __main__.py     CLI: chat REPL, `do`, `speak`, `video ...`
+  __main__.py     CLI: `web` HUD, chat REPL, `do`, `speak`, `video ...`
+  server.py       local web server for the HUD (stdlib, no extra deps)
+  web/index.html  the JARVIS HUD (arc reactor, chat, browser mic + voice)
   agent.py        Claude tool-use loop (streaming, refusal/pause handling)
   personality.py  system prompt: persona (cached) + long-term memory
   memory.py       ~/.jarvis/memory.md

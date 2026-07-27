@@ -12,6 +12,10 @@ from .. import config, memory
 # Tools that never run without an explicit yes (unless JARVIS_AUTO_APPROVE=1).
 GATED_TOOLS = {"run_command", "youtube_upload"}
 
+# Set by the web server: there is no terminal to ask on, so gated tools are
+# declined unless auto-approve was enabled at launch (`jarvis web --allow-actions`).
+NON_INTERACTIVE = False
+
 
 def _p(name: str, desc: str, required: bool = True) -> dict:
     return {name: {"type": "string", "description": desc}}
@@ -275,6 +279,8 @@ TOOL_SCHEMAS: list[dict] = [
 def _confirm(action: str) -> bool:
     if config.AUTO_APPROVE:
         return True
+    if NON_INTERACTIVE:
+        return False
     try:
         answer = input(f"\n  ⚠ JARVIS wants to: {action}\n  Allow? [y/N] ").strip().lower()
     except EOFError:
@@ -288,7 +294,13 @@ def execute(name: str, args: dict) -> tuple[str, bool]:
         if name in GATED_TOOLS:
             summary = args.get("command") or f"upload '{args.get('path')}' to YouTube ({args.get('privacy', 'private')})"
             if not _confirm(summary):
-                return json.dumps({"declined": "The user declined this action."}), True
+                reason = (
+                    "Gated actions are off in web mode. Restart with "
+                    "`python -m jarvis web --allow-actions` to enable them."
+                    if NON_INTERACTIVE and not config.AUTO_APPROVE
+                    else "The user declined this action."
+                )
+                return json.dumps({"declined": reason}), True
 
         result = _dispatch(name, args)
         return json.dumps(result, default=str), False
