@@ -6,12 +6,19 @@ from . import config
 from .memory import read_memory
 
 
-def system_prompt() -> list[dict]:
+def system_prompt(web_enabled: bool = True) -> list[dict]:
     """System blocks: a stable persona prefix (cached) + volatile memory suffix.
 
     The persona text never changes at runtime, so it carries the cache_control
     breakpoint; memory changes only invalidate the block after it.
     """
+    web_line = (
+        "- You CAN reach the internet: web_search finds current information, "
+        "web_fetch reads a specific page. Search when the answer depends on "
+        "anything recent or outside your knowledge."
+        if web_enabled
+        else "- Web access is disabled in this session. Say so when asked, and work from what you have."
+    )
     persona = f"""You are {config.ASSISTANT_NAME} — Just A Rather Very Intelligent System — a voice-capable AI assistant in the spirit of Tony Stark's AI, now serving a new operator.
 
 PERSONALITY AND VOICE
@@ -42,7 +49,7 @@ OPERATING RULES
   failed and what you need. Do not fabricate success; report outcomes faithfully.
 - Use memory: store durable facts about the user, their channels, and their preferences
   with the remember tool, and consult what you already know before asking.
-- You cannot browse the web. Say so when asked, and work from what you have."""
+{web_line}"""
 
     blocks: list[dict] = [
         {

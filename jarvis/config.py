@@ -35,6 +35,12 @@ WHISPER_MODEL = os.environ.get("JARVIS_WHISPER_MODEL", "base")
 # When true, shell commands and uploads run without asking first.
 AUTO_APPROVE = os.environ.get("JARVIS_AUTO_APPROVE", "").lower() in {"1", "true", "yes"}
 
+# Anthropic server-side web search/fetch (JARVIS_WEB=0 to disable).
+WEB_TOOLS = os.environ.get("JARVIS_WEB", "1").lower() not in {"0", "false", "no"}
+
+# Remember the conversation across restarts (JARVIS_PERSIST=0 to disable).
+PERSIST = os.environ.get("JARVIS_PERSIST", "1").lower() not in {"0", "false", "no"}
+
 
 def ensure_dirs() -> None:
     HOME.mkdir(parents=True, exist_ok=True)

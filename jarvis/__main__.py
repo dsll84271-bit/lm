@@ -159,6 +159,8 @@ def build_parser() -> argparse.ArgumentParser:
     w.add_argument("--allow-actions", action="store_true",
                    help="let JARVIS run shell commands / uploads without asking")
 
+    sub.add_parser("reset", help="forget the current conversation (memory notes are kept)")
+
     v = sub.add_parser("video", help="video pipeline (works without an API key)")
     vs = v.add_subparsers(dest="vcmd", required=True)
 
@@ -203,6 +205,13 @@ def main() -> int:
         from .server import serve
 
         serve(port=args.port, open_browser=not args.no_browser)
+        return 0
+    if args.cmd == "reset":
+        from .agent import HISTORY_FILE
+
+        if HISTORY_FILE.exists():
+            HISTORY_FILE.unlink()
+        print("Conversation forgotten. Long-term memory notes are untouched.")
         return 0
     return cmd_chat(args)
 

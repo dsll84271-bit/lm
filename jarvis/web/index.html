@@ -110,10 +110,12 @@
   <div id="chat"></div>
 
   <div id="bar">
-    <button id="mic" title="Hold a conversation by voice (Chrome/Edge)">🎙</button>
+    <button id="mic" title="Push to talk (Chrome/Edge)">🎙</button>
+    <button id="ears" title='Hands-free: keeps listening for "Hey JARVIS …"'>🎧</button>
     <input id="inp" placeholder="Speak or type, Sir…" autocomplete="off">
     <button id="send">Send</button>
     <button id="mute" class="active" title="Voice replies on/off">🔊</button>
+    <button id="reset" title="Forget this conversation">⟲</button>
   </div>
 
 <script>
@@ -143,12 +145,15 @@ function pickVoice() {
 speechSynthesis.onvoiceschanged = pickVoice;
 pickVoice();
 
-function speak(text) {
-  if (!speakOn || !("speechSynthesis" in window)) return;
+let speaking = false;
+function speak(text, onDone) {
+  if (!speakOn || !("speechSynthesis" in window)) { if (onDone) onDone(); return; }
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text.slice(0, 800));
   if (voice) u.voice = voice;
   u.rate = 1.03; u.pitch = 0.92;
+  speaking = true;
+  u.onend = u.onerror = () => { speaking = false; if (onDone) onDone(); };
   speechSynthesis.speak(u);
 }
 
@@ -195,21 +200,69 @@ inp.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
 
 // ---- Voice input (Chrome/Edge) ----
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const earsBtn = document.getElementById("ears");
+let handsFree = false;
 if (SR) {
   const rec = new SR();
   rec.lang = "en-US"; rec.interimResults = false;
   let listening = false;
-  rec.onresult = ev => { const said = ev.results[0][0].transcript; send(said); };
-  rec.onend = () => { listening = false; micBtn.classList.remove("listening"); };
+
+  rec.onresult = ev => {
+    const said = ev.results[ev.results.length - 1][0].transcript.trim();
+    if (!handsFree) { send(said); return; }
+    // Hands-free: only react to the wake word, ignore everything else.
+    const m = said.match(/^(?:hey |ok |okay )?jarvis[,.!]?\s*(.*)$/i);
+    if (!m) return;
+    const command = m[1].trim();
+    if (command) send(command);
+    else speak("Sir?");
+  };
+  rec.onend = () => {
+    listening = false;
+    micBtn.classList.remove("listening");
+    // In hands-free mode the browser stops recognition periodically (and we
+    // stop it while JARVIS is talking) — restart until the mode is off.
+    if (handsFree && !speaking) setTimeout(() => { try { rec.start(); listening = true; } catch (e) {} }, 250);
+  };
   rec.onerror = () => { listening = false; micBtn.classList.remove("listening"); };
+
   micBtn.onclick = () => {
     if (listening) { rec.stop(); return; }
     speechSynthesis.cancel();
-    listening = true; micBtn.classList.add("listening"); rec.start();
+    listening = true; micBtn.classList.add("listening");
+    try { rec.start(); } catch (e) {}
+  };
+  earsBtn.onclick = () => {
+    handsFree = !handsFree;
+    earsBtn.classList.toggle("active", handsFree);
+    if (handsFree) {
+      addSys('Hands-free on — say "Hey JARVIS, …". Click 🎧 again to stop.');
+      try { rec.start(); listening = true; } catch (e) {}
+    } else {
+      addSys("Hands-free off.");
+      rec.stop();
+    }
+  };
+  // Pause the mic while JARVIS speaks so he doesn't hear himself.
+  const origSpeak = speak;
+  speak = (text, onDone) => {
+    if (handsFree) { try { rec.stop(); } catch (e) {} }
+    origSpeak(text, () => {
+      if (handsFree) setTimeout(() => { try { rec.start(); } catch (e) {} }, 200);
+      if (onDone) onDone();
+    });
   };
 } else {
-  micBtn.onclick = () => addSys("Voice input needs Chrome or Edge. Typing works everywhere.");
+  const noVoice = () => addSys("Voice input needs Chrome or Edge. Typing works everywhere.");
+  micBtn.onclick = noVoice;
+  earsBtn.onclick = noVoice;
 }
+
+document.getElementById("reset").onclick = async () => {
+  await fetch("/api/reset", { method: "POST" });
+  chat.innerHTML = "";
+  addSys("Conversation forgotten, Sir. Long-term memory notes are kept.");
+};
 
 muteBtn.onclick = () => {
   speakOn = !speakOn;

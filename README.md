@@ -17,8 +17,11 @@ JARVIS: ⚙ video_cut_silence(...)   removed 74s of dead air
 | Capability | How |
 |---|---|
 | Converse with the JARVIS persona ("Sir", dry wit, concise) | Claude Opus 5, streaming |
-| Speak replies out loud | `edge-tts` neural voices (free), offline `pyttsx3` fallback |
-| Remember things between sessions | `~/.jarvis/memory.md`, auto-loaded into every session |
+| **Search the internet & read pages** | Anthropic server-side `web_search` / `web_fetch` |
+| Speak replies out loud | browser voice in the HUD; `edge-tts` in the terminal |
+| **Hands-free mode** | 🎧 in the HUD — say "Hey JARVIS, …" (Chrome/Edge) |
+| Remember facts between sessions | `~/.jarvis/memory.md`, auto-loaded every session |
+| **Remember the conversation across restarts** | `~/.jarvis/history.json` (⟲ or `python -m jarvis reset` to forget) |
 | Run shell commands / read & write files | gated behind a y/N confirmation |
 | **Edit talking videos** | silence removal (jump cuts), auto captions, loudness normalization, trims, concat |
 | **Voice videos** | script → neural narration MP3 (`voiceover`) |
@@ -27,8 +30,9 @@ JARVIS: ⚙ video_cut_silence(...)   removed 74s of dead air
 | Thumbnails, background music beds | ffmpeg |
 | Upload to YouTube | Data API v3, defaults to **private**, gated behind confirmation |
 
-Honest limits: it does not browse the web, it is not sentient, and "does everything"
-is a roadmap, not a property of software. But every row in that table works today.
+Honest limits: it cannot generate images or AI avatars by itself (that needs an
+external image/video service), it is not sentient, and "does everything" is a
+roadmap, not a property of software. But every row in that table works today.
 
 ## Quick start — see JARVIS and talk to him
 
@@ -46,7 +50,8 @@ python -m jarvis web
 
 Your browser opens the **JARVIS HUD** — a glowing arc reactor, a chat, a 🎙 button.
 Click the mic and talk to him (Chrome/Edge); he answers out loud. No extra setup:
-your browser provides the microphone and the voice.
+your browser provides the microphone and the voice. Toggle 🎧 for hands-free —
+he keeps listening and responds whenever you say **"Hey JARVIS, …"**.
 
 Prefer the terminal instead?
 

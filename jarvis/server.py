@@ -74,6 +74,13 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"error": "not found"}, 404)
 
     def do_POST(self):
+        if self.path == "/api/reset":
+            jarvis = _get_jarvis()
+            if jarvis is not None:
+                with _lock:
+                    jarvis.reset()
+            self._json({"ok": True})
+            return
         if self.path != "/api/chat":
             self._json({"error": "not found"}, 404)
             return
