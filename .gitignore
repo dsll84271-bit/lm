@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.mp4
+*.mp3
+*.wav
+*.srt
+!tests/fixtures/*
+client_secrets.json
+youtube_token.json
+.jarvis/
