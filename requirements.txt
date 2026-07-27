@@ -1,0 +1,11 @@
+# Core
+anthropic>=0.90.0
+imageio-ffmpeg>=0.6.0        # bundled static ffmpeg used by the video toolkit
+edge-tts>=7.0.0              # neural text-to-speech (free, no API key)
+
+# Optional — voice input + auto captions (heavy: pulls CTranslate2)
+# faster-whisper>=1.1.0
+
+# Optional — YouTube upload
+# google-api-python-client>=2.150.0
+# google-auth-oauthlib>=1.2.0
