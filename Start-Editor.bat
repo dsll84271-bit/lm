@@ -37,20 +37,35 @@ echo  ============================================
 echo   Beat-synced montage editor
 echo  ============================================
 echo.
-echo  Tip: drag a file from Explorer into this window to paste its path.
+echo  I need two files that are already on this PC: the movie to cut up, and
+echo  the music track to cut it to.
+echo.
+echo  Drag each one from Explorer into this window - that fills in the path
+echo  for you. Do not type a command here. Type q at any prompt to quit.
 echo.
 
+REM Re-ask on a bad path instead of exiting: a typo should not cost a restart.
+:askvideo
 set "VIDEO="
-set /p "VIDEO=  Movie file    : "
+set /p "VIDEO=  Movie file (.mp4)  : "
 set "VIDEO=%VIDEO:"=%"
-if not defined VIDEO goto :nofile
-if not exist "%VIDEO%" goto :nofile
+if not defined VIDEO goto :askvideo
+if /i "%VIDEO%"=="q" goto :quit
+if not exist "%VIDEO%" (
+  echo     Cannot find that. Drag the movie file in from Explorer.
+  goto :askvideo
+)
 
+:askaudio
 set "AUDIO="
-set /p "AUDIO=  Music track   : "
+set /p "AUDIO=  Music track (.mp3) : "
 set "AUDIO=%AUDIO:"=%"
-if not defined AUDIO goto :nofile
-if not exist "%AUDIO%" goto :nofile
+if not defined AUDIO goto :askaudio
+if /i "%AUDIO%"=="q" goto :quit
+if not exist "%AUDIO%" (
+  echo     Cannot find that. Drag the music file in from Explorer.
+  goto :askaudio
+)
 
 set "OUT="
 set /p "OUT=  Save as       : "
@@ -95,10 +110,9 @@ echo.
 echo  Done, Sir. Your edit: %OUT%
 goto :done
 
-:nofile
+:quit
 echo.
-echo  I could not find that file. Drag the file into the window rather than
-echo  typing the path, and try again.
+echo  Stopped, Sir. Nothing was changed.
 goto :done
 
 :fail

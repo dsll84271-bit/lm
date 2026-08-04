@@ -25,16 +25,38 @@ echo "============================================"
 echo "  Beat-synced montage editor"
 echo "============================================"
 echo
-echo "Tip: drag a file into this window to paste its path."
+echo "I need two files already on this machine: the movie to cut up, and the"
+echo "music track to cut it to."
+echo
+echo "Drag each one into this window — that fills in the path for you. Do not"
+echo "type a command here. Type q at any prompt to quit."
 echo
 
-read -r -p "  Movie file    : " VIDEO
-VIDEO="${VIDEO%\"}"; VIDEO="${VIDEO#\"}"; VIDEO="${VIDEO%\'}"; VIDEO="${VIDEO#\'}"
-[ -f "$VIDEO" ] || { echo; echo "I cannot find that file. Drag it in rather than typing the path."; exit 1; }
+# Re-ask on a bad path instead of exiting: a typo should not cost a restart.
+# The answer comes back in ASK_RESULT rather than via stdout, because command
+# substitution runs a subshell — `exit` inside one would not stop the script,
+# and the quit message would be captured instead of shown. Plain globals also
+# keep this working on the bash 3.2 that ships with macOS.
+ASK_RESULT=""
+ask_file() {
+  local prompt="$1" kind="$2" val
+  while true; do
+    # A failed read means EOF; without this the loop would spin forever.
+    if ! read -r -p "  $prompt" val; then
+      echo; echo "No more input — stopping."; exit 1
+    fi
+    val="${val%\"}"; val="${val#\"}"; val="${val%\'}"; val="${val#\'}"
+    [ -z "$val" ] && continue
+    case "$val" in
+      [qQ]) echo; echo "Stopped, Sir. Nothing was changed."; exit 0 ;;
+    esac
+    if [ -f "$val" ]; then ASK_RESULT="$val"; return 0; fi
+    echo "     ! Cannot find that. Drag the $kind file in instead."
+  done
+}
 
-read -r -p "  Music track   : " AUDIO
-AUDIO="${AUDIO%\"}"; AUDIO="${AUDIO#\"}"; AUDIO="${AUDIO%\'}"; AUDIO="${AUDIO#\'}"
-[ -f "$AUDIO" ] || { echo; echo "I cannot find that file. Drag it in rather than typing the path."; exit 1; }
+ask_file 'Movie file (.mp4)  : ' movie; VIDEO="$ASK_RESULT"
+ask_file 'Music track (.mp3) : ' music; AUDIO="$ASK_RESULT"
 
 read -r -p "  Save as       : " OUT
 OUT="${OUT:-edit.mp4}"
