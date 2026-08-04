@@ -9,3 +9,13 @@ edge-tts>=7.0.0              # neural text-to-speech (free, no API key)
 # Optional — YouTube upload
 # google-api-python-client>=2.150.0
 # google-auth-oauthlib>=1.2.0
+
+# Optional — beat-synced montage editor (auto_editor.py)
+# Heavy: librosa pulls numba/llvmlite, opencv is ~60 MB.
+# Install with: pip install librosa "moviepy>=2.1" opencv-python soundfile
+# librosa>=0.10            # beat tracking, onset strength, RMS energy
+# moviepy>=2.1             # clip extraction, variable-speed warp, concat (2.x API only)
+# opencv-python>=4.8       # motion scoring, shot detection, optical flow
+#                          #   headless servers: opencv-python-headless
+# soundfile>=0.12          # librosa audio backend
+# numpy>=1.24
