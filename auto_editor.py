@@ -774,8 +774,10 @@ def parse_args(argv=None):
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     io = p.add_argument_group("input / output")
-    io.add_argument("--video", required=True, help="source movie file")
-    io.add_argument("--audio", required=True, help="music track (used for the beat map)")
+    # Not argparse-required: --from-edl carries both paths inside the EDL, so
+    # requiring them here would break re-rendering a saved plan. Checked in main().
+    io.add_argument("--video", help="source movie file (omit with --from-edl)")
+    io.add_argument("--audio", help="music track for the beat map (omit with --from-edl)")
     io.add_argument("--output", default="edit.mp4", help="output file")
     io.add_argument("--silent-video", action="store_true",
                     help="render with no baked-in audio; cuts still match the "
@@ -843,14 +845,36 @@ def main(argv=None) -> int:
 
     # ---- re-render path ---------------------------------------------------
     if a.from_edl:
+        if not Path(a.from_edl).exists():
+            print(f"error: no such EDL: {a.from_edl}", file=sys.stderr)
+            return 2
         raw = json.loads(Path(a.from_edl).read_text())
+        # Let --video/--audio override what the EDL recorded, so a plan stays
+        # usable after the source files move.
+        if a.video:
+            raw["video"] = str(a.video)
+        if a.audio:
+            raw["audio"] = str(a.audio)
         edl = EDL(**{**raw, "slots": [Slot(**s) for s in raw["slots"]],
                      "size": tuple(raw["size"])})
+        for f in ([edl.video] if edl.video else []) + \
+                 ([] if a.silent_video else [edl.audio]):
+            if not Path(f).exists():
+                print(f"error: the EDL points at a file that is gone: {f}\n"
+                      f"       pass --video / --audio to point at its new location.",
+                      file=sys.stderr)
+                return 2
         Assembler(edl, a.crop_mode, a.base_speed, a.slow_speed, a.fast_speed, v) \
             .render(a.output, a.silent_video, a.crf, a.preset, a.interpolate)
         print(f"done -> {a.output}")
         return 0
 
+    missing = [n for n, val in (("--video", a.video), ("--audio", a.audio))
+               if not val]
+    if missing:
+        print(f"error: {' and '.join(missing)} required when not using --from-edl",
+              file=sys.stderr)
+        return 2
     for f in (a.video, a.audio):
         if not Path(f).exists():
             print(f"error: no such file: {f}", file=sys.stderr)
