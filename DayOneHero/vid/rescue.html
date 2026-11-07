@@ -1,0 +1,98 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Lilita One';src:url('node_modules/@fontsource/lilita-one/files/lilita-one-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Nunito';font-weight:800;src:url('node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2') format('woff2');}
+html,body{margin:0;background:#000;overflow:hidden}
+</style></head>
+<body>
+<svg id="root" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="lib.js"></script>
+<script src="helpers.js"></script>
+<script>
+const T={r0:0.4,r1:9.0,freeze:15.8,r2:16.8,r3:22.4,r4:31.0,r5:42.0,unfreeze:41.2,end:53.0};
+const DEX={type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true};
+function ball(x,y,r,rot=0){return `<g transform="translate(${x},${y}) rotate(${rot})"><circle r="${r}" fill="#fff" stroke="${INK}" stroke-width="5"/><path d="M0,${-r*0.35} l${r*0.33},${r*0.24} l${-r*0.13},${r*0.39} l${-r*0.4},0 l${-r*0.13},${-r*0.39} Z" fill="${INK}"/><path d="M0,${-r*0.35} L0,${-r} M${r*0.33},${-r*0.11} L${r*0.92},${-r*0.3} M${-r*0.33},${-r*0.11} L${-r*0.92},${-r*0.3}" stroke="${INK}" stroke-width="3"/></g>`;}
+function carDriver(x,y,s,t,shocked){return car(x,y,s,'#E8463C',true)+`<g transform="translate(${x-20*s},${y-120*s}) scale(${s*0.42})"><circle r="70" fill="url(#skin)" stroke="${INK}" stroke-width="6"/><path d="M-70,-10 C-74,-70 74,-70 70,-10 C50,-40 -50,-40 -70,-10 Z" fill="#5A3A2A" stroke="${INK}" stroke-width="4"/>${shocked?`<ellipse cx="-24" cy="6" rx="14" ry="18" fill="#fff" stroke="${INK}" stroke-width="4"/><ellipse cx="24" cy="6" rx="14" ry="18" fill="#fff" stroke="${INK}" stroke-width="4"/><circle cx="-24" cy="8" r="6" fill="${INK}"/><circle cx="24" cy="8" r="6" fill="${INK}"/><ellipse cx="0" cy="44" rx="12" ry="16" fill="#7A1F33" stroke="${INK}" stroke-width="4"/>`:`<circle cx="-24" cy="6" r="8" fill="${INK}"/><circle cx="24" cy="6" r="8" fill="${INK}"/><path d="M-12,36 Q0,44 12,36" fill="none" stroke="${INK}" stroke-width="5"/>`}</g>`;}
+function street(){return bgSky(0)+bgFar()+bgNear(0,0);}
+function girl(x,y,s,o={}){return chibi({x,y,s,type:'sweater',top:'#FF5A7A',hair:'long',hairCol:'#7A4A2E',pants:'#3D5AFE',eyes:o.eyes||'open',mouth:o.mouth||'smile',look:o.look||[0,0],armF:o.armF||[-30,20],armB:o.armB||[30,-20],legL:o.legL,legR:o.legR,flip:o.flip,tilt:o.tilt||0,bob:o.bob||0});}
+
+function render(t){
+  let s=DEFS;
+  if(t<8.4){ // SA: thinking -> idea
+    s+=bgPanel('#5DB6FF','#C9E9FF')+`<rect y="760" width="1920" height="320" fill="#E6E1F0" stroke="${INK}" stroke-width="5"/>`;
+    s+=`<g opacity=".55">${bgFar()}</g>`;
+    const idea=t>T.r0+5.4;
+    s+=chibi({x:760,y:1000,s:1.5,...DEX,eyes:idea?'open':'closed',sparkle:idea,mouth:idea?'grin':'flat',armF:idea?[150,40]:[150,60],armLen:1.3,handF:idea?'point':null,armB:[20,-10],tilt:idea?-4:6});
+    if(!idea) s+=`<g transform="translate(960,330)">${[0,1,2].map(i=>`<circle cx="${i*40}" cy="${-i*30}" r="${10+i*6}" fill="#fff" stroke="${INK}" stroke-width="4" opacity="${seg(t,T.r0+1+i*0.6,T.r0+1.4+i*0.6)}"/>`).join('')}</g>`;
+    if(idea){const k=pop(t,T.r0+5.4,0.35); s+=`<g transform="translate(980,260) scale(${k})"><circle r="70" fill="#FFF07A" stroke="${INK}" stroke-width="8"/><rect x="-26" y="60" width="52" height="40" rx="8" fill="#C9C2DA" stroke="${INK}" stroke-width="6"/>${[0,1,2,3,4,5,6,7].map(i=>{const a=rad(i*45);return `<line x1="${Math.cos(a)*90}" y1="${Math.sin(a)*90}" x2="${Math.cos(a)*130}" y2="${Math.sin(a)*130}" stroke="#FFC21F" stroke-width="10" stroke-linecap="round"/>`;}).join('')}</g>`;
+      s+=`<g transform="translate(1440,560) scale(${pop(t,T.r0+6.0,0.4)})">${chip('SAVING PEOPLE',0,0,'#3D8BFF',60)}</g>`;}
+  } else if(t<16.0){ // SB: girl chases ball into road, car coming (normal colour)
+    s+=street();
+    const k=seg(t,8.6,15.6); const gx=lerp(700,980,k), gy=lerp(900,1010,k); const ph=t*9;
+    const bxk=seg(t,8.6,14.2); s+=ball(lerp(820,1120,bxk),lerp(900,1030,bxk)-Math.abs(Math.sin(t*6))*40*(1-bxk),34,t*300);
+    s+=girl(gx,gy,0.78,{legL:[Math.sin(ph)*24,0],legR:[-Math.sin(ph)*24,0],armF:[-Math.sin(ph)*30,20],armB:[Math.sin(ph)*30,-20],eyes:'happy',mouth:'laugh',bob:-Math.abs(Math.sin(ph))*6});
+    const cx=lerp(2600,1700,seg(t,11.2,15.8)); s+=carDriver(cx,1060,1.3,t,false);
+    if(t>T.r1+3.6) s+=`<g transform="translate(1500,170) scale(${pop(t,T.r1+3.6,0.35)})">${txt('!!',0,0,120,'#E8463C')}</g>`;
+    s+=`<rect width="1920" height="1080" fill="none" stroke="#E8463C" stroke-width="${20*seg(t,13,15)}" opacity="${0.5+0.5*Math.sin(t*14)}"/>`;
+  } else { // frozen world from Dex's POV
+    const unf=t>=T.unfreeze, R=T.r4;
+    const carX=unf?lerp(1700,-900,ease(seg(t,T.unfreeze+0.2,T.unfreeze+3.4))):lerp(1700,1688,seg(t,16,T.unfreeze));
+    // --- choreography (Dex time) ---
+    const P=[[R,760,900],[R+1.0,900,1000],[R+1.8,900,1000],[R+5.0,560,900],[R+5.6,560,900],[R+7.0,1050,1030],[R+7.3,1050,1030],[R+8.7,470,900],[99,470,900]];
+    let dx=760,dy=900,moving=false;
+    if(t>=R){for(let i=0;i<P.length-1;i++){if(t>=P[i][0]&&t<P[i+1][0]){const k=ease(seg(t,P[i][0],P[i+1][0]));dx=lerp(P[i][1],P[i+1][1],k);dy=lerp(P[i][2],P[i+1][2],k);moving=(P[i][1]!==P[i+1][1]);break;}}}
+    if(t<R&&t>=T.r2){dx=lerp(-200,760,ease(seg(t,16.2,T.r2+1.2)));moving=t<T.r2+1.2;}
+    const lifting=t>=R+1.0&&t<R+5.6, lift=seg(t,R+1.0,R+1.8)*(1-seg(t,R+5.0,R+5.6));
+    let gx=980,gy=1010;
+    if(t>=R+1.8){gx=dx+70;gy=dy+10;} if(t>=R+5.0){const k=seg(t,R+5.0,R+5.6);gx=lerp(dx+70,650,k);gy=lerp(dy+10,895,k);} if(t>=R+5.6){gx=650;gy=895;}
+    if(unf){gx=650;gy=895;}
+    gy-=lift*110;
+    let bx=1120,by=1030;
+    if(t>=R+7.0){bx=dx+70;by=dy-120;} if(t>=R+8.7){const k=seg(t,R+8.7,R+9.1);bx=lerp(dx+70,720,k);by=lerp(dy-120,880,k);} if(t>=R+9.1||unf){bx=720;by=880;}
+    let w=street();
+    w+=girl(gx,gy,0.78,{legL:[24,0],legR:[-24,0],armF:[-30,20],armB:[30,-20],eyes:unf?'wide':'happy',mouth:unf?'o':'laugh',look:unf?[10,0]:[0,0]});
+    w+=ball(bx,by,34,0);
+    w+=carDriver(carX,1060,1.3,t,unf);
+    if(unf){const z=1+0.1*ease(seg(t,T.unfreeze+1.5,T.end)); s+=`<g transform="translate(650,880) scale(${z}) translate(-650,-880)">${w}</g>`;
+      const sw=seg(t,T.unfreeze,T.unfreeze+0.8); s+=`<g transform="translate(580,780)" opacity="${1-sw}">${[0,1,2].map(i=>`<path d="M${-90+i*30},${-i*44} q70,-46 140,0" fill="none" stroke="#FFC21F" stroke-width="${14-i*3}" stroke-linecap="round"/>`).join('')}</g>`;
+      s+=`<g transform="translate(${carX+40},760) scale(${pop(t,T.unfreeze+0.5,0.3)})">${txt('?!',0,0,100,'#E8463C')}</g>`;
+      s+=`<g transform="translate(${gx},${gy-290}) scale(${pop(t,T.unfreeze+1.0,0.35)})">${txt('?',0,0,110,'#FFC21F')}</g>`;
+      if(t>T.r5+0.2&&t<T.r5+3.4) s+=`<g transform="translate(960,330) scale(${pop(t,T.r5+0.2,0.35)})">${chip('FROM OUTSIDE: SHE TELEPORTED',0,0,'#7FB3FF',44)}</g>`;
+      if(t>T.r5+3.6) s+=`<g transform="translate(960,150) scale(${pop(t,T.r5+3.6,0.4)})">${chip('KNOW WHEN NOT TO BE FAST',0,0,'#3D8BFF',58)}</g>`;
+    } else {
+      s+=`<g filter="url(#freeze)">${w}</g>`;
+      let o={...DEX,eyes:'open',mouth:'smile',armF:[-20,10],armB:[20,-10]};
+      if(moving){const ph=t*(t<R?10:6); Object.assign(o,{legL:[Math.sin(ph)*22,0],legR:[-Math.sin(ph)*22,0],bob:-Math.abs(Math.sin(ph))*5});}
+      if(t>T.r2+1.6&&t<T.r3){o.armF=[110,60]; o.look=[10,-6];}
+      if(t>=T.r3&&t<R){o.eyes='wide'; o.mouth='o'; o.sweat=true;}
+      if(t>=R){o.eyes='happy'; o.mouth='smile';}
+      if(lifting){o.armF=[100,30]; o.armB=[-60,20];}
+      if(t>=R+7.0&&t<R+8.7){o.armF=[120,40];}
+      if(t>=R+9.1){o.armF=[115,55]; o.armLen=1.4; o.handF='peace'; o.eyes='happy'; o.mouth='grin'; o.sparkle=true;}
+      // draw order: Dex behind girl while carrying
+      const dex=chibi({x:dx,y:dy,s:1.05,...o});
+      s+=dex;
+      if(lifting){s+=`<g filter="url(#freeze)">${girl(gx,gy,0.78,{legL:[24,0],legR:[-24,0],armF:[-30,20],armB:[30,-20],eyes:'happy',mouth:'laugh'})}</g>`;}
+      if(t>T.r2+1.6&&t<T.r3){s+=`<g transform="translate(${dx+120},${dy-150})"><circle r="26" fill="#fff" stroke="${INK}" stroke-width="5"/><path d="M0,0 L0,-16 M0,0 L10,6" stroke="${INK}" stroke-width="4" stroke-linecap="round"/></g>`;
+        s+=`<g transform="translate(1420,560) scale(${pop(t,T.r2+0.6,0.35)})">${chip('CAR: ≈ 1 mm PER DEX-SECOND',0,0,'#7FB3FF',38)}</g>`;}
+      if(t>=T.r3&&t<R){const ik=pop(t,T.r3+0.6,0.4);
+        s+=`<g transform="translate(1360,380) scale(${ik})"><rect x="-340" y="-230" width="680" height="460" rx="34" fill="#fff" stroke="${INK}" stroke-width="8"/>
+        <text y="-160" text-anchor="middle" font-family="Lilita One" font-size="48" fill="${INK}">GRAB + SPRINT?</text>
+        <g transform="translate(-170,40) scale(0.6)">${chibiSide({x:0,y:200,s:1,phase:0.3,t,expr:'determined',lean:24,wind:1})}</g>
+        ${txt('≈ 6,000 g',130,50,84,'#E8463C')}${txt('= OUCH!',130,140,52,'#FFC21F')}
+        <path d="M-260,-110 L260,180 M260,-110 L-260,180" stroke="#E8463C" stroke-width="24" stroke-linecap="round" opacity="${seg(t,T.r3+4.2,T.r3+4.6)}"/></g>`;}
+      if(t>=R+0.4) s+=`<g transform="translate(1500,170) scale(${pop(t,R+0.4,0.35)})">${chip('SLOW & GENTLE',0,0,'#7ED957',58)}</g>`;
+      s+=`<rect width="1920" height="1080" fill="none" stroke="#7FD3FF" stroke-width="18" opacity=".4"/>`;
+    }
+  }
+  // freeze transition flash
+  const ff=1-seg(t,T.freeze,T.freeze+0.35); if(t>=T.freeze&&ff>0) s+=`<rect width="1920" height="1080" fill="#E8F6FF" opacity="${ff*0.7}"/>`;
+  const uf=1-seg(t,T.unfreeze,T.unfreeze+0.3); if(t>=T.unfreeze&&uf>0) s+=`<rect width="1920" height="1080" fill="#FFFFFF" opacity="${uf*0.6}"/>`;
+  s+=wipe(t,8.4);
+  const fi=1-seg(t,0,0.3); if(fi>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fi}"/>`;
+  const fo=seg(t,T.end-0.4,T.end); if(fo>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fo}"/>`;
+  document.getElementById('root').innerHTML=s;
+}
+window.render=render; render(0);
+</script></body></html>

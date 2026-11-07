@@ -1,0 +1,67 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Lilita One';src:url('node_modules/@fontsource/lilita-one/files/lilita-one-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Nunito';font-weight:800;src:url('node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2') format('woff2');}
+html,body{margin:0;background:#000;overflow:hidden}
+</style></head>
+<body>
+<svg id="root" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="lib.js"></script>
+<script src="helpers.js"></script>
+<script>
+const T={g0:0.4,g1:4.6,hit:11.9,g2:13.0,g3:17.6,end:21.5};
+const DEX={type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true};
+function bee(x,y,s,t,rot=0){const w=Math.sin(t*60)*30;
+  return `<g transform="translate(${x},${y}) scale(${s}) rotate(${rot})">
+  <ellipse cx="-10" cy="-40" rx="34" ry="22" fill="#E8F6FF" stroke="${INK}" stroke-width="5" opacity=".9" transform="rotate(${-20+w},-10,-20)"/><ellipse cx="14" cy="-40" rx="30" ry="20" fill="#E8F6FF" stroke="${INK}" stroke-width="5" opacity=".9" transform="rotate(${20-w},14,-20)"/>
+  <ellipse cx="0" cy="0" rx="60" ry="44" fill="#FFC21F" stroke="${INK}" stroke-width="6"/>
+  <path d="M-24,-40 Q-30,0 -24,40 M6,-44 Q0,0 6,44" stroke="${INK}" stroke-width="13" fill="none"/>
+  <circle cx="-62" cy="-4" r="30" fill="${INK}"/><circle cx="-72" cy="-12" r="9" fill="#fff"/><path d="M60,0 L84,0" stroke="${INK}" stroke-width="7" stroke-linecap="round"/>
+  <path d="M-74,-30 q-14,-30 -4,-46 M-60,-32 q0,-30 14,-42" fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="round"/></g>`;}
+function render(t){
+  let s=DEFS;
+  if(t<T.g1+0.2||t>=T.g3-0.3){
+    // running happily / rule 3 scene
+    const rule=t>=T.g3-0.3;
+    s+=bgPanel('#5DB6FF','#C9E9FF')+`<g transform="translate(${-((t*700)%2000)},0)">${bgFar()}<g transform="translate(2000,0)">${bgFar()}</g></g>`;
+    s+=`<rect y="700" width="1920" height="230" fill="#86D17C" stroke="${INK}" stroke-width="5"/><rect y="930" width="1920" height="200" fill="url(#road)"/>`;
+    if(!rule){ s+=chibiSide({x:900,y:905,s:1.35,phase:(t*3)%1,t,expr:'determined',lean:20,wind:1});
+      for(let i=0;i<5;i++){const bx=((i*430-t*1400)%2400+2400)%2400; s+=`<circle cx="${bx}" cy="${300+i*60}" r="5" fill="${INK}" opacity=".6"/>`;}
+      s+=`<g transform="translate(960,150) scale(${pop(t,T.g0+1.6,0.4)})">${chip('BUGS.',0,0,'#E8463C',56)}</g>`;}
+    else{
+      s+=chibi({x:640,y:1000,s:1.5,...DEX,eyes:'open',sparkle:true,mouth:'grin',armF:[115,55],armLen:1.4,handF:'peace',armB:[20,-10],tilt:-5});
+      // goggles over eyes
+      s+=`<g transform="translate(640,${1000-238*1.5+6*1.5}) scale(1.5)"><path d="M-84,-6 L84,-6" stroke="#E8463C" stroke-width="10"/><rect x="-62" y="-26" width="56" height="44" rx="18" fill="#9FD8FF" fill-opacity=".55" stroke="${INK}" stroke-width="6"/><rect x="6" y="-26" width="56" height="44" rx="18" fill="#9FD8FF" fill-opacity=".55" stroke="${INK}" stroke-width="6"/><path d="M-50,-14 l14,-6 M18,-14 l14,-6" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>`;
+      const nk=pop(t,T.g3,0.35);
+      s+=`<g transform="translate(1320,360) scale(${nk}) rotate(-4)"><rect x="-280" y="-150" width="560" height="300" fill="#FFF07A" stroke="${INK}" stroke-width="7"/><rect x="-70" y="-176" width="140" height="44" fill="#BFE6FF" opacity=".85" transform="rotate(-4)"/>
+       <text y="-50" text-anchor="middle" font-family="Lilita One" font-size="64" fill="#E8463C">RULE 3</text><text y="30" text-anchor="middle" font-family="Lilita One" font-size="52" fill="${INK}">ALWAYS WEAR</text><text y="92" text-anchor="middle" font-family="Lilita One" font-size="52" fill="${INK}">GOGGLES</text></g>`;}
+  } else {
+    // slow-mo bee approach + comparison + splat
+    s+=bgPanel('#2A3D8F','#1B2A6B')+rays(t,'#34489E',0.55);
+    const k=seg(t,T.g1+0.4,T.hit); const bx=lerp(1800,770,Math.pow(k,1.6)), by=lerp(380,560,k);
+    // giant dex face close-up on left
+    const shock=t>T.hit-1.4; const flinch=t>=T.hit&&t<T.hit+0.7;
+    s+=`<g transform="translate(560,1180) scale(3.2)">${chibi({x:0,y:0,s:1,...DEX,eyes:flinch?'closed':shock?'wide':'open',mouth:flinch?'flat':shock?'o':'smile',tilt:flinch?-6:0,look:[10,-2],armF:[-20,10],armB:[20,-10]})}</g>`;
+    if(t<T.hit) s+=bee(bx,by,lerp(0.6,2.4,Math.pow(k,1.6)),t,-10);
+    // paperclip comparison inset
+    if(t>T.g1+1.0&&t<T.hit-0.6){const ik=pop(t,T.g1+1.0,0.4);
+      s+=`<g transform="translate(1500,820) scale(${ik})"><rect x="-260" y="-150" width="520" height="290" rx="26" fill="#fff" stroke="${INK}" stroke-width="7"/>
+      <path d="M-200,40 L-200,-60 Q-200,-90 -170,-90 L-30,-90 Q0,-90 0,-60 L0,30 Q0,50 -20,50 L-150,50 Q-170,50 -170,30 L-170,-50" fill="none" stroke="#8C93B8" stroke-width="10" stroke-linecap="round"/>
+      <text x="-100" y="110" text-anchor="middle" font-family="Lilita One" font-size="34" fill="${INK}">CLIP ≈ 1 g</text>${bee(130,-20,0.7,t)}<text x="130" y="110" text-anchor="middle" font-family="Lilita One" font-size="34" fill="${INK}">BEE ≈ 0.2 g</text></g>`;}
+    s+=`<g transform="translate(1500,110) scale(${pop(t,T.g1+0.5,0.4)})">${chip('SLOW-MO · 1,235 km/h',0,0,'#E8463C',40)}</g>`;
+    if(t>=T.hit){const sk=seg(t,T.hit,T.hit+0.3);
+      s+=`<g transform="translate(720,580)">${[0,1,2,3,4,5,6,7,8,9].map(i=>{const a=rad(i*36+10), r=46+(i%3)*22; return `<ellipse cx="${Math.cos(a)*r*sk}" cy="${Math.sin(a)*r*sk}" rx="${26-(i%3)*6}" ry="${16-(i%3)*3}" fill="#FFC21F" stroke="${INK}" stroke-width="4"/>`;}).join('')}<circle r="${56*sk}" fill="#FFC21F" stroke="${INK}" stroke-width="6"/></g>`;
+      s+=`<g transform="translate(1300,360) scale(${pop(t,T.hit+0.1,0.3)}) rotate(-8)">${txt('SPLAT!',0,0,120,'#FFC21F')}</g>`;
+      s+=`<g transform="translate(1400,800) scale(${pop(t,T.hit+0.6,0.35)})">${chip('≈ A PAINTBALL HIT',0,0,'#E8463C',54)}</g>`;
+      const sh=1-seg(t,T.hit,T.hit+0.5); if(sh>0) s=`<g transform="translate(${Math.sin(t*90)*14*sh},${Math.cos(t*80)*10*sh})">${s}</g>`;}
+    if(t>T.g2+1.6) s+=`<g transform="translate(1400,960) scale(${pop(t,T.g2+1.6,0.35)})">${txt('EVERY. SINGLE. BUG.',0,0,74,'#FFFFFF')}</g>`;
+  }
+  // wipes at scene changes
+  s+=wipe(t,T.g1+0.2)+wipe(t,T.g3-0.3);
+  const fi=1-seg(t,0,0.3); if(fi>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fi}"/>`;
+  const fo=seg(t,T.end-0.4,T.end); if(fo>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fo}"/>`;
+  document.getElementById('root').innerHTML=s;
+}
+window.render=render; render(0);
+</script></body></html>

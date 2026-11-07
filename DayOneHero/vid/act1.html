@@ -1,0 +1,212 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Lilita One';src:url('node_modules/@fontsource/lilita-one/files/lilita-one-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Nunito';font-weight:800;src:url('node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2') format('woff2');}
+html,body{margin:0;background:#000;overflow:hidden}
+</style></head>
+<body>
+<svg id="root" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="lib.js"></script>
+<script>
+// ---- timing (seconds) from the narration ----
+const T={l0:0.3,l1:9.5,l2:20.8,l3:25.2,l4:34.0,l5:40.3,l6:48.7,l7:55.0,l8:63.1,l9:67.4,end:75.6};
+const S1=[0,20.5], S2=[20.5,25.0], S3=[25.0,33.9], S4=[33.9,40.1], S5=[40.1,48.5], S6=[48.5,54.9], S7=[54.9,75.6];
+
+function txt(t,x,y,size,fill,anchor='middle',sw=null){const w=sw??size*0.14;
+  return `<text x="${x+size*0.04}" y="${y+size*0.06}" text-anchor="${anchor}" font-family="Lilita One" font-size="${size}" fill="${INK}" stroke="${INK}" stroke-width="${w+4}" stroke-linejoin="round">${t}</text><text x="${x}" y="${y}" text-anchor="${anchor}" font-family="Lilita One" font-size="${size}" fill="${fill}" stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" paint-order="stroke">${t}</text>`;}
+function chip(t,x,y,fill,size=46){const w=t.length*size*0.56+60;
+  return `<g transform="translate(${x},${y})"><rect x="${-w/2+6}" y="${-size*0.95+8}" width="${w}" height="${size*1.5}" rx="${size*0.5}" fill="${INK}"/><rect x="${-w/2}" y="${-size*0.95}" width="${w}" height="${size*1.5}" rx="${size*0.5}" fill="${fill}" stroke="${INK}" stroke-width="7"/><text x="0" y="${size*0.18}" text-anchor="middle" font-family="Lilita One" font-size="${size}" fill="#fff">${t}</text></g>`;}
+function pop(t,a,d=0.4){return back(seg(t,a,a+d));}
+function bgPanel(c1,c2){return `<defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#pg)"/>`;}
+function rays(t,col,op=0.5){let s='';for(let a=0;a<360;a+=15){const r1=rad(a+t*6),r2=rad(a+7+t*6);s+=`<path d="M960,540 L${960+2400*Math.cos(r1)},${540+2400*Math.sin(r1)} L${960+2400*Math.cos(r2)},${540+2400*Math.sin(r2)} Z" fill="${col}" opacity="${op}"/>`;}return s;}
+
+// speedometer gauge: value 0..max shown on a 240-degree dial
+function gauge(x,y,r,val,maxv,label,col,cracked=false){
+  const a0=-210, a1=30; const f=clamp(val/maxv,0,1.08); const ang=a0+(a1-a0)*f;
+  let s=`<g transform="translate(${x},${y})"><circle r="${r+14}" fill="${INK}"/><circle r="${r}" fill="#FFFFFF" stroke="${INK}" stroke-width="6"/>`;
+  for(let i=0;i<=10;i++){const aa=rad(a0+(a1-a0)*i/10); s+=`<line x1="${Math.cos(aa)*(r-8)}" y1="${Math.sin(aa)*(r-8)}" x2="${Math.cos(aa)*(r-(i%5?22:34))}" y2="${Math.sin(aa)*(r-(i%5?22:34))}" stroke="${INK}" stroke-width="${i%5?4:7}" stroke-linecap="round"/>`;}
+  const arc=(fr,to,c)=>{const p=a=>[Math.cos(rad(a))*(r-44),Math.sin(rad(a))*(r-44)];const [x0,y0]=p(fr),[x1,y1]=p(to);return `<path d="M${x0},${y0} A${r-44},${r-44} 0 ${to-fr>180?1:0} 1 ${x1},${y1}" fill="none" stroke="${c}" stroke-width="16" stroke-linecap="round"/>`;};
+  s+=arc(a0,a0+(a1-a0)*0.7,'#7ED957')+arc(a0+(a1-a0)*0.7,a1,'#FF5A4E');
+  const na=rad(ang); s+=`<line x1="0" y1="0" x2="${Math.cos(na)*(r-30)}" y2="${Math.sin(na)*(r-30)}" stroke="${col}" stroke-width="12" stroke-linecap="round"/><circle r="18" fill="${INK}"/>`;
+  if(cracked) s+=`<path d="M${-r*0.2},${-r*0.9} L${-r*0.05},${-r*0.4} L${-r*0.3},${-r*0.1} L${r*0.1},${r*0.3} M${-r*0.05},${-r*0.4} L${r*0.4},${-r*0.5}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+  s+=`<text y="${r*0.62}" text-anchor="middle" font-family="Lilita One" font-size="${r*(label.length>9?0.24:0.32)}" fill="${INK}">${label}</text></g>`;
+  return s;}
+
+// ---------- SCENE 1: speed showdown ----------
+function scene1(t){
+  let s=bgPanel('#5DB6FF','#BFE4FF');
+  const showDex=t>=T.l1-0.3; const split=ease(seg(t,T.l1-0.4,T.l1+0.3));
+  const laneH=lerp(1080,540,split);
+  // lane 1: fastest human
+  s+=`<g><rect x="0" y="0" width="1920" height="${laneH}" fill="#FFD9A8"/>`;
+  const ty=laneH-120; s+=`<rect x="0" y="${ty}" width="1920" height="120" fill="#E8735A" stroke="${INK}" stroke-width="6"/>`;
+  for(let i=0;i<14;i++){const xx=((i*180-t*420)%2520+2520)%2520-300; s+=`<rect x="${xx}" y="${ty+52}" width="90" height="12" rx="6" fill="#fff" opacity=".8"/>`;}
+  for(let i=0;i<6;i++){const xx=((i*420-t*160)%2520+2520)%2520-300; s+=`<rect x="${xx}" y="${ty-180}" width="200" height="180" fill="#F6C690" stroke="${INK}" stroke-width="5" opacity=".7"/>`;}
+  const runner=chibiSide({x:620,y:ty+30,s:split>0.5?0.85:1.15,phase:(t*1.9)%1,t,expr:'determined',noHood:true,top:'#7ED957',hairCol:'#3B2416',lean:12,wind:0});
+  s+=runner;
+  s+=`<g transform="translate(${split>0.5?1180:1250},${split>0.5?60:120})">${chip('FASTEST HUMAN',0,0,'#E8735A',split>0.5?40:52)}</g>`;
+  const v1=44*easeOut(seg(t,T.l0+5.5,T.l0+7.5));
+  s+=gauge(split>0.5?1500:1500,split>0.5?300:560,split>0.5?150:230,v1,1300,`${Math.round(v1)} km/h`,'#E8463C');
+  s+=`</g>`;
+  if(showDex){
+    const y0=laneH; s+=`<g><rect x="0" y="${y0}" width="1920" height="${1080-y0}" fill="#CFE6FF" stroke="${INK}" stroke-width="6"/>`;
+    const ty2=1080-120; s+=`<rect x="0" y="${ty2}" width="1920" height="120" fill="#3D8BFF" stroke="${INK}" stroke-width="6"/>`;
+    for(let i=0;i<20;i++){const xx=((i*130-t*3600)%2600+2600)%2600-300; s+=`<rect x="${xx}" y="${ty2+52}" width="110" height="12" rx="6" fill="#fff" opacity=".85"/>`;}
+    for(let j=0;j<6;j++){const yy=y0+60+j*60; s+=`<g filter="url(#glow)"><path d="M${-200+((j*311+t*2600)%600)},${yy} L${560},${yy}" stroke="#7FD3FF" stroke-width="${10-j}" stroke-linecap="round" opacity=".7"/></g>`;}
+    s+=chibiSide({x:720,y:ty2+30,s:0.85,phase:(t*4.5)%1,t,expr:'determined',lean:20,wind:1});
+    s+=chip('DEX',1180,y0+60,'#FFC21F',40);
+    const v2=1235*Math.pow(seg(t,T.l1+2.2,T.l1+5.6),1.6); const cracked=t>T.l1+5.6;
+    let gx=1500, gy=y0+260; if(t>T.l1+5.6&&t<T.l1+6.2){gx+=Math.sin(t*90)*10; gy+=Math.cos(t*80)*8;}
+    s+=gauge(gx,gy,150,v2,1300,`${Math.round(v2).toLocaleString('en-GB')} km/h`,'#3D8BFF',cracked);
+    if(cracked){const k=seg(t,T.l1+5.6,T.l1+6.4); for(let i=0;i<10;i++){const a=rad(i*36+20); s+=`<line x1="${gx+Math.cos(a)*170}" y1="${gy+Math.sin(a)*170}" x2="${gx+Math.cos(a)*(170+70*k)}" y2="${gy+Math.sin(a)*(170+70*k)}" stroke="#FFC21F" stroke-width="10" stroke-linecap="round" opacity="${1-k*0.6}"/>`;}}
+    s+=`</g>`;
+  }
+  // x28 stamp
+  if(t>T.l1+6.8){const k=pop(t,T.l1+6.8,0.35); s+=`<g transform="translate(960,540) scale(${k}) rotate(-8)"><circle r="190" fill="#FFC21F" stroke="${INK}" stroke-width="12"/>${txt('×28',0,62,180,'#FFFFFF')}</g>`;
+    s+=`<g transform="translate(960,800) scale(${pop(t,T.l1+7.6,0.35)})">${chip('FASTER THAN THE FASTEST HUMAN',0,0,'#E8463C',44)}</g>`;}
+  return s;}
+
+// ---------- SCENE 2: is your brain fast enough? ----------
+function scene2(t){
+  let s=bgPanel('#2A3D8F','#1B2A6B')+rays(t,'#34489E',0.6);
+  const tap=Math.sin(Math.PI*seg(t,S2[0]+0.6,S2[0]+1.4));
+  s+=`<g filter="url(#shadowF)">${chibi({x:960,y:1000,s:1.7,type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true,eyes:'open',look:[0,-8],mouth:'o',brow:6,armF:[lerp(-20,150,tap),lerp(10,40,tap)],armLen:lerp(1,1.45,tap),handF:'point',armB:[20,-10],tilt:-6,sway:Math.sin(t*3)*0.3})}</g>`;
+  // brain icon
+  const k=pop(t,S2[0]+1.4,0.45);
+  s+=`<g transform="translate(1380,330) scale(${k})"><ellipse cx="0" cy="0" rx="150" ry="120" fill="#FF9FB8" stroke="${INK}" stroke-width="9"/>
+  <path d="M-110,-20 q30,-40 60,0 q30,-40 60,0 q30,-40 60,0 M-100,40 q30,-30 60,0 q30,-30 60,0 q30,-30 60,0 M0,-110 L0,110" fill="none" stroke="${INK}" stroke-width="7" stroke-linecap="round" opacity=".55"/>
+  ${txt('?',150,-60,150,'#FFC21F')}</g>`;
+  s+=`<g transform="translate(560,240) scale(${pop(t,S2[0]+2.2,0.4)})">${chip('IS YOUR BRAIN FAST ENOUGH?',0,0,'#3D8BFF',44)}</g>`;
+  return s;}
+
+// ---------- SCENE 3: 13 milliseconds ----------
+function scene3(t){
+  let s=bgPanel('#FFF4D6','#FFE2A8');
+  const t0=S3[0]; const run=seg(t,t0+1.6,t0+5.0); const ms=Math.round(13*run);
+  // stopwatch
+  const sk=pop(t,t0+0.2,0.5);
+  s+=`<g transform="translate(560,560) scale(${sk})"><rect x="-30" y="-330" width="60" height="50" rx="10" fill="${INK}"/><circle r="280" fill="${INK}"/><circle r="258" fill="#fff" stroke="${INK}" stroke-width="6"/>`;
+  for(let i=0;i<60;i++){const a=rad(i*6-90); s+=`<line x1="${Math.cos(a)*240}" y1="${Math.sin(a)*240}" x2="${Math.cos(a)*(i%5?225:205)}" y2="${Math.sin(a)*(i%5?225:205)}" stroke="${INK}" stroke-width="${i%5?3:6}"/>`;}
+  const ha=rad(-90+run*360*0.013*60); s+=`<line x1="0" y1="0" x2="${Math.cos(ha)*210}" y2="${Math.sin(ha)*210}" stroke="#E8463C" stroke-width="10" stroke-linecap="round"/><circle r="20" fill="${INK}"/>`;
+  s+=`<text y="120" text-anchor="middle" font-family="Lilita One" font-size="110" fill="${INK}">${ms} ms</text></g>`;
+  // picture loading
+  const pk=pop(t,t0+1.0,0.45); const sharp=seg(t,t0+1.6,t0+5.0);
+  s+=`<g transform="translate(1340,520) scale(${pk})"><rect x="-300" y="-230" width="600" height="460" rx="30" fill="#fff" stroke="${INK}" stroke-width="10"/>
+  <defs><clipPath id="pic"><rect x="-270" y="-200" width="540" height="400" rx="16"/></clipPath><filter id="pb"><feGaussianBlur stdDeviation="${(1-sharp)*28}"/></filter></defs>
+  <g clip-path="url(#pic)"><g filter="url(#pb)"><rect x="-270" y="-200" width="540" height="400" fill="#8FD3FF"/><circle cx="160" cy="-110" r="50" fill="#FFE27A"/><rect x="-270" y="80" width="540" height="120" fill="#7ED957"/>
+  <g transform="translate(-20,120) scale(0.95)"><ellipse cx="0" cy="-60" rx="95" ry="80" fill="#FFB86B" stroke="${INK}" stroke-width="6"/><path d="M-80,-110 L-60,-190 L-20,-130 Z M80,-110 L60,-190 L20,-130 Z" fill="#FFB86B" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/><circle cx="-34" cy="-70" r="12" fill="${INK}"/><circle cx="34" cy="-70" r="12" fill="${INK}"/><path d="M-10,-40 L10,-40 L0,-28 Z" fill="#FF8C9A"/></g></g></g>
+  ${sharp>=1?`<g transform="translate(220,-190) scale(${pop(t,t0+5.0,0.3)})"><circle r="56" fill="#7ED957" stroke="${INK}" stroke-width="8"/><path d="M-24,0 L-6,20 L28,-18" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>`:''}</g>`;
+  s+=`<g transform="translate(960,120) scale(${pop(t,t0+0.5,0.4)})">${chip('MIT: SEEING A PICTURE TAKES ~13 MS',0,0,'#3D8BFF',44)}</g>`;
+  if(t>t0+5.3) s+=`<g transform="translate(1340,900) scale(${pop(t,t0+5.3,0.4)})">${txt('INSANELY QUICK',0,0,90,'#FFC21F')}</g>`;
+  return s;}
+
+// ---------- SCENE 4: 4.5 metres in 13 ms ----------
+function scene4(t){
+  const t0=S4[0]; let s=bgPanel('#5DB6FF','#C9E9FF');
+  s+=`<g>${bgFar()}</g>`;
+  s+=`<rect x="-100" y="700" width="2200" height="230" fill="#E6E1F0" stroke="${INK}" stroke-width="5"/><rect x="-100" y="930" width="2200" height="200" fill="url(#road)"/>`;
+  // lamppost
+  const lx=520; s+=`<rect x="${lx-8}" y="400" width="16" height="305" fill="#3A3F66" stroke="${INK}" stroke-width="5"/><path d="M${lx},410 q0,-40 50,-40 l14,0" fill="none" stroke="#3A3F66" stroke-width="12"/><rect x="${lx+44}" y="358" width="44" height="22" rx="7" fill="#FFF1B0" stroke="${INK}" stroke-width="5"/>`;
+  // slow-mo dex: travels 4.5 m (450 px) across the clip
+  const k=ease(seg(t,t0+0.4,t0+5.4)); const dx=lerp(lx+80,lx+80+900,k);
+  s+=`<g filter="url(#glow)">${[0,1,2,3].map(j=>`<path d="M${lx-200},${640+j*40} L${dx-80},${640+j*40}" stroke="#7FD3FF" stroke-width="${12-j*2}" stroke-linecap="round" opacity=".7"/>`).join('')}</g>`;
+  s+=chibiSide({x:dx,y:905,s:1.15,phase:(t*0.6)%1,t:t*0.1,expr:'determined',lean:18,wind:1});
+  // thought bubble with lamppost loading
+  const bk=pop(t,t0+0.8,0.4); const load=seg(t,t0+1.0,t0+5.4);
+  s+=`<g transform="translate(${dx+40},300) scale(${bk})"><circle cx="-120" cy="190" r="16" fill="#fff" stroke="${INK}" stroke-width="5"/><circle cx="-90" cy="150" r="24" fill="#fff" stroke="${INK}" stroke-width="5"/><ellipse cx="0" cy="0" rx="190" ry="130" fill="#fff" stroke="${INK}" stroke-width="7"/>
+   <defs><clipPath id="tb"><rect x="-120" y="-90" width="${240*load}" height="180"/></clipPath></defs>
+   <rect x="-120" y="-90" width="240" height="180" rx="12" fill="#E6E1F0" stroke="${INK}" stroke-width="4" opacity=".6"/>
+   <g clip-path="url(#tb)"><rect x="-120" y="-90" width="240" height="180" rx="12" fill="#CFE6FF"/><rect x="-6" y="-60" width="12" height="150" fill="#3A3F66"/><rect x="0" y="-74" width="40" height="18" rx="6" fill="#FFF1B0" stroke="${INK}" stroke-width="3"/></g>
+   <text y="122" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="30" fill="${INK}">loading... ${Math.round(load*100)}%</text></g>`;
+  // ruler
+  const rk=seg(t,t0+2.0,t0+2.6);
+  if(rk>0){const x1=lx, x2=dx; s+=`<g opacity="${rk}"><line x1="${x1}" y1="990" x2="${x2}" y2="990" stroke="#FFC21F" stroke-width="10"/><line x1="${x1}" y1="965" x2="${x1}" y2="1015" stroke="#FFC21F" stroke-width="10"/><line x1="${x2}" y1="965" x2="${x2}" y2="1015" stroke="#FFC21F" stroke-width="10"/>${txt((4.5*k).toFixed(1)+' m',(x1+x2)/2,1060,64,'#FFFFFF')}</g>`;}
+  s+=`<g transform="translate(1600,120)">${chip('SLOW-MO · 13 MS',0,0,'#E8463C',42)}</g>`;
+  return s;}
+
+// ---------- SCENE 5: blink across a football pitch ----------
+function scene5(t){
+  const t0=S5[0]; const blinkAt=t0+4.1; let s=bgPanel('#7CC8FF','#D6F0FF');
+  s+=`<rect x="0" y="560" width="1920" height="520" fill="#56B85F"/>`;
+  for(let i=0;i<10;i++) s+=`<rect x="${i*192}" y="560" width="96" height="520" fill="#4FAF57"/>`;
+  s+=`<rect x="0" y="560" width="1920" height="8" fill="#fff" opacity=".9"/><line x1="960" y1="560" x2="960" y2="1080" stroke="#fff" stroke-width="8" opacity=".9"/><ellipse cx="960" cy="820" rx="170" ry="60" fill="none" stroke="#fff" stroke-width="8" opacity=".9"/>`;
+  // crowd stand
+  s+=`<rect x="0" y="380" width="1920" height="180" fill="#3D5AFE" stroke="${INK}" stroke-width="6"/>`;
+  for(let i=0;i<40;i++){s+=`<circle cx="${30+i*48}" cy="${430+(i%2)*50}" r="18" fill="${['#FFE2CC','#C98A6B','#8A5A3B','#FFD9B8'][i%4]}" stroke="${INK}" stroke-width="3"/>`;}
+  const goal=(x,flip,sway)=>`<g transform="translate(${x},560) scale(${flip?-1:1},1)"><path d="M0,0 L0,300 M0,0 L90,30 L90,330" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/><path d="M0,0 L90,30 L90,330 L0,300 Z" fill="#fff" opacity=".25" transform="skewY(${sway})"/>${[1,2,3,4,5].map(i=>`<line x1="0" y1="${i*55}" x2="90" y2="${30+i*55+sway*3}" stroke="#fff" stroke-width="3" opacity=".7"/>`).join('')}</g>`;
+  const blinked=t>=blinkAt+0.35;
+  const sway=blinked?Math.sin((t-blinkAt)*12)*6*Math.exp(-(t-blinkAt)*2):0;
+  s+=goal(90,false,0)+goal(1830,true,sway);
+  const dxp=blinked?1680:240;
+  const eyesClosed=t>=blinkAt&&t<blinkAt+0.35;
+  s+=chibi({x:dxp,y:1000,s:1.05,type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true,eyes:eyesClosed?'closed':(blinked?'wide':'open'),mouth:blinked?'o':'smile',sweat:blinked&&t>blinkAt+0.8,look:blinked?[-8,0]:[0,0],armF:[-20,10],armB:[20,-10],flip:blinked});
+  if(blinked&&t>blinkAt+0.9){s+=`<g transform="translate(${dxp-60},620) scale(${pop(t,blinkAt+0.9,0.35)}) rotate(-10)">${txt('?!',0,0,110,'#FFC21F')}</g>`;}
+  // ruler
+  if(t>t0+1.2){const k=seg(t,t0+1.2,t0+2.0); s+=`<g opacity="${k}"><line x1="180" y1="1050" x2="${180+1560*k}" y2="1050" stroke="#FFC21F" stroke-width="10" stroke-linecap="round"/>${txt('≈ 100 m',960,1040,60,'#FFFFFF')}</g>`;}
+  s+=`<g transform="translate(960,110) scale(${pop(t,t0+0.4,0.4)})">${chip('ONE BLINK ≈ 0.3 SECONDS',0,0,'#3D8BFF',46)}</g>`;
+  if(eyesClosed) s+=`<rect width="1920" height="1080" fill="#000"/>`+txt('*blink*',960,560,80,'#FFFFFF');
+  return s;}
+
+// ---------- SCENE 6: brain speeds up ----------
+function gear(x,y,r,teeth,ang,col){let p='';for(let i=0;i<teeth*2;i++){const a=rad(ang+i*180/teeth); const rr=i%2?r:r*1.18; p+=`${i?'L':'M'}${x+Math.cos(a)*rr},${y+Math.sin(a)*rr} `;}
+  return `<path d="${p}Z" fill="${col}" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/><circle cx="${x}" cy="${y}" r="${r*0.35}" fill="#fff" stroke="${INK}" stroke-width="6"/>`;}
+function scene6(t){
+  const t0=S6[0]; let s=bgPanel('#2A3D8F','#1B2A6B')+rays(t,'#34489E',0.6);
+  const spd=lerp(40,1100,Math.pow(seg(t,t0+0.8,t0+4.5),2));
+  const ang=(t-t0)*spd;
+  s+=`<g transform="translate(960,300)">${gear(-90,0,90,10,ang,'#FFC21F')}${gear(70,-60,62,8,-ang*1.4,'#3D8BFF')}${gear(80,90,50,7,-ang*1.6,'#FF8C9A')}</g>`;
+  if(spd>500) for(let i=0;i<8;i++){const a=rad(i*45+t*200); s+=`<line x1="${960+Math.cos(a)*230}" y1="${300+Math.sin(a)*200}" x2="${960+Math.cos(a)*290}" y2="${300+Math.sin(a)*250}" stroke="#FFC21F" stroke-width="10" stroke-linecap="round"/>`;}
+  s+=`<g filter="url(#shadowF)">${chibi({x:960,y:1120,s:1.55,type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',eyes:'open',sparkle:spd>600,mouth:spd>600?'grin':'smile',brow:spd>600?-2:3,armF:[-20,10],armB:[20,-10],sway:Math.sin(t*3)*0.3})}</g>`;
+  s+=`<g transform="translate(400,180) scale(${pop(t,t0+0.5,0.4)})">${chip('BRAIN SPEED',0,0,'#3D8BFF',44)}</g>`;
+  if(t>t0+3.2) s+=`<g transform="translate(1520,240) scale(${pop(t,t0+3.2,0.35)}) rotate(8)">${txt('×28',0,0,150,'#FFC21F')}</g>`;
+  return s;}
+
+// ---------- SCENE 7: everyone looks 28x slower ----------
+function scene7(t){
+  const t0=S7[0];
+  const k=(t-t0); // slow world time
+  const slow=0.036;
+  // camera: start medium on neighbour + Dex, pull back at l9
+  const pull=ease(seg(t,T.l9,T.l9+3.0));
+  const z=lerp(1.55,0.9,pull), cx=lerp(1210,1500,pull), cy=lerp(620,560,pull);
+  let w=`<g transform="translate(${(cx-1350)*0.75},0)">${bgSky(0)}</g><g transform="translate(${(cx-1350)*0.3},0)">${bgFar()}</g>${bgNear(0,0)}`;
+  // grey-tinted slow crowd
+  const ppl=[];
+  const neighbourWave=Math.sin(k*slow*20)*0.5+0.5;
+  ppl.push({y:890,svg:chibi({x:1380,y:890,s:1,type:'sweater',top:'#C17CFF',hair:'bun',hairCol:'#BFC3D6',eyes:'happy',mouth:t>T.l8&&t<T.l8+3.7?'o':'smile',armF:[lerp(105,130,neighbourWave),50],armLen:1.4,armB:[20,-20],tilt:-4})});
+  const extra=[[1720,870,'#3D5AFE','short','#4A2E22',0],[2000,880,'#3FBF7F','curly','#2B1B12',1],[2300,860,'#FF7EB6','long','#7A4A2E',0],[2600,885,'#FF8A3D','cap','#000',1],[2900,870,'#FFB020','short','#2B1B12',0],[700,880,'#4FC3F7','long','#C78A3A',1]];
+  extra.forEach((e,i)=>{const ph=k*slow*6+i; ppl.push({y:e[1],svg:chibi({x:e[0]+k*slow*40*(i%2?1:-1),y:e[1],s:0.95,type:i%2?'hoodie':'sweater',top:e[2],hair:e[3],hairCol:e[4],eyes:'open',look:[3,0],mouth:'smile',legL:[Math.sin(ph)*20,0],legR:[-Math.sin(ph)*20,0],armF:[-Math.sin(ph)*20,10],armB:[Math.sin(ph)*20,-10]})});});
+  ppl.sort((a,b)=>a.y-b.y); for(const p of ppl) w+=p.svg;
+  w+=pigeon(1600,540,1.4,k*slow,'fly');
+  let s=`<defs><filter id="slowF" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.55 0.30 0.07 0 0.01  0.18 0.66 0.08 0 0.04  0.20 0.33 0.42 0 0.12  0 0 0 1 0"/></filter></defs>`;
+  s+=`<g transform="translate(960,540) scale(${z}) translate(${-cx},${-cy})"><g filter="url(#slowF)">${w}</g>`;
+  s+=chibi({x:1130,y:900,s:1.05,type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true,eyes:'open',look:[8,-2],mouth:t>T.l8+3.8?'grin':'smile',brow:t>T.l8&&t<T.l8+3.8?5:0,armF:[-20,10],armB:[20,-10],sway:Math.sin(t*2)*0.3,sweat:t>T.l8+1&&t<T.l8+3.8});
+  // speech bubble letters crawl
+  if(t>T.l8&&t<T.l9+0.6){const msg='G o o o d   m o o o r n i n g . . .'; const n=Math.floor(seg(t,T.l8,T.l8+3.6)*msg.length);
+    s+=`<g transform="translate(1290,420) scale(${pop(t,T.l8,0.3)})"><path d="M60,66 L84,140 L140,68 Z" fill="#fff" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/><rect x="-60" y="-70" width="560" height="140" rx="60" fill="#fff" stroke="${INK}" stroke-width="7"/><text x="220" y="18" text-anchor="middle" font-family="Lilita One" font-size="46" fill="${INK}">${msg.slice(0,n)}</text></g>`;}
+  // x0.04 labels on pull back
+  if(t>T.l9+1.2){const lk=pop(t,T.l9+1.2,0.4); for(const p of [[1380,560],[1720,560],[2000,560],[2300,550],[2600,600],[2900,560],[700,560]]) s+=`<g transform="translate(${p[0]},${p[1]-60}) scale(${lk*1.2})">${chip('×0.04',0,0,'#7FB3FF',36)}</g>`;}
+  s+=`</g>`;
+  if(t<T.l8) s+=`<g transform="translate(330,110) scale(${pop(t,T.l7+0.3,0.4)})">${chip('EVERYONE ×28 SLOWER',0,0,'#3D8BFF',44)}</g>`;
+  return s;}
+
+// ---------- transitions: blue speed-wipe between scenes ----------
+function wipe(t,at){const k=seg(t,at-0.22,at+0.22); if(k<=0||k>=1) return '';
+  const x=lerp(-2400,1920,k); let s=`<g transform="translate(${x},0) skewX(-18)"><rect x="0" y="-100" width="2200" height="1300" fill="#3D8BFF"/><rect x="-80" y="-100" width="60" height="1300" fill="#7FD3FF"/><rect x="2220" y="-100" width="40" height="1300" fill="#FFC21F"/></g>`; return s;}
+
+function render(t){
+  let s=DEFS;
+  if(t<S1[1]) s+=scene1(t);
+  else if(t<S2[1]) s+=scene2(t);
+  else if(t<S3[1]) s+=scene3(t);
+  else if(t<S4[1]) s+=scene4(t);
+  else if(t<S5[1]) s+=scene5(t);
+  else if(t<S6[1]) s+=scene6(t);
+  else s+=scene7(t);
+  for(const at of [S1[1],S2[1],S3[1],S4[1],S5[1],S6[1]]) s+=wipe(t,at);
+  const fo=seg(t,T.end-0.6,T.end); if(fo>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fo}"/>`;
+  document.getElementById('root').innerHTML=s;
+}
+window.render=render; render(0);
+</script></body></html>

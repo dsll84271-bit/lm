@@ -1,0 +1,133 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Lilita One';src:url('node_modules/@fontsource/lilita-one/files/lilita-one-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Nunito';font-weight:800;src:url('node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2') format('woff2');}
+html,body{margin:0;background:#000;overflow:hidden}
+</style></head>
+<body>
+<svg id="root" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="lib.js"></script>
+<script src="helpers.js"></script>
+<script>
+const T={e0:0.4,e1:12.8,e2:29.4,e3:33.6,e4:45.6,red:47.3,gone:49.2,e5:49.8,day2:52.4,e6:55.4,end:74.0};
+const DEX={type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true};
+function note(t,at,x,y,rot,title,col,icon){const nk=pop(t,at,0.35);return `<g transform="translate(${x},${y}) scale(${nk}) rotate(${rot})"><rect x="-200" y="-160" width="400" height="320" fill="#FFF07A" stroke="${INK}" stroke-width="7"/><rect x="-60" y="-184" width="120" height="44" fill="#BFE6FF" opacity=".85"/>${icon}<text y="120" text-anchor="middle" font-family="Lilita One" font-size="62" fill="${col}">${title}</text></g>`;}
+function stampX(t,at,x,y){if(t<at) return ''; const k=pop(t,at,0.25); return `<g transform="translate(${x},${y}) scale(${k*1.3-0.3+0.3})" opacity="${Math.min(1,(t-at)*6)}"><path d="M-120,-110 L120,110 M120,-110 L-120,110" stroke="#E8463C" stroke-width="30" stroke-linecap="round" opacity=".8"/></g>`;}
+function clockFace(x,y,r,h,m){const ha=rad((h%12)*30+m*0.5-90), ma=rad(m*6-90);
+  return `<g transform="translate(${x},${y})"><circle r="${r}" fill="#FFF8E8" stroke="${INK}" stroke-width="${r*0.09}"/>${Array.from({length:12},(_,i)=>{const a=rad(i*30);return `<line x1="${Math.cos(a)*r*0.78}" y1="${Math.sin(a)*r*0.78}" x2="${Math.cos(a)*r*0.9}" y2="${Math.sin(a)*r*0.9}" stroke="${INK}" stroke-width="${r*0.05}" stroke-linecap="round"/>`;}).join('')}
+  <line x1="0" y1="0" x2="${Math.cos(ha)*r*0.5}" y2="${Math.sin(ha)*r*0.5}" stroke="${INK}" stroke-width="${r*0.09}" stroke-linecap="round"/><line x1="0" y1="0" x2="${Math.cos(ma)*r*0.75}" y2="${Math.sin(ma)*r*0.75}" stroke="#E8463C" stroke-width="${r*0.06}" stroke-linecap="round"/><circle r="${r*0.07}" fill="${INK}"/></g>`;}
+function tower(x,y,h,m){return `<g><rect x="${x-130}" y="${y-640}" width="260" height="640" fill="#E9C9A0" stroke="${INK}" stroke-width="7"/><path d="M${x-160},${y-640} L${x},${y-820} L${x+160},${y-640} Z" fill="#B85C4A" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/>
+  ${[0,1,2].map(i=>`<rect x="${x-50}" y="${y-300+i*90}" width="100" height="60" rx="30" fill="#7FA9D9" stroke="${INK}" stroke-width="5"/>`).join('')}${clockFace(x,y-500,100,h,m)}</g>`;}
+function polaroid(t,at,x,y,rot,label,inner){const k=pop(t,at,0.3); return `<g transform="translate(${x},${y}) rotate(${rot}) scale(${k})"><rect x="-170" y="-160" width="340" height="340" fill="#fff" stroke="${INK}" stroke-width="6"/><svg x="-145" y="-135" width="290" height="230" viewBox="0 0 290 230" overflow="hidden"><rect width="290" height="230" fill="#BFE6FF"/>${inner}</svg><rect x="-145" y="-135" width="290" height="230" fill="none" stroke="${INK}" stroke-width="4"/><text y="150" text-anchor="middle" font-family="Lilita One" font-size="38" fill="${INK}">${label}</text></g>`;}
+function mystery(x,y,s,t,eyesOn){return chibi({x,y,s,type:'hoodie',top:'#E8463C',hood:true,hair:'short',hairCol:'#1B1D33',pants:'#1F2033',eyes:'open',mouth:'flat',armF:[-10,10],armB:[10,-10]})+
+  `<ellipse cx="${x}" cy="${y-212*s}" rx="${80*s}" ry="${74*s}" fill="#14162A"/>`+(eyesOn?`<g opacity="${eyesOn}"><ellipse cx="${x-30*s}" cy="${y-208*s}" rx="${15*s}" ry="${7*s}" fill="#FFF"/><ellipse cx="${x+30*s}" cy="${y-208*s}" rx="${15*s}" ry="${7*s}" fill="#FFF"/></g>`:'');}
+const CROWD=[[260,'#7ED957','cap','jacket'],[470,'#B07CFF','bun','sweater'],[1110,'#3D8BFF','short','jacket'],[1290,'#FF5A7A','long','sweater'],[1720,'#7FD3FF','curly','hoodie']];
+function render(t){
+  let s=DEFS;
+  if(t<T.e1){ // VERDICT
+    s+=bgPanel('#2A3D8F','#1B2A6B')+rays(t,'#34489E',0.4);
+    if(t<6.6){
+      s+=`<g transform="translate(960,230) scale(${pop(t,T.e0+0.3,0.4)})">${txt('WOULD YOU SURVIVE',0,0,92,'#FFFFFF')}${txt('DAY ONE?',0,110,120,'#FFC21F')}</g>`;
+      s+=chibi({x:960,y:1060,s:1.45,...DEX,eyes:t>3.4?'wide':'open',mouth:t>3.4?'o':'flat',sweat:t>3.4,armF:[-20,10],armB:[20,-10],look:[0,-6]});
+      if(t>3.4){const k=pop(t,3.4,0.25); s+=`<g transform="translate(1480,560) rotate(-12) scale(${k})"><rect x="-190" y="-90" width="380" height="180" rx="24" fill="none" stroke="#E8463C" stroke-width="16"/>${txt('NOPE.',0,40,120,'#E8463C')}</g>`;}
+    } else {
+      s+=note(t,6.8,450,520,-5,'AIR','#3D8BFF',`<g transform="translate(0,-30)">${[0,1,2].map(i=>`<path d="M-120,${-40+i*40} q60,-30 120,0 t120,0" fill="none" stroke="#3D8BFF" stroke-width="14" stroke-linecap="round"/>`).join('')}</g>`);
+      s+=note(t,8.5,960,500,3,'G-FORCE','#B07CFF',`<g transform="translate(0,-30)">${txt('6,000 g',0,20,80,'#B07CFF')}</g>`);
+      s+=note(t,10.1,1470,520,-3,'HEAT','#E8463C',`<g transform="translate(0,-30)"><path d="M0,-70 C50,-20 60,30 0,60 C-60,30 -50,-20 0,-70 Z" fill="#FF8A3D" stroke="${INK}" stroke-width="6"/><path d="M0,-10 C20,10 20,40 0,50 C-20,40 -20,10 0,-10 Z" fill="#FFC21F"/></g>`);
+      s+=stampX(t,7.4,450,520)+stampX(t,9.1,960,500)+stampX(t,10.7,1470,520);
+      s+=`<g transform="translate(960,150) scale(${pop(t,6.7,0.35)})">${chip('DAY ONE SCORECARD',0,0,'#E8463C',54)}</g>`;
+    }
+  } else if(t<T.e2){ // SHIELD
+    s+=bgPanel('#5DB6FF','#C9E9FF');
+    s+=`<g transform="translate(${-((t*2800)%2000)},0)">${bgFar()}<g transform="translate(2000,0)">${bgFar()}</g></g>`;
+    s+=`<rect y="760" width="1920" height="70" fill="#86D17C" stroke="${INK}" stroke-width="5"/><rect y="830" width="1920" height="250" fill="url(#road)"/>`;
+    for(let i=0;i<9;i++){const lx=((i*260-t*3200)%2340+2340)%2340-200; s+=`<rect x="${lx}" y="940" width="160" height="12" rx="6" fill="#fff" opacity=".7"/>`;}
+    const popT=T.e1+11.4, popped=t>popT;
+    const cx=860, cy=610;
+    if(!popped){
+      s+=chibiSide({x:cx,y:800,s:1.1,phase:(t*4)%1,t,expr:'determined',lean:26,wind:1});
+      const sk=pop(t,T.e1+2.0,0.5), pul=1+0.02*Math.sin(t*6);
+      s+=`<g transform="translate(${cx},${cy}) scale(${sk*pul})"><ellipse rx="300" ry="290" fill="#7FD3FF" fill-opacity=".22" stroke="#3D8BFF" stroke-width="10"/><ellipse rx="300" ry="290" fill="none" stroke="#fff" stroke-width="4" opacity=".7" stroke-dasharray="40 30" transform="rotate(${t*40})"/><path d="M-200,-170 Q-120,-240 -20,-250" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity=".8"/></g>`;
+      // things bouncing off
+      const items=[['WIND','#3D8BFF',T.e1+4.0],['HEAT','#E8463C',T.e1+5.6],['G-FORCE','#B07CFF',T.e1+7.2],['BUGS','#7ED957',T.e1+8.6]];
+      items.forEach(([lab,col,at],i)=>{const k=(t-at)/1.4; if(k<0||k>1) return; const ang=rad(-30+i*25); const r=k<0.5?lerp(900,310,k*2):lerp(310,900,(k-0.5)*2); const bx=cx+Math.cos(ang)*r*(k<0.5?1:-0.2-1)+0, by=cy+Math.sin(ang)*r;
+        const x=k<0.5?cx+Math.cos(ang)*r:cx+Math.cos(ang)*310+ (k-0.5)*2*700, y=k<0.5?cy+Math.sin(ang)*r:cy+Math.sin(ang)*310-(k-0.5)*2*400;
+        s+=`<g transform="translate(${x},${y}) rotate(${k>0.5?(k-0.5)*400:0})">${chip(lab,0,0,col,44)}</g>`;
+        if(Math.abs(k-0.5)<0.08) s+=`<g transform="translate(${cx+Math.cos(ang)*300},${cy+Math.sin(ang)*290})">${[0,1,2,3,4,5].map(j=>{const a=rad(j*60);return `<line x1="${Math.cos(a)*20}" y1="${Math.sin(a)*20}" x2="${Math.cos(a)*60}" y2="${Math.sin(a)*60}" stroke="#fff" stroke-width="10" stroke-linecap="round"/>`;}).join('')}</g>`;});
+      s+=`<g transform="translate(960,130) scale(${pop(t,T.e1+1.6,0.35)})">${chip('THE SECRET 2ND POWER: A SHIELD',0,0,'#3D8BFF',54)}</g>`;
+    } else {
+      const k=seg(t,popT,popT+0.6);
+      s+=chibi({x:cx,y:820,s:1.15,...DEX,eyes:'dot',mouth:'o',armF:[-20,10],armB:[20,-10],tilt:6});
+      s+=`<g transform="translate(${cx},560)" opacity="${0.4+0.6*(1-seg(t,popT+2,popT+4))}">${[0,1,2,3,4,5,6].map(i=>{const a=rad(i*51);return `<circle cx="${Math.cos(a)*160*k}" cy="${Math.sin(a)*130*k+40}" r="${110-i*6}" fill="#4A4A5E" opacity=".8"/>`;}).join('')}</g>`;
+      if(t<popT+0.4) s+=`<g transform="translate(${cx},${cy})">${[0,1,2,3,4,5,6,7].map(i=>{const a=rad(i*45);const r=300+k*200;return `<path d="M${Math.cos(a)*r},${Math.sin(a)*r} l${Math.cos(a)*40},${Math.sin(a)*40}" stroke="#7FD3FF" stroke-width="12" stroke-linecap="round"/>`;}).join('')}</g>`;
+      s+=`<g transform="translate(960,130) scale(${pop(t,popT+0.4,0.35)})">${chip('NO SHIELD = NO DAY TWO',0,0,'#E8463C',60)}</g>`;
+      s+=`<g transform="translate(1400,420) scale(${pop(t,popT+0.2,0.3)}) rotate(8)">${txt('POOF.',0,0,110,'#FFFFFF')}</g>`;
+    }
+  } else if(t<T.e3+3.6){ // CLOCK TOWER + polaroid day
+    s+=bgPanel('#FFB27A','#FFE3B8');
+    s+=`<circle cx="1500" cy="760" r="150" fill="#FFE07A" opacity=".9"/><g filter="url(#freeze)">${building(0,420,520,'#E9D7F5','#C9A9E5',3)}${building(1500,420,560,'#D7F0E0','#A9D9B9',5)}</g>`;
+    s+=`<g filter="url(#freeze)">${tower(960,900,7,0)}</g>`;
+    s+=`<rect y="900" width="1920" height="180" fill="#E6E1F0" stroke="${INK}" stroke-width="5"/>`;
+    s+=chibi({x:560,y:1040,s:1.2,...DEX,eyes:'open',mouth:'smile',look:[8,-12],armF:[-20,10],armB:[20,-10],tilt:-4});
+    if(t>T.e2+1.8&&t<T.e3) s+=`<g transform="translate(1300,330) scale(${pop(t,T.e2+1.8,0.35)})">${chip('7:00 AM',0,0,'#3D8BFF',60)}</g>`;
+    if(t>=T.e3){ // polaroids
+      s+=`<rect width="1920" height="1080" fill="#1B1D33" opacity="${0.55*seg(t,T.e3,T.e3+0.3)}"/>`;
+      s+=polaroid(t,T.e3+0.2,330,470,-8,'RAN 650 KM',`${chibiSide({x:150,y:210,s:0.55,phase:(t*4)%1,t,expr:'determined',lean:24,wind:1})}`);
+      s+=polaroid(t,T.e3+0.8,750,580,5,'ATE A BEE',`<g transform="translate(150,330) scale(0.5)">${chibi({x:0,y:0,s:1,...DEX,eyes:'closed',mouth:'flat'})}</g><circle cx="190" cy="140" r="16" fill="#FFC21F" stroke="${INK}" stroke-width="3"/>`);
+      s+=polaroid(t,T.e3+1.4,1170,460,-4,'SAVED A KID',`<g transform="translate(120,330) scale(0.5)">${chibi({x:0,y:0,s:1,...DEX,eyes:'happy',mouth:'grin'})}</g><g transform="translate(200,330) scale(0.42)">${chibi({x:0,y:0,s:1,type:'sweater',top:'#FF5A7A',hair:'long',hairCol:'#7A4A2E',pants:'#3D5AFE',eyes:'happy',mouth:'smile'})}</g>`);
+      s+=polaroid(t,T.e3+2.0,1590,580,7,'17 PAIRS!',`<g transform="translate(160,150) scale(1.0)">${[0,1,2,3,4].map(i=>`<path transform="translate(${-120+i*60},${Math.sin(i)*30}) rotate(${i*20-40})" d="M-50,0 L-50,-30 Q-45,-48 -28,-48 L-6,-48 Q4,-36 16,-32 L44,-24 Q56,-20 56,-8 L56,0 Z" fill="#fff" stroke="${INK}" stroke-width="4"/>`).join('')}</g>`);
+    }
+  } else if(t<T.e4){ // 7:01 + sunrise bench
+    const k=seg(t,T.e3+3.6,T.e3+4.0);
+    if(t<T.e3+7.0){
+      s+=bgPanel('#1B2A6B','#2A3D8F')+rays(t,'#34489E',0.4);
+      const m=t>T.e3+4.6?1:0;
+      s+=clockFace(960,520,300,7,m);
+      if(m) s+=`<g transform="translate(960,520) scale(${pop(t,T.e3+4.6,0.3)})"><circle r="330" fill="none" stroke="#FFC21F" stroke-width="14" opacity="${1-seg(t,T.e3+4.6,T.e3+5.4)}"/></g>`;
+      s+=`<g transform="translate(960,930) scale(${pop(t,T.e3+4.0,0.35)})">${chip(m?'7:01 · ONE MINUTE':'7:00',0,0,m?'#E8463C':'#3D8BFF',60)}</g>`;
+    } else {
+      s+=bgPanel('#FF9A6B','#FFE3B8');
+      s+=`<circle cx="1400" cy="820" r="220" fill="#FFE07A"/><circle cx="1400" cy="820" r="300" fill="#FFE07A" opacity=".3"/>`;
+      s+=`<g filter="url(#freeze)" opacity=".9">${building(-60,420,420,'#E9D7F5','#C9A9E5',2)}${building(380,300,330,'#D7F0E0','#A9D9B9',4)}</g>`;
+      s+=`<rect y="860" width="1920" height="220" fill="#86D17C" stroke="${INK}" stroke-width="5"/>`;
+      s+=`<g transform="translate(760,900)"><rect x="-220" y="-110" width="440" height="34" rx="10" fill="#B07A4A" stroke="${INK}" stroke-width="6"/><rect x="-220" y="-170" width="440" height="34" rx="10" fill="#B07A4A" stroke="${INK}" stroke-width="6"/><rect x="-190" y="-76" width="22" height="80" fill="#5A3A2A" stroke="${INK}" stroke-width="5"/><rect x="168" y="-76" width="22" height="80" fill="#5A3A2A" stroke="${INK}" stroke-width="5"/></g>`;
+      s+=chibi({x:760,y:860,s:1.1,...DEX,eyes:'happy',mouth:'smile',armF:[-60,40],armB:[60,-40],legL:[-70,60],legR:[-70,60],sway:Math.sin(t*1.5)*2});
+      s+=motes(t);
+      s+=`<g transform="translate(960,150) scale(${pop(t,T.e3+7.4,0.35)})">${chip('MORE TIME THAN ANYONE ON EARTH',0,0,'#3D8BFF',54)}</g>`;
+    }
+  } else if(t<T.day2){ // ONE PROBLEM
+    s+=`<g filter="url(#freeze)">${bgSky(0)}${bgFar()}${bgNear(0,0)}</g>`;
+    const zoom=1+0.06*seg(t,T.e4,T.day2);
+    let crowd='';CROWD.forEach(([x,c,h,ty],i)=>{crowd+=chibi({x,y:1000,s:0.95,type:ty,top:c,hair:h,pants:'#3D5AFE',eyes:'open',mouth:'smile',armF:[-20,10],armB:[20,-10],look:[i%2?6:-6,0]});});
+    let w=`<g filter="url(#freeze)">${crowd}</g>`;
+    const vis=t<T.gone;
+    if(vis){const eo=seg(t,T.red,T.red+0.25); w+=mystery(1500,1000,0.95,t,eo);}
+    const sk=seg(t,T.gone,T.gone+0.5);
+    if(t>=T.gone&&sk<1) w+=`<g opacity="${1-sk}"><path d="M1500,820 Q1100,${700-200*sk} ${-200},600" fill="none" stroke="#E8463C" stroke-width="${60*(1-sk)+10}" stroke-linecap="round"/></g>`;
+    w+=chibi({x:740,y:1010,s:1.1,...DEX,eyes:t>T.red+0.3?'wide':'open',mouth:t>T.red+0.3?'o':'smile',sweat:t>T.gone,look:[10,0],armF:[-20,10],armB:[20,-10]});
+    s+=`<g transform="translate(960,700) scale(${zoom}) translate(-960,-700)">${w}</g>`;
+    if(t<T.red) s+=`<g transform="translate(960,150) scale(${pop(t,T.e4+0.2,0.35)})">${txt('There was just one problem…',0,0,72,'#FFFFFF')}</g>`;
+    if(t>=T.e5) s+=`<g transform="translate(960,150) scale(${pop(t,T.e5+0.2,0.35)})">${txt('Dex wasn’t the only one moving.',0,0,72,'#E8463C')}</g>`;
+    s+=`<defs><radialGradient id="vig" cx="50%" cy="50%" r="70%"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#vig)"/>`;
+  } else if(t<T.e6){ // DAY 2 title
+    s+=`<rect width="1920" height="1080" fill="#0B0C16"/>`;
+    const k=pop(t,T.day2+0.1,0.3); const sh=(1-seg(t,T.day2+0.1,T.day2+0.6))*12;
+    s+=`<g transform="translate(${960+Math.sin(t*80)*sh},540) scale(${k})">${txt('DAY 2:',0,-70,110,'#FFFFFF')}${txt('INVINCIBLE',0,90,190,'#FFC21F')}</g>`;
+  } else { // END CARD
+    s+=bgPanel('#2A3D8F','#1B2A6B')+rays(t,'#34489E',0.4);
+    s+=`<g transform="translate(960,130) scale(${pop(t,T.e6+0.2,0.35)})">${txt('NEXT: DAY 2 — INVINCIBLE',0,0,78,'#FFC21F')}</g>`;
+    // end-screen safe slots (video left, subscribe right)
+    s+=`<rect x="200" y="260" width="900" height="506" rx="26" fill="#14162A" stroke="#FFFFFF" stroke-width="6" stroke-dasharray="26 18" opacity=".85"/>`;
+    s+=`<circle cx="1440" cy="513" r="190" fill="#14162A" stroke="#FFFFFF" stroke-width="6" stroke-dasharray="26 18" opacity=".85"/>`;
+    s+=`<g transform="translate(1440,780)">${chip('SUBSCRIBE',0,0,'#E8463C',54)}</g>`;
+    const pk=ease(seg(t,T.e6+0.6,T.e6+1.4));
+    s+=chibi({x:1730,y:lerp(1500,1240,pk),s:1.2,...DEX,eyes:'happy',mouth:'grin',sparkle:true,armF:[150,-30],armLen:1.3,handF:'point',armB:[20,-10],tilt:-10+Math.sin(t*2)*3,flip:false});
+  }
+  s+=wipe(t,T.e1)+wipe(t,T.e2)+wipe(t,T.e3+3.6)+wipe(t,T.e3+7.0)+wipe(t,T.e6);
+  const fi=1-seg(t,0,0.3); if(fi>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fi}"/>`;
+  const fo=seg(t,T.end-0.8,T.end); if(fo>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fo}"/>`;
+  document.getElementById('root').innerHTML=s;
+}
+window.render=render; render(0);
+</script></body></html>

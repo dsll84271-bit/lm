@@ -1,0 +1,13 @@
+node_modules/
+# voice model (download with: python get_voice_model.py)
+*.onnx
+voices.bin
+# generated audio / renders / test frames
+*.wav
+*.npy
+*_silent.mp4
+seg_*.mp4
+shots/
+*.log
+# review videos are deliverables (the repo root ignores *.mp4)
+!review/*.mp4

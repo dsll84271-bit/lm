@@ -1,0 +1,6 @@
+numpy
+scipy
+soundfile
+playwright
+kokoro-onnx==0.6.1
+onnxruntime
