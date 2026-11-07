@@ -1,7 +1,7 @@
 import sys
 seg=sys.argv[1]
 # Scenes that start with '// RIG2' also load the Rig 2.0 / camera library.
-rig2='<script src="rig2.js"></script>' if open(f'sc_{seg}.js').read().startswith('// RIG2') else ''
+rig2='<script src="rig2.js"></script><script src="world2.js"></script>' if open(f'sc_{seg}.js').read().startswith('// RIG2') else ''
 open(f'{seg}.html','w').write(f"""<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{{font-family:'Lilita One';src:url('node_modules/@fontsource/lilita-one/files/lilita-one-latin-400-normal.woff2') format('woff2');}}
 @font-face{{font-family:'Nunito';font-weight:800;src:url('node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2') format('woff2');}}

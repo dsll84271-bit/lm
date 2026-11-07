@@ -4,7 +4,7 @@
 // and Ep2 still render exactly as before.
 //
 //   chibi2(o)            Dex rig: auto ground contact, squash/stretch, spin,
-//                        breathing, hood tip and drawstrings that follow
+//                        breathing, round hood and drawstrings that follow
 //                        motion, new eyes/brows/mouths, fists, trainers.
 //   POSES                named key poses (34 of them).
 //   poseAt(keys,t)       pose-to-pose with per-key easing (io, o = overshoot,
@@ -227,9 +227,10 @@ function chibi2(o) {
   g += `<g transform="translate(0,-64) scale(${1+br*.008},${1+br*.018}) translate(0,64)">`;
   g += `<path d="M-48,-168 Q0,-180 48,-168 Q58,-110 54,-64 Q0,-54 -54,-64 Q-58,-110 -48,-168 Z" fill="${top}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>`;
   g += `<path d="M32,-164 Q38,-110 32,-61 Q44,-62 52,-66 Q56,-110 48,-162 Z" fill="#B8650A" opacity=".22"/><path d="M-40,-160 Q-46,-120 -42,-90" stroke="#FFE9A0" stroke-width="7" stroke-linecap="round" fill="none" opacity=".7"/>`;
-  g += `<path d="M-30,-98 L30,-98 L36,-66 L-36,-66 Z" fill="#000" opacity=".07"/><path d="M-30,-98 L30,-98 L36,-66 L-36,-66 Z" fill="none" stroke="${INK}" stroke-width="3.5" opacity=".55"/>`;
+  if (o.type === 'jacket') g += `<path d="M0,-172 L0,-62" stroke="${INK}" stroke-width="4" opacity=".6"/><path d="M-26,-172 L0,-140 L26,-172" fill="${o.shirt||'#BFE6FF'}" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>`;
+  else g += `<path d="M-30,-98 L30,-98 L36,-66 L-36,-66 Z" fill="#000" opacity=".07"/><path d="M-30,-98 L30,-98 L36,-66 L-36,-66 Z" fill="none" stroke="${INK}" stroke-width="3.5" opacity=".55"/>`;
   g += `<path d="M-48,-70 Q0,-60 52,-70" stroke="#000" stroke-width="5" opacity=".12" fill="none"/>`;
-  for (const sx of [-1,1]) { const sw = o.sway || 0, w = o.wind || 0;
+  if (o.type !== 'jacket' && o.type !== 'plain') for (const sx of [-1,1]) { const sw = o.sway || 0, w = o.wind || 0;
     const d = `M${12*sx},-162 Q${14*sx+sw*9-w*8},${-140+Math.abs(w)*6} ${12*sx-w*30+sw*20},${-116-Math.abs(sw)*8-Math.abs(w)*14}`;
     g += `<path d="${d}" fill="none" stroke="${INK}" stroke-width="9.5" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${STR}" stroke-width="5" stroke-linecap="round"/>`;
     const [ax,ay] = [12*sx-w*30+sw*20, -116-Math.abs(sw)*8-Math.abs(w)*14]; g += `<rect x="${ax-4}" y="${ay-2}" width="8" height="10" rx="3" fill="#C9C2DA" stroke="${INK}" stroke-width="3"/>`; }
@@ -237,15 +238,20 @@ function chibi2(o) {
   // head (rides the breath a little)
   g += `<g transform="translate(0,${-238-br*2.2}) rotate(${o.tilt||0})">`;
   const ht = o.hoodTip || 0, w = o.wind || 0;
-  // hood tip (secondary motion, matches the thumbnail's pointed hood)
-  g += `<g transform="rotate(${ht + w*-18},-62,-96)"><path d="M-30,-121 Q-92,-136 ${-150-w*40},${-112+w*10} Q${-118-w*10},-98 -94,-62 Z" fill="#F2AA10" stroke="${INK}" stroke-width="5.5" stroke-linejoin="round"/><path d="M-60,-118 Q-100,-120 ${-128-w*30},-110" stroke="#FFE27A" stroke-width="6" fill="none" stroke-linecap="round" opacity=".8"/></g>`;
+  // round hood (as in the thumbnail) with follow-through: it lags, swings and squashes with motion, no point
+  const hb = clamp(ht/14, -1.6, 1.6);
+  if (o.hood !== false) {
+  g += `<g transform="rotate(${hb*3.2 - w*4},0,30) translate(${-w*7 - hb*2},${Math.abs(hb)*1.5}) scale(${1 + Math.abs(hb)*.018},${1 - Math.abs(hb)*.025})">`;
   g += `<path d="M-96,10 C-104,-80 -50,-122 0,-122 C${50-w*30},-122 ${104-w*40},-80 ${96-w*30},10 C90,70 50,92 0,92 C-50,92 -90,70 -96,10 Z" fill="url(#hoodG)" stroke="${INK}" stroke-width="6"/>`;
-  g += `<path d="M-70,-82 Q-30,-112 20,-108" fill="none" stroke="#FFF1B0" stroke-width="9" stroke-linecap="round" opacity=".85"/><path d="M84,-30 Q96,20 70,64" fill="none" stroke="#C97A06" stroke-width="10" stroke-linecap="round" opacity=".35"/>`;
+  g += `<path d="M-70,-82 Q-30,-112 20,-108" fill="none" stroke="#FFF1B0" stroke-width="9" stroke-linecap="round" opacity=".85"/><path d="M84,-30 Q96,20 70,64" fill="none" stroke="#C97A06" stroke-width="10" stroke-linecap="round" opacity=".35"/></g>`;
+  } else g += hairBack(o.hair, o.hairCol || '#5A3A2A');
   g += `<ellipse cx="0" cy="0" rx="80" ry="78" fill="url(#skin)" stroke="${INK}" stroke-width="5.5"/>`;
   g += `<path d="M48,-62 A80,78 0 0 1 48,62 Q74,0 48,-62 Z" fill="#E08F76" opacity=".2"/>`;
-  g += hairFront('dex');
-  g += `<path d="M-82,8 C-86,-70 -40,-104 0,-104 C40,-104 86,-70 82,8" fill="none" stroke="#FFC21F" stroke-width="13"/><path d="M-82,8 C-86,-70 -40,-104 0,-104 C40,-104 86,-70 82,8" fill="none" stroke="${INK}" stroke-width="3" transform="translate(0,-7) scale(1.08)"/>`;
+  g += o.hood === false ? hairFront(o.hair, o.hairCol || '#5A3A2A') : hairFront('dex');
+  if (o.hood !== false) g += `<path d="M-82,8 C-86,-70 -40,-104 0,-104 C40,-104 86,-70 82,8" fill="none" stroke="${top}" stroke-width="13"/><path d="M-82,8 C-86,-70 -40,-104 0,-104 C40,-104 86,-70 82,8" fill="none" stroke="${INK}" stroke-width="3" transform="translate(0,-7) scale(1.08)"/>`;
   g += face2(o, t);
+  if (o.acc === 'glasses') g += `<circle cx="-30" cy="6" r="25" fill="#fff" fill-opacity=".15" stroke="${INK}" stroke-width="5"/><circle cx="30" cy="6" r="25" fill="#fff" fill-opacity=".15" stroke="${INK}" stroke-width="5"/><path d="M-5,4 L5,4" stroke="${INK}" stroke-width="5"/>`;
+  if (o.acc === 'bun') g += '';
   if (o.sweat) { const sy = (t*60 % 40); g += `<path d="M74,${-44+sy*.3} C82,${-28+sy*.3} 84,${-16+sy*.3} 76,${-10+sy*.3} C66,${-4+sy*.3} 58,${-14+sy*.3} 64,${-28+sy*.3} Z" fill="#BFE6FF" stroke="${INK}" stroke-width="4"/>`; }
   g += `</g>`;
   // front arm
@@ -289,11 +295,18 @@ function speedLines(t, n=26, op=.8, col='#FFFFFF', dir=1, yMin=0, yMax=1080) {
     s += `<rect x="${dir > 0 ? x : 1920 - x - len}" y="${y}" width="${len}" height="${3 + hash(i*5 + f)*7}" rx="4" fill="${col}"/>`; }
   return s + '</g>';
 }
-function dust(x, y, t, t0, n=9, sc=1, col='#E9E2D2', dur=.9) {
-  if (t < t0 || t > t0 + dur) return ''; const k = (t - t0)/dur; let s = '';
-  for (let i = 0; i < n; i++) { const a = Math.PI*(i/(n-1)), r = (30 + 140*easeOut(k))*sc*(.7 + hash(i)*.6);
-    const cx = x - Math.cos(a)*r*1.6, cy = y - Math.sin(a)*r*.45 - 10*sc, rr = (16 + 34*k)*sc*(.7 + hash(i+9)*.6);
-    s += `<g opacity="${.9*(1 - k*k)}"><circle cx="${cx}" cy="${cy}" r="${rr}" fill="#B9AE98" opacity=".55"/><circle cx="${cx - rr*.15}" cy="${cy - rr*.2}" r="${rr*.85}" fill="${col}"/><circle cx="${cx - rr*.35}" cy="${cy - rr*.4}" r="${rr*.35}" fill="#FFFFFF" opacity=".5"/></g>`; }
-  return `<g filter="url(#b2)">${s}</g>`;
+function dust(x, y, t, t0, n=9, sc=1, col='#E9E2D2', dur=.9) {   // soft wisps hugging the ground + a few pebbles
+  if (t < t0 || t > t0 + dur) return ''; const k = (t - t0)/dur, e = easeOut(k), tt = t - t0; let s = '', p = '';
+  for (let i = 0; i < n*2; i++) { const side = i % 2 ? 1 : -1, a = hash(i*3.1)*.9, r = (20 + 190*e*(.5 + hash(i)*.7))*sc;
+    const cx = x + side*Math.cos(a)*r*1.5, cy = y - Math.sin(a)*r*.5 - 8*sc - e*24*sc*hash(i + 4), rx = (14 + 50*e)*sc*(.6 + hash(i + 9)*.6);
+    s += `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${rx*.5}" fill="${col}" opacity="${.5*(1 - k)*(.6 + hash(i + 2)*.4)}"/>`; }
+  for (let i = 0; i < n; i++) { const side = i % 2 ? 1 : -1, px = x + side*(120 + hash(i + 7)*260)*sc*tt, py = y - (220 + hash(i + 3)*300)*sc*tt + 1100*sc*tt*tt;
+    if (py < y + 4) p += `<circle cx="${px}" cy="${py}" r="${(3 + hash(i)*4)*sc}" fill="#7D705A" opacity="${1 - k}"/>`; }
+  return `<g filter="url(#b4)">${s}</g>${p}`;
 }
 function vignette() { return `<rect width="1920" height="1080" fill="url(#warm)"/><rect width="1920" height="1080" fill="url(#vig)"/>`; }
+
+// side-view runner with the ROUND hood (no streaming point), cream drawstrings
+function chibiSide2(o) {
+  return chibiSide(o).replace(/<path d="M-104,[^"]*" fill="#F0AE14"[^>]*\/>/, '').replace(/stroke="#fff" stroke-width="4.5"/g, 'stroke="#FFF1D6" stroke-width="4.5"');
+}

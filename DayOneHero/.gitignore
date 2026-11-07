@@ -11,3 +11,6 @@ shots/
 *.log
 # review videos are deliverables (the repo root ignores *.mp4)
 !review/*.mp4
+*.mov
+_cat.txt
+out/
