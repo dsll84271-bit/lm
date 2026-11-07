@@ -127,6 +127,100 @@ if seg == 'p':
     add(whoosh(1.4, 300, 4000), ST[7] - .2, .45); noise(ST[7] + 1.2, .3, 800, 6000, .6, 15); [thump(ST[7] + 1.25 + i*.1, .25) for i in range(3)]
     rush(ST[7] + 1.2, 1.0, .2); swish(41.3, .2)
 
+if seg == 's':
+    PUNCH = ST[1] + 1.4; SLAM = ST[4] + 1.5
+    [swish(x, .2) for x in (2.0, ST[1], PUNCH + .3, 7.4, ST[2] - .05, 15.5, 17.4, 20.9, 23.4, 27.3, 28.7)]
+    for i in range(5): add(tone(400 + i*30, 300, .12, .004, .08), .2 + i*.33, .1)                     # footsteps
+    for x in (2.33, 2.4, 2.48, 2.55): click(x, .4)
+    add(whoosh(.5, 300, 3000), ST[1] + .3, .3); add(whoosh(.25, 600, 8000), PUNCH - .2, .7); boom(PUNCH, .5)
+    [add(hit(), x, .25) for x in (7.85, 8.45)]; add(tone(200, 150, .4, .02, .3), ST[2] + .3, .1)       # taps, wall "hm"
+    add(hit(), 13.75, .4); add(tone(900, 900, .3, .002, .25), 13.77, .1); add(tone(1200, 1500, .1, .003, .06), 15.9, .2)   # clonk, boop
+    n = int((SLAM - 20.6)*SR); tt = np.arange(n)/SR; add(bp(rng.standard_normal(n), 200, 900)*(.5 + .5*np.sin(tt*28)), 20.6, .15)  # strain
+    boom(SLAM, .5); add(hit(), SLAM, .8); chirp(SLAM + .7, 2600, .08)
+    for k in range(4): add(hit(), ST[5] + .1 + k*.98, .3); add(tone(140, 110, .3, .01, .2), ST[5] + .2 + k*.98, .12)    # barbell reps
+    add(whoosh(.3, 600, 6000), 27.55, .4); add(hit(), 27.6, .5); add(whoosh(.3, 400, 4000), 27.95, .4); add(hit(), 28.05, .7); sparkle(29.4)
+
+if seg == 'l':
+    JUMP = ST[0] + DU[0] + .2; SPL = JUMP + 1.0
+    n = N; add(bp(rng.standard_normal(n), 40, 300)*(.7 + .3*np.sin(np.arange(n)/SR*1.3)), 0, .12)        # lava rumble bed
+    for i in range(int(END*2.2)): bubble(.3 + i*.45 + rng.random()*.2, .06)
+    [swish(x, .2) for x in (2.6, 5.0, JUMP - .1, SPL, ST[1], 12.0, 15.2, ST[2] - .2, 21.0, 30.6, 33.2)]
+    add(tone(300, 900, 1.2, .05, .3), 2.9, .08)                                                        # thermometer rising
+    add(tone(700, 1100, .15, .004, .1), 5.6, .15); add(whoosh(.8, 300, 4000), JUMP, .5); add(tone(300, 700, .5, .01, .3), JUMP, .1)
+    add(hit(), SPL, .6); [bubble(SPL + .05 + i*.07, .2) for i in range(6)]; boing(SPL + .1, .2)
+    [add(hit(), ST[1] + .9 + i*.4, .15) for i in range(3)]
+    for i in range(6): add(tone(160, 120, .25, .01, .2), 15.5 + i*.35, .08)                            # gloopy pour
+    add(tone(1800, 2400, .15, .004, .1), 21.8, .12); add(tone(1700, 2200, .12, .004, .08), 22.0, .1)     # duck squeak
+    for i in range(12): bubble(ST[3] + 3.0 + i*.15, .12)
+    add(tone(300, 120, 1.6, .05, .8), ST[3] + 6.0, .25); [bubble(ST[3] + 7.4 + i*.1, .25) for i in range(8)]   # sink + glug
+if seg == 'k':
+    STRIKE = ST[1] + 1.0
+    [swish(x, .2) for x in (2.2, 4.6, 6.9, 9.5, 13.0)]
+    rush(4.6, STRIKE - 4.6, .25); thunder(4.9, .3)
+    noise(STRIKE, .2, 2000, 10000, 1.0, 20); boom(STRIKE, 1.0); thunder(STRIKE + .1, .9); crackle(STRIKE + .3, 2.0, .2)
+    add(tone(120, 4000, 1.5, .05, .4), 10.2, .05); add(tone(200, 6000, 1.5, .05, .4), 11.2, .05)       # bar sweeps
+    add(tone(400, 900, .1, .003, .06), ST[2] + 1.4, .3); add(tone(900, 500, .15, .004, .1), ST[2] + 1.5, .2)   # "toast" pop
+    for i in range(3): add(whoosh(.3, 600, 5000), ST[3] + .25 + i*1.1, .3); thump(ST[3] + .3 + i*1.1, .2)
+    add(tone(500, 300, .4, .01, .3), WK1 + .1 if (WK1 := ST[4] - .2) else 0, .15); sparkle(ST[4] + .4)
+
+if seg == 'a':
+    JUMP = ST[0] + DU[0] + .2; UP = ST[4] + .6; OUT = ST[4] + DU[4] + .3
+    for i in range(int(JUMP*1.5)): noise(i*.66 + .2, .5, 300, 2500, .05, 4)                               # waves
+    add(tone(300, 220, .9, .05, .4), 3.6, .1); add(whoosh(.4, 300, 4000), JUMP, .4); noise(JUMP + .55, .6, 400, 6000, .7, 6)   # breath, dive, splash
+    n = int((OUT - JUMP - .6)*SR); tt = np.arange(n)/SR; add(bp(rng.standard_normal(n), 60, 400)*(.8 + .2*np.sin(tt*.9)), JUMP + .6, .14)   # underwater hum
+    for i in range(int((OUT - JUMP)*1.5)): bubble(JUMP + .7 + i*.66 + rng.random()*.3, .07)
+    [swish(x, .18) for x in (2.4, 11.8, 13.9, 17.9, 20.05, ST[3] - .1, 28.7, 33.9, 35.1)]
+    add(tone(80, 50, 1.5, .1, .6), ST[1] + .4, .2)                                                         # pressure groan
+    noise(12.55, .5, 300, 3000, .6, 8); add(hit(), 12.55, .6); [add(tone(f, f*.9, .4, .002, .3), 12.6, .05) for f in (700, 1100)]   # sub crush
+    add(tone(1200, 1800, .6, .02, .3), 14.2, .06)                                                          # angler glow
+    for i in range(8): add(tone(1000, 1000, .03, .002, .02), ST[3] + .4 + i*.7, .1)                         # timer ticks
+    rush(UP, OUT - UP, .3); add(tone(200, 1400, OUT - UP, .1, .3), UP, .05)
+    add(tone(80, 60, 1.1, .05, .5), 33.9, .1)                                                               # space hush
+    noise(OUT, .5, 400, 6000, .6, 6); add(tone(500, 900, .3, .01, .2), OUT + .05, .2); sparkle(ST[5] + .5)
+if seg == 'x':
+    [swish(x, .2) for x in (3.0, 6.6, 11.0, 15.9, 18.4, ST[3] + 2.6, 30.8)]
+    add(whoosh(.5, 200, 3000), 2.6, .4); add(tone(60, 40, 3.0, .3, 1.0), 6.6, .2); rush(6.6, 4.4, .15)    # dive into the core
+    n = int(10*SR); add(bp(rng.standard_normal(n), 40, 250), 11.0, .1); crackle(11.0, 7.0, .06)
+    add(tone(80, 60, 1.2, .05, .5), 11.2, .25); sparkle(ST[2] + .3); add(tone(800, 300, .6, .01, .3), ST[2] + 2.2, .08); pop_(ST[2] + 3.4)
+    for i in range(6): add(hit(), ST[3] + .1 + i*.5, .2); noise(ST[3] + .1 + i*.5, .1, 200, 2000, .15, 25)   # digging
+    add(hit(), ST[3] + 2.6, .7); [add(tone(f, f, .8, .002, .7), ST[3] + 2.62, .07) for f in (1180, 1770)]       # boink (shovel ring)
+    add(whoosh(1.8, 150, 2500), 29.0, .35); pop_(ST[4] + 4.2)
+
+if seg == 'r':
+    SLIP = ST[1] + 3.0; RUN0 = ST[3] + .2; PUSH = ST[3] + 1.4; HIT = ST[3] + DU[3] + .2; GETUP = ST[4] + 1.8
+    for i in range(6): add(tone(380 + i*20, 300, .1, .004, .07), .3 + i*.55, .08)                        # footsteps
+    [swish(x, .18) for x in (3.9, 6.6, SLIP + .1, 9.6, 13.1, 14.9, PUSH, 19.3, 23.2, GETUP)]
+    add(tone(200, 160, .5, .02, .3), SLIP - .5, .2); add(tone(170, 140, .4, .02, .3), SLIP - .1, .2); noise(SLIP, .2, 300, 3000, .3, 15)   # creak, slip
+    add(tone(600, 1600, .3, .01, .2), 10.1, .15)                                                          # Dex notices
+    n = int((RUN0 - ST[2])*SR); tt = np.arange(n)/SR; add(np.sin(2*np.pi*55*tt)*.5*np.minimum(1, tt*2), ST[2], .12); add(tone(300, 60, 1.0, .05, .6), ST[2] - .1, .2)   # slow-mo drop
+    for i in range(int((RUN0 - ST[2])/.9)): thump(ST[2] + .5 + i*.9, .2)                                     # heartbeat in slow-mo
+    add(whoosh(.4, 400, 6000), RUN0 - .1, .5); [add(tone(260, 220, .06, .003, .04), RUN0 + i*.15, .15) for i in range(8)]
+    add(whoosh(.3, 500, 5000), PUSH, .35); sparkle(PUSH + .1, .08)
+    add(tone(80, 50, 1.0, .05, .6), HIT, .3); [noise(HIT + .3 + i*.14, .1, 300, 2500, .25, 25) for i in range(4)]
+    boing(GETUP + .3, .2); thump(GETUP + .65, .3); sparkle(GETUP + 1.0)
+if seg == 'd':
+    JMP = ST[1] + DU[1] + .3; IMPD = ST[4] + .5
+    n = int(JMP*SR); tt = np.arange(n)/SR; add(bp(rng.standard_normal(n), 60, 500)*(.8 + .2*np.sin(tt*30)), 0, .14)        # plane drone
+    rush(3.0, JMP - 3.0, .25); [swish(x, .2) for x in (3.0, 5.6, ST[2] - .1, 15.5, ST[3] - .1, 25.4, 33.0, ST[6] - .2, 53.0)]
+    add(whoosh(1.0, 300, 6000), JMP, .6); rush(JMP + .3, IMPD - JMP - .3, .3)
+    add(tone(300, 900, 1.2, .05, .4), ST[2] + 2.6, .06); add(tone(400, 400, 1.5, .1, .5), 15.5, .03)
+    n2 = int(4.0*SR); t2 = np.arange(n2)/SR; add(np.sin(2*np.pi*np.cumsum(300 + 900*(t2/t2[-1])**2)/SR)*(t2/t2[-1])**2*.5, IMPD - 4.0, .25)   # riser to impact
+    GAP.append((IMPD - .1, IMPD))
+    noise(IMPD, .3, 2000, 9000, .8, 15); boom(IMPD, 1.0); add(hit(), IMPD, 1.0); thunder(IMPD + .05, .5)
+    for i in range(10): add(hit(), IMPD + .6 + i*.11, .15)                                                     # debris rain
+    for i in range(6): add(hit(), ST[5] + .4 + i*.35, .15)                                                     # climbing
+    add(tone(80, 70, 4.5, .5, 1.5), ST[7] + .2, .2); add(tone(1200, 400, .6, .01, .4), ST[7] + 2.3, .12)       # red hood sting
+    add(whoosh(.6, 500, 8000), ST[8] + DU[8] + .6, .6)
+
+if seg == 'e':
+    DAY3 = ST[3] + DU[3] + .15
+    [swish(x, .18) for x in (3.0, 5.5, 14.9)]
+    for i in range(6): add(hit(), 3.05 + i*.63, .12)                                                      # happy bounces
+    for at in (ST[1] + .9, ST[1] + 1.8, ST[1] + 2.6, ST[1] + 3.4, ST[1] + 4.4, ST[1] + 5.0): pop_(at, .14)   # sticky notes
+    add(tone(110, 90, 3.0, .2, 1.0), 14.9, .15)                                                           # spotlight hush
+    add(whoosh(.8, 200, 6000), DAY3 - .4, .5); add(tone(200, 2400, .5, .01, .3), DAY3, .1)
+    sparkle(ST[4] + .6, .1)
+
 sfx = orig*(1.0)
 for a, b in MUTE: sfx[int(a*SR):int(b*SR)] = 0
 o = g['out'][:N]; ex = o/(np.abs(o).max() + 1e-9)*.8 if np.abs(o).max() > 0 else o

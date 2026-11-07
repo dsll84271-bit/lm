@@ -242,7 +242,7 @@ function chibi2(o) {
   const hb = clamp(ht/14, -1.6, 1.6);
   if (o.hood !== false) {
   g += `<g transform="rotate(${hb*3.2 - w*4},0,30) translate(${-w*7 - hb*2},${Math.abs(hb)*1.5}) scale(${1 + Math.abs(hb)*.018},${1 - Math.abs(hb)*.025})">`;
-  g += `<path d="M-96,10 C-104,-80 -50,-122 0,-122 C${50-w*30},-122 ${104-w*40},-80 ${96-w*30},10 C90,70 50,92 0,92 C-50,92 -90,70 -96,10 Z" fill="url(#hoodG)" stroke="${INK}" stroke-width="6"/>`;
+  g += `<path d="M-96,10 C-104,-80 -50,-122 0,-122 C${50-w*30},-122 ${104-w*40},-80 ${96-w*30},10 C90,70 50,92 0,92 C-50,92 -90,70 -96,10 Z" fill="${o.top && o.top !== '#FFC21F' ? o.top : 'url(#hoodG)'}" stroke="${INK}" stroke-width="6"/>`;
   g += `<path d="M-70,-82 Q-30,-112 20,-108" fill="none" stroke="#FFF1B0" stroke-width="9" stroke-linecap="round" opacity=".85"/><path d="M84,-30 Q96,20 70,64" fill="none" stroke="#C97A06" stroke-width="10" stroke-linecap="round" opacity=".35"/></g>`;
   } else g += hairBack(o.hair, o.hairCol || '#5A3A2A');
   g += `<ellipse cx="0" cy="0" rx="80" ry="78" fill="url(#skin)" stroke="${INK}" stroke-width="5.5"/>`;
@@ -251,7 +251,7 @@ function chibi2(o) {
   if (o.hood !== false) g += `<path d="M-82,8 C-86,-70 -40,-104 0,-104 C40,-104 86,-70 82,8" fill="none" stroke="${top}" stroke-width="13"/><path d="M-82,8 C-86,-70 -40,-104 0,-104 C40,-104 86,-70 82,8" fill="none" stroke="${INK}" stroke-width="3" transform="translate(0,-7) scale(1.08)"/>`;
   g += face2(o, t);
   if (o.acc === 'glasses') g += `<circle cx="-30" cy="6" r="25" fill="#fff" fill-opacity=".15" stroke="${INK}" stroke-width="5"/><circle cx="30" cy="6" r="25" fill="#fff" fill-opacity=".15" stroke="${INK}" stroke-width="5"/><path d="M-5,4 L5,4" stroke="${INK}" stroke-width="5"/>`;
-  if (o.acc === 'bun') g += '';
+  if (o.acc === 'shades') g += `<path d="M-58,-14 L-6,-14 Q-4,26 -32,28 Q-58,26 -58,-14 Z M6,-14 L58,-14 Q58,26 32,28 Q4,26 6,-14 Z" fill="#14162A" stroke="${INK}" stroke-width="5"/><path d="M-6,-10 L6,-10 M-58,-12 L-78,-20 M58,-12 L78,-20" stroke="${INK}" stroke-width="5"/><path d="M-48,-6 L-36,-6 M16,-6 L28,-6" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/>`;
   if (o.sweat) { const sy = (t*60 % 40); g += `<path d="M74,${-44+sy*.3} C82,${-28+sy*.3} 84,${-16+sy*.3} 76,${-10+sy*.3} C66,${-4+sy*.3} 58,${-14+sy*.3} 64,${-28+sy*.3} Z" fill="#BFE6FF" stroke="${INK}" stroke-width="4"/>`; }
   g += `</g>`;
   // front arm

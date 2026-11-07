@@ -42,9 +42,13 @@ Next to the channels Leo benchmarks against (Awaken, IFANIME, ManifestingWhatIF)
 
 **First task:** remake Ep2's car-crash beat (`vid2/sc_p.js`, the start of the segment up to the box landing) as a ~15-second **before/after** using Rig 2.0 and the new camera language. Show Leo both side by side before rebuilding anything else.
 
-## Status: first task (car-crash before/after)
-- Done, waiting on Leo's verdict. Review videos are in `review/`: `carcrash_side_by_side.mp4`, `carcrash_before.mp4` and `carcrash_after.mp4` (16 s each, same narration and music, -14 LUFS).
-- **Rig 2.0 + Camera 2.0** live in `vid2/rig2.js`, loaded only by scenes whose first line is `// RIG2`, so old segments render unchanged. It has 36 named poses (`POSES`; check them with `python shot.py ps 0`), `poseAt` pose-to-pose easing (io / overshoot / spring / snap), natural blinks, breathing, a hood tip and drawstrings that follow motion, new eyes/brows/mouths and fists, parallax layers with depth of field, camera keyframes, trauma shake, whip-pan motion blur, impact frames, focus lines, speed lines and dust.
-- The remade beat is `vid2/sc_p2.js` (timing `t_p2.js`) and its sound is `vid2/beat_audio.py`. To rebuild: `python audio.py p`, `cd tts && python gen_p.py`, `python beat_audio.py`, `python render.py p2`, and `python render.py p 16` for the original.
-- `render.py` now takes an optional end time (`python render.py <seg> <seconds>`).
-- If Leo approves, next: (1) take the rig/camera through the rest of Ep2 segment by segment; (2) swap in his background plates as parallax layers; (3) YouTube Audio Library music; (4) test a commercially licensed TTS model.
+## Status: Ep2 rebuilt in Rig 2.0 (Leo approved the car-crash test)
+- Leo's fixes are done: the hood is round again (it bounces and squashes, no point); wides frame Dex at least ~40% bigger (rule: camera z >= 1.05 at DS); dust is soft wisps plus pebbles.
+- All 12 parts (v recap, c, h, p, s, l, k, a, x, r, d, e) have Rig 2.0 scenes: `vid2/sc_<seg>2.js` with `t_<seg>2.js` (same timings as Ep2). The full episode runs 8:01.8.
+- Shared code: `rig2.js` (rig, poses, camera, fx; chibi2 also draws non-hood characters such as the barber, Nan and the kid; acc 'shades'/'glasses'), and `world2.js` (playShots runner, parallax `L(p, svg, blur)`, sets and props).
+- Build one segment: `python render.py <seg>2`, then `python mix2.py <seg>` (music + original SFX + new SFX + voice), then `python mux.py <name> <seg>` (writes ../out/<name>.mp4 at -14 LUFS for review).
+- Build the episode: `python final2.py` writes `../out/DayOneHero_Ep2_Invincible_Rig2.mp4` (two-pass loudnorm to -14 LUFS / -1.5 dBTP, +faststart).
+- Narration: `cd tts && python gen_all.py` regenerates every line with the correct line sets (c and e from L4, k from L2, x and v from L3).
+- Checking frames: `python shot.py <seg>2 t1 t2…` makes a contact sheet. A headless all-frames error check (node) is quick to rebuild; see git history.
+- Honest ratings sent to Leo: recap+cold open 6.5, haircut 6.5, car 7, wall 6.5, lava 6.5, hoodie 6, ocean 7, Earth core 6, bricks 7, skydive 6.5, outro 6.5. Nothing is 9/10 yet.
+- Biggest remaining gaps: front-view-only rig (no side or 3/4 turnarounds, no belly-down freefall); backgrounds are still drawn in code (waiting on Leo's plates); synth music (waiting on YouTube Audio Library tracks); Kokoro voice; no lip sync.
