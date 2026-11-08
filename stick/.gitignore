@@ -1,0 +1,8 @@
+node_modules/
+tts/*.onnx
+tts/voices.bin
+*.wav
+shots/
+*.mp4
+_*.txt
+*.log
