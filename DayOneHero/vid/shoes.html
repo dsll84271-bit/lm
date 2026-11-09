@@ -1,0 +1,112 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Lilita One';src:url('node_modules/@fontsource/lilita-one/files/lilita-one-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Nunito';font-weight:800;src:url('node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2') format('woff2');}
+html,body{margin:0;background:#000;overflow:hidden}
+</style></head>
+<body>
+<svg id="root" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="lib.js"></script>
+<script src="helpers.js"></script>
+<script>
+const T={s0:0.4,b:3.0,s1:3.3,c:7.7,s2:8.0,d:12.3,s3:12.7,e:16.2,s4:16.6,end:20.0};
+const DEX={type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true};
+function sneaker(x,y,s,wear=0,col='#3D8BFF',rot=0){
+  const sh=24*(1-0.75*wear);
+  let g=`<g transform="translate(${x},${y}) scale(${s}) rotate(${rot})">`;
+  if(wear>0.85) g+=`<ellipse cx="128" cy="-22" rx="20" ry="16" fill="#FF9EB5" stroke="${INK}" stroke-width="5"/>`;
+  g+=`<path d="M-112,-${sh} L-112,-78 Q-104,-116 -62,-116 L-14,-116 Q6,-86 38,-76 L98,-60 Q126,-52 126,-24 L126,-${sh} Z" fill="#FFFFFF" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/>`;
+  g+=`<path d="M-70,-40 Q0,-30 60,-70" fill="none" stroke="${col}" stroke-width="16" stroke-linecap="round"/>`;
+  g+=`<path d="M-104,-110 Q-112,-70 -100,-${sh+6}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round"/>`;
+  g+=[0,1,2].map(i=>`<path d="M${-6+i*22},${-108+i*10} l18,8" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`).join('');
+  g+=`<rect x="-118" y="-${sh}" width="250" height="${sh}" rx="${Math.min(12,sh/2)}" fill="${wear>0.5?'#D9D4E6':'#F4F1FA'}" stroke="${INK}" stroke-width="7"/>`;
+  if(wear>0.55) g+=`<ellipse cx="-40" cy="-${sh/2}" rx="${18*(wear-0.5)*2}" ry="${Math.max(2,sh/2-2)}" fill="${INK}"/><ellipse cx="60" cy="-${sh/2}" rx="${14*(wear-0.5)*2}" ry="${Math.max(2,sh/2-2)}" fill="${INK}"/>`;
+  if(wear>0.7) g+=`<path d="M100,-70 l14,-10 l-4,16 Z" fill="${INK}"/>`;
+  return g+`</g>`;}
+function smoke(x,y,t,n=4,sc=1){let g='';for(let i=0;i<n;i++){const p=((t*0.7+i/n)%1);g+=`<circle cx="${x+Math.sin(p*7+i)*30*sc}" cy="${y-p*240*sc}" r="${(18+p*50)*sc}" fill="#C9C2DA" opacity="${0.6*(1-p)}"/>`;}return g;}
+function heart(x,y,s,c='#FF5A7A'){return `<path transform="translate(${x},${y}) scale(${s})" d="M0,18 C-30,-4 -26,-30 -10,-30 C-2,-30 0,-22 0,-18 C0,-22 2,-30 10,-30 C26,-30 30,-4 0,18 Z" fill="${c}" stroke="${INK}" stroke-width="4"/>`;}
+function note(t,at,x,y,l1,l2,l3){const nk=pop(t,at,0.35);return `<g transform="translate(${x},${y}) scale(${nk}) rotate(-4)"><rect x="-290" y="-150" width="580" height="300" fill="#FFF07A" stroke="${INK}" stroke-width="7"/><rect x="-70" y="-176" width="140" height="44" fill="#BFE6FF" opacity=".85" transform="rotate(-4)"/>
+ <text y="-50" text-anchor="middle" font-family="Lilita One" font-size="64" fill="#E8463C">${l1}</text><text y="30" text-anchor="middle" font-family="Lilita One" font-size="56" fill="${INK}">${l2}</text><text y="94" text-anchor="middle" font-family="Lilita One" font-size="56" fill="${INK}">${l3}</text></g>`;}
+function render(t){
+  let s=DEFS;
+  if(t<T.b){ // A: smoking trainer close-up + RULE 4
+    s+=bgPanel('#2A3D8F','#1B2A6B')+rays(t,'#34489E',0.5);
+    s+=`<ellipse cx="560" cy="860" rx="420" ry="40" fill="#000" opacity=".25"/>`;
+    const jig=Math.sin(t*40)*2;
+    s+=sneaker(560+jig,850,2.9,0.82,'#3D8BFF',-2)+smoke(520,640,t,6,1.4)+smoke(780,700,t+0.3,4,1.0);
+    s+=note(t,T.s0+0.5,1400,420,'RULE 4','PACK SPARE','TRAINERS');
+  } else if(t<T.c){ // B: lifespan
+    s+=bgPanel('#FFF6E0','#FFE7B8');
+    s+=`<g transform="translate(960,150) scale(${pop(t,T.b+0.3,0.35)})">${chip('ONE PAIR OF RUNNING SHOES',0,0,'#3D8BFF',52)}</g>`;
+    s+=sneaker(420,560,1.6,0,'#3D8BFF',0);
+    // distance bar
+    const k=ease(seg(t,T.s1+0.6,T.s1+3.4));
+    s+=`<g transform="translate(760,470)"><rect x="0" y="0" width="900" height="70" rx="35" fill="#fff" stroke="${INK}" stroke-width="7"/><rect x="8" y="8" width="${884*k}" height="54" rx="27" fill="#7ED957"/>
+      ${[0,200,400,600,800].map(v=>`<line x1="${v/800*900}" y1="78" x2="${v/800*900}" y2="96" stroke="${INK}" stroke-width="5"/><text x="${v/800*900}" y="134" text-anchor="middle" font-family="Lilita One" font-size="34" fill="${INK}">${v}</text>`).join('')}
+      <text x="900" y="180" text-anchor="end" font-family="Lilita One" font-size="34" fill="${INK}">KM</text></g>`;
+    if(t>T.s1+2.4) s+=`<g transform="translate(1210,410) scale(${pop(t,T.s1+2.4,0.35)})">${chip('≈ 500–800 KM',0,0,'#E8463C',56)}</g>`;
+    // jogger + calendar
+    if(t>T.s1+3.0){const jk=pop(t,T.s1+3.0,0.4); const ph=t*7;
+      s+=`<g transform="translate(0,0)">${chibi({x:520,y:1010,s:0.9,type:'jacket',top:'#7ED957',hair:'cap',pants:'#3D5AFE',eyes:'happy',mouth:'smile',legL:[Math.sin(ph)*18,0],legR:[-Math.sin(ph)*18,0],armF:[-Math.sin(ph)*30,30],armB:[Math.sin(ph)*30,-30],bob:-Math.abs(Math.sin(ph))*5})}</g>`;
+      s+=`<g transform="translate(1210,820) scale(${jk})"><rect x="-150" y="-110" width="300" height="230" rx="20" fill="#fff" stroke="${INK}" stroke-width="7"/><rect x="-150" y="-110" width="300" height="60" rx="20" fill="#E8463C" stroke="${INK}" stroke-width="7"/>
+        ${[0,1,2,3,4,5].map(i=>`<rect x="${-120+(i%3)*84}" y="${-30+Math.floor(i/3)*70}" width="68" height="54" rx="8" fill="${i<Math.floor(seg(t,T.s1+3.2,T.s1+4.4)*7)?'#FFC21F':'#EEE9F6'}" stroke="${INK}" stroke-width="4"/>`).join('')}</g>`;
+      s+=`<g transform="translate(1210,670) scale(${pop(t,T.s1+3.4,0.35)})">${chip('A JOGGER: MONTHS',0,0,'#7ED957',44)}</g>`;}
+  } else if(t<T.d){ // C: Dex burns through a pair in 30 min
+    s+=bgPanel('#5DB6FF','#C9E9FF');
+    s+=`<g transform="translate(${-((t*2600)%2000)},-140)">${bgFar()}<g transform="translate(2000,0)">${bgFar()}</g></g>`;
+    s+=`<rect y="560" width="1920" height="70" fill="#86D17C" stroke="${INK}" stroke-width="5"/><rect y="630" width="1920" height="450" fill="#2E3150"/>`;
+    for(let i=0;i<9;i++){const lx=((i*260-t*3000)%2340+2340)%2340-200; s+=`<rect x="${lx}" y="590" width="160" height="10" rx="5" fill="#fff" opacity=".7"/>`;}
+    s+=chibiSide({x:860,y:600,s:1.0,phase:(t*4)%1,t,expr:'determined',lean:26,wind:1});
+    for(let i=0;i<6;i++) s+=`<line x1="${620-i*40}" y1="${380+i*36}" x2="${300-i*60}" y2="${380+i*36}" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".7"/>`;
+    const k=seg(t,T.s2+0.3,T.s2+3.6);
+    // odometer + timer panel
+    s+=`<g transform="translate(560,850)"><rect x="-330" y="-120" width="660" height="240" rx="28" fill="#1B1D33" stroke="${INK}" stroke-width="7"/>
+      <text x="0" y="-50" text-anchor="middle" font-family="Lilita One" font-size="40" fill="#9FD8FF">DISTANCE</text>
+      <text x="0" y="60" text-anchor="middle" font-family="Lilita One" font-size="120" fill="#7ED957">${String(Math.round(k*650)).padStart(3,'0')} KM</text></g>`;
+    s+=`<g transform="translate(1360,850)"><rect x="-300" y="-120" width="600" height="240" rx="28" fill="#1B1D33" stroke="${INK}" stroke-width="7"/>
+      <text x="0" y="-50" text-anchor="middle" font-family="Lilita One" font-size="40" fill="#9FD8FF">TIME</text>
+      <text x="0" y="60" text-anchor="middle" font-family="Lilita One" font-size="120" fill="#FFC21F">${String(Math.floor(k*31.6)).padStart(2,'0')}:${String(Math.floor((k*31.6*60)%60)).padStart(2,'0')}</text></g>`;
+    s+=`<g transform="translate(1680,250)">${sneaker(0,60,0.9,k,'#3D8BFF',0)}${k>0.6?smoke(0,20,t,4,0.6):''}</g>`;
+    if(t>T.s2+2.4) s+=`<g transform="translate(1180,200) scale(${pop(t,T.s2+2.4,0.35)})">${chip('≈ HALF AN HOUR',0,0,'#E8463C',60)}</g>`;
+  } else if(t<T.e){ // D: morning routine gag
+    s+=bgPanel('#7ED0FF','#D6F0FF');
+    s+=`<rect y="860" width="1920" height="220" fill="#86D17C" stroke="${INK}" stroke-width="5"/>`;
+    // pile of worn trainers growing
+    const n=Math.floor(seg(t,T.d+0.3,T.e-0.2)*16);
+    for(let i=0;i<n;i++){const px=1300+((i*137)%360)-180, py=900-Math.floor(i/4)*60; s+=sneaker(px,py,0.55,0.9,['#3D8BFF','#E8463C','#7ED957','#FF5A7A'][i%4],(i*47)%40-20);}
+    if(n>3) s+=smoke(1300,700,t,5,1.0);
+    // giant backpack behind Dex
+    s+=`<g transform="translate(700,640)">${[0,1,2,3,4,5].map(i=>sneaker(-150+(i%3)*90,-200-Math.floor(i/3)*55,0.42,0,['#E8463C','#7ED957','#FF5A7A','#FFC21F','#3D8BFF','#B07CFF'][i],-30+i*12)).join('')}<rect x="-210" y="-220" width="320" height="320" rx="60" fill="#3D8BFF" stroke="${INK}" stroke-width="8"/>
+      <rect x="-170" y="-60" width="240" height="110" rx="24" fill="#2E6BD9" stroke="${INK}" stroke-width="6"/></g>`;
+    const swap=Math.floor((t-T.d)*4);
+    s+=chibi({x:820,y:1000,s:1.3,...DEX,shoe:['#3D8BFF','#E8463C','#7ED957','#FF5A7A'][swap%4],eyes:'happy',mouth:'grin',sparkle:true,armF:[115,55],armLen:1.4,handF:'peace',armB:[20,-10],bob:Math.sin(t*12)*4});
+    s+=`<g transform="translate(960,140) scale(${pop(t,T.d+0.4,0.35)})">${chip('DEX’S NEW MORNING ROUTINE',0,0,'#3D8BFF',54)}</g>`;
+    s+=`<g transform="translate(1300,360) scale(${pop(t,T.s3+1.4,0.35)})">${chip('PAIR #'+(12+swap*3),0,0,'#E8463C',46)}</g>`;
+  } else { // E: shoe shop loves him
+    s+=bgPanel('#FFD7E2','#FFF0F4');
+    s+=`<rect y="900" width="1920" height="180" fill="#E6E1F0" stroke="${INK}" stroke-width="5"/>`;
+    s+=`<g transform="translate(960,0)"><rect x="-560" y="230" width="1120" height="680" fill="#FFF6E0" stroke="${INK}" stroke-width="8"/>
+      <rect x="-600" y="180" width="1200" height="130" rx="20" fill="#E8463C" stroke="${INK}" stroke-width="8"/>
+      <text y="272" text-anchor="middle" font-family="Lilita One" font-size="88" fill="#fff" stroke="${INK}" stroke-width="3" paint-order="stroke">SHOE SHOP</text>
+      <rect x="-480" y="360" width="960" height="460" rx="16" fill="#BFE6FF" stroke="${INK}" stroke-width="8"/>
+      ${[0,1,2,3].map(i=>sneaker(-330+i*220,800,0.6,0,['#3D8BFF','#E8463C','#7ED957','#FFC21F'][i],0)).join('')}
+      ${[0,1,2,3].map(i=>`<path d="M${-560+i*280},310 l140,0 l-70,60 Z" fill="${i%2?'#FFC21F':'#3D8BFF'}" stroke="${INK}" stroke-width="5"/>`).join('')}</g>`;
+    const ph=t*3;
+    s+=chibi({x:960,y:860,s:1.15,type:'jacket',top:'#7ED957',hair:'bun',hairCol:'#5A3A2A',pants:'#1F2033',eyes:'happy',mouth:'laugh',armF:[150,20],armB:[-150,-20],bob:Math.sin(ph*4)*6,tilt:Math.sin(ph*2)*5});
+    for(let i=0;i<7;i++){const p=((t*0.5+i/7)%1); s+=heart(700+i*90+Math.sin(p*6+i)*30,560-p*380,0.9+0.5*Math.sin(i),'#FF5A7A').replace('<path','<path opacity="'+(1-p)+'"');}
+    // receipt sliding out
+    const rk=ease(seg(t,T.s4+0.6,T.end-0.4));
+    s+=`<g transform="translate(1700,${240})"><rect x="-110" y="0" width="220" height="${60+rk*640}" fill="#fff" stroke="${INK}" stroke-width="6"/>
+      ${Array.from({length:Math.floor(rk*15)},(_,i)=>`<rect x="-80" y="${70+i*40}" width="${100+((i*37)%50)}" height="12" rx="6" fill="#C9C2DA"/>`).join('')}
+      <rect x="-150" y="-60" width="300" height="80" rx="16" fill="#3D3F66" stroke="${INK}" stroke-width="6"/></g>`;
+    if(t>T.s4+0.3) s+=`<g transform="translate(300,600) scale(${pop(t,T.s4+0.3,0.3)}) rotate(-8)">${txt('KA-CHING!',0,0,96,'#FFC21F')}</g>`;
+    s+=`<g transform="translate(960,100) scale(${pop(t,T.e+0.2,0.35)})">${chip('BEST. CUSTOMER. EVER.',0,0,'#FF5A7A',54)}</g>`;
+  }
+  s+=wipe(t,T.b)+wipe(t,T.c)+wipe(t,T.d)+wipe(t,T.e);
+  const fi=1-seg(t,0,0.25); if(fi>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fi}"/>`;
+  const fo=seg(t,T.end-0.35,T.end); if(fo>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fo}"/>`;
+  document.getElementById('root').innerHTML=s;
+}
+window.render=render; render(0);
+</script></body></html>

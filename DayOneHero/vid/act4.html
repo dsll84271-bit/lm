@@ -1,0 +1,152 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Lilita One';src:url('node_modules/@fontsource/lilita-one/files/lilita-one-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Nunito';font-weight:800;src:url('node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2') format('woff2');}
+html,body{margin:0;background:#000;overflow:hidden}
+</style></head>
+<body>
+<svg id="root" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="lib.js"></script>
+<script src="helpers.js"></script>
+<script>
+const T={d0:0.4,d1:8.9,boom:18.0,d2:19.4,d3:22.0,d4:40.0,d5:45.7,hey:55.0,d7:56.8,end:68.5};
+const S=[[0,8.6],[8.6,19.2],[19.2,39.6],[39.6,45.3],[45.3,68.5]];
+const DEX={type:'hoodie',top:'#FFC21F',hood:true,hair:'dex',pants:'#1F2033',stripe:true};
+function sunrise(){return `<defs><linearGradient id="sr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B6FD6"/><stop offset=".55" stop-color="#FF9F80"/><stop offset="1" stop-color="#FFD58A"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#sr)"/><circle cx="1400" cy="700" r="170" fill="#FFF1B0" opacity=".95"/><circle cx="1400" cy="700" r="260" fill="#FFF1B0" opacity=".25"/>`;}
+function road(sc){let s=`<rect y="760" width="1920" height="320" fill="#4F5268" stroke="${INK}" stroke-width="6"/>`;
+  for(let i=0;i<10;i++){const x=((i*240-sc)%2400+2400)%2400-240; s+=`<rect x="${x}" y="900" width="130" height="16" rx="8" fill="#F2F2F2" opacity=".85"/>`;} return s;}
+function cone(x,y,k,len=900){ // Mach cone trailing behind (to the left)
+  return `<g opacity="${k}"><path d="M${x+60},${y} L${x-len},${y-len*0.75} M${x+60},${y} L${x-len},${y+len*0.75}" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity=".85"/><path d="M${x+60},${y} L${x-len},${y-len*0.75} L${x-len},${y+len*0.75} Z" fill="#FFFFFF" opacity=".12"/></g>`;}
+
+// S1: sunrise, crouch
+function s1(t){
+  let s=sunrise()+`<g opacity=".5">${bgFar()}</g>`+road(0);
+  const crouch=seg(t,T.d0+4.5,T.d0+5.5);
+  s+=`<g filter="url(#shadowF)">${chibiSide({x:620,y:840,s:1.5,phase:0.5,t,expr:'determined',lean:lerp(0,38,crouch),wind:0,run:0})}</g>`;
+  if(crouch>0.5) for(let i=0;i<3;i++) s+=`<circle cx="${520-i*40}" cy="${830}" r="${10+i*6}" fill="#fff" opacity="${0.5*Math.sin(t*4+i)}"/>`;
+  s+=`<g transform="translate(1300,240) scale(${pop(t,T.d0+5.8,0.4)})">${txt('1,235 km/h',0,0,110,'#FFFFFF')}</g>`;
+  s+=`<g transform="translate(1300,360) scale(${pop(t,T.d0+6.4,0.4)})">${chip('FULL SPEED',0,0,'#E8463C',46)}</g>`;
+  return s;}
+
+// S2: whip crack then launch + boom
+function s2(t){
+  const launch=T.d1+8.5; // ≈17.4
+  if(t<launch){
+    let s=bgPanel('#FFF4D6','#FFE2A8');
+    // whip: hand + curving rope whose tip snaps
+    const snap=seg(t,T.d1+2.2,T.d1+2.8); const ph=snap<1?snap:1;
+    const pts=[]; for(let i=0;i<=30;i++){const u=i/30; const x=420+u*1100, y=560+Math.sin(u*Math.PI*1.5+ph*6)*160*(1-ph*0.7)*u; pts.push(`${x},${y}`);}
+    s+=`<path d="M${pts.join(' L')}" fill="none" stroke="#8A5A3B" stroke-width="16" stroke-linecap="round"/><path d="M${pts.join(' L')}" fill="none" stroke="${INK}" stroke-width="3" stroke-dasharray="8 12" opacity=".4"/>`;
+    s+=`<rect x="300" y="520" width="140" height="80" rx="30" fill="#8A5A3B" stroke="${INK}" stroke-width="7"/>`;
+    const tip=pts[30].split(',').map(Number);
+    if(snap>=1){const k=seg(t,T.d1+2.8,T.d1+3.8); for(let r=0;r<3;r++) s+=`<circle cx="${tip[0]}" cy="${tip[1]}" r="${40+r*60+k*120}" fill="none" stroke="#3D8BFF" stroke-width="${10-r*2}" opacity="${1-k}"/>`;
+      s+=`<g transform="translate(${tip[0]},${tip[1]-170}) scale(${pop(t,T.d1+2.8,0.3)})">${txt('CRACK!',0,0,96,'#FFC21F')}</g>`;}
+    s+=`<g transform="translate(960,130) scale(${pop(t,T.d1+3.4,0.4)})">${chip('WHIP TIP > SPEED OF SOUND',0,0,'#3D8BFF',46)}</g>`;
+    if(t>T.d1+5.0) s+=`<g transform="translate(960,900) scale(${pop(t,T.d1+5.0,0.4)})">${txt('= A TINY SONIC BOOM',0,0,80,'#E8463C')}</g>`;
+    return s;}
+  // launch
+  let s=sunrise()+`<g opacity=".5">${bgFar()}</g>`+road((t-launch)*4000);
+  const k=seg(t,launch,T.boom); const x=lerp(620,1100,easeOut(k));
+  s+=cone(x,620,seg(t,T.boom-0.1,T.boom+0.2));
+  // vapour ring
+  if(t>T.boom-0.15){const vk=seg(t,T.boom-0.15,T.boom+0.6); s+=`<ellipse cx="${x-30}" cy="680" rx="${90+vk*120}" ry="${210+vk*200}" fill="none" stroke="#FFFFFF" stroke-width="${30*(1-vk)+4}" opacity="${1-vk}"/>`;}
+  s+=chibiSide({x,y:840,s:1.5,phase:(t*4)%1,t,expr:'determined',lean:28,wind:1.3});
+  if(t>=T.boom){const fk=1-seg(t,T.boom,T.boom+0.5); s+=`<rect width="1920" height="1080" fill="#fff" opacity="${fk}"/>`;
+    if(t<T.boom+1.0) s+=`<g transform="translate(960,540) scale(${pop(t,T.boom,0.25)*1.3})">${txt('BOOM',0,40,220,'#FFC21F')}</g>`;}
+  return s;}
+
+// S3: walking sonic boom + eardrum chart
+function s3(t){
+  if(t<T.d3+2.0){
+    let s=bgPanel('#5DB6FF','#C9E9FF')+`<g transform="translate(${-((t*900)%2000)},0)">${bgFar()}<g transform="translate(2000,0)">${bgFar()}</g></g>`;
+    s+=`<rect y="700" width="1920" height="230" fill="#E6E1F0" stroke="${INK}" stroke-width="5"/><rect y="930" width="1920" height="200" fill="url(#road)"/>`;
+    const x=1050; s+=cone(x,640,1,1100);
+    // pressure rings rolling off
+    for(let i=0;i<4;i++){const k=((t*1.6+i/4)%1); s+=`<path d="M${x-k*900},${640-k*500} Q${x-k*700},640 ${x-k*900},${640+k*500}" fill="none" stroke="#7FD3FF" stroke-width="8" opacity="${1-k}"/>`;}
+    s+=chibiSide({x,y:905,s:1.35,phase:(t*4)%1,t,expr:'determined',lean:26,wind:1.4});
+    s+=`<g transform="translate(560,170) scale(${pop(t,T.d2+0.3,0.4)})">${chip('A WALKING SONIC BOOM',0,0,'#E8463C',48)}</g>`;
+    return s;}
+  // chart: eardrum danger vs record boom
+  let s=bgPanel('#1B2A6B','#2A3D8F')+rays(t,'#24357F',0.5);
+  const t0=T.d3+2.0; const k1=easeOut(seg(t,t0+3.0,t0+4.2)), k2=easeOut(seg(t,t0+9.0,t0+10.4));
+  const base=900, H=640;
+  s+=`<line x1="300" y1="${base}" x2="1620" y2="${base}" stroke="#fff" stroke-width="6"/>`;
+  // eardrum bar 720
+  s+=`<rect x="560" y="${base-H*k1}" width="260" height="${H*k1}" rx="20" fill="#E8463C" stroke="${INK}" stroke-width="8"/>`;
+  s+=`<g transform="translate(690,${base+70})"><text text-anchor="middle" font-family="Lilita One" font-size="40" fill="#fff">EARDRUM DAMAGE</text></g>`;
+  if(k1>0.95) s+=`<g transform="translate(690,${base-H-50}) scale(${pop(t,t0+4.2,0.3)})">${txt('≈ 720',0,0,80,'#FFFFFF')}</g>`;
+  // record boom bar 144
+  s+=`<rect x="1100" y="${base-H*0.2*k2}" width="260" height="${H*0.2*k2}" rx="20" fill="#3D8BFF" stroke="${INK}" stroke-width="8"/>`;
+  s+=`<g transform="translate(1230,${base+70})"><text text-anchor="middle" font-family="Lilita One" font-size="40" fill="#fff">LOUDEST BOOM EVER</text></g>`;
+  if(k2>0.95){s+=`<g transform="translate(1230,${base-H*0.2-50}) scale(${pop(t,t0+10.4,0.3)})">${txt('≈ 144',0,0,80,'#FFFFFF')}</g>`;
+    s+=`<g transform="translate(1230,420) scale(${pop(t,t0+11.2,0.35)}) rotate(-6)">${txt('5× WEAKER',0,0,96,'#FFC21F')}</g>`;}
+  // jet icon over boom bar
+  if(t>t0+7.6){const jx=lerp(1900,1230,easeOut(seg(t,t0+7.6,t0+8.8))); s+=`<g transform="translate(${jx},250) scale(1.1)"><path d="M-120,0 L60,-14 Q110,-10 120,0 Q110,10 60,14 Z" fill="#C9C2DA" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/><path d="M-20,-8 L-70,-70 L-40,-70 L20,-10 Z M-20,8 L-70,70 L-40,70 L20,10 Z M-110,-4 L-140,-40 L-120,-40 L-96,-6 Z" fill="#9A93B2" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/><ellipse cx="70" cy="-4" rx="22" ry="8" fill="#7FD3FF" stroke="${INK}" stroke-width="4"/></g>`;}
+  s+=`<g transform="translate(960,110) scale(${pop(t,t0+0.4,0.4)})">${chip('PRESSURE (LB PER SQ FT) · NASA',0,0,'#3D8BFF',42)}</g>`;
+  return s;}
+
+// S4: windows, car alarms, dog
+function s4(t){
+  const t0=S[3][0]; let s=bgPanel('#5DB6FF','#C9E9FF');
+  const hx=[120,620,1120,1620];
+  hx.forEach((x,i)=>{const hit=seg(t,t0+0.8+i*0.35,t0+1.0+i*0.35); const sh=hit>0&&hit<1?0:(t>t0+0.8+i*0.35?Math.sin(t*60+i)*6*Math.exp(-(t-(t0+0.8+i*0.35))*1.5):0);
+    s+=`<g transform="translate(${x},0)"><rect x="0" y="330" width="420" height="390" fill="${['#FFE7B8','#BFE8D2','#D8CCFF','#FFC9B8'][i]}" stroke="${INK}" stroke-width="6"/><path d="M-20,340 L210,190 L440,340 Z" fill="#E8836E" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+    ${[[50,400],[250,400],[50,540],[250,540]].map(w=>`<g transform="translate(${w[0]+sh*(w[0]>100?1:-1)},${w[1]})"><rect width="120" height="110" rx="10" fill="#DDF1FF" stroke="${INK}" stroke-width="5"/><path d="M14,90 L70,20" stroke="#fff" stroke-width="8" opacity=".9"/></g>`).join('')}
+    ${Math.abs(sh)>1?`<path d="M30,380 l-20,-14 M400,380 l20,-14" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`:''}</g>`;});
+  s+=`<rect y="720" width="1920" height="360" fill="#E6E1F0" stroke="${INK}" stroke-width="5"/>`;
+  // car with flashing alarm
+  const al=t>t0+1.6&&Math.sin(t*20)>0;
+  s+=car(560,940,1.2,'#3D8BFF',false);
+  if(t>t0+1.6){s+=`<circle cx="740" cy="866" r="${al?50:20}" fill="#FFC21F" opacity="${al?0.7:0.3}"/><circle cx="380" cy="866" r="${al?50:20}" fill="#FF8A3D" opacity="${al?0.7:0.3}"/>`;
+    s+=`<g transform="translate(560,700) scale(${pop(t,t0+1.6,0.3)})">${txt('WEE-OOO!',0,0,60,'#E8463C')}</g>`;}
+  // dog with ears up
+  const ears=seg(t,t0+2.4,t0+2.6); const dx=1350, dy=950;
+  s+=`<g transform="translate(${dx},${dy})"><ellipse cx="0" cy="0" rx="110" ry="60" fill="#E0A060" stroke="${INK}" stroke-width="7"/><rect x="-80" y="30" width="26" height="60" rx="12" fill="#E0A060" stroke="${INK}" stroke-width="6"/><rect x="50" y="30" width="26" height="60" rx="12" fill="#E0A060" stroke="${INK}" stroke-width="6"/>
+  <circle cx="110" cy="-60" r="62" fill="#E0A060" stroke="${INK}" stroke-width="7"/>
+  <path d="M70,-100 L${lerp(40,66,ears)},${lerp(-60,-190,ears)} L100,-114 Z M130,-110 L${lerp(170,150,ears)},${lerp(-70,-200,ears)} L160,-96 Z" fill="#B87B40" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+  <circle cx="96" cy="-66" r="${ears>0?11:8}" fill="#fff" stroke="${INK}" stroke-width="3"/><circle cx="134" cy="-66" r="${ears>0?11:8}" fill="#fff" stroke="${INK}" stroke-width="3"/><circle cx="97" cy="-64" r="5" fill="${INK}"/><circle cx="135" cy="-64" r="5" fill="${INK}"/><ellipse cx="160" cy="-40" rx="14" ry="10" fill="${INK}"/>
+  <path d="M-110,-10 q-40,-${30+Math.sin(t*25)*20} -60,-60" fill="none" stroke="#E0A060" stroke-width="16" stroke-linecap="round"/></g>`;
+  if(ears>0) s+=`<g transform="translate(${dx+120},${dy-290}) scale(${pop(t,t0+2.5,0.3)})">${txt('WOOF?!',0,0,70,'#FFC21F')}</g>`;
+  // Dex streak passing across the top
+  const sx=lerp(-300,2300,seg(t,t0+0.6,t0+2.4));
+  if(t>t0+0.6&&t<t0+2.6) s+=`<g filter="url(#glow)"><path d="M${sx-900},280 L${sx},280" stroke="#3D8BFF" stroke-width="22" stroke-linecap="round" opacity=".9"/><path d="M${sx-700},310 L${sx},310" stroke="#FFC21F" stroke-width="12" stroke-linecap="round"/></g>`;
+  return s;}
+
+// S5: outrunning his voice, alone
+function s5(t){
+  const t0=S[4][0];
+  const lonely=seg(t,T.d7+5.2,T.d7+6.5);
+  let w=`<g transform="translate(${lerp(0,-200,seg(t,t0,T.hey+1))},0)">${bgSky(0)}${bgFar()}${bgNear(0,0)}</g>`;
+  // friend
+  const fturn=seg(t,T.hey+1.4,T.hey+2.0);
+  w+=chibi({x:1380,y:900,s:1.05,type:'hoodie',top:'#3FBF7F',hair:'curly',hairCol:'#2B1B12',acc:'headphones',eyes:fturn>0?'wide':'happy',mouth:fturn>0?'o':'smile',look:[fturn>0?-10:0,0],flip:fturn>0.5,armF:[-20,10],armB:[20,-10]});
+  let s=`<g ${lonely>0?'':''}>${lonely>0?`<g filter="url(#freeze)" opacity="1">${w}</g>`:w}</g>`;
+  // dex runs past friend while shouting
+  const dexX=t<T.hey-0.8?lerp(-200,700,seg(t,t0+0.4,T.hey-0.8)):lerp(700,2600,seg(t,T.hey-0.8,T.hey+0.6));
+  if(t<T.hey+0.8){s+=`<g filter="url(#glow)"><path d="M${dexX-700},640 L${dexX-80},640" stroke="#7FD3FF" stroke-width="14" stroke-linecap="round" opacity=".7"/></g>`;
+    s+=chibiSide({x:dexX,y:905,s:1.15,phase:(t*4)%1,t,expr:'determined',lean:24,wind:1.2,mouth:t>T.hey-0.3?'o':null});}
+  // speech bubble lagging behind
+  if(t>T.hey-0.3&&t<T.hey+3.6){const bx=lerp(820,1220,easeOut(seg(t,T.hey-0.3,T.hey+1.4))); const op=1-seg(t,T.hey+3.0,T.hey+3.6);
+    s+=`<g transform="translate(${bx},430)" opacity="${op}"><rect x="-150" y="-80" width="300" height="140" rx="60" fill="#fff" stroke="${INK}" stroke-width="7"/><path d="M-80,56 L-130,110 L-30,60 Z" fill="#fff" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>${txt('HEY!',0,22,80,'#FFC21F')}</g>`;}
+  if(t>T.d5+3.0&&t<T.hey-0.5) s+=`<g transform="translate(960,130) scale(${pop(t,T.d5+3.0,0.4)})">${chip('SOUND ≈ 1,235 km/h · DEX IS FASTER',0,0,'#3D8BFF',42)}</g>`;
+  if(t>T.hey+1.4&&t<T.hey+4.6) s+=`<g transform="translate(1380,560) scale(${pop(t,T.hey+1.6,0.3)})">${txt('?',0,0,110,'#FFC21F')}</g>`;
+  // final lonely shot: Dex alone, in colour, push-in
+  if(lonely>0){const z=lerp(1,1.25,seg(t,T.d7+5.2,T.end));
+    s=`<g transform="translate(960,620) scale(${z}) translate(-960,-620)"><g filter="url(#freeze)">${bgSky(0)}${bgFar()}${bgNear(0,0)}${[300,560,1380,1640].map((x,i)=>chibi({x,y:900,s:0.95,type:i%2?'sweater':'hoodie',top:['#3D5AFE','#FF7EB6','#3FBF7F','#FFB020'][i],hair:['short','long','curly','bun'][i],hairCol:'#2B1B12',eyes:'open',mouth:'smile',armF:[-20,10],armB:[20,-10]})).join('')}</g>
+      ${chibi({x:960,y:930,s:1.25,...DEX,eyes:'open',look:[0,4],mouth:'flat',brow:-3,armF:[-10,5],armB:[10,-5],sway:Math.sin(t*1.5)*0.2})}</g>`;
+    s+=`<defs><radialGradient id="vg" cx="50%" cy="58%" r="65%"><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#vg)" opacity="${lonely}"/>`;
+    if(t>T.d7+7.4) s+=`<g transform="translate(960,190)" opacity="${seg(t,T.d7+7.4,T.d7+8.2)}"><text text-anchor="middle" font-family="Lilita One" font-size="90" fill="#fff" stroke="${INK}" stroke-width="12" paint-order="stroke">...ALONE.</text></g>`;}
+  return s;}
+
+function render(t){
+  let s=DEFS; const F=[s1,s2,s3,s4,s5];
+  for(let i=0;i<S.length;i++){ if(t<S[i][1]||i===S.length-1){ s+=F[i](t); break; } }
+  for(const at of [S[0][1],S[2][1],S[3][1]]) s+=wipe(t,at);
+  // hard cut into launch (no wipe), quick flash into S3
+  const fi=1-seg(t,0,0.3); if(fi>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fi}"/>`;
+  const fo=seg(t,T.end-0.8,T.end); if(fo>0) s+=`<rect width="1920" height="1080" fill="#000" opacity="${fo}"/>`;
+  document.getElementById('root').innerHTML=s;
+}
+window.render=render; render(0);
+</script></body></html>
