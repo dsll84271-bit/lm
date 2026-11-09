@@ -24,7 +24,7 @@ const SHOTS_S5 = [
         chipAt(t, 15.5, 520, 900, "EARTH'S SPIN: MATCHED", '#7ED957', 46) + chipAt(t, 18.2, 1400, 900, 'THE MOON: NOT MATCHED', '#E8463C', 46); } },
   // 5 he'd arrive at Earth speed and the Moon would hit him
   { t: 19.75, ref: SP5, cam: push(19.75, 26.0, { x: 960, y: 540, z: 1.05, r: 0 }, { x: 960, y: 540, z: 1.3, r: -4 }, 'in'), draw: (t, c, L) => {
-      const A = 20.0, FZ = 24.9, mxk = seg(t, 21.3, FZ), mx = lerp(3600, 1500, E.in(mxk));
+      const A = 20.0, FZ = 24.9, mxk = seg(t, 21.3, FZ), mx = lerp(2700, 1250, E.io(mxk));
       const K = [[A, 'landSquash'], [A + .2, { ...POSES.idleB, eyes: 'happy', mouth: 'grin' }, 'o2'], [22.3, { ...POSES.lookR, look: [9, 0] }, 'o'], [23.3, { ...POSES.flinch, eyes: 'shock', mouth: 'wail' }, 'snap']];
       const dx = chibi2(dexAt(K, Math.min(t, FZ), () => ({ x: 760, y: 760 }), { s: DS, air: true })) + helmet(760, 760 - 250*DS, DS);
       let s = L(0, space(t, 160, 5)) + L(1, tpWrap(t, dx, 760, 600, A) + popFX(t, A, 760, 600, 1) + (t > 21.3 ? `<g ${t < FZ ? 'filter="url(#mb2)"' : ''}>${moon(mx + 900, 560, 1000, t*20)}</g>` : '') + (t > 21.3 && t < FZ ? speedLines(t, 22, .55, '#fff', -1) : ''));
