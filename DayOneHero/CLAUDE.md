@@ -19,7 +19,8 @@ Chibi boy with a round face and short black anime hair. Yellow hoodie with the *
 ## Episodes so far
 - **Ep 1 — What If You Woke Up With Super Speed?** (8:01). Finished. Code is in `vid/`.
 - **Ep 2 — What If You Woke Up Invincible?** (8:02). Finished. Code is in `vid2/`. It ends with "DAY 3: ???" ("a power you picked"). The red-hood mystery figure appears at the end of both episodes.
-- Possible Ep 3 or Hero Science special: **One For All**, under the rules above.
+- **Ep 3 — What If You Woke Up With Teleportation?** (8:01.8). Built in Rig 2.0. Code is in `vid3/`. It ends with "DAY 4: ???" after the red hood is seen on the rooftop opposite.
+- Possible Hero Science special: **One For All**, under the rules above.
 - Running devices: the "RULE n" sticky notes; callbacks (Ep1 "pack spare trainers", Ep2 "pack spare hoodies"); "Would you survive day N?"; the red hood.
 
 ## Pipeline (how the videos are made)
@@ -52,3 +53,19 @@ Next to the channels Leo benchmarks against (Awaken, IFANIME, ManifestingWhatIF)
 - Checking frames: `python shot.py <seg>2 t1 t2…` makes a contact sheet. A headless all-frames error check (node) is quick to rebuild; see git history.
 - Honest ratings sent to Leo: recap+cold open 6.5, haircut 6.5, car 7, wall 6.5, lava 6.5, hoodie 6, ocean 7, Earth core 6, bricks 7, skydive 6.5, outro 6.5. Nothing is 9/10 yet.
 - Biggest remaining gaps: front-view-only rig (no side or 3/4 turnarounds, no belly-down freefall); backgrounds are still drawn in code (waiting on Leo's plates); synth music (waiting on YouTube Audio Library tracks); Kokoro voice; no lip sync.
+
+## Status: Ep 3 (teleportation) built in `vid3/`
+- Script, sources and the YouTube description with real chapters are in Leo's Claude doc (Ep3 script). Chapters: 0:00, 0:34, 1:56, 2:46, 3:51, 5:01, 5:37, 7:08.
+- Segments: `o` cold open, `s1`–`s5` rules 1–5, `w` window-cleaner rescue, `e` outro. Each one has `sc_<seg>.js` (scenes), `t_<seg>.js` (timings from `timing.py`) and `mix_<seg>.py` (cues).
+- Shared code: `ep3.js` holds the teleport pop FX (`tpWrap`, `popFX`), the globe with real coastlines plus a pole-view diagram, and the sets: beach, bedroom, kitchen, Everest, space, pool and the city tower. It also has the red hood (`redHood3`, which uses the Rig 2.0 body with a red hood). `a3.py` is the audio engine: synth instruments, the signature `tp_pop`, and ducked voice/music/SFX mixing.
+- Build steps:
+  - `node check.js <seg>` checks every frame (errors or NaN).
+  - `python shot.py <seg> t…` makes a contact sheet.
+  - `python render.py <seg> 4` writes `<seg>_silent.mp4`.
+  - `python mix_<seg>.py` writes `mix3_<seg>.wav`.
+  - `python mux3.py <seg> <name>` writes `seg3_<seg>.mov` plus a −14 LUFS review copy in `../out/`.
+  - `python final3.py` writes the master and the 720p share copy.
+- `fixrange.py <seg> t0 t1` re-renders part of a segment and splices it in.
+- The master uses two-pass loudnorm to −14 LUFS, then a 4×-oversampled limiter; true peak measures −1.9 dBTP.
+- Honest ratings sent to Leo: cold open 7, rule 1 7, rule 2 7, Everest 7, space 7, Moon 6.5, rescue 7.5, outro 7. Not 9/10 yet. The gaps are the same as Ep 2: a front-view-only rig, code-drawn backgrounds, synth music and no lip sync.
+- Note: the old `mystery()` in `ep2.js` draws the red hood's *hood* yellow (it uses the old rig's `hoodG`). Use `redHood3` instead.
