@@ -20,6 +20,7 @@ Chibi boy with a round face and short black anime hair. Yellow hoodie with the *
 - **Ep 1 — What If You Woke Up With Super Speed?** (8:01). Finished. Code is in `vid/`.
 - **Ep 2 — What If You Woke Up Invincible?** (8:02). Finished. Code is in `vid2/`. It ends with "DAY 3: ???" ("a power you picked"). The red-hood mystery figure appears at the end of both episodes.
 - **Ep 3 — What If You Woke Up With Teleportation?** (8:01.8). Built in Rig 2.0. Code is in `vid3/`. It ends with "DAY 4: ???" after the red hood is seen on the rooftop opposite.
+- **Ep 4 — What If You Woke Up Invisible?** (8:01.7). Built in Rig 2.0. Code is in `vid4/`. It ends with the red hood sticking a NICE TRY note on Dex's forehead without looking, then "DAY 5: ???".
 - Possible Hero Science special: **One For All**, under the rules above.
 - Running devices: the "RULE n" sticky notes; callbacks (Ep1 "pack spare trainers", Ep2 "pack spare hoodies"); "Would you survive day N?"; the red hood.
 
@@ -69,3 +70,22 @@ Next to the channels Leo benchmarks against (Awaken, IFANIME, ManifestingWhatIF)
 - The master uses two-pass loudnorm to −14 LUFS, then a 4×-oversampled limiter; true peak measures −1.9 dBTP.
 - Honest ratings sent to Leo: cold open 7, rule 1 7, rule 2 7, Everest 7, space 7, Moon 6.5, rescue 7.5, outro 7. Not 9/10 yet. The gaps are the same as Ep 2: a front-view-only rig, code-drawn backgrounds, synth music and no lip sync.
 - Note: the old `mystery()` in `ep2.js` draws the red hood's *hood* yellow (it uses the old rig's `hoodG`). Use `redHood3` instead.
+
+## Status: Ep 4 (invisibility) built in `vid4/`
+- The script, sources and runtime additions are in Leo's Claude doc (Ep4 script). Chapters: 0:00, 0:44, 1:53, 2:44, 3:55, 4:57, 5:46, 7:04.
+- The power's rules:
+  - Whatever Dex had on when the power arrived (his hoodie) is invisible.
+  - Anything he picks up later stays visible: slippers, the toothbrush, cereal, the spare hoodie.
+  - His eyes "seem to" keep working, so they show as floating eyeballs.
+- Segments: `o`, `s1`–`s5`, `h` (the floating-hoodie scare) and `e`. The tools work the same as in vid3 (`check.js`, `shot.py`, `render.py`, `mix_<seg>.py`, `mux3.py`, `final4.py`).
+- `ep4.js` holds `chibi4`, which is chibi2 plus three modes:
+  - `inv`: only the eyeballs, plus `food` (the visible cereal).
+  - `hollow`: the empty spare hoodie (with `noEyes` for the pull-on).
+  - `back`: the red hood seen from behind (`redHoodBack`).
+- Effects are built from silhouette masks: `glassDex` (the see-through glass statue), `rainDex` (the rain outline), and `thermalDef`/`thermalScreen` (a blurred silhouette mapped to a heat palette).
+- Sets:
+  - New: `mirrorPOV`, museum, high street, alley, rooftops.
+  - Kept from Ep 3: kitchen, bedroom and terrace.
+  - Props: dog (`dog4`), slippers, bowl, spoon and sticky notes.
+- If background jobs die when a shell ends, start them with `setsid nohup …`.
+- Honest ratings sent to Leo: cold open 7, eyes 7.5, breakfast 7, stay dry 7.5, heat 7.5, dogs 7, hoodie scare 7.5, outro 7. Not 9/10 yet. The same gaps remain: a front-view-only rig, code-drawn backgrounds, synth music and no lip sync.
