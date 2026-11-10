@@ -1,0 +1,25 @@
+# Ep4 s4 cues (Rule 4: heat).  python mix_s4.py -> mix3_s4.wav
+from a3 import *
+M = Mix('s4')
+n = int(9.9*SR); hall = lp(rng.standard_normal(n), 400)*.5 + bp(rng.standard_normal(n), 300, 1200)*.08; M.put('amb', np.stack([hall, np.roll(hall, 7000)], 1)*env(n, .3, .3)[:, None], 0, .45)
+for i in range(10): M.put('sfx', lp(noise(.08), 600)*np.exp(-tt(.08)*40), 3.0 + i*.416, .2)
+M.put('sfx', tone(60, 60, 9.0, .5, .5)*.15 + tone(120, 120, 9.0, .5, .5)*.05, .5, .2)                 # screen hum
+M.put('sfx', tone(400, 900, .4, .01, .1)*.3, 6.4, .25); M.put('sfx', tone(500, 800, .25, .01, .1)*.4, 8.1, .25)
+M.put('amb', lp(noise(14.4), 150)*.4, 9.9, .3); M.put('sfx', tone(300, 1500, 5.0, .2, .4)*.2, 10.5, .3); ding(M, 17.2, .2, 2400); ding(M, 21.6, .2, 3000)
+M.put('amb', lp(noise(8.0), 200)*.5, 24.3, .35); M.put('sfx', tone(200, 700, 1.8, .05, .3)*.25, 24.8, .3); M.put('sfx', bp(noise(1.2), 300, 2000)*np.linspace(0, 1, int(1.2*SR))*.4, 27.0, .3)
+M.put('amb', np.stack([hall[:int(7.4*SR)]]*2, 1)*env(int(7.4*SR), .2, .2)[:, None], 32.3, .45)
+for i in range(7): M.put('sfx', lp(noise(.08), 600)*np.exp(-tt(.08)*40), 33.0 + i*.42, .2)
+M.put('sfx', tone(500, 900, .3, .01, .1)*.4, 36.6, .3); M.put('sfx', tone(600, 1000, .3, .01, .1)*.35, 37.6, .25)
+n = int(5.4*SR); rot = lp(rng.standard_normal(n), 220)*(.6 + .4*np.sign(np.sin(np.arange(n)/SR*2*np.pi*14))); M.put('amb', np.stack([rot, rot], 1)*env(n, .3, .3)[:, None], 39.7, .9)   # helicopter
+h2 = np.tile(hall, 2)[:int(13.9*SR)]; M.put("amb", np.stack([h2]*2, 1)*env(len(h2), .2, .2)[:, None], 45.1, .45)
+for i in range(4): M.put('sfx', lp(noise(.08), 600)*np.exp(-tt(.08)*40), 46.2 + i*.35, .25)
+ding(M, 48.6, .2, 2600); M.put('sfx', tone(1500, 2200, .08, .003, .03), 56.0, .2); M.put('sfx', tone(500, 900, .25, .01, .1)*.45, 56.6, .3)
+M.put('sfx', tone(900, 1200, .1, .005, .05), 59.0, .25); click(M, 59.15, .4)
+groove(M, 0, 9.9, (C, Am, F, G), drums=.4, gain=.75, bar=4, inst='mallet')
+groove(M, 9.9, 24.3, (F, C, G, Am), drums=.3, gain=.75, bar=4, inst='mallet')
+M.put('mus', pad([52, 59, 64, 67], 8.0, 1400, 1.0), 24.3, .3)
+groove(M, 32.3, 39.6, (Am, F, C, G), drums=.6, gain=.8, bar=4)
+drone(M, 39.7, 5.4, (36, 43), .4)
+groove(M, 45.1, 58.9, (C, G, F, C), drums=.5, gain=.8, bar=4)
+chordHit(M, 58.95, C, .45); groove(M, 59.05, 62.6, (C, F), drums=1, gain=.9, bar=4)
+M.render(mus_g=.5, sfx_g=.6, amb_g=.4, duck=.6)

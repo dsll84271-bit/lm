@@ -1,0 +1,30 @@
+# Ep4 s5 cues (Rule 5: dogs).  python mix_s5.py -> mix3_s5.wav
+from a3 import *
+M = Mix('s5')
+def park(t0, t1, g=.5):
+    n = int((t1 - t0)*SR); a = lp(rng.standard_normal(n), 700)*.3 + hp(rng.standard_normal(n), 5000)*.02; M.put('amb', np.stack([a, np.roll(a, 4000)], 1)*env(n, .3, .3)[:, None], t0, g)
+    for x in np.arange(t0 + .5, t1, 2.3): M.put('sfx', tone(3200, 4100, .08, .003, .05), x, .03); M.put('sfx', tone(3600, 4300, .07, .003, .04), x + .1, .025)
+def sniff(t0, n=4, g=.3): [M.put('sfx', bp(noise(.08), 1500, 6000)*np.sin(np.linspace(0, np.pi, int(.08*SR))), t0 + i*.14, g) for i in range(n)]
+def woof(t0, g=.4, f=420): M.put('sfx', (np.sign(np.sin(2*np.pi*np.cumsum(np.linspace(f, f*.7, int(.16*SR)))/SR))*.5 + bp(noise(.16), 300, 2000)*.5)*env(int(.16*SR), .005, .05), t0, g)
+park(0, 7.0)
+for i in range(6): M.put('sfx', lp(noise(.08), 600)*np.exp(-tt(.08)*40), .2 + i*.4, .18)
+sniff(2.7); sniff(3.5); M.put('sfx', tone(900, 1500, .1, .003, .04), 4.4, .2); woof(4.6, .35, 520)
+M.put('amb', lp(noise(21.75), 150)*.4, 7.0, .3)
+for i in range(6): blip(M, 8.0 + i*.16, 700, .1)
+for i in range(30): M.put('sfx', tone(1500 + i*30, 1600 + i*30, .04, .002, .02), 9.6 + i*.09, .05)
+M.put('sfx', boom(1.2)*.5, 15.4, .4); ding(M, 24.2, .2, 2600)
+park(28.75, 45.0, .5)
+for i in range(30): M.put('sfx', lp(noise(.08), 600)*np.exp(-tt(.08)*40), 28.8 + i*.28, .15)
+for x in np.arange(29.5, 37, 1.2): sniff(x, 3, .22)
+M.put('sfx', tone(500, 300, .3, .01, .1)*.3, 34.9, .2)
+woof(37.5, .4, 560); M.put('sfx', bp(noise(.5), 500, 3000)*(.5 + .5*np.sin(tt(.5)*90)), 38.1, .45); M.put('sfx', bp(noise(.5), 500, 3000)*(.5 + .5*np.sin(tt(.5)*90)), 38.8, .4)   # slurps
+M.put('sfx', tone(900, 1300, .2, .01, .1)*.3, 39.4, .2)
+for x in np.arange(40.6, 43, .8): sniff(x, 3, .22)
+woof(43.2, .45, 330); woof(43.45, .4, 330)
+M.put('sfx', tone(900, 1200, .1, .005, .05), 45.05, .25); click(M, 45.2, .4)
+groove(M, 0, 7.0, (C, F, G, C), drums=.5, gain=.8, bar=4)
+groove(M, 7.0, 28.7, (F, C, Dm, G), drums=.3, gain=.75, bar=4, inst='mallet')
+groove(M, 28.75, 40.3, (C, G, Am, F), drums=.8, gain=.85, bar=4)
+groove(M, 40.3, 45.0, (Am, F), drums=.6, gain=.8, bar=4)
+chordHit(M, 45.0, C, .45); groove(M, 45.1, 48.4, (C, F), drums=1, gain=.9, bar=4)
+M.render(mus_g=.5, sfx_g=.6, amb_g=.4, duck=.6)
