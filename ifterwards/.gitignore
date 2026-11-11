@@ -1,0 +1,8 @@
+node_modules/
+build/
+out/
+.remotion/
+
+# Finished videos are large. They stay on the machine that rendered them.
+episodes/*/renders/*
+!episodes/*/renders/.gitkeep
