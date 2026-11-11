@@ -135,6 +135,8 @@ export type StickmanOptions = {
 	blink?: number;
 	/** Mirrors the whole character. */
 	flip?: boolean;
+	/** Seen from behind: the head has no face. */
+	back?: boolean;
 };
 
 export type Skeleton = {
@@ -569,12 +571,13 @@ export const buildStickman = (options: StickmanOptions): Shape[] => {
 	});
 
 	const faceX = turn * R * 0.15;
+	const showFace = !options.back;
 	const faceY = (pose.nod ?? 0) * R * 0.2;
 	const eyes = [
 		{side: -1, eye: ex.eyeL, brow: ex.browL},
 		{side: 1, eye: ex.eyeR, brow: ex.browR},
 	];
-	for (const {side, eye, brow} of eyes) {
+	for (const {side, eye, brow} of showFace ? eyes : []) {
 		// The eye further from the camera narrows a touch when the face turns.
 		const far = side * turn < 0 ? 1 - 0.16 * Math.abs(turn) : 1;
 		const rx = MODEL.eyeRx * eye.scale * far;
@@ -603,11 +606,11 @@ export const buildStickman = (options: StickmanOptions): Shape[] => {
 		const pr = MODEL.pupilR * ex.pupil * eye.scale;
 		// At rest the pupils sit a touch towards the nose, which reads as focus
 		// instead of a blank stare.
-		const px = cx - side * 1.4 * far + ex.gaze[0] * Math.max(0, rx - pr - 2.5);
+		const px = cx - side * 1.4 * far + ex.gaze[0] * Math.max(0, rx - pr * 0.8);
 		const py =
 			cy +
 			(ry * (bottom - top)) / 2 +
-			ex.gaze[1] * Math.max(0, (ry * (top + bottom)) / 2 - pr - 2);
+			ex.gaze[1] * Math.max(0, (ry * (top + bottom)) / 2 - pr * 0.8);
 		shapes.push({
 			d: headSpace().circle(px, py, pr).toString(),
 			fill: look.outline,
@@ -645,7 +648,7 @@ export const buildStickman = (options: StickmanOptions): Shape[] => {
 	}
 
 	// Mouth: one closed shape. When top and bottom meet it collapses into a line.
-	{
+	if (showFace) {
 		const m = ex.mouth;
 		const mc: Vec = [faceX + m.x, MODEL.mouthY + faceY * 0.8];
 		const q = (x: number, y: number): Vec => add(mc, rotate([x, y], m.tilt));

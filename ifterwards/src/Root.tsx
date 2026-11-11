@@ -2,6 +2,7 @@ import React from 'react';
 import {Composition, Series, Still} from 'remotion';
 import '../brand/fonts';
 import {DAY_CARD_FRAMES, DayCard} from '../components/DayCard';
+import {COLD_OPEN_FRAMES, ColdOpen} from '../episodes/ep01/scenes/ColdOpen';
 import {
 	SHEET_HEIGHT,
 	SHEET_WIDTH,
@@ -26,6 +27,14 @@ const DayCardDemo: React.FC = () => (
 export const Root: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="Ep01ColdOpenTest"
+				component={ColdOpen}
+				width={1920}
+				height={1080}
+				fps={30}
+				durationInFrames={COLD_OPEN_FRAMES}
+			/>
 			<Composition
 				id="DayCard"
 				component={DayCard}

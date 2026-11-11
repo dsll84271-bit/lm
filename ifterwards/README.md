@@ -51,6 +51,23 @@ npm run sheet
 - `components/DayCard.tsx` is the calendar page that flips to DAY 1, WEEK 1 and so on. It always lasts 2 seconds and always plays `sfx/paper-flip.wav`.
 - The flip sound was made from scratch by `sfx/make_paper_flip.py`, so it is free to use commercially. To use a recorded sound instead, replace `paper-flip.wav`.
 
+## 3D scenes
+
+- `components/DepthLayers.tsx` draws every set three times through the same camera: far away (slightly blurred), the characters (sharp) and close to the lens (blurred). That is how the rulebook's "background slightly blurred, characters sharp" is done.
+- `characters/stickman/StickmanCard.tsx` puts the flat stickman on an upright card inside a set. He is not lit, so his colours never drift, but he still casts a shadow.
+- `components/RingPulse.tsx` is Episode 1's ring, drawn as thin red arcs from his ear. Its sound is `sfx/ring.wav`, made from scratch by `sfx/make_ring.py`.
+- `episodes/ep01/scenes/kitchen/KitchenSet.tsx` is the kitchen. `episodes/ep01/scenes/ColdOpen.tsx` is the 20-second cold-open test.
+
+Render the cold-open test, or the day-card demo:
+
+```bash
+npm run coldopen
+```
+
+```bash
+npm run daycard
+```
+
 ## Licence note
 
 Remotion is free for individuals and for companies of up to three people. Larger companies need a paid licence: see remotion.dev/license.

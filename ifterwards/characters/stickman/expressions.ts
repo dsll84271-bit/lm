@@ -22,7 +22,7 @@ export const EXPRESSIONS = {
 		eyeL: eye(1, 0.6, 1.04),
 		eyeR: eye(1, 0.6, 1.04),
 		pupil: 1.12,
-		gaze: [0, -0.1],
+		gaze: [0, -0.05],
 		mouth: {w: 23, corner: -8, top: -2, bottom: 17, round: 0.3, x: 0, tilt: 0},
 	},
 	shocked: {
@@ -40,7 +40,7 @@ export const EXPRESSIONS = {
 		eyeL: eye(0.36, 0.7),
 		eyeR: eye(0.58, 0.8),
 		pupil: 0.95,
-		gaze: [0.75, 0],
+		gaze: [0.4, 0],
 		mouth: {w: 12, corner: 0, top: 0, bottom: 0, round: 0, x: 6, tilt: -10},
 	},
 	crushed: {
@@ -49,7 +49,7 @@ export const EXPRESSIONS = {
 		eyeL: eye(0.62, 0.95),
 		eyeR: eye(0.62, 0.95),
 		pupil: 1.1,
-		gaze: [0, 0.6],
+		gaze: [0, 0.31],
 		mouth: {w: 13, corner: 6, top: -3, bottom: -3, round: 0, x: 0, tilt: 0},
 	},
 } as const satisfies Record<string, Expression>;
