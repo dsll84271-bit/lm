@@ -16,6 +16,7 @@ import {
 	mixExpression,
 	mixPose,
 	OTHER_LOOK,
+	solvePose,
 	type Expression,
 	type Pose,
 	type SolvedPose,
@@ -41,7 +42,7 @@ const LEGS = {legL: [90, 7], legR: [80, -5]} as const;
 // Both forearms rest on the table.
 const SIT: Pose = {lean: 5, headTilt: -3, armL: [44, 108], armR: [58, 104], ...LEGS};
 const SIT_ASK: Pose = {lean: 12, headTilt: -5, armL: [50, 112], armR: [64, 108], ...LEGS};
-const SIT_EAR: Pose = {
+const SIT_EAR_REACH: Pose = {
 	lean: 1,
 	headTilt: -7,
 	// His left ear: the side of his head nearest the camera once he is mirrored.
@@ -49,6 +50,14 @@ const SIT_EAR: Pose = {
 	armR: [56, 102],
 	...LEGS,
 	front: ['armL'],
+};
+// Work the reach out as angles, then write the forearm's angle the long way
+// round (up and over, not down and under). That decides the path his hand
+// takes between the table and his ear: across his front, not behind his back.
+const earAngles = solvePose(SIT_EAR_REACH);
+const SIT_EAR: SolvedPose = {
+	...earAngles,
+	armL: [earAngles.armL[0], earAngles.armL[1] + 360],
 };
 const SIT_LOW: Pose = {lean: 8, headTilt: 3, nod: 0.55, armL: [42, 104], armR: [56, 100], ...LEGS};
 
