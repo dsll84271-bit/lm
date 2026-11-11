@@ -14,3 +14,7 @@ episodes/*/renders/*
 !music/*.mp3
 !episodes/*/voiceover/*.wav
 !episodes/*/voiceover/*.mp3
+
+# The voice tool's Python packages and model files (about 350 MB). Re-download with tools/setup_voice.sh
+.venv/
+tools/models/
