@@ -6,3 +6,11 @@ out/
 # Finished videos are large. They stay on the machine that rendered them.
 episodes/*/renders/*
 !episodes/*/renders/.gitkeep
+
+# The repository's top-level settings skip audio files. Ours are part of the project.
+!sfx/*.wav
+!sfx/*.mp3
+!music/*.wav
+!music/*.mp3
+!episodes/*/voiceover/*.wav
+!episodes/*/voiceover/*.mp3

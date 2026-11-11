@@ -46,6 +46,11 @@ npm run sheet
 - `expressions.ts` holds the five expressions, `poses.ts` the six poses and the walk.
 - `Stickman.tsx` draws him. The same file draws everyone else: `who="other"` gives a blue-grey head and no scarf.
 
+## The day card
+
+- `components/DayCard.tsx` is the calendar page that flips to DAY 1, WEEK 1 and so on. It always lasts 2 seconds and always plays `sfx/paper-flip.wav`.
+- The flip sound was made from scratch by `sfx/make_paper_flip.py`, so it is free to use commercially. To use a recorded sound instead, replace `paper-flip.wav`.
+
 ## Licence note
 
 Remotion is free for individuals and for companies of up to three people. Larger companies need a paid licence: see remotion.dev/license.
