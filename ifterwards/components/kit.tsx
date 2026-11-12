@@ -240,12 +240,16 @@ export const Room: React.FC<{
 
 	return (
 		<>
-			{drawn ? (
-				<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, zc]} receiveShadow>
-					<planeGeometry args={[width, depth]} />
+			<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, zc]} receiveShadow={drawn}>
+				<planeGeometry args={[width, depth]} />
+				{drawn ? (
 					<meshStandardMaterial map={floorMap} roughness={0.75} />
-				</mesh>
-			) : null}
+				) : (
+					// In the other layers the floor is invisible but still solid, so
+					// nothing below floor level (a seated person's legs) shows through.
+					<meshBasicMaterial colorWrite={false} />
+				)}
+			</mesh>
 			{pieces
 				.filter((p) => p.x1 - p.x0 > 0.01 && p.y1 - p.y0 > 0.01)
 				.map((p, i) => (

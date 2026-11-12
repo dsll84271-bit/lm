@@ -168,7 +168,7 @@ export const S4_5: React.FC<P> = ({frame, dur, lines}) => {
 		blink: blinks(frame, 1),
 	};
 	return (
-		<Stage camera={dolly(span(frame, 0, dur), shot([-0.2, 1.35, 4.4], [-0.5, 0.95, -0.5]), shot([0.0, 1.28, 3.5], [-0.25, 1.0, -0.5]))} wash={flash(frame, last, 0.1)}>
+		<Stage camera={dolly(span(frame, 0, dur), shot([-0.2, 1.35, 4.4], [-0.5, 0.95, -0.5]), shot([0.2, 1.28, 3.7], [0.0, 1.0, -0.5]))} wash={flash(frame, last, 0.1)}>
 			<Lounge kind="tv" screen={red ? '#FF4D3D' : ['#9CC3DE', '#B8E0C8', '#E8D9A0'][Math.floor(frame / 50) % 3]} />
 			<Actor {...hero} />
 			<Ring actor={hero} since={frame - last} strength={0.9} />

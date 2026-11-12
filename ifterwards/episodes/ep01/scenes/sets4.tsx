@@ -8,6 +8,9 @@ import {Chair, Counter, CREAM, Door, Glow, INK, Lights, Mug, Picture, Plant, Roo
 const TEAL = '#19C2B1';
 const RED = '#E2493B';
 
+/** Where the two stools stand at the high table. */
+export const STOOLS = [0.75, 2.45];
+
 /** The kitchen at work: a counter, a coffee machine, a water cooler. */
 export const OfficeKitchen: React.FC<{warm?: boolean}> = ({warm = false}) => (
 	<>
@@ -42,6 +45,14 @@ export const OfficeKitchen: React.FC<{warm?: boolean}> = ({warm = false}) => (
 		<Layer name="mid">
 			<RoundTable at={[1.6, 0, 0.2]} r={0.42} h={1.02} color={CREAM} leg="#6D7A80" />
 			<Mug at={[1.5, 1.02, 0.25]} />
+			{/* Two stools at the high table. */}
+			{STOOLS.map((x) => (
+				<React.Fragment key={x}>
+					<Solid shape="cylinder" size={[0.17, 0.05]} position={[x, 0.72, 0.0]} color="#3D4A60" bevel={0.02} />
+					<Solid shape="cylinder" size={[0.025, 0.7]} position={[x, 0.35, 0.0]} color={STEEL} metalness={0.5} />
+					<Solid shape="cylinder" size={[0.17, 0.02]} position={[x, 0.01, 0.0]} color={STEEL} metalness={0.5} />
+				</React.Fragment>
+			))}
 		</Layer>
 		<Layer name="fg">
 			<Solid size={[0.5, 3.4, 0.2]} position={[-2.5, 1.7, 3.2]} color="#2A3A40" bevel={0.02} />

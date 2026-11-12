@@ -1,9 +1,12 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, Sequence, useCurrentFrame} from 'remotion';
 import {COLOURS} from '../../brand/colours';
 import {FONT_FAMILY} from '../../brand/fonts';
 import {DayCard} from '../../components/DayCard';
 import type {ShotProps} from '../../components/Stage';
+import bedCool from '../../music/bed-cool.wav';
+import bedWarm from '../../music/bed-warm.wav';
+import whoosh from '../../sfx/whoosh.wav';
 import {SCENES} from './scenes';
 import {CARD_FRAMES, END_CARD_FRAMES, TIMELINE} from './timeline';
 import vo1 from './voiceover/01-cold-open.wav';
@@ -20,6 +23,32 @@ import vo9 from './voiceover/09-year-1-asking-why.wav';
 
 const VOICE = [vo1, vo2, vo3, vo4, vo5, vo6, vo7, vo8, vo9];
 export const EP01_FRAMES = TIMELINE.total;
+
+// The music bed for each section. The colour arc in sound: warm, then cool,
+// then nothing at all for the turn (section 8), then warm again.
+const BEDS: Record<number, string | null> = {1: bedWarm, 2: bedWarm, 3: bedWarm, 4: bedWarm, 5: bedCool, 6: bedCool, 7: bedCool, 8: null, 9: bedWarm};
+const BED_VOLUME = 0.2;
+
+/** Runs of neighbouring sections that share a bed, so the music is not chopped up. */
+const bedRuns = () => {
+	const runs: Array<{src: string; from: number; to: number}> = [];
+	for (const s of TIMELINE.sections) {
+		const src = BEDS[s.index];
+		const start = s.card ? s.card.start : s.start;
+		const last = runs[runs.length - 1];
+		if (!src) {
+			continue;
+		}
+
+		if (last && last.src === src && last.to === start) {
+			last.to = s.start + s.dur;
+		} else {
+			runs.push({src, from: start, to: s.start + s.dur});
+		}
+	}
+
+	return runs;
+};
 
 /** Gives a shot its own frame count, starting from 0. */
 const Run: React.FC<{C: React.FC<ShotProps & {frame: number}>} & ShotProps> = ({C, dur, lines}) => {
@@ -64,6 +93,26 @@ export const Episode01: React.FC = () => (
 				</Sequence>
 			</React.Fragment>
 		))}
+		{bedRuns().map((run) => {
+			const length = run.to - run.from;
+			return (
+				<Sequence key={run.from} from={run.from} durationInFrames={length} layout="none">
+					<Audio
+						src={run.src}
+						loop
+						volume={(f) => interpolate(f, [0, 45, length - 60, length], [0, BED_VOLUME, BED_VOLUME, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})}
+					/>
+				</Sequence>
+			);
+		})}
+		{/* A soft whoosh on every cut to a new location. */}
+		{TIMELINE.shots.map((sh, i) =>
+			i > 0 && TIMELINE.shots[i - 1].where !== sh.where && sh.section !== 8 ? (
+				<Sequence key={`w${sh.id}`} from={Math.max(0, sh.start - 5)} layout="none">
+					<Audio src={whoosh} volume={0.22} />
+				</Sequence>
+			) : null,
+		)}
 		{TIMELINE.shots.map((sh) => {
 			const C = SCENES[sh.id];
 			return (

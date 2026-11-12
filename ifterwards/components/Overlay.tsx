@@ -29,7 +29,9 @@ export const Caption: React.FC<{
 	where?: 'bottom' | 'top' | 'centre';
 	size?: number;
 	red?: boolean;
-}> = ({text, number, since, until, where = 'bottom', size = 96, red = false}) => {
+	/** Put the number after the words. */
+	numberLast?: boolean;
+}> = ({text, number, since, until, where = 'bottom', size = 96, red = false, numberLast = false}) => {
 	const {fps} = useVideoConfig();
 	if (since < 0 || (until !== undefined && since > until + 8)) {
 		return null;
@@ -51,6 +53,7 @@ export const Caption: React.FC<{
 					display: 'flex',
 					alignItems: 'baseline',
 					gap: 26,
+					flexDirection: numberLast ? 'row-reverse' : 'row',
 					fontSize: size,
 					opacity: Math.min(1, since / 3) * (1 - out),
 					transform: `translateY(${(1 - pop) * 40 + out * -20}px) scale(${0.85 + 0.15 * pop})`,

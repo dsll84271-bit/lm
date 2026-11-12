@@ -211,17 +211,20 @@ export const Lounge: React.FC<{kind: LoungeKind; screen?: string; cool?: number}
 	const sky: SkyName = kind === 'tv' || kind === 'flat' ? 'night' : kind === 'dawn' ? 'dawn' : kind === 'present' ? 'dusk' : 'dusk';
 	const c = kind === 'after' ? 1 : cool;
 	const warm = 1 - c;
-	const wall = flat ? '#3A4470' : kind === 'tv' ? '#4A4A7A' : kind === 'present' ? '#B98A6E' : '#A8748A';
+	const wall = flat ? '#55629C' : kind === 'tv' ? '#4A4A7A' : kind === 'present' ? '#B98A6E' : '#A8748A';
 	return (
 		<>
 			<Lights
 				sky={flat ? '#9AA8E0' : kind === 'tv' ? '#9CA6DC' : '#FFE6CC'}
 				ground={flat ? '#4E4A6A' : '#A0806E'}
-				ambient={flat ? (kind === 'dawn' ? 0.95 : 0.6) : kind === 'tv' ? 0.6 : 0.75 + 0.45 * warm}
+				ambient={flat ? (kind === 'dawn' ? 1.3 : 1.15) : kind === 'tv' ? 0.6 : 0.75 + 0.45 * warm}
 				sun={kind === 'dawn' ? {from: [-7, 2.4, -6], to: [1, 0.9, 0], color: '#FFB978', intensity: 7} : undefined}
 				fills={
 					flat
-						? [{at: [-2.2, 1.8, -2.2], color: '#9FB6FF', intensity: kind === 'dawn' ? 0 : 7, distance: 7}]
+						? [
+								{at: [-2.2, 1.8, -1.6], color: kind === 'dawn' ? '#FFC58A' : '#9FB6FF', intensity: 16, distance: 8},
+								{at: [1.2, 2.2, 1.4], color: kind === 'dawn' ? '#FFD9B0' : '#8EA0E8', intensity: 10, distance: 8},
+							]
 						: kind === 'tv'
 							? [{at: [-1.6, 1.0, -0.4], color: screen, intensity: 14, distance: 6}]
 							: [
@@ -236,7 +239,7 @@ export const Lounge: React.FC<{kind: LoungeKind; screen?: string; cool?: number}
 				{flat ? null : <Shelf at={[3.2, 1.75, -2.86]} w={1.5} items={[TEAL, CREAM, '#B5654A', '#E8B7A8', CREAM]} />}
 				{flat ? null : <Plant at={[4.3, 0, -2.4]} s={1.2} />}
 				{kind === 'tv' ? null : <FloorLamp at={[3.9, 0, -2.2]} on={!flat && c < 0.6} />}
-				{kind === 'tv' ? null : <Sofa at={[1.3, 0, -2.3]} w={2.2} color={flat ? '#4A5890' : '#5B79B0'} dark={flat ? '#3C4877' : '#476296'} />}
+				{kind === 'tv' || flat ? null : <Sofa at={[1.3, 0, -2.3]} w={2.2} />}
 				{party
 					? [-3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5].map((x, i) => (
 							<Solid key={x} shape="cone" size={[0.2, 0.34]} rotation={[Math.PI, 0, 0]} position={[x, 2.75 - Math.cos(x * 0.5) * 0.18, -2.9]} color={[RED, TEAL, CREAM, '#FFD27A'][i % 4]} cast={false} />
@@ -279,9 +282,11 @@ export const Lounge: React.FC<{kind: LoungeKind; screen?: string; cool?: number}
 				) : null}
 				{flat ? (
 					<>
-						<Table at={[-0.6, 0, 0.2]} size={[1.0, 0.6]} h={0.46} color="#55527A" leg="#3C3A5A" />
+						{/* The sofa is in focus here: it is where the scene happens. */}
+						<Sofa at={[0.9, 0, -1.0]} w={2.3} color="#4A5890" dark="#3C4877" />
+						<Table at={[-1.3, 0, 0.1]} size={[1.0, 0.6]} h={0.46} color="#55527A" leg="#3C3A5A" />
 						{/* His phone, face down. */}
-						<Solid size={[0.075, 0.012, 0.15]} rotation={[0, 0.5, 0]} position={[-0.55, 0.467, 0.22]} color={INK} bevel={0.004} />
+						<Solid size={[0.075, 0.012, 0.15]} rotation={[0, 0.5, 0]} position={[-1.25, 0.467, 0.12]} color={INK} bevel={0.004} />
 					</>
 				) : null}
 				{kind === 'present' ? <Table at={[0.3, 0, 0.4]} size={[1.1, 0.6]} h={0.46} /> : null}
