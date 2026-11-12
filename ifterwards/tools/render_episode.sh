@@ -28,6 +28,7 @@ for (( from = 0; from < TOTAL; from += SIZE )); do
 	mv "$CHUNKS/part.mkv" "$CHUNKS/$name"
 	echo "done $name (frames $from-$to) in $(( $(date +%s) - start )) s"
 done
-ffmpeg -loglevel error -y -f concat -safe 0 -i "$CHUNKS/list.txt" -c:v copy -c:a aac -b:a 192k -movflags +faststart "$OUT/ep01.mp4"
+# The sound is lifted to about -16 LUFS, a normal level for YouTube, with a limiter to catch the peaks.
+ffmpeg -loglevel error -y -f concat -safe 0 -i "$CHUNKS/list.txt" -c:v copy -af "volume=6dB,alimiter=limit=0.84:level=false" -ar 48000 -c:a aac -b:a 192k -movflags +faststart "$OUT/ep01.mp4"
 echo "wrote $OUT/ep01.mp4"
 ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$OUT/ep01.mp4"
