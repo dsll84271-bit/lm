@@ -1,6 +1,10 @@
 import React, {useMemo} from 'react';
 import * as THREE from 'three';
 import {Layer, Solid, useDrawn, usePass} from '../../../../components/DepthLayers';
+import {Glow as LampGlow, Sky as KitSky} from '../../../../components/kit';
+
+/** 'morning' is the cold open. 'evening' is the same room a year later. */
+export type KitchenMood = 'morning' | 'evening';
 
 // The kitchen from the cold open. Early morning: a cool blue room with low,
 // warm sunlight coming in through the window over the sink.
@@ -284,7 +288,8 @@ const sunDirection = () =>
 		.normalize();
 
 /** The whole kitchen. Put the characters in alongside it. */
-export const KitchenSet: React.FC = () => {
+export const KitchenSet: React.FC<{mood?: KitchenMood}> = ({mood = 'morning'}) => {
+	const evening = mood === 'evening';
 	const [wx, , wz] = KITCHEN.window;
 	const win = {l: wx - 0.8, r: wx + 0.8, b: 1.12, t: 2.2};
 	const top = KITCHEN.tableTop;
@@ -294,7 +299,7 @@ export const KitchenSet: React.FC = () => {
 			{/* ---------- Background: the room, slightly out of focus ---------- */}
 			<Layer name="bg">
 				<Floor />
-				<Sky />
+				{evening ? <KitSky kind="dusk" at={[KITCHEN.window[0], 1.75, -3.7]} size={[4.2, 2.6]} /> : <Sky />}
 
 				{/* Back wall, built in four pieces around the window opening. */}
 				<Solid size={[win.l + 5.4, ROOM_H, 0.24]} position={[(win.l - 5.4) / 2, ROOM_H / 2, wz - 0.12]} color={C.wall} bevel={0} />
@@ -316,8 +321,8 @@ export const KitchenSet: React.FC = () => {
 				<Solid size={[0.04, 1.08, 0.05]} position={[wx, 1.66, wz - 0.06]} color={C.frame} />
 				<Solid size={[1.6, 0.04, 0.05]} position={[wx, 1.78, wz - 0.06]} color={C.frame} />
 				<Solid size={[1.9, 0.045, 0.2]} position={[wx, win.b - 0.09, wz + 0.09]} color={C.frame} />
-				<Glow position={[wx, 1.7, wz + 0.2]} size={[4.4, 3.4]} color="#FFC387" opacity={0.34} />
-				<SunBeam />
+				<Glow position={[wx, 1.7, wz + 0.2]} size={[4.4, 3.4]} color={evening ? '#F09A7A' : '#FFC387'} opacity={evening ? 0.2 : 0.34} />
+				{evening ? null : <SunBeam />}
 
 				{/* A plant on the sill. */}
 				<Solid shape="cylinder" size={[0.07, 0.11, 0.055]} position={[wx + 0.55, win.b - 0.01, wz + 0.1]} color={C.pot} />
@@ -453,7 +458,8 @@ export const KitchenSet: React.FC = () => {
 
 				{/* The lamp over the table. Switched off: it is morning. */}
 				<Solid shape="cylinder" size={[0.006, 1.8]} position={[0.35, 2.9, -0.15]} color="#1C2244" cast={false} />
-				<Solid shape="cone" size={[0.24, 0.2]} position={[0.35, 1.95, -0.15]} color={C.frame} roughness={0.5} />
+				<Solid shape="cone" size={[0.24, 0.2]} position={[0.35, 1.95, -0.15]} color={C.frame} roughness={0.5} emissive={evening ? '#FFD9A0' : undefined} emissiveIntensity={0.7} />
+				{evening ? <LampGlow at={[0.35, 1.8, 0]} size={[2.4, 2]} color="#FFD49A" opacity={0.5} /> : null}
 			</Layer>
 
 			{/* ---------- Foreground: close to the lens, out of focus ---------- */}
@@ -486,7 +492,8 @@ export const KitchenSet: React.FC = () => {
 };
 
 /** The kitchen's lighting: cool room, low warm sun through the window. */
-export const KitchenLights: React.FC<{sun?: number}> = ({sun = 1}) => {
+export const KitchenLights: React.FC<{sun?: number; mood?: KitchenMood}> = ({sun = 1, mood = 'morning'}) => {
+	const evening = mood === 'evening';
 	const [wx, wy, wz] = KITCHEN.window;
 	const pass = usePass();
 	// Things close to the lens sit in the dark doorway, out of the sun.
@@ -501,7 +508,9 @@ export const KitchenLights: React.FC<{sun?: number}> = ({sun = 1}) => {
 
 	return (
 		<>
-			<hemisphereLight args={['#CFD6FF', '#B48A72', 1.05]} />
+			<hemisphereLight args={evening ? ['#D9C8E8', '#C49A7C', 1.0] : ['#CFD6FF', '#B48A72', 1.05]} />
+			{/* In the evening the lamp over the table is on. */}
+			{evening ? <pointLight position={[0.35, 1.75, -0.15]} color="#FFD49A" intensity={14} distance={7} decay={1.5} /> : null}
 			{/* Sunlight bouncing around the room from the window. */}
 			<pointLight position={[wx + 0.2, 1.7, wz + 1.1]} color="#FFC48E" intensity={9} distance={7} decay={1.6} />
 			<primitive object={target} position={[aim.x, aim.y, aim.z]} />
@@ -509,7 +518,7 @@ export const KitchenLights: React.FC<{sun?: number}> = ({sun = 1}) => {
 				position={[lightPos.x, lightPos.y, lightPos.z]}
 				target={target}
 				color="#FFB978"
-				intensity={15 * sun * sunOn}
+				intensity={(evening ? 5 : 15) * sun * sunOn}
 				castShadow={pass !== 'fg'}
 				shadow-mapSize-width={pass === 'mid' ? 1536 : 768}
 				shadow-mapSize-height={pass === 'mid' ? 1536 : 768}

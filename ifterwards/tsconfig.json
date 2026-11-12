@@ -9,7 +9,17 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ES2022", "DOM"]
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "resolveJsonModule": true
   },
-  "include": ["src", "brand", "characters", "components", "episodes"]
+  "include": [
+    "src",
+    "brand",
+    "characters",
+    "components",
+    "episodes"
+  ]
 }
