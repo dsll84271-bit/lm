@@ -1,0 +1,11 @@
+node_modules/
+build/
+out/
+.remotion/
+.venv/
+tools/models/
+episodes/*/renders/*
+!episodes/*/renders/.gitkeep
+!sfx/*.wav
+!music/*.wav
+!episodes/*/voiceover/*.wav

@@ -1,0 +1,440 @@
+{
+ "seconds": 146.535,
+ "shots": [
+  {
+   "id": "alarm",
+   "start": 0.0,
+   "end": 3.0,
+   "lines": []
+  },
+  {
+   "id": "room",
+   "start": 3.0,
+   "end": 9.448,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Every morning, Dex wakes up with a brand-new power.",
+     "start": 3.25,
+     "end": 6.026
+    },
+    {
+     "who": "NARRATOR",
+     "text": "This morning, everything looked... big.",
+     "start": 6.676,
+     "end": 8.948
+    }
+   ]
+  },
+  {
+   "id": "pillow",
+   "start": 9.448,
+   "end": 12.245,
+   "lines": [
+    {
+     "who": "DEX",
+     "text": "Huh? Why is my pillow a mountain?",
+     "start": 9.698,
+     "end": 11.645
+    }
+   ]
+  },
+  {
+   "id": "title",
+   "start": 12.245,
+   "end": 15.586,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Day five. Dex had shrunk!",
+     "start": 12.495,
+     "end": 14.186
+    }
+   ]
+  },
+  {
+   "id": "ruler",
+   "start": 15.586,
+   "end": 20.517,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "All the way down to about one centimetre tall. Smaller than a sugar cube.",
+     "start": 15.836,
+     "end": 20.017
+    }
+   ]
+  },
+  {
+   "id": "fun",
+   "start": 20.517,
+   "end": 22.691,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And at first? It was amazing.",
+     "start": 20.767,
+     "end": 22.491
+    }
+   ]
+  },
+  {
+   "id": "ride",
+   "start": 22.691,
+   "end": 25.281,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Free rides across the bedroom.",
+     "start": 22.941,
+     "end": 24.681
+    }
+   ]
+  },
+  {
+   "id": "hide",
+   "start": 25.281,
+   "end": 28.0,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The best hiding place in the world.",
+     "start": 25.531,
+     "end": 27.4
+    }
+   ]
+  },
+  {
+   "id": "lift",
+   "start": 28.0,
+   "end": 35.328,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And for his size, he was super strong.",
+     "start": 28.25,
+     "end": 30.224
+    },
+    {
+     "who": "NARRATOR",
+     "text": "When you shrink, your muscles get weaker, but your weight drops much, much faster.",
+     "start": 30.574,
+     "end": 34.728
+    }
+   ]
+  },
+  {
+   "id": "fall",
+   "start": 35.328,
+   "end": 41.485,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then he walked straight off the edge of the bed.",
+     "start": 35.578,
+     "end": 37.665
+    },
+    {
+     "who": "DEX",
+     "text": "Whoooa!",
+     "start": 38.015,
+     "end": 38.665
+    },
+    {
+     "who": "DEX",
+     "text": "I'm okay!",
+     "start": 40.215,
+     "end": 41.085
+    }
+   ]
+  },
+  {
+   "id": "fallwhy",
+   "start": 41.485,
+   "end": 46.365,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "When you're this tiny, the air slows you down so much that falling barely hurts.",
+     "start": 41.735,
+     "end": 45.965
+    }
+   ]
+  },
+  {
+   "id": "haldane",
+   "start": 46.365,
+   "end": 51.918,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Back in nineteen twenty-six, a scientist called J. B. S. Haldane wrote about this.",
+     "start": 46.615,
+     "end": 51.618
+    }
+   ]
+  },
+  {
+   "id": "mouse",
+   "start": 51.918,
+   "end": 59.104,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "He said that if you dropped a mouse down a deep mine shaft, it would get a slight shock at the bottom, and then just walk away.",
+     "start": 52.168,
+     "end": 58.304
+    }
+   ]
+  },
+  {
+   "id": "badnews",
+   "start": 59.104,
+   "end": 61.459,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But then came the bad news.",
+     "start": 59.354,
+     "end": 60.959
+    }
+   ]
+  },
+  {
+   "id": "cold",
+   "start": 61.459,
+   "end": 69.848,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "First, Dex was freezing.",
+     "start": 61.709,
+     "end": 63.306
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Your body loses heat through your skin. And the smaller you are, the more skin you have, compared to the rest of you.",
+     "start": 63.656,
+     "end": 69.248
+    }
+   ]
+  },
+  {
+   "id": "hungry",
+   "start": 69.848,
+   "end": 79.854,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "To stay warm, tiny animals have to eat almost all the time. A shrew eats about its own body weight in food, every single day.",
+     "start": 70.098,
+     "end": 77.306
+    },
+    {
+     "who": "DEX",
+     "text": "So I'm hungry... forever?",
+     "start": 77.656,
+     "end": 79.354
+    }
+   ]
+  },
+  {
+   "id": "voice",
+   "start": 79.854,
+   "end": 85.753,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Next problem. A tiny voice box makes a tiny voice. Very high, and very, very quiet.",
+     "start": 80.104,
+     "end": 85.253
+    }
+   ]
+  },
+  {
+   "id": "mum",
+   "start": 85.753,
+   "end": 92.055,
+   "lines": [
+    {
+     "who": "MUM",
+     "text": "Dex? Breakfast! Where are you?",
+     "start": 86.003,
+     "end": 87.788
+    },
+    {
+     "who": "DEX",
+     "text": "Mum! Down here! Mum!",
+     "start": 88.138,
+     "end": 89.687
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Mum couldn't hear a thing.",
+     "start": 90.037,
+     "end": 91.455
+    }
+   ]
+  },
+  {
+   "id": "stomp",
+   "start": 92.055,
+   "end": 95.638,
+   "lines": [
+    {
+     "who": "DEX",
+     "text": "Nope. Nope, nope, nope.",
+     "start": 93.505,
+     "end": 95.138
+    }
+   ]
+  },
+  {
+   "id": "breakfast",
+   "start": 95.638,
+   "end": 97.795,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Next problem: breakfast.",
+     "start": 95.888,
+     "end": 97.495
+    }
+   ]
+  },
+  {
+   "id": "hoop",
+   "start": 97.795,
+   "end": 100.853,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "One cereal hoop was bigger than he was.",
+     "start": 98.045,
+     "end": 100.253
+    }
+   ]
+  },
+  {
+   "id": "milk",
+   "start": 100.853,
+   "end": 104.882,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So he went for a sip of milk.",
+     "start": 101.103,
+     "end": 102.8
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Big mistake.",
+     "start": 103.45,
+     "end": 104.582
+    }
+   ]
+  },
+  {
+   "id": "surface",
+   "start": 104.882,
+   "end": 112.33,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "To something this small, the top of a drink acts like a stretchy, sticky skin. One drop can grab you, and not let go.",
+     "start": 105.132,
+     "end": 111.53
+    }
+   ]
+  },
+  {
+   "id": "cliff",
+   "start": 112.33,
+   "end": 118.466,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Haldane wrote about that too. For an insect, going for a drink is as dangerous as leaning over a cliff.",
+     "start": 112.58,
+     "end": 118.066
+    }
+   ]
+  },
+  {
+   "id": "rule",
+   "start": 118.466,
+   "end": 121.88,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Rule one: never go near drinks.",
+     "start": 118.716,
+     "end": 120.68
+    }
+   ]
+  },
+  {
+   "id": "found",
+   "start": 121.88,
+   "end": 127.145,
+   "lines": [
+    {
+     "who": "MUM",
+     "text": "There you are!",
+     "start": 122.13,
+     "end": 123.245
+    },
+    {
+     "who": "NARRATOR",
+     "text": "In the end, Mum found him. With a magnifying glass.",
+     "start": 123.595,
+     "end": 126.545
+    }
+   ]
+  },
+  {
+   "id": "score",
+   "start": 127.145,
+   "end": 137.861,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, is shrinking a good power?",
+     "start": 127.395,
+     "end": 129.177
+    },
+    {
+     "who": "NARRATOR",
+     "text": "He's strong, and he can fall from anywhere.",
+     "start": 129.527,
+     "end": 131.691
+    },
+    {
+     "who": "NARRATOR",
+     "text": "But he's always cold, always hungry, nobody can hear him, and a drop of milk could trap him.",
+     "start": 132.041,
+     "end": 137.061
+    }
+   ]
+  },
+  {
+   "id": "next",
+   "start": 137.861,
+   "end": 146.535,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Tomorrow, Dex wakes up with another brand-new power.",
+     "start": 138.111,
+     "end": 140.911
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Which one should it be? Tell us in the comments!",
+     "start": 141.261,
+     "end": 143.535
+    }
+   ]
+  }
+ ]
+}
