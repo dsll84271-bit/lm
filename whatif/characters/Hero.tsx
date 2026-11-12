@@ -1,4 +1,5 @@
 import React, {useId} from 'react';
+import {useCurrentFrame} from 'remotion';
 
 // The hero: a faceless "you". A glossy orange round head (no hair, no nose,
 // no ears) so anyone can picture themselves, a deep purple hoodie with a
@@ -106,6 +107,12 @@ export type HeroProps = {
 	/** Squash for landings / jumps. */
 	squash?: number;
 	opacity?: number;
+	/** Running: bigger strides, pumping arms, leaning forward. Use with `walk`. */
+	run?: boolean;
+	/** 0 to 1: a little jump (for surprise or joy). */
+	hop?: number;
+	/** Turn off the automatic breathing, sway and blinking. */
+	still?: boolean;
 };
 
 const r = (d: number) => (d * Math.PI) / 180;
@@ -274,8 +281,8 @@ export const Hero: React.FC<HeroProps> = ({
 	y,
 	size,
 	face = 'neutral',
-	armL = [14, 8],
-	armR = [14, 8],
+	armL: armLIn,
+	armR: armRIn,
 	fists = false,
 	stance = 0.3,
 	look = [0, 0],
@@ -283,7 +290,7 @@ export const Hero: React.FC<HeroProps> = ({
 	aura = 0,
 	auraColor = '#FFB020',
 	flip = false,
-	blink = 0,
+	blink: blinkIn,
 	thinking = false,
 	who = YOU,
 	walk,
@@ -291,17 +298,37 @@ export const Hero: React.FC<HeroProps> = ({
 	talk = 0,
 	squash = 1,
 	opacity = 1,
+	run = false,
+	hop = 0,
+	still = false,
 }) => {
 	P = who;
+	const frame = useCurrentFrame();
 	const id = useId().replace(/[^a-zA-Z0-9]/g, '');
-	const w = walk === undefined ? 0 : Math.sin(walk * Math.PI * 2);
-	const bob = walk === undefined ? 0 : Math.abs(Math.cos(walk * Math.PI * 2)) * 18;
+	const seed = (Math.abs(Math.round(x * 7 + size)) % 97) / 9;
+	const alive = still ? 0 : 1;
+	const w = walk === undefined ? 0 : Math.sin(walk * Math.PI * 2) * (run ? 1.6 : 1);
+	const breathe = walk === undefined && !sit ? Math.sin(frame * 0.09 + seed) * 7 * alive : 0;
+	const bob = (walk === undefined ? 0 : Math.abs(Math.cos(walk * Math.PI * 2)) * (run ? 34 : 18)) + breathe;
+	// Arms: swing when walking, sway gently when standing.
+	const sway = Math.sin(frame * 0.07 + seed) * 4 * alive;
+	const swingAmt = walk === undefined ? 0 : run ? 38 : armLIn || armRIn ? 8 : 24;
+	const baseL: Arm = armLIn ?? (run ? [40, 95] : [14, 8]);
+	const baseR: Arm = armRIn ?? (run ? [40, 95] : [14, 8]);
+	const armL: Arm = [baseL[0] + w * swingAmt + sway, baseL[1] + w * swingAmt * 0.6 + sway];
+	const armR: Arm = [baseR[0] - w * swingAmt - sway, baseR[1] - w * swingAmt * 0.6 - sway];
+	const blink = blinkIn ?? (still ? 0 : (() => {
+		const t = (frame + seed * 31) % 101;
+		return t > 94 ? 1 - Math.abs(t - 97.5) / 3.5 : 0;
+	})());
+	const nod = (talk > 0.05 ? Math.sin(frame * 0.55) * 3 : 0) + Math.sin(frame * 0.05 + seed) * 2 * alive;
+	const lean = run ? 9 : 0;
 	const sitDrop = sit ? 230 : 0;
 	const k = size / 1000;
 	const legX = 40 + stance * 70;
 	const ar: Arm = thinking ? [18, 196] : armR;
 	return (
-		<g transform={`translate(${x} ${y}) scale(${(flip ? -1 : 1) * k * (2 - squash)} ${k * squash})`} opacity={opacity}>
+		<g transform={`translate(${x} ${y - hop * size * 0.28}) scale(${(flip ? -1 : 1) * k * (2 - squash)} ${k * squash}) rotate(${lean})`} opacity={opacity}>
 			<defs>
 				<radialGradient id={`head${id}`} cx="38%" cy="32%" r="75%">
 					<stop offset="0%" stopColor={P.headLight} />
@@ -338,8 +365,8 @@ export const Hero: React.FC<HeroProps> = ({
 			<ellipse cx={0} cy={-6} rx={250} ry={34} fill="rgba(10,5,30,0.45)" filter={`url(#soft${id})`} />
 			{/* legs */}
 			{[-1, 1].map((s) => {
-				const lift = walk === undefined ? 0 : Math.max(0, w * s) * 46;
-				const swing = walk === undefined ? 0 : w * s * 16;
+				const lift = walk === undefined ? 0 : Math.max(0, w * s) * (run ? 80 : 46);
+				const swing = walk === undefined ? 0 : w * s * (run ? 34 : 16);
 				const hipY = sit ? -110 : -320;
 				const footX = sit ? s * (legX + 30) : s * legX + swing;
 				const footY = sit ? -64 : -70 - lift;
@@ -387,7 +414,7 @@ export const Hero: React.FC<HeroProps> = ({
 			)}
 			{thinking ? null : <ArmShape side={1} a={ar} fist={fists} id={id} />}
 			{/* head, with the hood bunched behind the neck */}
-			<g transform={`rotate(${tilt} 0 -640)`}>
+			<g transform={`rotate(${tilt + nod} 0 -640)`}>
 				{P.collar ? null : <path d="M-170 -640 Q0 -560 170 -640 Q150 -720 0 -720 Q-150 -720 -170 -640 Z" fill={P.hoodieDark} stroke={INK} strokeWidth={9} />}
 				{P.hair === 'long' ? <path d="M-200 -800 Q-210 -560 -150 -520 L150 -520 Q210 -560 200 -800 Z" fill={P.hairColor} stroke={INK} strokeWidth={9} /> : null}
 				{P.hair === 'bun' ? <circle cx={0} cy={-985} r={62} fill={P.hairColor} stroke={INK} strokeWidth={9} /> : null}

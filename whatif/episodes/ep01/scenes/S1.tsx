@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing} from 'remotion';
 import {Hero} from '../../../characters/Hero';
 import {blinking, cue, lerp, SnapRing, Sound, span, Svg, track, type ShotProps} from '../../../components/stage';
-import {Big, Bubble, Count, Label, UI} from '../../../components/ui';
+import {Big, Bubble, Count, Label, TimeHud, UI} from '../../../components/ui';
 import {Board, Desk, Phone, Room, ROOMS, Stove} from '../../../sets/indoor';
 import {Bus, Pigeon, Rain, Splash} from '../../../sets/outdoor';
 import {CAST, close, CityBack, detail, GROUND, H, medium, Shot, Street, wide} from './kit';
@@ -29,7 +29,7 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<g>
 						<Street time="night" wet />
 						<Bus x={1100} doors={track(frame, [[0, 1], [snapAt, 0.45]])} />
-						<Hero x={x} y={GROUND + 20} size={H} face={frozen ? 'smug' : 'determined'} walk={frozen ? undefined : frame / 9} armR={frozen ? [110, 160] : [40, 80]} armL={[40, 80]} />
+						<Hero x={x} y={GROUND + 20} size={H} face={frozen ? 'smug' : 'determined'} walk={frozen ? undefined : frame / 9} run={!frozen} armR={frozen ? [110, 160] : undefined} />
 						<Rain t={rt} long={frozen ? 0 : 34} />
 					</g>
 				}
@@ -37,8 +37,9 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				overlay={<SnapRing frame={frame} at={snapAt} x={960} y={420} />}
 			/>
 			<Sound name="rain" at={0} volume={0.35} loop={snapAt} />
+			<Sound name="run" at={0} volume={0.35} loop={snapAt} />
 			<Sound name="snap" at={snapAt} volume={0.9} />
-			<Sound name="whoosh" at={snapAt + 2} volume={0.4} />
+			<Sound name="timestop" at={snapAt + 1} volume={0.6} />
 		</>
 	);
 };
@@ -69,6 +70,7 @@ export const Frozen: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				slow={{at: -10}}
 				overlay={<AbsoluteFill style={{background: '#000', opacity: dark}} />}
 			/>
+			<Sound name="steps" at={0} volume={0.3} loop={blackAt} />
 			<Sound name="thud" at={blackAt + 6} volume={0.4} />
 		</>
 	);
@@ -135,14 +137,14 @@ export const Gasp: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<g>
 							<Street time="night" wet />
 							<Bus x={lerp(1100, 2600, span(frame, 10, practise, Easing.in(Easing.quad)))} doors={0} />
-							<Hero x={760} y={GROUND + 20} size={H} face="scared" sit armL={[60, 120]} armR={[60, 120]} />
+							<Hero x={760} y={GROUND + 20} size={H} face="scared" sit armL={[60, 120]} armR={[60, 120]} talk={0.4 + 0.4 * Math.abs(Math.sin(frame * 0.35))} tilt={Math.sin(frame * 0.35) * 4} />
 							<Rain t={frame * RAIN_SPEED} long={34} />
 						</g>
 					}
 					overlay={<SnapRing frame={frame} at={0} x={760} y={420} />}
 				/>
 				<Sound name="snap" at={0} volume={0.8} />
-				<Sound name="rain" at={0} volume={0.35} loop={practise} />
+				<Sound name="timestart" at={1} volume={0.5} />
 			</>
 		);
 	}
@@ -155,7 +157,7 @@ export const Gasp: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={[{...l1, a: 0, b: l1.b - practise}]}
 				angles={[wide(960, 540, 1.05), close(960, GROUND, H, 0.1), medium(960)]}
 				world={
-					<Room look={ROOMS.bedroomNight} window={{x: 1300, w: 420, night: true}}>
+					<Room look={ROOMS.bedroomNight} decor="bedroom" window={{x: 1300, w: 420, night: true}}>
 						<Hero x={960} y={GROUND} size={H} face={frame > bigAt ? 'smug' : 'determined'} armR={[110, 160]} thinking={frame < bigAt - 20} />
 					</Room>
 				}
@@ -171,7 +173,8 @@ export const Gasp: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 			/>
 			<Sound name="snap" at={bigAt} volume={0.8} />
-			<Sound name="chime" at={bigAt + 4} volume={0.5} />
+			<Sound name="timestop" at={bigAt + 1} volume={0.5} />
+			<Sound name="chime" at={bigAt + 10} volume={0.4} />
 		</>
 	);
 };
@@ -188,7 +191,7 @@ export const Rules: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			world={
 				<g>
 					<Street time="night" wet />
-					<Hero x={960} y={GROUND + 20} size={H} face={frame > cue(l0, "Don't ask") ? 'happy' : 'smug'} armL={[40, 60]} armR={[40, 60]} blink={blinking(frame)} />
+					<Hero x={960} y={GROUND + 20} size={H} face={frame > cue(l0, "Don't ask") ? 'happy' : 'smug'} armL={[40, 60]} armR={[40, 60]} look={[Math.sin(frame * 0.05), -0.3]} hop={frame > cue(l0, "Don't ask") ? Math.max(0, Math.sin((frame - cue(l0, "Don't ask")) * 0.25)) * 0.3 : 0} />
 					<Rain t={frame * 0.4} long={0} />
 				</g>
 			}
@@ -219,10 +222,10 @@ export const Tests: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={[wide(960, 560, 1.05), detail(1080, 660, 2.6), close(heroX, GROUND, H, 0.08), medium(960), detail(1080, 680, 3, 4)]}
 				world={
-					<Room look={ROOMS.bedroomNight} window={{x: 1350, w: 380, night: true}}>
+					<Room look={ROOMS.bedroomNight} decor="bedroom" window={{x: 1350, w: 380, night: true}}>
 						<Desk x={880} w={460} />
 						<Phone x={1080} y={phoneY} rot={frame < knock ? 90 : (frame - knock) * (frame < snapAt ? 3 : 0.1)} />
-						<Hero x={heroX} y={GROUND} size={H} face={frame > catchAt ? 'happy' : frame > snapAt ? 'smug' : 'neutral'} walk={frame > snapAt && frame < catchAt ? frame / 16 : undefined} armR={frame > catchAt ? [80, 100] : [20, 10]} blink={blinking(frame, 2)} />
+						<Hero x={heroX} y={GROUND} size={H} face={frame > catchAt ? 'happy' : frame > snapAt ? 'smug' : 'neutral'} walk={frame > snapAt && frame < catchAt ? frame / 16 : undefined} armR={frame > catchAt ? [80, 100] : undefined} hop={frame > catchAt ? Math.max(0, Math.sin((frame - catchAt) * 0.2)) * 0.25 : 0} />
 					</Room>
 				}
 				slow={{at: snapAt}}
@@ -231,11 +234,14 @@ export const Tests: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Label text="PHONE FALL ≈ 0.5 S" x={420} y={200} frame={frame} at={cue(l0, 'half a second')} />
 						<Label text="SLOWED ≈ 7.5 MINUTES" x={1500} y={200} frame={frame} at={cue(l0, 'seven and a half')} color={UI.yellow} />
 						<Count from={0} to={200} x={1500} y={760} size={110} frame={frame} at={l1.a} dur={70} suffix=" CATCHES" />
+						{frame > snapAt && frame < l1.a ? <TimeHud real={lerp(0, 0.45, span(frame, snapAt, catchAt))} yours={lerp(0, 450, span(frame, snapAt, catchAt))} frame={frame} at={snapAt + 8} x={1500} y={790} /> : null}
 						<SnapRing frame={frame} at={snapAt} x={760} y={430} />
 					</>
 				}
 			/>
 			<Sound name="snap" at={snapAt} volume={0.8} />
+			<Sound name="timestop" at={snapAt + 1} volume={0.45} />
+			<Sound name="steps" at={snapAt + 10} volume={0.25} loop={Math.max(1, catchAt - snapAt - 10)} />
 			<Sound name="pop" at={catchAt} />
 		</>
 	);
@@ -251,9 +257,9 @@ export const Egg: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			lines={lines}
 			angles={[wide(960, 560, 1.05), detail(1340, 430, 2.6), close(860, GROUND, H, 0.08, -3), medium(900)]}
 			world={
-				<Room look={ROOMS.kitchen} window={{x: 200, w: 400}}>
+				<Room look={ROOMS.kitchen} decor="kitchen" window={{x: 200, w: 400}}>
 					<Stove x={1120} frozen={frame < cereal} frame={frame} />
-					<Hero x={860} y={GROUND} size={H} face={frame > cereal ? 'happy' : frame > cue(l0, 'nearly a week') ? 'shocked' : 'neutral'} look={[0.8, 0]} armR={frame > cereal ? [70, 110] : [20, 10]} blink={blinking(frame, 3)} />
+					<Hero x={860} y={GROUND} size={H} face={frame > cereal ? 'happy' : frame > cue(l0, 'nearly a week') ? 'shocked' : 'neutral'} look={[0.8, 0]} armR={frame > cereal ? [70 + Math.sin(frame * 0.4) * 15, 120] : undefined} talk={frame > cereal ? Math.abs(Math.sin(frame * 0.5)) * 0.6 : 0} tilt={frame < cereal ? 6 : 0} />
 				</Room>
 			}
 			slow={{at: -10, until: cereal}}
@@ -295,11 +301,15 @@ export const BusShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Label text="DOORS: 0.5 S → 8 MIN" x={960} y={200} frame={frame} at={cue(l0, 'eight whole')} color={UI.yellow} />
 						<SnapRing frame={frame} at={snapAt} x={700} y={420} />
 						<SnapRing frame={frame} at={backAt} x={1240} y={420} />
+						{frame > snapAt && frame < backAt ? <TimeHud real={lerp(0, 0.4, span(frame, snapAt, backAt))} yours={lerp(0, 400, span(frame, snapAt, backAt))} frame={frame} at={snapAt + 8} x={480} y={790} /> : null}
 					</>
 				}
 			/>
 			<Sound name="snap" at={snapAt} volume={0.7} />
+			<Sound name="timestop" at={snapAt + 1} volume={0.45} />
+			<Sound name="steps" at={boardAt} volume={0.25} loop={Math.max(1, backAt - boardAt)} />
 			<Sound name="snap" at={backAt} volume={0.7} />
+			<Sound name="timestart" at={backAt + 1} volume={0.4} />
 		</>
 	);
 };
@@ -316,21 +326,21 @@ export const TestShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			lines={lines}
 			angles={[wide(960, 560, 1.05), close(820, GROUND, H, 0.08), detail(1060, 560, 2.2), medium(1000)]}
 			world={
-				<Room look={ROOMS.classroom}>
+				<Room look={ROOMS.classroom} decor="classroom">
 					<Board x={560} text={frame > scoreAt ? '100%' : 'TEST'} />
 					<Desk x={700} w={520} color="#C98A5A" h={260} />
 					{[...Array(books)].map((_, i) => (
 						<rect key={i} x={1000 + (i % 2) * 8} y={GROUND - 290 - i * 36} width={170} height={34} rx={6} fill={['#E8453C', '#3FB7E8', '#FFD84A', '#7CF2A0'][i % 4]} stroke="#140A28" strokeWidth={5} />
 					))}
 					<Hero x={820} y={GROUND} size={H} face={frame > scoreAt ? 'smug' : 'determined'} sit armL={[70, 100]} armR={[70, 100]} blink={blinking(frame)} />
-					{frame > checkAt ? <Hero who={CAST.teacher} x={1380} y={GROUND} size={H * 1.15} face="determined" look={[-0.8, 0.2]} flip /> : null}
+					{frame > checkAt ? <Hero who={CAST.teacher} x={lerp(2100, 1380, span(frame, checkAt, checkAt + 30))} y={GROUND} size={H * 1.15} face="determined" look={[-0.8, 0.2]} walk={frame < checkAt + 30 ? frame / 12 : undefined} armL={frame > checkAt + 30 ? [100, 120] : undefined} flip /> : null}
 				</Room>
 			}
 			slow={{at: cue(l0, 'thirty minute'), until: scoreAt, strength: 0.7}}
 			overlay={
 				<>
 					<Label text="30 MIN LUNCH ≈ 3 WEEKS" x={960} y={200} frame={frame} at={cue(l0, 'three weeks')} color={UI.yellow} />
-					<Big text="100%" x={1520} y={760} size={150} frame={frame} at={scoreAt} color={UI.green} />
+					<Big text="100%" x={1640} y={330} size={150} frame={frame} at={scoreAt} color={UI.green} />
 					<Bubble text="Show me your sleeves." x={1380} y={250} tx={1380} ty={330} frame={frame} at={checkAt + 6} until={dur} size={38} />
 				</>
 			}

@@ -54,7 +54,11 @@ export const Shot: React.FC<{
 	cuts?: number[];
 	shakeXY?: {x: number; y: number};
 	dark?: number;
-}> = ({frame, dur, lines, angles, order, bg, world, overlay, slow, cuts, shakeXY, dark}) => {
+	/** Soft out-of-focus lights floating in front, for depth. */
+	bokeh?: string;
+	/** Things very close to the camera: drawn big, blurred, moving faster. */
+	fg?: React.ReactNode;
+}> = ({frame, dur, lines, angles, order, bg, world, overlay, slow, cuts, shakeXY, dark, bokeh = '#FFE2A0', fg}) => {
 	const c = cuts ?? cutsFor(lines, dur);
 	const cam = cameraFor(frame, c, dur, angles, order);
 	const body = (
@@ -66,6 +70,18 @@ export const Shot: React.FC<{
 			) : null}
 			<Cam x={cam.x} y={cam.y} zoom={cam.zoom} rot={cam.rot}>
 				<Svg>{world}</Svg>
+			</Cam>
+			{fg ? (
+				<Cam x={960 + (cam.x - 960) * 1.4} y={540 + (cam.y - 540) * 1.4} zoom={cam.zoom * 1.25} rot={cam.rot} blur={10}>
+					<Svg>{fg}</Svg>
+				</Cam>
+			) : null}
+			<Cam x={960 + (cam.x - 960) * 1.6} y={540 + (cam.y - 540) * 1.6} zoom={1} blur={5}>
+				<Svg>
+					{[...Array(14)].map((_, i) => (
+						<circle key={i} cx={((i * 331 + frame * (0.4 + (i % 3) * 0.2)) % 2400) - 240} cy={((i * 173) % 900) + 90 + Math.sin(frame * 0.03 + i) * 20} r={10 + (i % 4) * 9} fill={bokeh} opacity={0.12 + (i % 3) * 0.05} />
+					))}
+				</Svg>
 			</Cam>
 		</AbsoluteFill>
 	);
@@ -92,13 +108,80 @@ export const CityBack: React.FC<{time: Time}> = ({time}) => (
 	</g>
 );
 
-/** The street in front: near buildings, lamps, bus stop, road. */
+/** Shop fronts along the pavement, with awnings and glowing windows. */
+const Shops: React.FC<{time: Time}> = ({time}) => {
+	const glow = time === 'day' ? '#DDF1FF' : '#FFE2A0';
+	const awn = ['#E8453C', '#2EA86A', '#7F5AF0', '#FF8A3D', '#3FB7E8'];
+	return (
+		<g stroke="#140A28" strokeWidth={5}>
+			{[...Array(7)].map((_, i) => {
+				const x = i * 330 - 260;
+				return (
+					<g key={i}>
+						<rect x={x} y={GROUND - 290} width={320} height={290} fill={time === 'day' ? '#C9B8E8' : '#3A2E80'} />
+						<rect x={x + 24} y={GROUND - 230} width={190} height={170} rx={6} fill={glow} opacity={time === 'day' ? 0.8 : 0.9} />
+						<rect x={x + 234} y={GROUND - 230} width={66} height={230} fill={time === 'day' ? '#55597A' : '#1C1640'} />
+						<path d={`M${x - 6} ${GROUND - 300} L${x + 326} ${GROUND - 300} L${x + 306} ${GROUND - 250} L${x + 14} ${GROUND - 250} Z`} fill={awn[i % awn.length]} />
+						{[0, 1, 2, 3, 4, 5].map((k) => (
+							<line key={k} x1={x + 20 + k * 52} y1={GROUND - 300} x2={x + 30 + k * 50} y2={GROUND - 250} stroke="#fff" strokeWidth={8} opacity={0.35} />
+						))}
+						{time !== 'day' ? <rect x={x + 24} y={GROUND - 60} width={190} height={60} fill={glow} opacity={0.15} stroke="none" /> : null}
+					</g>
+				);
+			})}
+		</g>
+	);
+};
+
+const Tree: React.FC<{x: number; time: Time}> = ({x, time}) => (
+	<g stroke="#140A28" strokeWidth={5}>
+		<rect x={x - 12} y={GROUND - 300} width={24} height={300} fill="#5A3A2A" />
+		{[[-60, -330, 90], [50, -350, 100], [0, -420, 110], [-20, -300, 80]].map(([dx, dy, r], i) => (
+			<circle key={i} cx={x + dx} cy={GROUND + dy} r={r} fill={time === 'day' ? (i % 2 ? '#3FC07C' : '#2EA86A') : i % 2 ? '#2A5A6A' : '#1F4A5A'} />
+		))}
+	</g>
+);
+
+const Bench: React.FC<{x: number}> = ({x}) => (
+	<g stroke="#140A28" strokeWidth={5}>
+		<rect x={x} y={GROUND - 90} width={240} height={20} rx={6} fill="#8A5A3E" />
+		<rect x={x} y={GROUND - 150} width={240} height={20} rx={6} fill="#8A5A3E" />
+		<rect x={x + 20} y={GROUND - 90} width={14} height={90} fill="#2A2350" />
+		<rect x={x + 206} y={GROUND - 90} width={14} height={90} fill="#2A2350" />
+	</g>
+);
+
+const Bin: React.FC<{x: number}> = ({x}) => (
+	<g stroke="#140A28" strokeWidth={5}>
+		<path d={`M${x - 40} ${GROUND - 130} L${x + 40} ${GROUND - 130} L${x + 32} ${GROUND} L${x - 32} ${GROUND} Z`} fill="#2EA86A" />
+		<rect x={x - 46} y={GROUND - 146} width={92} height={20} rx={6} fill="#24865A" />
+	</g>
+);
+
+/** Puddles that reflect the lights. */
+const Puddles: React.FC<{time: Time}> = ({time}) => (
+	<g>
+		{[[200, 120, 160], [860, 150, 220], [1500, 110, 180]].map(([x, y, w], i) => (
+			<g key={i}>
+				<ellipse cx={x} cy={GROUND + y} rx={w} ry={22} fill={time === 'day' ? '#9FD0FA' : '#3A3090'} opacity={0.8} />
+				<ellipse cx={x - w * 0.3} cy={GROUND + y - 4} rx={w * 0.3} ry={6} fill={time === 'day' ? '#fff' : '#FFE2A0'} opacity={0.5} />
+			</g>
+		))}
+	</g>
+);
+
+/** The street in front: buildings, shop fronts, trees, lamps, bus stop, road. */
 export const Street: React.FC<{time: Time; wet?: boolean; stop?: boolean}> = ({time, wet = false, stop = true}) => (
 	<g>
 		<City time={time} />
+		<Shops time={time} />
+		<Tree x={90} time={time} />
+		<Tree x={1830} time={time} />
 		<StreetLamp x={260} time={time} />
 		<StreetLamp x={1500} time={time} />
-		{stop ? <BusStop x={1240} /> : null}
+		<Bin x={520} />
+		{stop ? <BusStop x={1240} /> : <Bench x={1180} />}
 		<Road time={time} wet={wet} />
+		{wet ? <Puddles time={time} /> : null}
 	</g>
 );

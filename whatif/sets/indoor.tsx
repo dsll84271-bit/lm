@@ -18,29 +18,193 @@ export const ROOMS = {
 	gamer: {wall: '#221A4E', wallDark: '#18123A', floor: '#2E2458', floorDark: '#251C4C', trim: '#5A3FD6'},
 } satisfies Record<string, RoomLook>;
 
-export const Room: React.FC<{look: RoomLook; window?: {x: number; w: number; night?: boolean}; children?: React.ReactNode}> = ({look, window, children}) => (
+export type Decor = 'bedroom' | 'kitchen' | 'classroom' | 'gym' | 'lunch' | 'studio' | 'lab' | 'clinic' | 'gamer' | 'none';
+
+/** Things on the walls and at the edges of a room, so it never looks empty. */
+const RoomDecor: React.FC<{decor: Decor; look: RoomLook}> = ({decor, look}) => {
+	const shelf = (x: number, y: number, items: string[]) => (
+		<g stroke={INK} strokeWidth={5}>
+			{items.map((c, i) => (
+				<rect key={i} x={x + 12 + i * 34} y={y - 70 + (i % 3) * 12} width={28} height={70 - (i % 3) * 12} rx={4} fill={c} />
+			))}
+			<rect x={x} y={y} width={items.length * 34 + 24} height={14} rx={4} fill="#8A5A3E" />
+		</g>
+	);
+	const poster = (x: number, y: number, w: number, h: number, a: string, b: string) => (
+		<g stroke={INK} strokeWidth={5}>
+			<rect x={x} y={y} width={w} height={h} rx={6} fill={a} transform={`rotate(-2 ${x} ${y})`} />
+			<circle cx={x + w / 2} cy={y + h * 0.42} r={Math.min(w, h) * 0.25} fill={b} stroke="none" />
+			<rect x={x + w * 0.2} y={y + h * 0.75} width={w * 0.6} height={10} rx={5} fill={b} stroke="none" />
+		</g>
+	);
+	const plant = (x: number) => (
+		<g stroke={INK} strokeWidth={5}>
+			{[-40, -15, 10, 35].map((dx, i) => (
+				<ellipse key={i} cx={x + dx} cy={GROUND - 200 - (i % 2) * 40} rx={26} ry={70} fill={i % 2 ? '#2EA86A' : '#3FC07C'} transform={`rotate(${dx} ${x + dx} ${GROUND - 140})`} />
+			))}
+			<path d={`M${x - 55} ${GROUND - 130} L${x + 55} ${GROUND - 130} L${x + 40} ${GROUND} L${x - 40} ${GROUND} Z`} fill="#D9644A" />
+		</g>
+	);
+	const clock = (x: number, y: number) => (
+		<g stroke={INK} strokeWidth={6}>
+			<circle cx={x} cy={y} r={52} fill="#fff" />
+			<path d={`M${x} ${y} L${x} ${y - 34} M${x} ${y} L${x + 24} ${y + 8}`} strokeLinecap="round" />
+		</g>
+	);
+	switch (decor) {
+		case 'bedroom':
+			return (
+				<g>
+					{poster(120, 220, 170, 230, '#FF8A3D', '#FFD84A')}
+					{shelf(1620, 420, ['#E8453C', '#3FB7E8', '#FFD84A', '#7CF2A0', '#C9A6FF'])}
+					{plant(1820)}
+					<ellipse cx={960} cy={GROUND + 120} rx={620} ry={70} fill="#FF8A3D" opacity={0.25} />
+				</g>
+			);
+		case 'kitchen':
+			return (
+				<g stroke={INK} strokeWidth={6}>
+					{[...Array(7)].map((_, i) => (
+						<rect key={i} x={620 + i * 170} y={150} width={160} height={200} rx={8} fill={look.trim ?? '#fff'} />
+					))}
+					{[...Array(26)].map((_, i) => (
+						<rect key={`t${i}`} x={620 + (i % 13) * 92} y={390 + Math.floor(i / 13) * 60} width={86} height={54} fill="#fff" opacity={0.35} strokeWidth={2} />
+					))}
+					<rect x={1700} y={GROUND - 620} width={240} height={620} rx={14} fill="#E8EEF6" />
+					<line x1={1700} y1={GROUND - 380} x2={1940} y2={GROUND - 380} />
+					{plant(120)}
+				</g>
+			);
+		case 'classroom':
+			return (
+				<g>
+					{clock(1560, 220)}
+					{poster(150, 230, 200, 150, '#7CF2A0', '#3FB7E8')}
+					{poster(1700, 300, 160, 200, '#C9A6FF', '#FF8A3D')}
+					{shelf(80, 640, ['#E8453C', '#3FB7E8', '#FFD84A', '#7CF2A0', '#C9A6FF', '#FF8A3D'])}
+				</g>
+			);
+		case 'gym':
+			return (
+				<g stroke={INK} strokeWidth={6}>
+					{[...Array(9)].map((_, i) => (
+						<rect key={i} x={i * 240 - 120} y={GROUND - 260} width={220} height={230} rx={12} fill="#2E4A9E" />
+					))}
+					{[...Array(5)].map((_, i) => (
+						<rect key={`w${i}`} x={i * 420 + 40} y={60} width={300} height={110} rx={8} fill="#BFE3FA" />
+					))}
+					<rect x={1620} y={260} width={180} height={120} rx={6} fill="#fff" />
+					<circle cx={1710} cy={420} r={50} fill="none" stroke="#FF8A3D" strokeWidth={10} />
+				</g>
+			);
+		case 'lunch':
+			return (
+				<g stroke={INK} strokeWidth={6}>
+					<rect x={120} y={200} width={420} height={240} rx={14} fill="#2A2350" />
+					{[0, 1, 2, 3].map((i) => (
+						<rect key={i} x={160} y={240 + i * 46} width={260 - (i % 2) * 80} height={18} rx={9} fill="#FFD84A" stroke="none" />
+					))}
+					<rect x={1680} y={GROUND - 560} width={220} height={560} rx={12} fill="#E8453C" />
+					<rect x={1710} y={GROUND - 520} width={160} height={300} rx={8} fill="#BFE3FA" />
+					{poster(1300, 220, 180, 200, '#7CF2A0', '#FF8A3D')}
+				</g>
+			);
+		case 'studio':
+			return (
+				<g stroke={INK} strokeWidth={6}>
+					<rect x={560} y={150} width={800} height={380} rx={20} fill="#120C30" />
+					<rect x={580} y={170} width={760} height={340} rx={12} fill="#7F5AF0" opacity={0.8} />
+					<text x={960} y={370} fontFamily="Fredoka" fontWeight={700} fontSize={90} fill="#fff" textAnchor="middle" stroke="none">
+						MORNING LIVE
+					</text>
+					{[...Array(12)].map((_, i) => (
+						<circle key={i} cx={100 + i * 160} cy={60} r={18} fill="#FFE7A8" />
+					))}
+				</g>
+			);
+		case 'lab':
+			return (
+				<g stroke={INK} strokeWidth={5}>
+					{shelf(1500, 330, ['#BFE8FF', '#7CF2A0', '#BFE8FF', '#FFD84A', '#BFE8FF'])}
+					{shelf(1500, 500, ['#C9A6FF', '#BFE8FF', '#FF8A3D', '#BFE8FF'])}
+					<rect x={120} y={200} width={300} height={220} rx={8} fill="#fff" />
+					{[...Array(18)].map((_, i) => (
+						<rect key={i} x={135 + (i % 6) * 46} y={215 + Math.floor(i / 6) * 64} width={40} height={56} fill={['#FFB0C8', '#BFE8FF', '#FFE08A'][i % 3]} strokeWidth={2} />
+					))}
+				</g>
+			);
+		case 'clinic':
+			return (
+				<g stroke={INK} strokeWidth={5}>
+					<rect x={160} y={200} width={200} height={300} rx={8} fill="#fff" />
+					{['E', 'F P', 'T O Z', 'L P E D'].map((t, i) => (
+						<text key={t} x={260} y={260 + i * 60} fontFamily="Fredoka" fontWeight={700} fontSize={50 - i * 9} fill={INK} textAnchor="middle" stroke="none">
+							{t}
+						</text>
+					))}
+					<rect x={1650} y={GROUND - 420} width={240} height={420} rx={10} fill="#E8EEF6" />
+					{plant(1520)}
+				</g>
+			);
+		case 'gamer':
+			return (
+				<g>
+					<rect x={-400} y={130} width={2720} height={10} fill="#FF4FD8" opacity={0.8} />
+					<rect x={-400} y={130} width={2720} height={60} fill="#FF4FD8" opacity={0.12} />
+					{poster(140, 230, 190, 260, '#3FB7E8', '#FF4FD8')}
+					{poster(1640, 250, 210, 160, '#FF8A3D', '#7F5AF0')}
+					{shelf(1600, 560, ['#7CF2A0', '#FF4FD8', '#FFD84A', '#3FB7E8'])}
+				</g>
+			);
+		default:
+			return null;
+	}
+};
+
+export const Room: React.FC<{look: RoomLook; window?: {x: number; w: number; night?: boolean}; decor?: Decor; children?: React.ReactNode}> = ({look, window, decor = 'none', children}) => (
 	<g>
 		<defs>
 			<linearGradient id={`wall${look.wall}`} x1="0" y1="0" x2="0" y2="1">
 				<stop offset="0%" stopColor={look.wallDark} />
 				<stop offset="100%" stopColor={look.wall} />
 			</linearGradient>
+			<linearGradient id={`floor${look.floor}`} x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0%" stopColor={look.floorDark} />
+				<stop offset="100%" stopColor={look.floor} />
+			</linearGradient>
+			<linearGradient id="ao" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0%" stopColor="#000" stopOpacity={0} />
+				<stop offset="100%" stopColor="#000" stopOpacity={0.28} />
+			</linearGradient>
 		</defs>
 		<rect x={-400} y={-400} width={2720} height={GROUND + 400} fill={`url(#wall${look.wall})`} />
+		{[...Array(16)].map((_, i) => (
+			<rect key={i} x={i * 180 - 400} y={-400} width={6} height={GROUND + 400} fill="#000" opacity={0.05} />
+		))}
+		<rect x={-400} y={86} width={2720} height={18} fill={look.trim ?? '#fff'} opacity={0.6} />
 		{window ? (
-			<g stroke={INK} strokeWidth={8}>
-				<rect x={window.x} y={170} width={window.w} height={380} rx={10} fill={window.night ? '#1C1850' : '#BFE3FA'} />
-				{window.night ? [...Array(8)].map((_, i) => <circle key={i} cx={window.x + 30 + ((i * 97) % (window.w - 60))} cy={200 + ((i * 61) % 200)} r={3} fill="#fff" stroke="none" />) : null}
-				<line x1={window.x + window.w / 2} y1={170} x2={window.x + window.w / 2} y2={550} />
-				<line x1={window.x} y1={360} x2={window.x + window.w} y2={360} />
-				<rect x={window.x - 20} y={548} width={window.w + 40} height={22} rx={6} fill={look.trim ?? '#fff'} />
+			<g>
+				{!window.night ? <path d={`M${window.x} 170 L${window.x + window.w} 170 L${window.x + window.w + 380} ${GROUND + 200} L${window.x + 160} ${GROUND + 200} Z`} fill="#FFF3C4" opacity={0.14} /> : <path d={`M${window.x} 170 L${window.x + window.w} 170 L${window.x + window.w + 260} ${GROUND + 160} L${window.x + 120} ${GROUND + 160} Z`} fill="#8FA8FF" opacity={0.08} />}
+				<g stroke={INK} strokeWidth={8}>
+					<rect x={window.x - 16} y={154} width={window.w + 32} height={412} rx={14} fill={look.trim ?? '#fff'} />
+					<rect x={window.x} y={170} width={window.w} height={380} rx={8} fill={window.night ? '#1C1850' : '#BFE3FA'} />
+					{window.night ? [...Array(8)].map((_, i) => <circle key={i} cx={window.x + 30 + ((i * 97) % (window.w - 60))} cy={200 + ((i * 61) % 200)} r={3} fill="#fff" stroke="none" />) : <path d={`M${window.x + 30} 330 L${window.x + 120} 200`} stroke="#fff" strokeWidth={14} opacity={0.6} />}
+					<line x1={window.x + window.w / 2} y1={170} x2={window.x + window.w / 2} y2={550} />
+					<line x1={window.x} y1={360} x2={window.x + window.w} y2={360} />
+					<rect x={window.x - 30} y={548} width={window.w + 60} height={24} rx={6} fill={look.trim ?? '#fff'} />
+				</g>
+				<path d={`M${window.x - 70} 130 Q${window.x - 30} 360 ${window.x - 60} 600 L${window.x - 10} 600 Q${window.x + 10} 360 ${window.x - 10} 130 Z`} fill="#7F5AF0" stroke={INK} strokeWidth={6} opacity={0.9} />
+				<path d={`M${window.x + window.w + 70} 130 Q${window.x + window.w + 30} 360 ${window.x + window.w + 60} 600 L${window.x + window.w + 10} 600 Q${window.x + window.w - 10} 360 ${window.x + window.w + 10} 130 Z`} fill="#7F5AF0" stroke={INK} strokeWidth={6} opacity={0.9} />
 			</g>
 		) : null}
+		<RoomDecor decor={decor} look={look} />
+		<rect x={-400} y={GROUND - 120} width={2720} height={120} fill="url(#ao)" />
 		<rect x={-400} y={GROUND - 30} width={2720} height={34} fill={look.trim ?? '#fff'} stroke={INK} strokeWidth={6} />
-		<rect x={-400} y={GROUND} width={2720} height={600} fill={look.floor} />
+		<rect x={-400} y={GROUND} width={2720} height={600} fill={`url(#floor${look.floor})`} />
 		{[...Array(14)].map((_, i) => (
 			<line key={i} x1={i * 200 - 400} y1={GROUND} x2={i * 200 - 500} y2={GROUND + 600} stroke={look.floorDark} strokeWidth={6} />
 		))}
+		<ellipse cx={960} cy={GROUND + 60} rx={900} ry={40} fill="#fff" opacity={0.06} />
 		{children}
 	</g>
 );

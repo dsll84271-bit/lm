@@ -198,7 +198,7 @@ export const shake = (frame: number, at: number, amount = 16, length = 12) => {
 
 // ---------------------------------------------------------------- sound
 
-export type SoundName = 'snap' | 'whoosh' | 'pop' | 'chime' | 'thud' | 'brakes' | 'rain' | 'crowd' | 'sizzle' | 'tick' | 'boom' | 'swish';
+export type SoundName = 'snap' | 'whoosh' | 'pop' | 'chime' | 'thud' | 'brakes' | 'rain' | 'crowd' | 'sizzle' | 'tick' | 'boom' | 'swish' | 'timestop' | 'timestart' | 'steps' | 'run' | 'coins' | 'heart';
 
 export const Sound: React.FC<{name: SoundName; at: number; volume?: number; loop?: number}> = ({name, at, volume = 0.5, loop}) =>
 	at >= 0 ? (

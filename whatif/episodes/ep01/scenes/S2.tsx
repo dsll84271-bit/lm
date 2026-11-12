@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing} from 'remotion';
 import {Hero} from '../../../characters/Hero';
 import {blinking, cue, lerp, shake, SnapRing, Sound, span, track, type ShotProps} from '../../../components/stage';
-import {Big, Bubble, Count, Label, UI} from '../../../components/ui';
+import {Big, Bubble, ChatFeed, Count, Label, SpeedRace, TimeHud, UI} from '../../../components/ui';
 import {Desk, Monitor, Room, ROOMS} from '../../../sets/indoor';
 import {Ball, Field, Goal} from '../../../sets/outdoor';
 import {CAST, close, CityBack, detail, GROUND, H, medium, Shot, Street, wide} from './kit';
@@ -27,10 +27,10 @@ export const Dodge: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			lines={lines}
 			angles={[wide(1060, 560, 1.05), detail(ballX, 470, 2.2), close(heroX, GROUND, H, 0.08, 3), medium(heroX)]}
 			world={
-				<Room look={GYM}>
+				<Room look={GYM} decor="gym">
 					<rect x={-400} y={GROUND + 120} width={2720} height={8} fill="#fff" opacity={0.7} />
-					<Hero who={CAST.bigKid} x={1700} y={GROUND} size={H} face="determined" armR={[100, 110]} flip />
-					<Hero x={heroX} y={GROUND} size={H} face={frame > stepAt ? 'smug' : 'shocked'} look={[0.8, -0.2]} />
+					<Hero who={CAST.bigKid} x={1700} y={GROUND} size={H} face="determined" armR={[track(frame, [[0, 160], [slowAt - 6, 160], [slowAt, 80]]), 100]} flip />
+					<Hero x={heroX} y={GROUND} size={H} face={frame > stepAt ? 'smug' : 'shocked'} look={[0.8, -0.2]} walk={frame > stepAt && frame < stepAt + 12 ? frame / 6 : undefined} hop={frame > stepAt ? Math.max(0, Math.sin((frame - stepAt) * 0.25)) * 0.12 : 0} />
 					<Ball x={ballX} y={470} r={50} color="#E8453C" />
 				</Room>
 			}
@@ -39,6 +39,7 @@ export const Dodge: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<>
 					<Label text="BALL ≈ 15 M/S" x={480} y={200} frame={frame} at={cue(l0, 'fifteen')} />
 					<Label text="SLOWED: 1.5 CM/S" x={1440} y={200} frame={frame} at={cue(l0, 'one and a half')} color={UI.yellow} />
+					{frame > slowAt && frame < stepAt + 20 ? <TimeHud real={lerp(0, 0.06, span(frame, slowAt, stepAt))} yours={lerp(0, 60, span(frame, slowAt, stepAt))} frame={frame} at={slowAt + 6} /> : null}
 				</>
 			}
 		/>
@@ -63,8 +64,8 @@ export const Penalty: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<g>
 					<Field lines="pitch" />
 					<Goal x={580} />
-					<Hero x={960} y={GROUND} size={H} face={frame > catchAt ? 'smug' : 'determined'} armL={[60, 90]} armR={frame > catchAt ? [100, 130] : [60, 90]} stance={0.8} />
-					<Hero who={CAST.friend} x={1620} y={GROUND} size={H} face={frame > sitAt ? 'sad' : 'determined'} sit={frame > sitAt} flip />
+					<Hero x={960} y={GROUND} size={H} face={frame > catchAt ? 'smug' : 'determined'} armL={[60, 90]} armR={frame > catchAt ? [100, 130] : [60, 90]} stance={0.8} tilt={frame > slowAt && frame < catchAt + 20 ? -8 : 0} hop={frame < shotAt ? Math.abs(Math.sin(frame * 0.3)) * 0.05 : 0} />
+					<Hero who={CAST.friend} x={frame < shotAt ? lerp(1900, 1620, span(frame, 0, shotAt)) : 1620} y={GROUND} size={H} face={frame > sitAt ? 'sad' : 'determined'} sit={frame > sitAt} walk={frame < shotAt ? frame / 7 : undefined} run={frame < shotAt} flip />
 					<Ball x={ballX} y={ballY} r={44} />
 				</g>
 			}
@@ -100,8 +101,8 @@ export const Rps: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			lines={lines}
 			angles={[wide(960, 560, 1.05), close(700, GROUND, H, 0.08), close(1260, GROUND, H, 0.08, 3), medium(1000)]}
 			world={
-				<Room look={ROOMS.classroom}>
-					<Hero x={700} y={GROUND} size={H} face={frame > slowAt ? 'smug' : 'determined'} armR={[90, 90]} fists />
+				<Room look={ROOMS.classroom} decor="classroom">
+					<Hero x={700} y={GROUND} size={H} face={frame > slowAt ? 'smug' : 'determined'} armR={[90 + (frame < slowAt ? Math.abs(Math.sin(frame * 0.3)) * 40 : 0), 90 + (frame < slowAt ? Math.abs(Math.sin(frame * 0.3)) * 40 : 0)]} fists />
 					<Hero who={CAST.crowdA} x={1260} y={GROUND} size={H} face="determined" armL={[90, 90]} fists={frame < slowAt || Math.floor(frame / 40) % 2 === 0} flip />
 				</Room>
 			}
@@ -147,7 +148,7 @@ export const FlyShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				world={
 					<g>
 						<Field />
-						<Hero who={CAST.bigKid} x={1500} y={GROUND} size={H * 1.15} face={frame > payAt ? 'shocked' : 'smug'} flip />
+						<Hero who={CAST.bigKid} x={1500} y={GROUND} size={H * 1.15} face={frame > payAt ? 'shocked' : 'smug'} talk={frame < cue(l0, 'A housefly') ? Math.abs(Math.sin(frame * 0.5)) * 0.6 : 0} armL={frame > payAt ? [70, 110] : undefined} flip />
 						<Hero x={frame < takeAt ? 900 : 1060} y={GROUND} size={H} face={frame > payAt ? 'happy' : 'smug'} armR={frame > takeAt && frame < letAt ? [100, 140] : [20, 10]} walk={frame > slowAt && frame < takeAt ? frame / 14 : undefined} />
 						<Fly x={fx} y={520} wing={wing} s={1.2} />
 					</g>
@@ -181,9 +182,9 @@ export const HighFive: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={[medium(1100), close(900, GROUND, H, 0.08, -4), detail(1120, 470, 2.6), wide(1100, 560, 1.1), detail(1120, 470, 3, 6)]}
 				world={
-					<Room look={LUNCH}>
-						<Hero who={CAST.friend} x={1360} y={GROUND} size={H} face={frame > burnAt ? 'shocked' : 'happy'} armL={[150, 165]} flip />
-						<Hero x={900} y={GROUND} size={H} face={frame > burnAt ? 'scared' : frame > swing ? 'happy' : 'smug'} armR={frame > swing ? [130, 150] : [20, 10]} />
+					<Room look={LUNCH} decor="lunch">
+						<Hero who={CAST.friend} x={lerp(1800, 1360, span(frame, 0, swing))} y={GROUND} size={H} face={frame > burnAt ? 'shocked' : 'happy'} armL={[150, 165]} walk={frame < swing ? frame / 12 : undefined} hop={frame > burnAt ? Math.max(0, Math.sin((frame - burnAt) * 0.25)) * 0.2 : 0} flip />
+						<Hero x={900} y={GROUND} size={H} face={frame > burnAt ? 'scared' : frame > swing ? 'happy' : 'smug'} armR={frame > burnAt ? [60 + Math.sin(frame * 1.2) * 25, 90] : frame > swing ? [130, 150] : undefined} hop={frame > burnAt ? Math.max(0, Math.sin((frame - burnAt) * 0.3)) * 0.15 : 0} />
 						{hot > 0.02 ? (
 							<g>
 								<ellipse cx={1130} cy={470} rx={140 * hot} ry={110 * hot} fill="#FF8A3D" opacity={0.5 * hot} />
@@ -201,7 +202,8 @@ export const HighFive: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<>
 						<Label text="YOUR HAND: 2 M/S" x={480} y={200} frame={frame} at={cue(l1, 'two metres')} />
 						<Label text="REAL WORLD: 2,000 M/S" x={1440} y={200} frame={frame} at={cue(l1, 'two thousand')} color={UI.red} />
-						<Big text="MACH 6" x={960} y={760} size={130} frame={frame} at={cue(l1, 'Six times')} color={UI.orange} />
+						<Big text="MACH 6" x={960} y={760} size={130} frame={frame} at={cue(l1, 'Six times')} until={cue(l1, 'The air')} color={UI.orange} />
+						<SpeedRace frame={frame} at={cue(l1, 'The air')} x={960} y={780} w={1100} items={[{label: 'SOUND', speed: 1.2, color: UI.cyan}, {label: 'JET PLANE', speed: 0.9, color: UI.green}, {label: 'YOUR HAND', speed: 7, color: UI.red}]} />
 					</>
 				}
 			/>
@@ -222,7 +224,7 @@ export const Careful: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			lines={lines}
 			angles={[close(800, GROUND, H, 0.06), medium(x), wide(900, 560, 1.1)]}
 			world={
-				<Room look={ROOMS.bedroomDay} window={{x: 1300, w: 420}}>
+				<Room look={ROOMS.bedroomDay} decor="bedroom" window={{x: 1300, w: 420}}>
 					<Hero x={x} y={GROUND} size={H} face={frame > cue(l0, 'Gently') ? 'determined' : 'sad'} armR={[70, 110]} walk={frame > cue(l0, 'From then') ? frame / 40 : undefined} />
 					<rect x={x + 85} y={GROUND - 470} width={70} height={40} rx={12} fill="#FFFFFF" stroke={INK} strokeWidth={5} />
 				</Room>
@@ -247,7 +249,7 @@ export const Teleport: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={[wide(1100, 560, 1.05), close(1000, GROUND, H, 0.08, 3), close(heroX, GROUND, H, 0.06), wide(1100, 560, 1.15)]}
 				world={
-					<Room look={LUNCH}>
+					<Room look={LUNCH} decor="lunch">
 						<Desk x={560} w={1000} color="#C98A5A" h={230} />
 						<Hero who={CAST.friend} x={1000} y={GROUND} size={H} face={frame > forkAt ? 'shocked' : 'happy'} sit armL={[60, 100]} armR={[60, 100]} />
 						<Hero x={heroX} y={GROUND} size={H} face="smug" sit={frame < jumpAt} walk={frame > gapAt && frame < gapAt + 60 ? frame / 14 : undefined} armR={frame > jumpAt && frame < gapAt ? [90, 140] : [20, 10]} />
@@ -262,6 +264,7 @@ export const Teleport: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 			/>
 			<Sound name="swish" at={jumpAt} volume={0.6} />
+			<Sound name="steps" at={gapAt} volume={0.25} loop={60} />
 			<Sound name="thud" at={forkAt} volume={0.3} />
 		</>
 	);
@@ -270,7 +273,6 @@ export const Teleport: React.FC<ShotProps> = ({frame, dur, lines}) => {
 export const Games: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const [l0] = lines;
 	const rankAt = cue(l0, 'number one');
-	const chatAt = cue(l0, 'Half the chat');
 	return (
 		<Shot
 			frame={frame}
@@ -278,14 +280,14 @@ export const Games: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			lines={lines}
 			angles={[wide(960, 560, 1.05), detail(1200, 470, 2.4), close(760, GROUND, H, 0.08, -3), medium(900)]}
 			world={
-				<Room look={ROOMS.gamer}>
+				<Room look={ROOMS.gamer} decor="gamer">
 					<Desk x={880} w={640} color="#2A2350" h={260} />
 					<Monitor x={1200} y={330} w={420} glow="#7F5AF0">
 						<text x={1200} y={430} fontFamily="Fredoka" fontWeight={700} fontSize={frame > rankAt ? 70 : 40} fill="#fff" textAnchor="middle" stroke="none">
 							{frame > rankAt ? '#1' : 'RANKED'}
 						</text>
 					</Monitor>
-					<Hero x={760} y={GROUND} size={H} face={frame > rankAt ? 'smug' : 'determined'} sit armL={[70, 100]} armR={[70, 100]} look={[0.8, -0.2]} blink={blinking(frame)} />
+					<Hero x={760} y={GROUND} size={H} face={frame > rankAt ? 'smug' : 'determined'} sit armL={[70 + Math.sin(frame * 1.7) * 6, 100]} armR={[70 + Math.cos(frame * 2.1) * 6, 100]} look={[0.8, -0.2]} />
 				</Room>
 			}
 			slow={{at: cue(l0, 'You get'), until: rankAt, strength: 0.6}}
@@ -294,7 +296,7 @@ export const Games: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<Label text="NORMAL REACTION ≈ 0.25 S" x={480} y={200} frame={frame} at={cue(l0, 'quarter of a second')} />
 					<Label text="YOURS: ≈ 4 MINUTES" x={1440} y={200} frame={frame} at={cue(l0, 'four minutes')} color={UI.yellow} />
 					<Big text="#1 WORLDWIDE" x={960} y={760} size={100} frame={frame} at={rankAt} />
-					<Bubble text="HACKER??" x={1500} y={300} tx={1300} ty={380} frame={frame} at={chatAt} until={dur} shout size={46} />
+					<ChatFeed frame={frame} at={cue(l0, 'One month')} x={1560} y={560} messages={[['xXpro', 'GG'], ['n00bslayer', 'how is this player SO fast'], ['kai_77', 'reaction time 0 ms??'], ['mod_bot', 'player reported'], ['zara', 'HACKER?!'], ['luke', 'no way thats legit'], ['tom', 'clip it clip it']]} />
 				</>
 			}
 		/>
@@ -322,8 +324,8 @@ export const Magic: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						))}
 						<path d={`M1040 ${GROUND + 40} L1180 ${GROUND + 40} L1160 ${GROUND - 60} L1060 ${GROUND - 60} Z`} fill="#2A2350" stroke={INK} strokeWidth={6} />
 						{coins > 0 ? <ellipse cx={1110} cy={GROUND - 60} rx={50} ry={10 + coins / 20} fill="#FFD84A" stroke={INK} strokeWidth={4} /> : null}
-						<Hero x={900} y={GROUND + 20} size={H} face="smug" armR={[80, 110]} />
-						<Hero who={CAST.crowdB} x={1400} y={GROUND + 20} size={H} face={frame > cue(l0, 'back pocket') ? 'shocked' : 'happy'} flip />
+						<Hero x={900} y={GROUND + 20} size={H} face="smug" armR={[80 + Math.sin(frame * 0.3) * 20, 110 + Math.sin(frame * 0.5) * 20]} armL={[60, 100]} />
+						<Hero who={CAST.crowdB} x={1400} y={GROUND + 20} size={H} face={frame > cue(l0, 'back pocket') ? 'shocked' : 'happy'} hop={frame > cue(l0, 'back pocket') ? Math.max(0, Math.sin((frame - cue(l0, 'back pocket')) * 0.25)) * 0.2 : 0} armL={frame > cue(l0, 'back pocket') ? [150, 165] : undefined} flip />
 						<Hero who={CAST.crowdC} x={1700} y={GROUND + 20} size={H * 0.95} face={frame > cue(l0, "friend's hand") ? 'shocked' : 'neutral'} flip />
 					</g>
 				}
@@ -334,7 +336,8 @@ export const Magic: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					</>
 				}
 			/>
-			<Sound name="crowd" at={hatAt} volume={0.35} />
+			<Sound name="coins" at={hatAt} volume={0.5} />
+			<Sound name="crowd" at={hatAt + 20} volume={0.35} />
 		</>
 	);
 };

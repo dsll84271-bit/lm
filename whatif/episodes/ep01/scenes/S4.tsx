@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing} from 'remotion';
 import {Hero} from '../../../characters/Hero';
 import {blinking, cue, lerp, shake, SnapRing, Sound, span, track, type ShotProps} from '../../../components/stage';
-import {Big, Label, UI} from '../../../components/ui';
+import {Big, Label, TimeHud, UI} from '../../../components/ui';
 import {Ball, Car, Rain} from '../../../sets/outdoor';
 import {CAST, close, CityBack, detail, GROUND, H, medium, Shot, Street, wide} from './kit';
 
@@ -12,7 +12,7 @@ const KID = H * 0.62;
 const ROAD_Y = GROUND + 190;
 
 /** The afternoon street with the kid, the ball and the car. */
-const Scene: React.FC<{carX: number; kidX: number; kidY: number; kidSit?: boolean; ballX: number; heroX: number; heroY?: number; heroFace?: React.ComponentProps<typeof Hero>['face']; heroArms?: [number, number]; walk?: number; frame: number; heroTilt?: number; driver?: boolean}> = ({
+const Scene: React.FC<{carX: number; kidX: number; kidY: number; kidSit?: boolean; ballX: number; heroX: number; heroY?: number; heroFace?: React.ComponentProps<typeof Hero>['face']; heroArms?: [number, number]; walk?: number; frame: number; heroTilt?: number; driver?: boolean; kidWalk?: number}> = ({
 	carX,
 	kidX,
 	kidY,
@@ -26,11 +26,12 @@ const Scene: React.FC<{carX: number; kidX: number; kidY: number; kidSit?: boolea
 	frame,
 	heroTilt = 0,
 	driver = false,
+	kidWalk,
 }) => (
 	<g>
 		<Street time="dusk" stop={false} />
 		<Ball x={ballX} y={ROAD_Y - 40} r={40} color="#E8453C" />
-		<Hero who={CAST.kid} x={kidX} y={kidY} size={KID} face={kidSit ? 'shocked' : 'happy'} sit={kidSit} walk={kidSit ? undefined : 0.3} armR={kidSit ? [30, 40] : [100, 100]} flip />
+		<Hero who={CAST.kid} x={kidX} y={kidY} size={KID} face={kidSit ? 'shocked' : 'happy'} sit={kidSit} walk={kidSit ? undefined : kidWalk ?? 0.3} run={kidWalk !== undefined} armR={kidSit ? [30, 40] : kidWalk !== undefined ? undefined : [100, 100]} flip />
 		<Hero x={heroX} y={heroY} size={H} face={heroFace} walk={walk} armR={heroArms} armL={heroArms} tilt={heroTilt} blink={blinking(frame)} />
 		<Car x={carX} flip color="#3FB7E8" lights driver={driver ? <g transform="scale(-1 1)"><Hero who={CAST.driver} x={-120} y={-60} size={200} face="neutral" look={[0, 1]} /></g> : undefined} />
 	</g>
@@ -48,7 +49,7 @@ export const StreetShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={[wide(1100, 560, 1.05), close(kidX, ROAD_Y, KID, 0.08), detail(carX - 300, ROAD_Y - 100, 1.8), close(400, GROUND + 20, H, 0.1, -4)]}
 				bg={<CityBack time="dusk" />}
-				world={<Scene frame={frame} carX={carX} kidX={kidX} kidY={ROAD_Y} ballX={kidX + 140} heroX={400} heroFace={frame > cue(l0, 'In about') ? 'shocked' : 'neutral'} />}
+				world={<Scene frame={frame} carX={carX} kidX={kidX} kidY={ROAD_Y} ballX={kidX + 140} heroX={400} heroFace={frame > cue(l0, 'In about') ? 'shocked' : 'neutral'} kidWalk={frame < cue(l0, 'A car') ? frame / 7 : undefined} />}
 				overlay={
 					<>
 						<Label text="CAR ≈ 50 KM/H" x={480} y={200} frame={frame} at={cue(l0, 'fifty')} />
@@ -80,11 +81,12 @@ export const SnapShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Label text="CAR: 1.4 CM/S" x={480} y={200} frame={frame} at={cue(l0, 'crawling')} />
 						<Label text="YOUR TIME: ≈ 18 MIN" x={1440} y={200} frame={frame} at={cue(l0, 'eighteen')} color={UI.yellow} />
 						<Label text="YOU: 20 M AWAY" x={960} y={860} frame={frame} at={cue(l0, 'twenty metres')} color={UI.red} />
+						<TimeHud real={lerp(0, 0.02, span(frame, 0, dur))} yours={lerp(0, 20, span(frame, 0, dur))} frame={frame} at={cue(l0, 'eighteen')} x={1500} y={790} />
 					</>
 				}
 			/>
 			<Sound name="snap" at={2} volume={0.9} />
-			<Sound name="whoosh" at={4} volume={0.4} />
+			<Sound name="timestop" at={3} volume={0.6} />
 		</>
 	);
 };
@@ -167,11 +169,11 @@ export const Reach: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Label text="3 MINUTES SPARE" x={480} y={200} frame={frame} at={cue(l0, 'three minutes')} until={pushAt} />
 						<Label text="YANK = LIKE A CAR HIT" x={1440} y={200} frame={frame} at={cue(l0, 'yank')} until={pushAt} color={UI.red} />
 						<Label text="PUSH: 1 MM / S" x={480} y={200} frame={frame} at={cue(l1, 'One millimetre')} color={UI.yellow} />
-						{frame > pushAt ? <Big text={`${clock} : 00`} x={1500} y={760} size={110} frame={frame} at={pushAt} color={UI.cream} /> : null}
+						<TimeHud real={lerp(0.06, 1.05, span(frame, 0, dur))} yours={lerp(180, 18 * 60, span(frame, 0, dur))} frame={frame} at={6} x={1500} y={790} />
 					</>
 				}
 			/>
-			<Sound name="tick" at={pushAt} volume={0.3} />
+			<Sound name="heart" at={0} volume={0.5} loop={dur} />
 		</>
 	);
 };
@@ -189,7 +191,7 @@ export const Miss: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={[wide(1150, 580, 1.05), detail(1150, GROUND + 40, 2.2), close(1150, GROUND + 60, KID, 0.08, 3), close(980, GROUND + 60, H, 0.06), wide(1100, 560, 1.15)]}
 				bg={<CityBack time="dusk" />}
-				world={<Scene frame={frame} carX={carX} kidX={1150} kidY={GROUND + 60} kidSit ballX={1290} heroX={980} heroY={GROUND + 60} heroFace={frame > l1.a ? 'smug' : 'neutral'} />}
+				world={<Scene frame={frame} carX={carX} kidX={1150} kidY={GROUND + 60} kidSit ballX={1290} heroX={980} heroY={GROUND + 60} heroFace={frame > l1.a ? 'smug' : 'neutral'} heroArms={[50, 110]} />}
 				shakeXY={o}
 				overlay={
 					<>
@@ -200,6 +202,7 @@ export const Miss: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 			/>
 			<Sound name="snap" at={0} volume={0.8} />
+			<Sound name="timestart" at={1} volume={0.5} />
 			<Sound name="brakes" at={brake} volume={0.6} />
 		</>
 	);
@@ -244,7 +247,11 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			/>
 			<Sound name="rain" at={0} volume={0.3} loop={stopAt} />
 			<Sound name="snap" at={stopAt} volume={0.7} />
+			<Sound name="timestop" at={stopAt + 1} volume={0.5} />
+			<Sound name="steps" at={otherAt} volume={0.2} loop={Math.max(1, cue(l1, 'They turn') - otherAt)} />
 			<Sound name="snap" at={theirSnap} volume={1} />
+			<Sound name="timestart" at={theirSnap + 1} volume={0.7} />
+			<Sound name="rain" at={theirSnap + 2} volume={0.3} />
 		</>
 	);
 };
@@ -261,7 +268,7 @@ export const Outro: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<g>
 					<rect x={-400} y={-400} width={2720} height={1900} fill="#0E0A2E" />
 					<circle cx={960} cy={560} r={400} fill="#7F5AF0" opacity={0.15} />
-					<Hero x={960} y={GROUND} size={H} face="smug" armR={[110, 160]} aura={0.4 + 0.2 * Math.sin(frame * 0.1)} auraColor="#7F5AF0" />
+					<Hero x={960} y={GROUND} size={H} face="smug" armR={[110 + Math.max(0, Math.sin(frame * 0.12)) * 20, 160]} aura={0.4 + 0.2 * Math.sin(frame * 0.1)} auraColor="#7F5AF0" />
 				</g>
 			}
 			overlay={
