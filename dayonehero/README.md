@@ -10,7 +10,7 @@ Every morning Dex wakes up with a new power, and each episode finds out what it 
 | `sets/` | The bedroom, the kitchen, the close-up "tiny world" surfaces, and props (alarm clock, ruler, sugar cube, toy car, cereal hoop, milk drop, magnifying glass, shrew) |
 | `components/ui.tsx` | Labels ("NEW POWER EVERY DAY"), sound words ("STOMP!"), spoken lines, sparkles, the camera |
 | `episodes/day05/script.md` | The script. Each `### name` is one shot |
-| `episodes/day05/scenes/` | The 28 shots, in three parts: waking up small (A), the science (B), Mum and breakfast (C) |
+| `episodes/day05/scenes/` | The 57 shots, in four parts: waking up small and cold (S1), food, falling and strength (S2), Mum, Biscuit and the milk (S3), the ring under the fridge (S4); shared pieces in `kit.tsx` |
 | `episodes/day05/voiceover/` | The narration and its timings |
 | `sfx/`, `music/` | Sound effects and the music loop, all generated from scratch, so free to use |
 
@@ -26,9 +26,17 @@ Every morning Dex wakes up with a new power, and each episode finds out what it 
   npx remotion render src/index.ts Day05 episodes/day05/renders/day05.mp4 --concurrency=4
   ```
 
-## Voices
+## How it matches Day 4
 
-Free Kokoro voices, British: the narrator is "Emma", Mum is "Isabella", and Dex is "Lewis" pitched up, because a tiny voice box makes a high, squeaky voice. The voice tool and model are shared with the Ifterwards project next door (`.venv` and `tools/models` link to it).
+Measured from the Day 4 clips (speech-to-text plus a voice-matching model):
+- **Narrator:** Kokoro's "Heart" voice (`af_heart`), just under normal speed. It matched Day 4's narrator better than any other Kokoro voice.
+- **Characters don't speak out loud.** Dex's and Mum's lines are written on screen.
+- **Rules:** each limit of the power is numbered, on a yellow sticky note: "RULE 1. SMALL MEANS COLD."
+- **Shape:** the morning is the science, with real numbers; the evening is a story where Dex uses the power, limits and all, to help someone.
+- **Music:** a steady bed about 6 dB under the voice, like Day 4.
+- **Length:** 8 minutes or more.
+
+The voice tool and model are shared with the Ifterwards project next door; make `.venv` and `tools/models` links to it (see `../ifterwards/tools/setup_voice.sh`).
 
 ## The science in Day 5
 

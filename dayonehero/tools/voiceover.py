@@ -22,14 +22,15 @@ RATE = 24_000  # Kokoro's sample rate
 
 # Who speaks with which Kokoro voice. British voices, because the show says "Mum".
 VOICES = {
-    "NARRATOR": {"voice": "bf_emma", "speed": 1.0, "pitch": 1.0},
-    "MUM": {"voice": "bf_isabella", "speed": 0.95, "pitch": 1.0},
-    # A boy's voice, pitched up: a tiny voice box makes a high, squeaky voice.
-    "DEX": {"voice": "bm_lewis", "speed": 0.78, "pitch": 1.45},
+    # Day 4's narrator matched Kokoro's "Heart" voice (af_heart) most closely,
+    # at a little under normal speed. Characters are not voiced: their lines are on screen.
+    "NARRATOR": {"voice": "af_heart", "speed": 0.95, "pitch": 1.0, "lang": "en-us"},
+    "MUM": {"voice": "bf_isabella", "speed": 0.95, "pitch": 1.0, "lang": "en-gb"},
+    "DEX": {"voice": "bm_lewis", "speed": 0.78, "pitch": 1.45, "lang": "en-gb"},
 }
 
-GAP_LINE = 0.35  # silence between one line and the next
-SHOT_EDGE = 0.25  # silence at the start of a shot that has lines
+GAP_LINE = 0.5  # silence between one line and the next
+SHOT_EDGE = 0.35  # silence at the start of a shot that has lines
 
 
 def read_script(path: Path):
@@ -106,7 +107,7 @@ def main():
                 silence(GAP_LINE)
             first = False
             v = VOICES[it["who"]]
-            audio, rate = kokoro.create(it["text"], voice=v["voice"], speed=v["speed"], lang="en-gb")
+            audio, rate = kokoro.create(it["text"], voice=v["voice"], speed=v["speed"], lang=v["lang"])
             assert rate == RATE
             audio = pitch_up(np.asarray(audio, dtype=np.float32), v["pitch"])
             # Trim Kokoro's own leading and trailing quiet.

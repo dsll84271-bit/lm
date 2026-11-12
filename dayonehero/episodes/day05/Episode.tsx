@@ -18,7 +18,7 @@ const Run: React.FC<{Scene: React.FC<ShotProps>; dur: number; lines: ShotProps['
 };
 
 // The music sits under the voices, a little lower whenever someone speaks.
-const MUSIC = 0.11;
+const MUSIC = 0.24;
 
 export const Day05: React.FC = () => (
 	<AbsoluteFill style={{background: C.navy}}>
