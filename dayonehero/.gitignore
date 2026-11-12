@@ -2,8 +2,8 @@ node_modules/
 build/
 out/
 .remotion/
-.venv/
-tools/models/
+.venv
+tools/models
 episodes/*/renders/*
 !episodes/*/renders/.gitkeep
 !sfx/*.wav
