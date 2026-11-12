@@ -9,3 +9,6 @@ episodes/*/renders/*
 !sfx/*.wav
 !music/*.wav
 !episodes/*/voiceover/*.wav
+!public/sfx/*.wav
+!public/music/*.wav
+!episodes/*/voiceover/*.wav
