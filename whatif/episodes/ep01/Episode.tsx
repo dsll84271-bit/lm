@@ -28,16 +28,6 @@ const BEDS: Array<{from: number; to: number; src: string; volume: number}> = [
 	{from: at('outro').from, to: TOTAL, src: 'music/main.wav', volume: 0.16},
 ];
 
-/** The background sound of each scene: the place, or the hum of slowed time. */
-const AMB: Record<string, string> = {
-	frozen: 'amb_slow', gasp: 'amb_rain', rules: 'amb_slow', tests: 'amb_room', egg: 'amb_room', bus: 'amb_city', test: 'amb_crowd',
-	dodge: 'amb_crowd', penalty: 'amb_field', rps: 'amb_crowd', fly: 'amb_field', highfive: 'amb_crowd', careful: 'amb_room', teleport: 'amb_crowd',
-	games: 'amb_room', magic: 'amb_city', race: 'amb_field', quiet: 'amb_slow', lightning: 'amb_storm', famous: 'amb_room', sleep: 'amb_slow',
-	lonely: 'amb_slow', drift: 'amb_room', doctor: 'amb_room', street: 'amb_city', snap: 'amb_slow', driver: 'amb_slow', dash: 'amb_slow',
-	reach: 'amb_slow', miss: 'amb_city',
-};
-const AMB_LOOP = 8 * 30;
-
 export const Episode01: React.FC = () => (
 	<AbsoluteFill style={{background: '#05030C'}}>
 		{SHOTS.map((s) => {
@@ -48,13 +38,6 @@ export const Episode01: React.FC = () => (
 				</Sequence>
 			);
 		})}
-		{SHOTS.filter((s) => AMB[s.id]).map((s) => (
-			<Sequence key={`amb-${s.id}`} from={s.from} durationInFrames={s.dur} name={`amb ${s.id}`}>
-				<Loop durationInFrames={AMB_LOOP}>
-					<Audio src={staticFile(`sfx/${AMB[s.id]}.wav`)} volume={0.22} />
-				</Loop>
-			</Sequence>
-		))}
 		<Audio src={staticFile('ep01-voiceover/voiceover.wav')} />
 		{BEDS.map((b, i) => (
 			<Sequence key={i} from={b.from} durationInFrames={b.to - b.from} name={`music ${i}`}>
