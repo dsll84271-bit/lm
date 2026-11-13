@@ -101,7 +101,7 @@ export const Bubble: React.FC<{text: string; x: number; y: number; tx: number; t
 
 /** Two (or more) bars comparing numbers. `values` are 0 to 1. */
 export const Bars: React.FC<{items: Array<{label: string; value: number; color: string; note?: string}>; x: number; y: number; w: number; frame: number; at: number}> = ({items, x, y, w, frame, at}) => (
-	<div style={{position: 'absolute', left: x, top: y, width: w, display: 'flex', flexDirection: 'column', gap: 22}}>
+	<div style={{position: 'absolute', left: x, top: y, width: w, display: 'flex', flexDirection: 'column', gap: 22, padding: '22px 28px', background: UI.box, border: `3px solid ${UI.edge}`, borderRadius: 30, opacity: span(frame, at - 6, at + 4)}}>
 		{items.map((it, i) => {
 			const p = span(frame, at + i * 10, at + i * 10 + 24);
 			if (frame < at + i * 10) {
