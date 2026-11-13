@@ -8,7 +8,7 @@ export const FACE_SPAN = 190 * 1.27; // half-width of the canvas, in 2D units
 
 const INK = '#140A28';
 
-export type FaceState = {face: HeroFace; look: [number, number]; blink: number; talk: number; skin: string; glasses?: boolean};
+export type FaceState = {face: HeroFace; look: [number, number]; blink: number; talk: number; skin: string; glasses?: boolean; eyesOnly?: boolean};
 
 export const drawFace = (ctx: CanvasRenderingContext2D, size: number, f: FaceState) => {
 	ctx.clearRect(0, 0, size, size);
@@ -48,7 +48,7 @@ export const drawFace = (ctx: CanvasRenderingContext2D, size: number, f: FaceSta
 	const {face, look, blink, talk} = f;
 
 	// cheeks
-	ctx.globalAlpha = 0.35;
+	ctx.globalAlpha = f.eyesOnly ? 0 : 0.35;
 	ellipse(-92, -700, 34, 18, '#FF6A4A');
 	ellipse(92, -700, 34, 18, '#FF6A4A');
 	ctx.globalAlpha = 1;
@@ -65,8 +65,8 @@ export const drawFace = (ctx: CanvasRenderingContext2D, size: number, f: FaceSta
 		sad: [-20, 10, -20, 10],
 	};
 	const [li, lo, ri, ro] = shapes[face];
-	stroke(`M-108 ${base + lo} Q-70 ${base + (lo + li) / 2 - 10} -32 ${base + li}`, 20);
-	stroke(`M32 ${base + ri} Q70 ${base + (ro + ri) / 2 - 10} 108 ${base + ro}`, 20);
+	if (!f.eyesOnly) stroke(`M-108 ${base + lo} Q-70 ${base + (lo + li) / 2 - 10} -32 ${base + li}`, 20);
+	if (!f.eyesOnly) stroke(`M32 ${base + ri} Q70 ${base + (ro + ri) / 2 - 10} 108 ${base + ro}`, 20);
 
 	// eyes
 	if (face === 'happy') {
@@ -109,7 +109,9 @@ export const drawFace = (ctx: CanvasRenderingContext2D, size: number, f: FaceSta
 
 	// mouth
 	const y = -660;
-	if (talk > 0.05 && face !== 'happy' && face !== 'shocked') {
+	if (f.eyesOnly) {
+		// an invisible face: only the eyes show
+	} else if (talk > 0.05 && face !== 'happy' && face !== 'shocked') {
 		ellipse(0, -655, 30, 8 + 26 * talk, '#5A1A2A', 8);
 	} else if (face === 'smug') {
 		stroke(`M-40 ${y} Q10 ${y + 18} 52 ${y - 14}`, 13);
@@ -129,7 +131,7 @@ export const drawFace = (ctx: CanvasRenderingContext2D, size: number, f: FaceSta
 	} else {
 		stroke(`M-30 ${y} Q0 ${y + 10} 30 ${y}`, 12);
 	}
-	if (face === 'scared') {
+	if (face === 'scared' && !f.eyesOnly) {
 		fill('M160 -880 Q182 -840 166 -820 Q146 -840 160 -880 Z', '#9FD6F5', 6);
 	}
 	if (f.glasses) {

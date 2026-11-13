@@ -3,7 +3,7 @@ import {useCurrentFrame} from 'remotion';
 import * as THREE from 'three';
 import {HERO, YOU, type HeroFace, type Look} from '../characters/Hero';
 import {drawFace} from './face';
-import {INK, T} from './toon';
+import {Fade, Glow, INK, T} from './toon';
 
 // The hero in 3D: a cel-shaded puppet (sphere head with a painted face,
 // hoodie body, capsule limbs, mitten hands, chunky trainers), like the top
@@ -40,6 +40,10 @@ export type Hero3DProps = {
 	aura?: string;
 	/** Crowd extras: the face is painted once, not every frame. */
 	lite?: boolean;
+	/** 0 = normal, 1 = invisible: a faint glassy outline with only the eyes showing. */
+	ghost?: number;
+	/** Little sparkles around an invisible body (default on when ghost > 0.3). */
+	shimmer?: boolean;
 };
 
 const R = 0.32; // head radius
@@ -94,7 +98,12 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 	opacity = 1,
 	aura,
 	lite = false,
+	ghost = 0,
+	shimmer,
 }) => {
+	const g = Math.max(0, Math.min(1, ghost));
+	const eyesOnly = g > 0.5;
+	const fade = {fill: 1 - g * 0.87, line: 1 - g * 0.6, tint: g > 0 ? '#CFEFFF' : undefined, shadow: g < 0.5};
 	const frame = useCurrentFrame();
 	const seed = (Math.abs(Math.round(position[0] * 13 + position[2] * 7 + height * 10)) % 97) / 9;
 	const alive = still ? 0 : 1;
@@ -125,11 +134,11 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 		return {canvas: c, tex: t, decal: headDecal()};
 	}, []);
 	const ctx = canvas.getContext('2d');
-	const faceKey = `${face}|${look.join(',')}|${talk > 0.05 ? 1 : 0}|${blink > 0.5 ? 1 : 0}`;
+	const faceKey = `${face}|${look.join(',')}|${talk > 0.05 ? 1 : 0}|${blink > 0.5 ? 1 : 0}|${eyesOnly ? 1 : 0}`;
 	const drawn = useMemo(() => ({key: ''}), []);
 	if (ctx && (!lite || drawn.key !== faceKey)) {
 		drawn.key = faceKey;
-		drawFace(ctx, FACE_PX, {face, look, blink, talk, skin: who.head, glasses: who.glasses});
+		drawFace(ctx, FACE_PX, {face, look, blink, talk, skin: eyesOnly ? '#D6F0FF' : who.head, glasses: who.glasses && !eyesOnly, eyesOnly});
 		tex.needsUpdate = true;
 	}
 
@@ -137,7 +146,15 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 	const k = height / 1.7;
 	const hairColor = who.hairColor ?? '#2A1E2E';
 	return (
+		<Fade.Provider value={g > 0 ? fade : {fill: 1, line: 1}}>
 		<group position={[position[0], position[1] + hop * 0.5 * k, position[2]]} rotation={[0, turn, 0]} scale={[k, k, k]}>
+			{(shimmer ?? g > 0.3)
+				? [...Array(12)].map((_, i) => {
+						const tw = Math.max(0, Math.sin(frame * 0.12 + i * 2.1));
+						const a = i * 2.4 + frame * 0.01;
+						return <Glow key={`sp${i}`} shape={{kind: 'sphere', r: 0.018 + (i % 3) * 0.006, seg: 8}} color={i % 2 ? '#FFFFFF' : '#9FE8FF'} position={[Math.cos(a) * (0.3 + (i % 4) * 0.05), 0.25 + ((i * 0.37) % 1.4) - sitDrop * 0.6, Math.sin(a) * 0.3]} opacity={tw * 0.85 * Math.min(1, g * 1.5)} />;
+					})
+				: null}
 			{aura ? (
 				<mesh position={[0, 0.9, -0.3]}>
 					<circleGeometry args={[0.9, 48]} />
@@ -170,15 +187,15 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 					<group position={[0, 0.84, 0.265]}>
 						<mesh>
 							<circleGeometry args={[0.085, 40]} />
-							<meshBasicMaterial color={HERO.emblem} toneMapped={false} />
+							<meshBasicMaterial color={HERO.emblem} toneMapped={false} transparent={g > 0} opacity={1 - g * 0.85} />
 						</mesh>
 						<mesh position={[0, 0, 0.002]}>
 							<circleGeometry args={[0.068, 40]} />
-							<meshBasicMaterial color={who.hoodieDark} />
+							<meshBasicMaterial color={who.hoodieDark} transparent={g > 0} opacity={1 - g * 0.85} />
 						</mesh>
 						<mesh position={[0, -0.003, 0.004]}>
 							<planeGeometry args={[0.1, 0.1]} />
-							<meshBasicMaterial map={qTexture()} transparent toneMapped={false} />
+							<meshBasicMaterial map={qTexture()} transparent toneMapped={false} opacity={1 - g * 0.85} />
 						</mesh>
 					</group>
 				) : null}
@@ -192,13 +209,13 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 					{who.hair === 'long' ? <T shape={{kind: 'capsule', r: 0.31, len: 0.25}} color={hairColor} position={[0, -0.1, -0.08]} /> : null}
 					{who.hair === 'bun' ? <T shape={{kind: 'sphere', r: 0.11}} color={hairColor} position={[0, 0.34, -0.06]} /> : null}
 					<T shape={{kind: 'sphere', r: R, seg: 48}} color={who.head} outline={0.02} />
-					<mesh geometry={decal}>
+					<mesh geometry={decal} renderOrder={3}>
 						<meshBasicMaterial map={tex} transparent alphaTest={0.05} toneMapped={false} />
 					</mesh>
 					{/* gloss highlight */}
 					<mesh position={[-0.13, 0.17, 0.22]} rotation={[0, -0.4, -0.5]} scale={[1, 0.55, 0.3]}>
 						<sphereGeometry args={[0.06, 16, 12]} />
-						<meshBasicMaterial color="#ffffff" transparent opacity={0.75} toneMapped={false} />
+						<meshBasicMaterial color="#ffffff" transparent opacity={0.75 * (1 - g * 0.8)} toneMapped={false} />
 					</mesh>
 					{who.hair === 'short' || who.hair === 'bun' || who.hair === 'long' ? (
 						<T shape={{kind: 'sphere', r: R * 1.05, seg: 40}} color={hairColor} position={[0, 0.1, -0.04]} scale={[1, 0.72, 0.98]} outline={0.015} />
@@ -215,6 +232,7 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 				</group>
 			</group>
 		</group>
+		</Fade.Provider>
 	);
 };
 

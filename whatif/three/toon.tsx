@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {createContext, useContext, useMemo} from 'react';
 import * as THREE from 'three';
 
 // Cel shading: a 3-step light ramp, plus a dark "inverted hull" outline on
@@ -17,6 +17,15 @@ export const toonRamp = () => {
 };
 
 export const INK = '#140A28';
+
+/**
+ * Makes every shape inside it glassy: `fill` is the body's opacity, `line` the
+ * outline's, and `tint` a colour the body is mixed towards. Used for the
+ * invisible hero. fill = 1 means normal.
+ */
+export type FadeState = {fill: number; line: number; tint?: string; shadow?: boolean};
+export const Fade = createContext<FadeState>({fill: 1, line: 1});
+const mixColor = (a: string, b: string, t: number) => '#' + new THREE.Color(a).lerp(new THREE.Color(b), t).getHexString();
 
 type Shape =
 	| {kind: 'sphere'; r: number; seg?: number}
@@ -58,8 +67,14 @@ export const T: React.FC<{
 	opacity?: number;
 	children?: React.ReactNode;
 }> = ({shape, color, position, rotation, scale, outline = 0.025, emissive, emissiveIntensity = 1, shadow = true, receive = true, opacity = 1, children}) => {
+	const fade = useContext(Fade);
 	const key = JSON.stringify(shape);
 	const geom = useMemo(() => geomFor(shape), [key]);
+	const glassy = fade.fill < 1;
+	const fillOpacity = opacity * fade.fill;
+	const lineOpacity = opacity * fade.line;
+	const bodyColor = glassy && fade.tint ? mixColor(color, fade.tint, 0.55) : color;
+	const castsShadow = shadow && (fade.shadow ?? !glassy);
 	const s = typeof scale === 'number' ? [scale, scale, scale] : scale;
 	// The outline is the same shape, a little bigger, drawn inside-out in ink.
 	const out = useMemo(() => {
@@ -73,12 +88,12 @@ export const T: React.FC<{
 	const k = out ? 1 + outline / Math.max(0.05, out.boundingSphere?.radius ?? 1) : 1;
 	return (
 		<group position={position} rotation={rotation} scale={s as [number, number, number] | undefined}>
-			<mesh geometry={geom} castShadow={shadow} receiveShadow={receive}>
-				<meshToonMaterial color={color} gradientMap={toonRamp()} emissive={emissive ?? '#000000'} emissiveIntensity={emissive ? emissiveIntensity : 0} transparent={opacity < 1} opacity={opacity} />
+			<mesh geometry={geom} castShadow={castsShadow} receiveShadow={receive && !glassy} renderOrder={glassy ? 1 : 0}>
+				<meshToonMaterial color={bodyColor} gradientMap={toonRamp()} emissive={emissive ?? '#000000'} emissiveIntensity={emissive ? emissiveIntensity : 0} transparent={fillOpacity < 1} opacity={fillOpacity} />
 			</mesh>
-			{out ? (
-				<mesh geometry={out} scale={[k, k, k]}>
-					<meshBasicMaterial color={INK} side={THREE.BackSide} transparent={opacity < 1} opacity={opacity} />
+			{out && lineOpacity > 0.01 ? (
+				<mesh geometry={out} scale={[k, k, k]} renderOrder={glassy ? 2 : 0}>
+					<meshBasicMaterial color={INK} side={THREE.BackSide} transparent={lineOpacity < 1} opacity={lineOpacity} />
 				</mesh>
 			) : null}
 			{children}

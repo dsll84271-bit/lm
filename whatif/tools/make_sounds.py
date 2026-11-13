@@ -316,3 +316,65 @@ for off, a in [(0.0, 1.0), (0.22, 0.7)]:
     s0 = int(off * R)
     x[s0 : s0 + len(b)] += b
 save2("heart", x, peak=0.7)
+
+
+# ---------------------------------------------------------------- Episode 3 (invisibility)
+# Vanishing: a glassy shimmer of high partials gliding down, with a soft swish.
+tt = t(1.1)
+shim = np.zeros(len(tt))
+for k, f0 in enumerate([2400, 3100, 3900, 4700, 5600, 6600]):
+    f = f0 * np.exp(-tt * 0.9)
+    trem = 0.5 + 0.5 * np.sin(2 * np.pi * (11 + k * 3) * tt + k)
+    shim += np.sin(2 * np.pi * np.cumsum(f) / R) * trem / (1 + k * 0.3)
+shim *= np.sin(np.pi * np.minimum(tt / 1.1, 1)) ** 1.5
+sw = lowpass(rng.normal(size=len(tt)), 0.18) * np.sin(np.pi * tt / 1.1) ** 2 * 0.8
+vanish = reverb(shim * 0.5 + sw, 1.2, 0.35)
+save2("vanish", vanish, peak=0.55)
+# Appearing: the same, rising, ending in a soft bloom.
+bloom_t = t(0.6)
+bloom = sum(np.sin(2 * np.pi * f * bloom_t) for f in (523, 659, 784)) * np.exp(-bloom_t * 5)
+app = np.concatenate([vanish[::-1][: int(0.9 * R)], np.zeros(len(bloom_t))])
+app[int(0.85 * R) : int(0.85 * R) + len(bloom_t)] += reverb(bloom, 0.0001, 0)[: len(bloom_t)] * 0.5
+save2("appear", reverb(app, 0.8, 0.25), peak=0.55)
+
+# Camera shutter: two mechanical clicks.
+x = np.zeros(int(0.35 * R))
+for off, a in [(0.0, 1.0), (0.075, 0.7)]:
+    tc = t(0.04)
+    c = (rng.normal(size=len(tc)) * np.exp(-tc * 260) + 0.5 * np.sin(2 * np.pi * 3200 * tc) * np.exp(-tc * 200)) * a
+    s0 = int(off * R)
+    x[s0 : s0 + len(c)] += c
+save2("shutter", reverb(bandpass(x, 0.05, 0.6), 0.3, 0.15), peak=0.6)
+
+# A crunchy bite: three quick crackles.
+x = np.zeros(int(0.45 * R))
+for k in range(3):
+    tc = t(0.09)
+    c = rng.normal(size=len(tc)) * np.exp(-tc * 45) * (rng.random(len(tc)) > 0.55)
+    s0 = int((0.01 + k * 0.11) * R)
+    x[s0 : s0 + len(c)] += c * (1 - k * 0.2)
+save2("crunch", bandpass(x, 0.06, 0.5), peak=0.6)
+
+# Applause: hundreds of single claps (short bright noise bursts), swelling and fading.
+L = int(4.5 * R)
+x = np.zeros(L)
+n_claps = 900
+for k in range(n_claps):
+    s0 = int(rng.random() * (L - 600))
+    ln = int(R * (0.006 + rng.random() * 0.006))
+    c = rng.normal(size=ln) * np.exp(-np.arange(ln) / (ln / 4)) * (0.4 + rng.random() * 0.6)
+    x[s0 : s0 + ln] += c
+x = bandpass(x, 0.03, 0.45)
+tt = np.arange(L) / R
+x *= np.minimum(1, tt / 0.6) * np.minimum(1, (4.5 - tt) / 1.4)
+save2("applause", reverb(x, 1.4, 0.35), peak=0.6)
+
+# Underwater bubbles: little rising blips.
+x = np.zeros(int(2.0 * R))
+for k in range(14):
+    tc = t(0.08)
+    f = (300 + rng.random() * 500) * (1 + tc * 12)
+    b = np.sin(2 * np.pi * np.cumsum(f) / R) * np.sin(np.pi * tc / 0.08)
+    s0 = int(rng.random() * (len(x) - len(tc)))
+    x[s0 : s0 + len(tc)] += b * (0.4 + rng.random() * 0.6)
+save2("bubbles", reverb(x, 0.8, 0.3), peak=0.45)
