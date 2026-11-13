@@ -536,7 +536,7 @@ export const Honesty: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				frame={frame}
 				dur={dur}
 				lines={lines}
-				angles={[W(0, -2.8, 6.6, 0, 10), {at: [0.2, 1.7, -3.9], dist: 2.8, pitch: 10, yaw: 4}, {at: [0.45, 1.15, -3.8], dist: 1.6, yaw: -18, pitch: 22, fov: 32}, {at: [0.4, 1.5, -3.6], dist: 4.0, yaw: 25, pitch: 6}]}
+				angles={[W(0, -2.8, 6.6, 0, 10), {at: [0.2, 1.7, -3.9], dist: 2.8, pitch: 10, yaw: 4}, {at: [0.45, 1.15, -3.8], dist: 1.6, yaw: -18, pitch: 22, fov: 32}, {at: [0.0, 1.5, -3.6], dist: 4.0, yaw: -28, pitch: 6}]}
 				light={LIGHT.room}
 				bg={BG.room}
 				far={

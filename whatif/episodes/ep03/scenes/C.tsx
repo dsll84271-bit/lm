@@ -296,7 +296,7 @@ export const Nerves: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={
 					back
-						? [{at: [2.4, 1.3, -0.6], dist: 4.4, yaw: 72, pitch: 6}, {at: [hero[0], 1.32, hero[2]], dist: 2.3, yaw: -57, pitch: 3, fov: 30}]
+						? [{at: [hero[0], 1.15, hero[2]], dist: 3.6, yaw: -50, pitch: 4}, {at: [hero[0], 1.32, hero[2]], dist: 2.3, yaw: -57, pitch: 3, fov: 30}]
 						: [W(0, -1.6, 7.2, 0, 10), {at: [-1.2, 1.45, -1.4], dist: 2.3, yaw: 70, pitch: 4, fov: 30}, {at: [1.4, 1.3, -1.6], dist: 3.4, yaw: -70, pitch: 6}, {at: [0, 1.3, -1.5], dist: 6, yaw: -10, pitch: 8}]
 				}
 				light={back ? LIGHT.stageDark : LIGHT.lab}
@@ -329,7 +329,7 @@ export const Nerves: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					back ? (
 						<group>
 							<Audience3D z0={2.2} frame={frame} rows={8} cols={22} />
-							<Hero3D position={hero} turn={-1.0} ghost={1} face="neutral" look={[-0.6, 0]} />
+							<Hero3D position={hero} turn={-1.0} ghost={1} face="neutral" look={[-0.6, 0]} aura="#C9B8FF" />
 						</group>
 					) : (
 						<group>
@@ -444,7 +444,7 @@ export const StageScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				near={
 					<group>
 						<Hero3D who={P3.teacher} position={[-4.4, 0, -0.6]} turn={0.9} face="happy" armL={[40, 120]} reachL={40} talk={frame > called && frame < called + 40 ? 0.5 : 0} />
-						<Hero3D position={you} turn={turn} ghost={1} walk={arrived ? undefined : frame / 15} face={frame > dry ? 'scared' : 'neutral'} armR={arrived ? MIC_ARM : [20, 60]} reachR={arrived ? MIC_REACH : 30} look={frame > laughs ? [0.3, -0.4] : [0, 0]} />
+						<Hero3D position={you} turn={turn} ghost={1} aura="#FFE8B0" walk={arrived ? undefined : frame / 15} face={frame > dry ? 'scared' : 'neutral'} armR={arrived ? MIC_ARM : [20, 60]} reachR={arrived ? MIC_REACH : 30} look={frame > laughs ? [0.3, -0.4] : [0, 0]} />
 						<Mic3D at={mic} rot={arrived ? [0.35, 0, 0.15] : [0, 0, 0]} />
 					</group>
 				}
@@ -502,7 +502,7 @@ export const Appear: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				far={<Hall frame={frame} up={up} clap={frame > claps - 4} />}
 				near={
 					<group>
-						<Hero3D position={you} ghost={g} face={frame > claps ? 'happy' : singing ? (frame > chorus ? 'happy' : 'determined') : frame > off ? 'determined' : 'scared'} talk={singing ? 0.35 + Math.abs(Math.sin(frame * 0.35)) * 0.4 : 0} armR={frame > forYou ? [100, 150] : MIC_ARM} reachR={frame > forYou ? 0 : MIC_REACH} armL={frame > chorus && singing ? [60 + Math.sin(frame * 0.1) * 20, 100] : frame > forYou ? [100, 150] : undefined} blink={frame > forYou + 10 ? 1 : undefined} />
+						<Hero3D position={you} ghost={g} aura={g > 0.3 ? '#FFE8B0' : undefined} face={frame > claps ? 'happy' : singing ? (frame > chorus ? 'happy' : 'determined') : frame > off ? 'determined' : 'scared'} talk={singing ? 0.35 + Math.abs(Math.sin(frame * 0.35)) * 0.4 : 0} armR={frame > forYou ? [100, 150] : MIC_ARM} reachR={frame > forYou ? 0 : MIC_REACH} armL={frame > chorus && singing ? [60 + Math.sin(frame * 0.1) * 20, 100] : frame > forYou ? [100, 150] : undefined} blink={frame > forYou + 10 ? 1 : undefined} />
 						{frame <= forYou ? <Mic3D at={mic} rot={[0.35, 0, 0.15]} /> : <Mic3D at={handAt(you, 0, [100, 150], 0, 1)} rot={[0, 0, 0.3]} />}
 						{burst > 0 && burst < 1 ? <T shape={{kind: 'torus', r: 0.4 + burst * 2.2, tube: 0.04}} color="#FFF3C4" position={[0, 0.9, -1.0]} rotation={[Math.PI / 2, 0, 0]} opacity={1 - burst} outline={0} /> : null}
 						{burst > 0 && burst < 1

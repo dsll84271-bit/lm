@@ -157,8 +157,8 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 				: null}
 			{aura ? (
 				<mesh position={[0, 0.9, -0.3]}>
-					<circleGeometry args={[0.9, 48]} />
-					<meshBasicMaterial color={aura} transparent opacity={0.35 * opacity} toneMapped={false} />
+					<circleGeometry args={[1.05, 48]} />
+					<meshBasicMaterial color={aura} map={softDisc()} transparent opacity={0.55 * opacity} depthWrite={false} toneMapped={false} />
 				</mesh>
 			) : null}
 			{/* legs and trainers */}
@@ -234,6 +234,25 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 		</group>
 		</Fade.Provider>
 	);
+};
+
+let soft: THREE.CanvasTexture | null = null;
+/** A white disc that fades to nothing at its edge (for auras). */
+const softDisc = () => {
+	if (!soft) {
+		const c = document.createElement('canvas');
+		c.width = 128;
+		c.height = 128;
+		const x = c.getContext('2d')!;
+		const g = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+		g.addColorStop(0, 'rgba(255,255,255,1)');
+		g.addColorStop(0.55, 'rgba(255,255,255,0.75)');
+		g.addColorStop(1, 'rgba(255,255,255,0)');
+		x.fillStyle = g;
+		x.fillRect(0, 0, 128, 128);
+		soft = new THREE.CanvasTexture(c);
+	}
+	return soft;
 };
 
 let q: THREE.CanvasTexture | null = null;

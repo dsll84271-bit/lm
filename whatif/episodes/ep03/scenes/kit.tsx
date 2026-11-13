@@ -54,8 +54,8 @@ export const LIGHT: Record<string, Light3> = {
 	sea: {sky: '#7FD8FF', ground: '#0E3A5A', ambient: 1.2, sun: {from: [0, 10, 3], color: '#CFF4FF', intensity: 2.2}, rim: {from: [-4, 3, -5], color: '#7FFFE0', intensity: 1.8}, fog: {color: '#1E6A9A', near: 5, far: 22}},
 	greek: {sky: '#BFE6FF', ground: '#B89A6A', ambient: 1.35, sun: {from: [-6, 9, 6], color: '#FFF0D0', intensity: 3}, rim: {from: [6, 4, -8], color: '#FFD0A0', intensity: 1.4}, fog: {color: '#D8ECFA', near: 20, far: 60}},
 	palace: {sky: '#FFD8A0', ground: '#5A3A2A', ambient: 1.1, sun: {from: [3, 7, 5], color: '#FFE0B0', intensity: 2.4}, rim: {from: [-4, 4, -6], color: '#FFB060', intensity: 2}, points: [{at: [0, 3, 0], color: '#FFB060', intensity: 5}]},
-	stage: {sky: '#5A4AA0', ground: '#140E30', ambient: 0.85, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 2.6}, rim: {from: [0, 4, -6], color: '#FF4FD8', intensity: 2.2}, points: [{at: [0, 3.2, 1.2], color: '#FFF0C8', intensity: 14}]},
-	stageDark: {sky: '#3A2E70', ground: '#0A0820', ambient: 0.6, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 1.8}, rim: {from: [0, 4, -6], color: '#7F5AF0', intensity: 2}, points: [{at: [0, 3.2, 1.2], color: '#FFF0C8', intensity: 12}, {at: [4.4, 2.6, 0.5], color: '#C9B8FF', intensity: 5}]},
+	stage: {sky: '#5A4AA0', ground: '#140E30', ambient: 0.85, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 2.6}, rim: {from: [0, 4, -6], color: '#FF4FD8', intensity: 2.2}, points: [{at: [0, 3.2, 1.2], color: '#FFF0C8', intensity: 14}, {at: [0, 1.7, 1.6], color: '#FFF6E8', intensity: 9}]},
+	stageDark: {sky: '#3A2E70', ground: '#0A0820', ambient: 0.6, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 1.8}, rim: {from: [0, 4, -6], color: '#7F5AF0', intensity: 2}, points: [{at: [0, 3.2, 1.2], color: '#FFF0C8', intensity: 12}, {at: [0, 1.7, 1.6], color: '#E8E0FF', intensity: 8}, {at: [4.4, 2.6, 0.5], color: '#C9B8FF', intensity: 6}]},
 	void: {sky: '#7F5AF0', ground: '#140E38', ambient: 1.0, sun: {from: [2, 5, 5], color: '#FFFFFF', intensity: 2.2}, rim: {from: [-3, 3, -4], color: '#7F5AF0', intensity: 3}},
 };
 

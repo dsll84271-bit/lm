@@ -748,7 +748,7 @@ export const Staff: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				overlay={(cam) => (
 					<>
-						<Thought cam={cam} head={[-1.15, 2.3, -2.05]} text="Zzz..." frame={frame} at={maths} size={40} />
+						<Thought cam={cam} head={[-0.75, 1.85, -2.05]} text="Zzz..." frame={frame} at={maths} size={40} />
 					</>
 				)}
 			/>

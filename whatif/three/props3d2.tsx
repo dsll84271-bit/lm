@@ -672,7 +672,7 @@ export const HonestyBox3D: React.FC<{at: V3}> = ({at}) => (
 		<Box size={[0.16, 0.012, 0.03]} at={[0, 0.265, 0]} color="#140A28" outline={0} />
 		<CanvasPlane w={0.3} h={0.12} px={300} dep="honesty" position={[0, 0.13, 0.135]} draw={(ctx, W, H) => {
 			ctx.fillStyle = '#140A28';
-			ctx.font = `bold ${H * 0.55}px Fredoka, sans-serif`;
+			ctx.font = `bold ${H * 0.36}px Fredoka, sans-serif`;
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'middle';
 			ctx.fillText('HONESTY BOX', W / 2, H / 2);
