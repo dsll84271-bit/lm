@@ -48,7 +48,7 @@ export const Habit: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		const dir = i % 2 ? 1 : -1;
 		const speed = 0.028 + (i % 3) * 0.006;
 		const x = (((frame * speed + i * 2.3) % 18) - 9) * dir;
-		const z = i % 2 ? -1.9 : -0.5;
+		const z = i % 2 ? -2.2 : -1.8;
 		return <Hero3D key={i} who={P3.extras[i]} position={[x, 0, z]} turn={dir * (Math.PI / 2)} walk={frame / 14 + i * 0.3} face={i % 3 ? 'neutral' : 'happy'} lite />;
 	});
 	return (
@@ -93,7 +93,7 @@ export const Seat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const shrug = cue(l0, 'shrugs');
 	const ages = cue(l0, "Haven't seen");
 	const behind = cue(l0, "You're standing");
-	const you: V3 = [0.5, 0, -3.15];
+	const you: V3 = [0.95, 0, -3.1];
 	const trayArm: [number, number] = [20, 70];
 	const tray = handAt(you, 0, trayArm, 70, 1);
 	const sh = span(frame, shrug - 4, shrug + 8) * (1 - span(frame, ages + 30, ages + 44));
@@ -103,13 +103,13 @@ export const Seat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				frame={frame}
 				dur={dur}
 				lines={lines}
-				angles={[W(0.2, -2.4, 6.4, 0, 10), {at: [-0.6, 1.3, -2.6], dist: 2.4, yaw: 8, pitch: 4, fov: 32}, {at: [0.45, 1.45, -2.85], dist: 2.8, pitch: 4, yaw: -6}, C(0.5, -3.15, 6)]}
+				angles={[W(0.2, -2.4, 6.4, 0, 10), {at: [-0.6, 1.3, -2.6], dist: 2.4, yaw: 8, pitch: 4, fov: 32}, {at: [0.65, 1.45, -2.85], dist: 3.0, pitch: 6, yaw: -6}, {at: [0.95, 1.4, -3.1], dist: 2.6, pitch: 8, yaw: 4, fov: 32}]}
 				light={LIGHT.day}
 				bg={BG.room}
 				far={
 					<Room3 look={ROOM3.lunch} window={{x: -3, w: 2.4}}>
 						<Desk3 at={[0, 0, -2.0]} w={3.4} d={0.9} color="#E8D8C0" />
-						{[-1.2, -0.6, 0.5, 1.4].map((x) => (
+						{[-1.2, -0.6, 0.3, 1.6].map((x) => (
 							<Chair3 key={x} at={[x, 0, -2.65]} color="#FF8A3D" />
 						))}
 						<Plant3 at={[5, 0, -3.6]} />
@@ -119,9 +119,9 @@ export const Seat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<group>
 						<Hero3D who={P3.friend2} position={[-1.2, 0.46, -2.6]} sit face="happy" armL={[20, 60]} reachL={50} armR={[20, 60]} reachR={50} lite />
 						<Hero3D who={P3.friend3} position={[-0.6, 0.46, -2.6]} sit face="neutral" armR={[20, 60 + Math.sin(frame * 0.3) * 20]} reachR={60} armL={[20, 60]} reachL={50} />
-						<Hero3D who={P3.friend} position={[0.5, 0.46, -2.6]} sit face={frame > shrug ? 'neutral' : 'happy'} armL={mixArm([20, 60], [50, 120], sh)} armR={mixArm([20, 60], [50, 120], sh)} reachL={lerp(50, 10, sh)} reachR={lerp(50, 10, sh)} talk={frame > ages && frame < ages + 40 ? 0.5 : 0} />
-						<Hero3D who={P3.extras[2]} position={[1.4, 0.46, -2.6]} sit face="happy" armL={[20, 60]} reachL={50} armR={[20, 60]} reachR={50} lite />
-						{[-1.2, -0.6, 0.5, 1.4].map((x) => (
+						<Hero3D who={P3.friend} position={[0.3, 0.46, -2.6]} sit face={frame > shrug ? 'neutral' : 'happy'} armL={mixArm([20, 60], [50, 120], sh)} armR={mixArm([20, 60], [50, 120], sh)} reachL={lerp(50, 10, sh)} reachR={lerp(50, 10, sh)} talk={frame > ages && frame < ages + 40 ? 0.5 : 0} />
+						<Hero3D who={P3.extras[2]} position={[1.6, 0.46, -2.6]} sit face="happy" armL={[20, 60]} reachL={50} armR={[20, 60]} reachR={50} lite />
+						{[-1.2, -0.6, 0.3, 1.6].map((x) => (
 							<Box key={x} size={[0.36, 0.03, 0.26]} at={[x, 0.79, -1.9]} color="#C9CED8" />
 						))}
 						<Hero3D position={you} ghost={1} face="sad" armR={trayArm} reachR={70} armL={[20, 70]} reachL={70} look={[0, 0.5]} />
@@ -137,7 +137,7 @@ export const Seat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					return (
 						<>
 							{frame >= seat && frame < shrug + 10 ? <Label text="YOUR SEAT ↓" x={sx} y={sy} frame={frame} at={seat} size={38} color={UI.yellow} /> : null}
-							<Says cam={cam} head={top(0.5, -2.6, 0.46, true)} text="Haven't seen them in ages." frame={frame} at={ages} />
+							<Says cam={cam} head={top(0.3, -2.6, 0.46, true)} text="Haven't seen them in ages." frame={frame} at={ages} />
 						</>
 					);
 				}}
@@ -205,13 +205,13 @@ export const Photos: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					</group>
 				}
 				overlay={(cam) => {
-					const [hx, hy] = project(cam, [0, 1.9, z]);
+					const [hx, hy] = project(cam, [0, 1.8, z]);
 					const p = span(frame, l1.a, l1.a + 10);
 					return (
 						<>
 							<Flash frame={frame} at={flash} />
 							<PhotoFrame frame={frame} at={flash + 4} caption="HAPPY BIRTHDAY!" />
-							{p > 0 ? <div style={{position: 'absolute', left: hx - 120, top: hy - 140, width: 240, height: 240, borderRadius: '50%', border: `7px dashed ${UI.red}`, opacity: p}} /> : null}
+							{p > 0 ? <div style={{position: 'absolute', left: hx - 110, top: hy - 110, width: 220, height: 220, borderRadius: '50%', border: `7px dashed ${UI.red}`, opacity: p}} /> : null}
 							<Label text="CAMERAS NEED LIGHT TOO" x={960} y={200} frame={frame} at={l1.a + 4} size={44} color={UI.yellow} />
 						</>
 					);
@@ -287,7 +287,7 @@ export const Nerves: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		[1.2, -0.7, 2],
 		[1.9, -2.6, 3],
 	];
-	const hero: V3 = [4.3, 0, -1.0];
+	const hero: V3 = [4.5, 0, -1.4];
 	return (
 		<>
 			<Shot3
@@ -296,7 +296,7 @@ export const Nerves: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={
 					back
-						? [{at: [3.4, 1.4, -1.0], dist: 4.6, yaw: 10, pitch: 5}, {at: [hero[0], 1.35, hero[2]], dist: 2.2, yaw: -25, pitch: 2, fov: 30}]
+						? [{at: [2.4, 1.3, -0.6], dist: 4.4, yaw: 72, pitch: 6}, {at: [hero[0], 1.32, hero[2]], dist: 2.3, yaw: -57, pitch: 3, fov: 30}]
 						: [W(0, -1.6, 7.2, 0, 10), {at: [-1.2, 1.45, -1.4], dist: 2.3, yaw: 70, pitch: 4, fov: 30}, {at: [1.4, 1.3, -1.6], dist: 3.4, yaw: -70, pitch: 6}, {at: [0, 1.3, -1.5], dist: 6, yaw: -10, pitch: 8}]
 				}
 				light={back ? LIGHT.stageDark : LIGHT.lab}
@@ -329,7 +329,7 @@ export const Nerves: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					back ? (
 						<group>
 							<Audience3D z0={2.2} frame={frame} rows={8} cols={22} />
-							<Hero3D position={hero} turn={-1.4} ghost={1} face="neutral" look={[-0.8, 0]} />
+							<Hero3D position={hero} turn={-1.0} ghost={1} face="neutral" look={[-0.6, 0]} />
 						</group>
 					) : (
 						<group>
@@ -406,8 +406,8 @@ const Notes: React.FC<{cam: Parameters<typeof project>[0]; from: V3; frame: numb
 	);
 };
 
-const MIC_ARM: [number, number] = [8, -32];
-const MIC_REACH = 118;
+const MIC_ARM: [number, number] = [30, -75];
+const MIC_REACH = 110;
 
 export const StageScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const [l0, l1] = lines;
@@ -426,7 +426,7 @@ export const StageScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const mic: V3 = arrived ? [hand[0] + shake[0], hand[1] + shake[1], hand[2]] : handAt(you, turn, [20, 60], 30, 1);
 	const angles: Angle3[] = [
 		{at: [0, 1.6, -1.5], dist: 14, pitch: 9},
-		{at: [0.4, 1.3, -1.0], dist: 5.2, yaw: 8, pitch: 4},
+		{at: [0.2, 1.3, -1.0], dist: 3.0, yaw: 8, pitch: 5},
 		{at: [0, 1.5, 5.5], dist: 6, yaw: 180, pitch: 6},
 		{at: [0, 1.32, -1.0], dist: 1.9, pitch: 2, fov: 30},
 	];
@@ -445,7 +445,7 @@ export const StageScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<group>
 						<Hero3D who={P3.teacher} position={[-4.4, 0, -0.6]} turn={0.9} face="happy" armL={[40, 120]} reachL={40} talk={frame > called && frame < called + 40 ? 0.5 : 0} />
 						<Hero3D position={you} turn={turn} ghost={1} walk={arrived ? undefined : frame / 15} face={frame > dry ? 'scared' : 'neutral'} armR={arrived ? MIC_ARM : [20, 60]} reachR={arrived ? MIC_REACH : 30} look={frame > laughs ? [0.3, -0.4] : [0, 0]} />
-						<Mic3D at={mic} rot={arrived ? [0.5, 0, 0] : [0, 0, 0]} />
+						<Mic3D at={mic} rot={arrived ? [0.35, 0, 0.15] : [0, 0, 0]} />
 					</group>
 				}
 				overlay={(cam) => {
@@ -503,7 +503,7 @@ export const Appear: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				near={
 					<group>
 						<Hero3D position={you} ghost={g} face={frame > claps ? 'happy' : singing ? (frame > chorus ? 'happy' : 'determined') : frame > off ? 'determined' : 'scared'} talk={singing ? 0.35 + Math.abs(Math.sin(frame * 0.35)) * 0.4 : 0} armR={frame > forYou ? [100, 150] : MIC_ARM} reachR={frame > forYou ? 0 : MIC_REACH} armL={frame > chorus && singing ? [60 + Math.sin(frame * 0.1) * 20, 100] : frame > forYou ? [100, 150] : undefined} blink={frame > forYou + 10 ? 1 : undefined} />
-						{frame <= forYou ? <Mic3D at={mic} rot={[0.5, 0, 0]} /> : <Mic3D at={handAt(you, 0, [100, 150], 0, 1)} rot={[0, 0, 0.3]} />}
+						{frame <= forYou ? <Mic3D at={mic} rot={[0.35, 0, 0.15]} /> : <Mic3D at={handAt(you, 0, [100, 150], 0, 1)} rot={[0, 0, 0.3]} />}
 						{burst > 0 && burst < 1 ? <T shape={{kind: 'torus', r: 0.4 + burst * 2.2, tube: 0.04}} color="#FFF3C4" position={[0, 0.9, -1.0]} rotation={[Math.PI / 2, 0, 0]} opacity={1 - burst} outline={0} /> : null}
 						{burst > 0 && burst < 1
 							? [...Array(14)].map((_, i) => {
@@ -597,7 +597,7 @@ export const Home: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				dur={dur}
 				lines={lines}
 				cuts={[0, photo - 4, magnets - 4, scary - 4]}
-				angles={[W(0.6, -2.8, 6.4, -8, 10), {at: [1.68, 1.62, -3.5], dist: 1.1, pitch: 0, fov: 30}, {at: [1.66, 1.62, -3.5], dist: 0.9, yaw: 12, pitch: 2, fov: 30}, {at: [0.7, 1.3, -2.6], dist: 2.8, yaw: -12, pitch: 3}]}
+				angles={[W(0.6, -2.8, 6.4, -8, 10), {at: [1.68, 1.62, -3.5], dist: 1.45, pitch: 0, fov: 30}, {at: [1.66, 1.62, -3.5], dist: 1.25, yaw: 12, pitch: 2, fov: 30}, {at: [0.7, 1.3, -2.6], dist: 2.8, yaw: -12, pitch: 3}]}
 				light={LIGHT.evening}
 				bg={BG.night}
 				far={
@@ -645,7 +645,7 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				dur={dur}
 				lines={lines}
 				cuts={[0, asks - 4, l1.a - 4, bites - 4, height - 4, only - 4]}
-				angles={[W(0, -1.8, 6.4, 0, 12), C(-1.4, -2.5, 30), {at: [0.25, 0.55, -1.25], dist: 2.6, pitch: -2, yaw: 6}, {at: [0.35, 0.65, -1.25], dist: 1.6, pitch: 0, yaw: 14, fov: 30}, C(0.9, -2.4, -20, 1.9), {at: [0.3, 0.76, -1.2], dist: 1.25, pitch: 0, yaw: -8, fov: 30}]}
+				angles={[W(0, -1.8, 6.4, 0, 12), C(-1.4, -2.5, 30), {at: [0.25, 0.55, -1.25], dist: 2.6, pitch: -2, yaw: 6}, {at: [0.35, 0.65, -1.25], dist: 1.6, pitch: 0, yaw: 14, fov: 30}, C(0.9, -2.4, -20, 1.9), {at: [0.0, 0.8, -0.7], dist: 1.15, pitch: 2, yaw: 24, fov: 30}]}
 				light={LIGHT.morning}
 				bg={BG.room}
 				far={

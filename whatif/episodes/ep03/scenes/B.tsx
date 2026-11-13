@@ -37,6 +37,7 @@ export const Shadow: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			angles={[{at: [0, 0.6, -0.8], dist: 7.5, pitch: 34, yaw: 4}, {at: [0.9, 0.5, -0.8], dist: 3.8, pitch: 42, yaw: 18}, C(0.6, -0.4, 8)]}
 			light={LIGHT.sunny}
 			bg={BG.sky}
+			blur={0}
 			far={<School3 />}
 			near={
 				<group>
@@ -181,11 +182,11 @@ export const Rain: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const man: V3 = [-2.1, 0, -5.4];
 	const fall = span(frame, drops, drops + 14);
 	const streaks: React.ReactNode[] = [];
-	for (let i = 0; i < 240; i++) {
+	for (let i = 0; i < 320; i++) {
 		const x = ((i * 37.3) % 18) - 9;
 		const z = ((i * 13.7) % 12) - 9;
 		const y = 7 - ((frame * 0.5 + i * 0.83) % 7);
-		streaks.push(<Glow key={i} shape={{kind: 'box', w: 0.012, h: 0.32, d: 0.012}} color="#DCEBFF" position={[x, y, z]} opacity={0.55} />);
+		streaks.push(<Glow key={i} shape={{kind: 'box', w: 0.022, h: 0.42, d: 0.022}} color="#E8F2FF" position={[x, y, z]} opacity={0.8} />);
 	}
 	return (
 		<>
@@ -193,7 +194,7 @@ export const Rain: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				frame={frame}
 				dur={dur}
 				lines={lines}
-				angles={[W(-0.6, -4.2, 8.2, 0, 8), {at: [you[0], 1.1, you[2]], dist: 3.4, yaw: -55, pitch: 6}, C(man[0], man[2], 30), {at: [you[0] - 0.3, 1.1, you[2]], dist: 4.2, yaw: -25, pitch: 4}]}
+				angles={[{at: [you[0] - 0.4, 1.1, you[2]], dist: 5.4, yaw: -8, pitch: 6}, {at: [you[0], 1.15, you[2]], dist: 2.9, yaw: -55, pitch: 6}, C(man[0], man[2], 30), {at: [you[0] - 0.3, 1.15, you[2]], dist: 3.4, yaw: -25, pitch: 4}]}
 				light={LIGHT.rain}
 				bg={BG.rain}
 				far={
@@ -216,11 +217,11 @@ export const Rain: React.FC<ShotProps> = ({frame, dur, lines}) => {
 							const t = ((frame * 0.03 + i * 0.37) % 1);
 							return <T key={i} shape={{kind: 'torus', r: 0.1 + t * 0.4, tube: 0.01}} color="#DCEBFF" position={[-3 + i * 1.6, 0.02, 0.4 + (i % 2) * 1.4]} rotation={[Math.PI / 2, 0, 0]} opacity={1 - t} outline={0} />;
 						})}
-						<Hero3D position={you} turn={turn} ghost={1 - wet * 0.3} face={frame > drops ? 'smug' : 'sad'} walk={frame / 15} shimmer={false} />
+						<Hero3D position={you} turn={turn} ghost={1 - wet * 0.42} face={frame > drops ? 'smug' : 'sad'} walk={frame / 15} shimmer={false} />
 						<group position={you} rotation={[0, turn, 0]}>
 							{DROPS.map((d, i) => {
 								const on = span(frame, lands + (i % 23) * 2, lands + (i % 23) * 2 + 4);
-								return on > 0 ? <Glow key={i} shape={{kind: 'sphere', r: 0.022, seg: 8}} color="#E8F6FF" position={[d[0], d[1] + Math.abs(Math.cos((frame / 15) * Math.PI * 2)) * 0.03, d[2]]} opacity={on * (0.7 + 0.3 * Math.sin(frame * 0.3 + i))} /> : null;
+								return on > 0 ? <Glow key={i} shape={{kind: 'sphere', r: 0.032, seg: 8}} color="#E8F6FF" position={[d[0], d[1] + Math.abs(Math.cos((frame / 15) * Math.PI * 2)) * 0.03, d[2]]} opacity={on * (0.7 + 0.3 * Math.sin(frame * 0.3 + i))} /> : null;
 							})}
 						</group>
 						<Hero3D who={P3.man} position={man} turn={0.6} face={frame > drops ? 'shocked' : 'neutral'} armR={frame < drops ? [40, 150] : [130, 200]} reachR={frame < drops ? 20 : 0} armL={frame > drops ? [130, 200] : undefined} />
@@ -289,7 +290,7 @@ const drawThermal = (ctx: CanvasRenderingContext2D, W2: number, H: number) => {
 const Museum: React.FC<{hot: boolean; frame: number}> = ({hot, frame}) => {
 	const c = (normal: string, heat: string) => (hot ? heat : normal);
 	return (
-		<Room3 look={hot ? {wall: '#1A0E5A', floor: '#22146A', trim: '#2A1A7A'} : {wall: '#3A3A7A', floor: '#C9C2D8', trim: '#7F5AF0'}}>
+		<Room3 look={hot ? {wall: '#0E0638', floor: '#140A48', trim: '#1E1060'} : {wall: '#3A3A7A', floor: '#C9C2D8', trim: '#7F5AF0'}}>
 			<Screen3 at={[0, 2.35, -4.36]} w={3.4} h={1.9} color={c('#1A0E5A', '#2A1A7A')} />
 			{!hot ? <CanvasPlane w={3.4} h={1.9} px={680} dep="thermal" position={[0, 2.35, -4.29]} draw={drawThermal} /> : null}
 			<CanvasPlane w={2.2} h={0.36} px={560} dep={`sign${hot}`} position={[0, 3.6, -4.36]} draw={(ctx, W2, H) => {
@@ -346,11 +347,11 @@ export const Heat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [0, 1.1, -1.3], dist: 5.6, yaw: 180, pitch: 4},
 		{at: [YOU_HEAT[0], 1.15, YOU_HEAT[2]], dist: 2.6, yaw: 180, pitch: 3, fov: 30},
 		{at: [0, 1.1, -1.3], dist: 5, yaw: 165, pitch: 6},
-		C(YOU_HEAT[0], YOU_HEAT[2], 0),
+		{at: [YOU_HEAT[0], 1.3, YOU_HEAT[2]], dist: 1.9, yaw: 0, pitch: 2, fov: 30},
 		{at: [0.2, 1.1, -1.3], dist: 4.6, yaw: 195, pitch: 5},
 		{at: [YOU_HEAT[0], 1.15, YOU_HEAT[2]], dist: 2.3, yaw: 180, pitch: 2, fov: 30},
 		{at: [2.6, 1.35, -2.6], dist: 3.2, yaw: -8, pitch: 12},
-		{at: [3.1, 1.25, -2.6], dist: 1.5, yaw: 12, pitch: 14, fov: 30},
+		{at: [3.8, 1.2, -2.6], dist: 1.7, yaw: 25, pitch: 14, fov: 30},
 		{at: [2.8, 1.2, -2.6], dist: 2.2, yaw: 0, pitch: 10, fov: 30},
 	];
 	let i = 0;
@@ -382,18 +383,18 @@ export const Heat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				near={
 					<group>
 						{VISITORS.map(([x, z, k]) => (
-							<Hero3D key={k} who={hot ? [HOT.a, HOT.b, HOT.c][k] : P3.extras[k + 2]} position={[x, 0, z]} turn={Math.PI} face="happy" aura={hot ? '#FF6A2A' : undefined} armR={k === 1 ? [100, 150] : undefined} lite />
+							<Hero3D key={k} who={hot ? [HOT.a, HOT.b, HOT.c][k] : P3.extras[k + 2]} position={[x, 0, z]} turn={Math.PI} face="happy" armR={k === 1 ? [100, 150] : undefined} lite />
 						))}
-						<Hero3D who={hot ? HOT.you : undefined} position={YOU_HEAT} turn={youTurn} ghost={hot ? 0 : 1} aura={hot ? '#FF6A2A' : undefined} face={hot ? 'shocked' : 'smug'} armL={hot ? [70, 120] : undefined} armR={hot ? [70, 120] : undefined} />
+						<Hero3D who={hot ? HOT.you : undefined} position={YOU_HEAT} turn={youTurn} ghost={hot ? 0 : 1} face={hot ? 'shocked' : 'smug'} armL={hot ? [70, 120] : undefined} armR={hot ? [70, 120] : undefined} />
 						{hot && snake ? (
 							<group position={[2.7, 0.9, -2.6]}>
-								<Snake3D at={[0, 0.12, 0]} frame={frame} />
+								<Snake3D at={[0, 0.12, 0]} frame={frame} cold />
 							</group>
 						) : null}
 					</group>
 				}
 				overlay={(cam) => {
-					const pit = project(cam, [3.2, 1.2, -2.5]);
+					const pit = project(cam, [3.95, 1.2, -2.6]);
 					return (
 						<>
 							{hot && !snake ? <ThermalHud frame={frame} /> : null}
@@ -403,7 +404,7 @@ export const Heat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 							<Label text="OUR EYES CAN'T SEE IT" x={960} y={880} frame={frame} at={eyesCant} until={camCan - 4} size={44} />
 							<Label text="TO A HEAT CAMERA: NOT INVISIBLE" x={960} y={880} frame={frame} at={notInv} until={l2.a - 4} size={44} color={UI.yellow} />
 							<Big text="PIT VIPER" x={960} y={240} size={96} frame={frame} at={vipers} until={mouse - 4} color={UI.green} />
-							{frame >= vipers + 10 && frame < mouse - 4 ? <Label text="← HEAT-SENSING PITS" x={pit[0] + 260} y={pit[1]} frame={frame} at={vipers + 10} size={38} color={UI.yellow} /> : null}
+							{frame >= vipers + 10 && frame < mouse - 4 ? <Label text="← HEAT-SENSING PITS" x={pit[0] + 250} y={pit[1] - 60} frame={frame} at={vipers + 10} size={38} color={UI.yellow} /> : null}
 							<Label text="IT FINDS WARM PREY IN THE DARK" x={960} y={880} frame={frame} at={mouse} size={42} color={UI.orange} />
 						</>
 					);
@@ -527,7 +528,7 @@ export const Honesty: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const three = cue(l1, 'nearly three times');
 	const notReal = cue(l1, 'Not real eyes');
 	const eyesOn = frame >= eyes;
-	const payer: V3 = [0.5, 0, -3.15];
+	const payer: V3 = [1.2, 0, -3.15];
 	const drop = eyesOn ? (frame - eyes) % 50 : 999;
 	return (
 		<>
@@ -560,7 +561,7 @@ export const Honesty: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				near={
 					<group>
-						<Hero3D who={P3.scientist} position={payer} turn={Math.PI + 0.2} face={eyesOn ? 'shocked' : 'neutral'} armR={drop < 20 ? [50, 90] : [14, 10]} reachR={drop < 20 ? 60 : 0} look={[0, -0.8]} />
+						<Hero3D who={P3.scientist} position={payer} turn={-2.29} face={eyesOn ? 'shocked' : 'neutral'} armR={drop < 20 ? [50, 90] : [14, 10]} reachR={drop < 20 ? 60 : 0} look={[0, -0.8]} />
 						<Hero3D who={P3.extras[5]} position={[-2.2, 0, -2.4]} turn={0.4} face="happy" armR={[70, 140]} reachR={30} lite />
 						{drop < 26 ? <T shape={{kind: 'cyl', r: 0.04, h: 0.01}} color="#FFD84A" position={[0.45, lerp(1.4, 1.24, span(drop, 12, 22)), -3.82]} rotation={[Math.PI / 2, 0, 0]} outline={0.004} /> : null}
 					</group>
@@ -623,7 +624,7 @@ export const Gyges: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				angles={
 					palace
-						? [W(0, -2.2, 8, 0, 10), {at: [shep[0], 1.3, shep[2]], dist: 3, yaw: 20, pitch: 6}, C(0.2, -1.6, -10), {at: [0.2, 1.5, -1.6], dist: 2.4, pitch: 4, fov: 30}]
+						? [W(0.2, -2, 8.5, 0, 10), {at: [shep[0], 1.6, shep[2]], dist: 3.8, yaw: 18, pitch: 6}, {at: [0, 1.8, -2.4], dist: 6, yaw: -10, pitch: 8}]
 						: [W(0, -1.5, 9, 0, 8), C(0, -1, -15), {at: [0.3, 0.4, -0.5], dist: 1.6, yaw: -10, pitch: 30, fov: 32}, M(0, -1, 10)]
 				}
 				light={palace ? LIGHT.palace : LIGHT.greek}
@@ -821,7 +822,7 @@ export const Octopus: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				frame={frame}
 				dur={dur}
 				lines={lines}
-				angles={[W(0, -0.6, 6.4, 0, 14), {at: [0, 0.75, -0.5], dist: 2.6, yaw: 15, pitch: 12}, {at: [0, 0.85, -0.5], dist: 2.0, yaw: -20, pitch: 8, fov: 32}, {at: [0, 0.7, -0.6], dist: 4.2, yaw: 8, pitch: 10}]}
+				angles={[W(0, -0.6, 6.4, 0, 14), {at: [0, 0.75, -0.5], dist: 3.8, yaw: 15, pitch: 12}, {at: [0, 0.8, -0.5], dist: 3.2, yaw: -20, pitch: 8, fov: 32}, {at: [0, 0.7, -0.6], dist: 4.2, yaw: 8, pitch: 10}]}
 				light={LIGHT.sea}
 				bg={BG.sea}
 				far={

@@ -96,8 +96,8 @@ export const PhotoFrame: React.FC<{frame: number; at: number; caption: string}> 
 	}
 	return (
 		<AbsoluteFill style={{pointerEvents: 'none', transform: `rotate(${-2 * p}deg) scale(${1 - 0.06 * p})`}}>
-			<div style={{position: 'absolute', inset: 0, border: '46px solid #FFFDF6', borderBottomWidth: 170, boxShadow: '0 0 0 2000px rgba(20,10,40,0.5)', opacity: p}} />
-			<div style={{position: 'absolute', left: 0, right: 0, bottom: 52, textAlign: 'center', fontFamily: FONT, fontWeight: 700, fontSize: 64, color: '#2A2350', opacity: p}}>{caption}</div>
+			<div style={{position: 'absolute', left: 150, right: 150, top: 150, bottom: 150, border: '34px solid #FFFDF6', borderBottomWidth: 120, boxShadow: '0 0 0 2000px rgba(20,10,40,0.62), 0 20px 50px rgba(0,0,0,0.5)', opacity: p}} />
+			<div style={{position: 'absolute', left: 0, right: 0, bottom: 170, textAlign: 'center', fontFamily: FONT, fontWeight: 700, fontSize: 60, color: '#2A2350', opacity: p}}>{caption}</div>
 		</AbsoluteFill>
 	);
 };
@@ -143,8 +143,8 @@ export const Vignette: React.FC<{strength: number}> = ({strength}) => (
 );
 
 /** H.G. Wells's 1897 novel: an old clothbound cover, with a floating hat and glasses. */
-export const Book: React.FC<{frame: number; at: number}> = ({frame, at}) => {
-	const p = pop(frame, at, 180);
+export const Book: React.FC<{frame: number; at: number; until?: number}> = ({frame, at, until}) => {
+	const p = pop(frame, at, 180) * (until === undefined ? 1 : 1 - span(frame, until, until + 10));
 	if (p <= 0.01) {
 		return null;
 	}

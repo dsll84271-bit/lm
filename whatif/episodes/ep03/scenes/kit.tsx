@@ -48,15 +48,16 @@ export const LIGHT: Record<string, Light3> = {
 	evening: {sky: '#FFB890', ground: '#3A2A50', ambient: 1.15, sun: {from: [-4, 4, 5], color: '#FFC8A0', intensity: 2.2}, rim: {from: [4, 4, -6], color: '#9F8AFF', intensity: 2}, points: [{at: [0, 2.4, -1], color: '#FFD9A0', intensity: 4}]},
 	rain: {sky: '#9AA8C8', ground: '#3A3A50', ambient: 1.25, sun: {from: [-3, 8, 5], color: '#DCE6F8', intensity: 1.8}, rim: {from: [5, 4, -6], color: '#9FD0FF', intensity: 2}, fog: {color: '#8A98B8', near: 10, far: 40}},
 	museum: {sky: '#E8E0FF', ground: '#4A4060', ambient: 1.3, sun: {from: [2, 7, 6], color: '#FFF4E8', intensity: 2.4}, rim: {from: [-5, 4, -6], color: '#FF8AD8', intensity: 1.6}},
-	thermal: {sky: '#6A4AFF', ground: '#120A40', ambient: 1.4, sun: {from: [0, 6, 6], color: '#FFFFFF', intensity: 1.6}},
+	thermal: {sky: '#FFF0D0', ground: '#FF9A50', ambient: 2.0, sun: {from: [0, 6, -6], color: '#FFFFFF', intensity: 1.4}},
 	lab: {sky: '#E8F4FF', ground: '#8A94A8', ambient: 1.5, sun: {from: [3, 7, 5], color: '#FFFFFF', intensity: 2.4}, rim: {from: [-5, 3, -5], color: '#7FE0FF', intensity: 1.6}},
 	jungle: {sky: '#4A7AB0', ground: '#0E2A20', ambient: 1.0, sun: {from: [-3, 6, 4], color: '#CFE8FF', intensity: 1.8}, rim: {from: [4, 3, -4], color: '#7CF2A0', intensity: 2.6}, fog: {color: '#123A38', near: 6, far: 20}},
 	sea: {sky: '#7FD8FF', ground: '#0E3A5A', ambient: 1.2, sun: {from: [0, 10, 3], color: '#CFF4FF', intensity: 2.2}, rim: {from: [-4, 3, -5], color: '#7FFFE0', intensity: 1.8}, fog: {color: '#1E6A9A', near: 5, far: 22}},
 	greek: {sky: '#BFE6FF', ground: '#B89A6A', ambient: 1.35, sun: {from: [-6, 9, 6], color: '#FFF0D0', intensity: 3}, rim: {from: [6, 4, -8], color: '#FFD0A0', intensity: 1.4}, fog: {color: '#D8ECFA', near: 20, far: 60}},
 	palace: {sky: '#FFD8A0', ground: '#5A3A2A', ambient: 1.1, sun: {from: [3, 7, 5], color: '#FFE0B0', intensity: 2.4}, rim: {from: [-4, 4, -6], color: '#FFB060', intensity: 2}, points: [{at: [0, 3, 0], color: '#FFB060', intensity: 5}]},
-	stage: {sky: '#5A4AA0', ground: '#140E30', ambient: 0.75, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 2.6}, rim: {from: [0, 4, -6], color: '#FF4FD8', intensity: 2.2}},
-	stageDark: {sky: '#3A2E70', ground: '#0A0820', ambient: 0.55, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 1.8}, rim: {from: [0, 4, -6], color: '#7F5AF0', intensity: 2}},
+	stage: {sky: '#5A4AA0', ground: '#140E30', ambient: 0.85, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 2.6}, rim: {from: [0, 4, -6], color: '#FF4FD8', intensity: 2.2}, points: [{at: [0, 3.2, 1.2], color: '#FFF0C8', intensity: 14}]},
+	stageDark: {sky: '#3A2E70', ground: '#0A0820', ambient: 0.6, sun: {from: [0, 7, 6], color: '#FFF3D6', intensity: 1.8}, rim: {from: [0, 4, -6], color: '#7F5AF0', intensity: 2}, points: [{at: [0, 3.2, 1.2], color: '#FFF0C8', intensity: 12}, {at: [4.4, 2.6, 0.5], color: '#C9B8FF', intensity: 5}]},
 	void: {sky: '#7F5AF0', ground: '#140E38', ambient: 1.0, sun: {from: [2, 5, 5], color: '#FFFFFF', intensity: 2.2}, rim: {from: [-3, 3, -4], color: '#7F5AF0', intensity: 3}},
 };
 
-export const BG = {sky: '#9FD0FA', room: '#2A1E50', night: '#0E0A2E', void: '#0E0A2E', rain: '#6A7898', sea: '#0E4A7A', jungle: '#0A1E1A', greek: '#9FD4F8', stage: '#0A0820', thermal: '#0E0640'};
+export const BG = {
+	studio: '#3E2F96',sky: '#9FD0FA', room: '#2A1E50', night: '#0E0A2E', void: '#0E0A2E', rain: '#6A7898', sea: '#0E4A7A', jungle: '#0A1E1A', greek: '#9FD4F8', stage: '#0A0820', thermal: '#0E0640'};

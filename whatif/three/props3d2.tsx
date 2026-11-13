@@ -197,7 +197,9 @@ export const Octopus3D: React.FC<{at: V3; frame: number; blend: number; rock: st
 // ---------------------------------------------------------------- pit viper
 
 /** A green pit viper coiled in an S, head towards +x, with heat pits and a flicking tongue. */
-export const Snake3D: React.FC<{at: V3; frame: number}> = ({at, frame}) => {
+export const Snake3D: React.FC<{at: V3; frame: number; cold?: boolean}> = ({at, frame, cold = false}) => {
+	const dark = cold ? '#3A3AB8' : '#3E7A2E';
+	const light = cold ? '#5A6AE8' : '#7CC850';
 	const n = 34;
 	const pts = [...Array(n)].map((_, i) => {
 		const t = i / (n - 1);
@@ -208,10 +210,10 @@ export const Snake3D: React.FC<{at: V3; frame: number}> = ({at, frame}) => {
 	return (
 		<group position={at}>
 			{pts.map((p, i) => (
-				<T key={i} shape={{kind: 'sphere', r: 0.06 + Math.sin((i / n) * Math.PI) * 0.06, seg: 14}} color={i % 4 === 0 ? '#3E7A2E' : '#7CC850'} position={p} outline={0.006} />
+				<T key={i} shape={{kind: 'sphere', r: 0.06 + Math.sin((i / n) * Math.PI) * 0.06, seg: 14}} color={i % 4 === 0 ? dark : light} position={p} outline={0.006} />
 			))}
 			<group position={[head[0] + 0.12, 0.16, head[2]]}>
-				<T shape={{kind: 'sphere', r: 0.13, seg: 24}} color="#7CC850" scale={[1.5, 0.75, 1.05]} />
+				<T shape={{kind: 'sphere', r: 0.13, seg: 24}} color={light} scale={[1.5, 0.75, 1.05]} />
 				{[-1, 1].map((s) => (
 					<group key={s}>
 						<T shape={{kind: 'sphere', r: 0.035}} color="#FFD84A" position={[0.08, 0.05, s * 0.1]} outline={0.006} />
@@ -629,13 +631,11 @@ export const DogBowl3D: React.FC<{at: V3; label?: boolean}> = ({at}) => (
 	</group>
 );
 
-/** An invisible dog: just its red collar and two little eyes, at dog height, facing +x. */
+/** An invisible dog: just two little eyes, at dog height, facing +x (its collar vanished with it). */
 export const GhostDog3D: React.FC<{at: V3; rot?: number; frame: number; eyes?: number}> = ({at, rot = 0, frame, eyes = 1}) => {
 	const blink = frame % 70 > 66;
 	return (
 		<group position={at} rotation={[0, rot, 0]}>
-			<T shape={{kind: 'torus', r: 0.13, tube: 0.03}} color="#E8453C" position={[0.32, 0.62, 0]} rotation={[0, Math.PI / 2, 0.5]} outline={0.006} />
-			<T shape={{kind: 'cyl', r: 0.04, h: 0.01}} color="#FFD84A" position={[0.36, 0.5, 0]} rotation={[0, 0, Math.PI / 2]} outline={0.003} />
 			{eyes > 0
 				? [-0.1, 0.1].map((z) => (
 						<group key={z} position={[0.6, 0.8, z]} scale={[1, blink ? 0.15 : 1, 1]}>

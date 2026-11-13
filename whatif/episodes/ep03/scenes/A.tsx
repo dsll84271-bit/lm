@@ -56,7 +56,7 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				frame={frame}
 				dur={dur}
 				lines={lines}
-				angles={frame < opens - 6 ? [W(-0.4, -2.8, 6.8, 14, 14), C(-1.0, -3.05, 0, 2.05), {at: [-1.0, 1.1, -2.5], dist: 3.2, yaw: 30, pitch: 22}, C(-1.0, -3.05, -18, 2.05)] : [{at: [0.4, 1.2, -3.2], dist: 6.2, yaw: -12, pitch: 10}, C(2.0, -3.5, -50), C(-1.0, -3.05, 15, 2.05)]}
+				angles={frame < opens - 6 ? [W(-0.4, -2.8, 6.8, 14, 14), C(-1.0, -3.05, 0, 2.05), {at: [-1.0, 1.1, -2.5], dist: 3.2, yaw: 30, pitch: 22}, C(-1.0, -3.05, -18, 2.05)] : [{at: [0.4, 1.2, -3.2], dist: 6.2, yaw: -12, pitch: 10}, C(2.0, -3.5, -50, 1.95), C(-1.0, -3.05, 15, 2.05)]}
 				light={LIGHT.morning}
 				bg={BG.room}
 				far={
@@ -94,8 +94,8 @@ export const Mirror: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const inv = cue(l0, "You're invisible");
 	const almost = l1.a;
 	const you: V3 = [0, 0, -1.0];
-	const armR: [number, number] = [8, -32 + Math.sin(frame * 0.9) * 10];
-	const reachR = 118;
+	const armR: [number, number] = [35, -55 + Math.sin(frame * 0.9) * 9];
+	const reachR = 120;
 	const hand = handAt(you, 0, armR, reachR, 1);
 	const tiles: React.ReactNode[] = [];
 	for (let r = 0; r < 9; r++) {
@@ -111,7 +111,7 @@ export const Mirror: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, cue(l0, 'Just a toothbrush') - 4, almost - 4]}
 				angles={[M(0, -1.0, 0), {at: [0.05, 1.25, -1.0], dist: 2.1, pitch: 2, fov: 32}, {at: [0, 1.34, -1.0], dist: 1.25, pitch: 0, fov: 30, dyaw: 0, ddist: -0.15}]}
-				light={LIGHT.bath}
+				light={{...LIGHT.bath, sun: {from: [0.5, 9, 2.5], color: '#FFFFFF', intensity: 2.4}}}
 				bg="#2A4A5A"
 				far={
 					<group>
@@ -133,7 +133,7 @@ export const Mirror: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				near={
 					<group>
 						<Hero3D position={you} ghost={1} face={frame > almost ? 'smug' : 'neutral'} look={frame > almost ? [Math.sin((frame - almost) * 0.12), 0] : [0, -0.2]} armR={armR} reachR={reachR} armL={[14, 10]} />
-						<Toothbrush3D at={hand} rot={[0, -Math.PI / 2 + 0.4, 0.25]} />
+						<Toothbrush3D at={hand} rot={[0, Math.PI, 0.12]} />
 						<Sink3D at={[0, 0, -0.42]} />
 					</group>
 				}
@@ -248,9 +248,9 @@ export const Eyes: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						: [{at: [0, 1.4, 0], dist: 6.4, pitch: 4, dyaw: 8}, {at: [0.3, 1.4, 0], dist: 3.6, yaw: 28, pitch: 10}, {at: [0, 1.4, 0], dist: 5.0, yaw: -24, pitch: -4}]
 				}
 				light={LIGHT.void}
-				bg={BG.void}
+				bg={ours ? BG.studio : BG.void}
 				blur={0}
-				far={<VoidFloor />}
+				far={<VoidFloor color={ours ? '#2A2070' : undefined} />}
 				near={
 					ours ? (
 						<Hero3D position={you} ghost={1} face={frame > dots ? 'happy' : 'neutral'} look={[Math.sin(frame * 0.05) * 0.6, 0]} />
@@ -306,9 +306,9 @@ export const Glass: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const bends = cue(l1, 'bends');
 	const water = cue(l2, 'sixty percent');
 	const air = cue(l2, 'exactly the way air');
-	const lamp: V3 = [-3.6, 3.0, -0.4];
+	const lamp: V3 = [-3.4, 2.5, -0.6];
 	const apple: V3 = [-1.2, 1.08, 0];
-	const viewer: V3 = [-3.1, 1.25, 1.3];
+	const viewer: V3 = [-2.72, 1.36, 0.85];
 	const p1 = span(frame, appleAt - 6, appleAt + 34);
 	const p2 = span(frame, bounce, bounce + 30);
 	const p3 = span(frame, bends - 30, bends + 30);
@@ -332,11 +332,11 @@ export const Glass: React.FC<ShotProps> = ({frame, dur, lines}) => {
 							: [{at: [1.6, 1.15, 0], dist: 3.6, yaw: 8, pitch: 8}, {at: [1.45, 1.1, 0], dist: 2.3, yaw: -18, pitch: 4}]
 				}
 				light={LIGHT.void}
-				bg={BG.void}
+				bg={BG.studio}
 				blur={0}
 				far={
 					<group>
-						<VoidFloor />
+						<VoidFloor color="#2A2070" />
 						<Box size={[6.4, 0.08, 1.6]} at={[0, 0.75, 0]} color="#C98A5A" />
 						{[-3, 3].map((x) => [-0.65, 0.65].map((z) => <Box key={`${x}${z}`} size={[0.08, 0.75, 0.08]} at={[x, 0.375, z]} color="#8A5A3E" outline={0.01} />))}
 					</group>
@@ -346,12 +346,8 @@ export const Glass: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Glow shape={{kind: 'sphere', r: 0.22}} color="#FFF4B0" position={lamp} />
 						<T shape={{kind: 'cone', r: 0.36, h: 0.4}} color="#2A2350" position={[lamp[0], lamp[1] + 0.22, lamp[2]]} />
 						<Apple at={apple} />
-						{/* a cartoon eye watching the apple */}
-						<group position={viewer} rotation={[0, 2.3, 0]}>
-							<T shape={{kind: 'sphere', r: 0.2}} color="#FFFFFF" outline={0.012} />
-							<T shape={{kind: 'cyl', r: 0.09, h: 0.02}} color="#3FB7E8" position={[0, 0, 0.19]} rotation={[Math.PI / 2, 0, 0]} outline={0} />
-							<T shape={{kind: 'cyl', r: 0.045, h: 0.025}} color="#140A28" position={[0, 0, 0.2]} rotation={[Math.PI / 2, 0, 0]} outline={0} />
-						</group>
+						{/* someone looking at the apple: the red light lands in their eye */}
+						{!third ? <Hero3D who={P3.extras[3]} position={[-3.0, 0, 1.0]} turn={2.1} face="happy" look={[0.6, 0.3]} /> : null}
 						{rays.map(([c, o], i) => (
 							<RayPath key={c} pts={[[lamp[0] + 0.1, lamp[1] - 0.1 + o, lamp[2]], [apple[0] - 0.2 + o, apple[1] + 0.18 + o * 0.5, apple[2] - 0.08]]} p={p1 * (1 - span(frame, l1.a - 10, l1.a))} r={0.03} color={c} opacity={i === 0 || p1 < 1 ? 1 : 0.4} />
 						))}
@@ -400,7 +396,7 @@ export const Frog: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				frame={frame}
 				dur={dur}
 				lines={lines}
-				angles={[{at: [0, 1.25, 0], dist: 4.8, pitch: 10, yaw: 12}, {at: [0.1, 1.33, 0.05], dist: 1.5, yaw: 30, pitch: 12, fov: 30}, {at: [0.05, 1.3, 0], dist: 1.3, yaw: 55, pitch: 28, fov: 30}, {at: [0.1, 1.32, 0], dist: 1.7, yaw: 5, pitch: 6, fov: 30}]}
+				angles={[{at: [0, 1.25, 0], dist: 4.8, pitch: 10, yaw: 12}, {at: [0.1, 1.38, 0.05], dist: 2.9, yaw: 30, pitch: 12, fov: 30}, {at: [0.05, 1.35, 0], dist: 2.5, yaw: 55, pitch: 28, fov: 30}, {at: [0.1, 1.36, 0], dist: 3.1, yaw: 5, pitch: 6, fov: 30}]}
 				light={LIGHT.jungle}
 				bg={BG.jungle}
 				far={
@@ -464,7 +460,9 @@ export const Breakfast: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		[swallow, 1.32],
 		[l2.a, 0.98],
 	]);
-	const book = frame >= l2.a - 2;
+	const hide = cue(l2, 'he has to hide');
+	const book = frame >= l2.a - 2 && frame < hide + 12;
+	const after = frame >= hide + 12;
 	const mumTurn = lerp(Math.PI, 0.95, span(frame, turns - 4, turns + 10));
 	return (
 		<>
@@ -473,7 +471,9 @@ export const Breakfast: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				dur={dur}
 				lines={lines}
 				angles={
-					book
+					after
+						? [{at: [0.4, 1.15, -2.1], dist: 1.9, yaw: -12, pitch: 4, fov: 30}]
+						: book
 						? [{at: [-0.4, 1.2, -2.4], dist: 7.2, pitch: 10, yaw: 8, dyaw: 4}]
 						: frame < l1.a
 							? [W(-0.2, -2.2, 6.6, 6, 12), C(0.4, -2.2, 0, 1.95), {at: [0.62, 1.15, -1.9], dist: 1.9, yaw: 25, pitch: 12, fov: 30}]
@@ -505,7 +505,8 @@ export const Breakfast: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<>
 						<Says cam={cam} head={top(-1.8, -3.2)} text="Cornflakes?! FLOATING?!" frame={frame} at={turns + 10} until={l2.a - 4} />
 						<Label text="⏳ A STOMACH TAKES A FEW HOURS TO EMPTY" x={960} y={880} frame={frame} at={hours} until={l2.a - 4} size={40} />
-						{book ? <Book frame={frame} at={l2.a + 4} /> : null}
+						{book ? <Book frame={frame} at={l2.a + 4} until={hide + 2} /> : null}
+						<Label text="HE HID UNTIL EVERY MEAL WAS DIGESTED" x={960} y={880} frame={frame} at={hide + 14} size={40} color={UI.yellow} />
 					</>
 				)}
 			/>
@@ -589,7 +590,7 @@ export const Register: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				frame={frame}
 				dur={dur}
 				lines={lines}
-				angles={frame < here - 4 ? [W(-1.2, -1.6, 7.6, 8, 12), C(-4.6, -1.0, 90), C(-4.6, -1.0, 75, 1.7, -2)] : [C(0.6, -1.6, -62, 1.95), W(-0.8, -1.4, 7.4, -12, 14), {at: [0.2, 1.2, -1.8], dist: 4.6, yaw: -40, pitch: 10}]}
+				angles={frame < here - 4 ? [W(-1.2, -1.6, 7.6, 8, 12), C(-4.6, -1.0, 90), C(-4.6, -1.0, 75, 1.7, -2)] : [{at: [0.6, 1.4, -1.6], dist: 3.0, yaw: -70, pitch: 28, fov: 32}, W(-0.8, -1.4, 7.4, -12, 14), {at: [0.2, 1.2, -1.8], dist: 4.6, yaw: -40, pitch: 22}]}
 				light={LIGHT.day}
 				bg={BG.room}
 				far={<Classroom />}
@@ -638,7 +639,7 @@ export const Prank: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={
 					outside
 						? [W(0, -1.0, 9, 0, 6), C(-1.1, 0.2, 10)]
-						: [{at: [-5.6, 1.7, -1.9], dist: 3.6, yaw: 78, pitch: 4}, W(-1.6, -1.6, 7.2, 6, 10), {at: [-1.6, 1.3, -2.2], dist: 3.6, yaw: -58, pitch: 6}, {at: [-5.4, 1.6, -1.9], dist: 2.6, yaw: 60, pitch: 2}]
+						: [{at: [-5.5, 1.65, -1.6], dist: 3.6, yaw: 42, pitch: 4}, W(-1.6, -1.6, 7.2, 6, 10), {at: [-1.6, 1.3, -2.2], dist: 3.6, yaw: -58, pitch: 6}, {at: [-5.5, 1.6, -1.6], dist: 2.8, yaw: 35, pitch: 2}]
 				}
 				light={LIGHT.day}
 				bg={BG.sky}
@@ -747,7 +748,7 @@ export const Staff: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				overlay={(cam) => (
 					<>
-						<Thought cam={cam} head={[-1.3, 1.95, -2.05]} text="Zzz..." frame={frame} at={maths} size={40} />
+						<Thought cam={cam} head={[-1.15, 2.3, -2.05]} text="Zzz..." frame={frame} at={maths} size={40} />
 					</>
 				)}
 			/>
