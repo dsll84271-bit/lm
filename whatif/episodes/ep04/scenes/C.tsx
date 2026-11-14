@@ -229,7 +229,7 @@ export const RainScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				)}
 			/>
 			<Sound name="rain" at={0} volume={0.18} loop={mosq} />
-			<Sound name="thud" at={hitAt} volume={0.5} />
+			<Sound name="splash" at={hitAt} volume={0.5} />
 			<Sound name="bubbles" at={carries} volume={0.3} />
 			<Sound name="whoosh" at={slips} volume={0.35} />
 		</>
@@ -614,7 +614,8 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					</>
 				)}
 			/>
-			<Sound name="pop" at={6} volume={0.3} />
+			<Sound name="squeak" at={6} volume={0.4} />
+			<Sound name="squeak" at={waving + 4} volume={0.4} />
 			<Sound name="boom" at={itsMum} volume={0.3} />
 		</>
 	);

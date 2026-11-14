@@ -484,6 +484,8 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			<Sound name="thud" at={slipper + 8} volume={0.6} />
 			<Sound name="boom" at={slipper + 8} volume={0.25} />
 			<Sound name="thud" at={step + 30} volume={0.5} />
+			<Sound name="squeak" at={shout + 4} volume={0.4} />
+			<Sound name="squeak" at={shout + 14} volume={0.35} />
 		</>
 	);
 };
@@ -690,7 +692,7 @@ export const DropScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				)}
 			/>
 			<Sound name="bubbles" at={sinks} volume={0.35} />
-			<Sound name="pop" at={grabs + 30} volume={0.5} />
+			<Sound name="splash" at={grabs + 30} volume={0.35} />
 			<Sound name="chime" at={owe + 4} volume={0.25} />
 		</>
 	);

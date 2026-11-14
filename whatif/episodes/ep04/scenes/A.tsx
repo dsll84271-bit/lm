@@ -96,7 +96,7 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				near={stand > 0.5 ? hero : <Lying at={[you[0], 0.3, you[2] + 0.2]} up={sitUp}>{hero}</Lying>}
 			/>
-			{frame > alarm - 10 ? <Sound name="tick" at={alarm - 10} volume={0.5} loop={shrunk - alarm} /> : null}
+			{frame > alarm - 10 ? <Sound name="ring" at={alarm - 10} volume={0.35} loop={shrunk - alarm} /> : null}
 			<Sound name="swish" at={wrong - 4} volume={0.35} />
 			<Sound name="boom" at={shrunk - 4} volume={0.35} />
 		</>

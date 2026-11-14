@@ -378,3 +378,26 @@ for k in range(14):
     s0 = int(rng.random() * (len(x) - len(tc)))
     x[s0 : s0 + len(tc)] += b * (0.4 + rng.random() * 0.6)
 save2("bubbles", reverb(x, 0.8, 0.3), peak=0.45)
+
+# An alarm clock bell: a hammer striking two bells about 18 times a second (1.5 s, loops).
+L = int(1.5 * R)
+x = np.zeros(L)
+for k in range(27):
+    tc = t(0.12)
+    f0 = 1850 if k % 2 else 2050
+    b = sum(a * np.sin(2 * np.pi * f0 * m * tc) for m, a in [(1, 1.0), (1.51, 0.5), (2.37, 0.3)]) * np.exp(-tc * 30)
+    s0 = int(k * R / 18)
+    e = min(L, s0 + len(b))
+    x[s0:e] += b[: e - s0]
+save2("ring", bandpass(x, 0.02, 0.6), peak=0.5)
+
+# A tiny squeak: a quick rising chirp, very high.
+tc = t(0.18)
+f = 2600 + 2400 * (tc / 0.18) ** 0.7
+x = np.sin(2 * np.pi * np.cumsum(f) / R) * np.sin(np.pi * tc / 0.18) ** 2
+save2("squeak", reverb(x, 0.3, 0.15), peak=0.4)
+
+# A heavy splash: a low thump, then a spray of noise.
+tc = t(0.9)
+x = np.sin(2 * np.pi * 70 * tc) * np.exp(-tc * 12) * 0.8 + rng.normal(size=len(tc)) * np.exp(-tc * 6) * 0.5
+save2("splash", reverb(bandpass(x, 0.005, 0.4), 0.6, 0.25), peak=0.6)
