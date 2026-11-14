@@ -1,0 +1,558 @@
+{
+ "seconds": 501.743,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 14.955,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up, stretch, and look down. There's nothing there. No hands. No feet. Not even your pyjamas. Just the duvet, sitting up by itself.",
+     "start": 0.25,
+     "end": 8.896
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Your mum opens the door, looks straight through you, and sighs. Already up? That's a first.",
+     "start": 9.596,
+     "end": 14.355
+    }
+   ]
+  },
+  {
+   "id": "mirror",
+   "start": 14.955,
+   "end": 24.03,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "In the bathroom mirror, there's no face. No hair. Just a toothbrush, scrubbing away in mid air. You're invisible.",
+     "start": 15.205,
+     "end": 21.613
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Well. Almost.",
+     "start": 22.313,
+     "end": 23.43
+    }
+   ]
+  },
+  {
+   "id": "rules",
+   "start": 24.03,
+   "end": 34.538,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You work out the rules fast. You can switch it on and off, just by thinking about it. Your clothes vanish with you. But anything you pick up doesn't, so it looks like it's floating.",
+     "start": 24.28,
+     "end": 34.038
+    }
+   ]
+  },
+  {
+   "id": "eyes",
+   "start": 34.538,
+   "end": 63.001,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But there's a problem the films never mention. To see anything, your eyes have to catch light. At the back of each one, more than a hundred million tiny cells soak it up and turn it into signals for your brain.",
+     "start": 34.788,
+     "end": 46.956
+    },
+    {
+     "who": "NARRATOR",
+     "text": "If you were truly invisible, light would pass straight through your eyes, and nothing would catch it. A perfectly invisible person would be completely blind.",
+     "start": 47.656,
+     "end": 56.354
+    },
+    {
+     "who": "NARRATOR",
+     "text": "So, in our story, your eyes are the one part that stays. Two little dots, floating at head height.",
+     "start": 57.054,
+     "end": 62.401
+    }
+   ]
+  },
+  {
+   "id": "glass",
+   "start": 63.001,
+   "end": 91.364,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Here's how seeing works. Things look the way they do because of what they do to light. A red apple soaks up most colours and bounces the red back into your eyes.",
+     "start": 63.251,
+     "end": 72.726
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And see-through isn't the same as invisible. A glass of water is see-through, but you can still spot it, because it bends the light that passes through it.",
+     "start": 73.426,
+     "end": 81.908
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You're about sixty percent water. To truly vanish, every part of you would have to bend light exactly the way air does. That's the hard part.",
+     "start": 82.608,
+     "end": 90.864
+    }
+   ]
+  },
+  {
+   "id": "frog",
+   "start": 91.364,
+   "end": 113.153,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Nature has had a go. The glass frog, from the rainforests of Central and South America, has see-through skin. You can watch its heart beat.",
+     "start": 91.614,
+     "end": 99.93
+    },
+    {
+     "who": "NARRATOR",
+     "text": "In two thousand and twenty two, scientists found its trick. While it sleeps, it packs about eighty nine percent of its red blood cells into its liver, and that makes it two to three times more see-through.",
+     "start": 100.63,
+     "end": 112.553
+    }
+   ]
+  },
+  {
+   "id": "breakfast",
+   "start": 113.153,
+   "end": 141.957,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Breakfast is a problem. You're invisible, but the moment you swallow, the food isn't.",
+     "start": 113.403,
+     "end": 118.208
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Your mum turns round to see a mouthful of cornflakes hanging in the air, slowly sliding down. A stomach takes a few hours to empty. That's a long time to be a floating breakfast.",
+     "start": 118.908,
+     "end": 129.942
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Even the very first invisible man had this problem. In H.G. Wells's novel from eighteen ninety seven, he has to hide after every meal, until his food disappears too.",
+     "start": 130.642,
+     "end": 141.357
+    }
+   ]
+  },
+  {
+   "id": "register",
+   "start": 141.957,
+   "end": 153.283,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At school, the teacher takes the register. She reaches your name, looks up at your empty chair, and marks you absent.",
+     "start": 142.207,
+     "end": 148.716
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Here, you say. Thirty heads turn to stare at an empty chair.",
+     "start": 149.416,
+     "end": 152.683
+    }
+   ]
+  },
+  {
+   "id": "prank",
+   "start": 153.283,
+   "end": 166.623,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Which turns out to be the best prank in the world. A pen floats up off a desk and writes, hello, on the board. Half the class screams. The other half films it.",
+     "start": 153.533,
+     "end": 162.513
+    },
+    {
+     "who": "NARRATOR",
+     "text": "For a whole week, your school is convinced it's haunted.",
+     "start": 163.213,
+     "end": 166.023
+    }
+   ]
+  },
+  {
+   "id": "staff",
+   "start": 166.623,
+   "end": 179.729,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At lunch, you finally sneak into the staff room, the one room no pupil has ever seen. It's a huge disappointment. A broken kettle, a mountain of marking, and your maths teacher, fast asleep in a chair.",
+     "start": 166.873,
+     "end": 179.129
+    }
+   ]
+  },
+  {
+   "id": "shadow",
+   "start": 179.729,
+   "end": 188.35,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Outside, you notice something odd. Everyone has a shadow except you. A shadow is just the light someone blocks, and you don't block any.",
+     "start": 179.979,
+     "end": 187.85
+    }
+   ]
+  },
+  {
+   "id": "dog",
+   "start": 188.35,
+   "end": 210.065,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Not everyone is fooled, though. Your dog, Biscuit, lifts his nose, sniffs twice, and trots straight up to you, tail going like mad.",
+     "start": 188.6,
+     "end": 196.282
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Dogs have up to three hundred million smell receptors. You've got about six million. He can't see you. He doesn't need to. To Biscuit, you smell exactly the same as always. Like toast, and trainers.",
+     "start": 196.982,
+     "end": 209.565
+    }
+   ]
+  },
+  {
+   "id": "rain",
+   "start": 210.065,
+   "end": 223.028,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then it rains. Every drop that lands on you shows exactly where you are, until you're a walking, dripping outline of a person. A man at the bus stop drops his umbrella. You take the long way home.",
+     "start": 210.315,
+     "end": 222.528
+    }
+   ]
+  },
+  {
+   "id": "heat",
+   "start": 223.028,
+   "end": 250.393,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At the science museum, there's a heat camera. Everyone on the screen glows orange and yellow. And so do you.",
+     "start": 223.278,
+     "end": 229.588
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Your body sits at about thirty seven degrees, and anything warm gives off infrared light. Our eyes can't see it, but this camera can. To a heat camera, you're not invisible at all.",
+     "start": 230.288,
+     "end": 241.063
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Some snakes do this naturally. Pit vipers have heat sensing pits on their faces, so they can find a warm mouse in total darkness.",
+     "start": 241.763,
+     "end": 249.793
+    }
+   ]
+  },
+  {
+   "id": "canteen",
+   "start": 250.393,
+   "end": 256.646,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then it hits you what else you could do. The canteen. A tray of hot chips. Nobody would ever know.",
+     "start": 250.643,
+     "end": 256.146
+    }
+   ]
+  },
+  {
+   "id": "honesty",
+   "start": 256.646,
+   "end": 276.869,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Here's something scientists found. In two thousand and six, a coffee room at Newcastle University ran on an honesty box. Some weeks, a picture of flowers hung above it. Other weeks, a picture of eyes.",
+     "start": 256.896,
+     "end": 269.645
+    },
+    {
+     "who": "NARRATOR",
+     "text": "In the eyes weeks, people paid nearly three times as much. Not real eyes. Just a picture of them.",
+     "start": 270.345,
+     "end": 276.269
+    }
+   ]
+  },
+  {
+   "id": "gyges",
+   "start": 276.869,
+   "end": 299.182,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "People have wondered about this for a very long time. About two thousand four hundred years ago, the philosopher Plato told a story about a shepherd called Gyges, who found a ring that made him invisible.",
+     "start": 277.119,
+     "end": 288.639
+    },
+    {
+     "who": "NARRATOR",
+     "text": "He used it to sneak into the palace and take the whole kingdom. And Plato asked a simple question. If nobody could ever see what you did, would you still be good?",
+     "start": 289.339,
+     "end": 298.582
+    }
+   ]
+  },
+  {
+   "id": "choice",
+   "start": 299.182,
+   "end": 309.528,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You put the chips down. Then you switch yourself back on, and you pay. The dinner lady smiles at you like she knew all along. Mostly, though, you pay because you'd know.",
+     "start": 299.432,
+     "end": 308.928
+    }
+   ]
+  },
+  {
+   "id": "cloak",
+   "start": 309.528,
+   "end": 333.509,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So could real people ever do this? Scientists have actually built invisibility cloaks. In two thousand and six, a team at Duke University made rings of special material that steered microwaves around a small copper cylinder, so the waves carried on as if it wasn't there.",
+     "start": 309.778,
+     "end": 326.958
+    },
+    {
+     "who": "NARRATOR",
+     "text": "The catch? It worked for microwaves, not light. In one flat slice. At one frequency.",
+     "start": 327.658,
+     "end": 333.009
+    }
+   ]
+  },
+  {
+   "id": "tiny",
+   "start": 333.509,
+   "end": 346.952,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Hiding from light is far harder, because light waves are tiny. To steer them, a cloak needs patterns smaller than the waves themselves, more than a hundred times thinner than a human hair, covering every part of you.",
+     "start": 333.759,
+     "end": 346.452
+    }
+   ]
+  },
+  {
+   "id": "octopus",
+   "start": 346.952,
+   "end": 362.418,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The best real invisibility belongs to octopuses and cuttlefish. Their skin is packed with tiny bags of colour that they can stretch open or squeeze shut, matching the rocks behind them in under a second. They don't vanish. They blend in.",
+     "start": 347.202,
+     "end": 361.818
+    }
+   ]
+  },
+  {
+   "id": "habit",
+   "start": 362.418,
+   "end": 373.565,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "By week three, you've stopped switching it off. It's just easier. Nobody asks you questions. Nobody picks you for anything. Nobody looks at you. Everybody bumps into you.",
+     "start": 362.668,
+     "end": 373.065
+    }
+   ]
+  },
+  {
+   "id": "seat",
+   "start": 373.565,
+   "end": 382.294,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At lunch, someone's sitting in your seat. Your best friend shrugs. Haven't seen them in ages. You're standing right behind her, holding your tray.",
+     "start": 373.815,
+     "end": 381.694
+    }
+   ]
+  },
+  {
+   "id": "photos",
+   "start": 382.294,
+   "end": 395.264,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Even your birthday goes wrong. Everyone squeezes in for a photo. Flash. Your friends are all grinning around a party hat, floating in mid air.",
+     "start": 382.544,
+     "end": 391.345
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Cameras need light too. And you don't give them any.",
+     "start": 392.045,
+     "end": 394.664
+    }
+   ]
+  },
+  {
+   "id": "show",
+   "start": 395.264,
+   "end": 403.946,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you remember. Weeks ago, before any of this, you put your name down for the school show. Singing. On Friday. In front of everyone.",
+     "start": 395.514,
+     "end": 403.446
+    }
+   ]
+  },
+  {
+   "id": "nerves",
+   "start": 403.946,
+   "end": 426.379,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And here's something real. In two thousand and fifteen, scientists in Sweden used headsets to make people feel as if their bodies were invisible. Then they put them in front of a group of staring strangers.",
+     "start": 404.196,
+     "end": 416.175
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Feeling invisible, their hearts raced less, and they felt less stressed. Being unseen is calming. Which is exactly why it's so tempting to stay that way.",
+     "start": 416.875,
+     "end": 425.779
+    }
+   ]
+  },
+  {
+   "id": "stage",
+   "start": 426.379,
+   "end": 441.319,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Friday. Your name is called. You walk on, invisible. The audience sees a microphone floating in a spotlight, shaking slightly.",
+     "start": 426.629,
+     "end": 434.398
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Someone at the back laughs. Your mouth goes dry. You could just stay like this, and sing as nobody.",
+     "start": 435.098,
+     "end": 440.719
+    }
+   ]
+  },
+  {
+   "id": "appear",
+   "start": 441.319,
+   "end": 459.65,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Instead, you take one deep breath, and switch it off. You appear, right there in the light, and four hundred faces look straight at you.",
+     "start": 441.569,
+     "end": 448.605
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You sing. Your voice wobbles on the first line. By the chorus, it doesn't.",
+     "start": 449.405,
+     "end": 453.659
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And when it's over, the whole hall claps. Not for a floating microphone. For you.",
+     "start": 454.359,
+     "end": 458.85
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "start": 459.65,
+   "end": 474.41,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That night, there's a new photo on the fridge. It's you, on stage, mid note, very much visible. Your mum has stuck it up with three magnets, just to be safe.",
+     "start": 459.9,
+     "end": 469.259
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Being seen is scary. But it's the only way anyone can clap for you.",
+     "start": 469.959,
+     "end": 473.81
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 474.41,
+   "end": 491.14,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The next morning, your mum is staring at an empty plate. Has anyone seen the sausages?",
+     "start": 474.66,
+     "end": 479.868
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Under the table, a sausage lifts into the air, all by itself, and disappears, bite by bite, at exactly dog height.",
+     "start": 480.668,
+     "end": 487.919
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Looks like you're not the only one.",
+     "start": 488.619,
+     "end": 490.14
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 491.14,
+   "end": 501.743,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you want to be invisible? And what's the first thing you'd do? Tell us in the comments. And if you want more what ifs, subscribe. See you in the next one.",
+     "start": 491.39,
+     "end": 500.543
+    }
+   ]
+  }
+ ]
+}

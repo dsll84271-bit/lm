@@ -1,0 +1,564 @@
+{
+ "seconds": 517.198,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 12.122,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up, and your mum pops her head round the door. Morning, love!",
+     "start": 0.25,
+     "end": 4.077
+    },
+    {
+     "who": "NARRATOR",
+     "text": "But that's not all you hear. Right behind her smile, clear as a voice, you hear: I hope they didn't notice I ate their chocolate.",
+     "start": 4.877,
+     "end": 11.522
+    }
+   ]
+  },
+  {
+   "id": "dog",
+   "start": 12.122,
+   "end": 30.404,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Downstairs, it's the dog's turn. Dogs don't think in sentences. One study found the average dog understands about eighty nine words and phrases. So what you hear is more like a feeling. Walk? Walk. Sausage? Walk.",
+     "start": 12.372,
+     "end": 26.645
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You give him a sausage. He thinks you're a genius.",
+     "start": 27.345,
+     "end": 29.904
+    }
+   ]
+  },
+  {
+   "id": "bus",
+   "start": 30.404,
+   "end": 47.322,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "On the bus, everyone is quiet. Out loud, anyway. The driver is counting the years to retirement. The woman next to you is practising a job interview in her head. The man behind you is singing the same four words of a song, over and over, and it's driving you mad.",
+     "start": 30.654,
+     "end": 46.822
+    }
+   ]
+  },
+  {
+   "id": "school",
+   "start": 47.322,
+   "end": 59.457,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At school, it gets loud. Not the corridor. The thinking. Three hundred kids, all thinking at once.",
+     "start": 47.572,
+     "end": 53.249
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You can read minds. Anyone within about ten metres, whether you want to or not.",
+     "start": 53.949,
+     "end": 58.657
+    }
+   ]
+  },
+  {
+   "id": "rules",
+   "start": 59.457,
+   "end": 77.827,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You work out the rules in the first week. It reaches about ten metres. Strong feelings are loudest; fear is a shout, boredom is a mumble. And there's no off switch.",
+     "start": 59.707,
+     "end": 69.524
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Not even at night. Through the wall, you can hear your little brother dreaming. Tonight, he's being chased by a giant sandwich.",
+     "start": 70.224,
+     "end": 77.227
+    }
+   ]
+  },
+  {
+   "id": "brain",
+   "start": 77.827,
+   "end": 99.399,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Here's what you're listening to. Your brain has about eighty six billion neurons. They talk to each other with tiny electrical pulses, and the whole thing runs on about twenty watts. Less than a light bulb.",
+     "start": 78.077,
+     "end": 90.421
+    },
+    {
+     "who": "NARRATOR",
+     "text": "A thought isn't one neuron. It's a pattern, millions of them firing together, like a city's lights flickering in a particular shape.",
+     "start": 91.121,
+     "end": 98.799
+    }
+   ]
+  },
+  {
+   "id": "energy",
+   "start": 99.399,
+   "end": 114.116,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "For something so small, it's hungry. Your brain is only about two percent of your body weight, but it burns around a fifth of your energy. Which might explain why, after a day of hearing everyone else's thoughts on top of your own, you're starving.",
+     "start": 99.649,
+     "end": 113.616
+    }
+   ]
+  },
+  {
+   "id": "decoder",
+   "start": 114.116,
+   "end": 142.466,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And scientists can already read some of it. In two thousand and twenty three, a team at the University of Texas built a decoder that turned brain scans into the rough meaning of what someone was hearing or imagining.",
+     "start": 114.366,
+     "end": 127.602
+    },
+    {
+     "who": "NARRATOR",
+     "text": "But each person had to lie in a scanner for about sixteen hours to train it. It got the gist, not the exact words. And it only worked if they wanted it to.",
+     "start": 128.302,
+     "end": 137.549
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You? No scanner. Exact words. And nobody gets asked.",
+     "start": 138.249,
+     "end": 141.666
+    }
+   ]
+  },
+  {
+   "id": "test",
+   "start": 142.466,
+   "end": 159.42,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Maths test. Thirty kids, and twenty nine of them are thinking the same thing. I have no idea.",
+     "start": 142.716,
+     "end": 148.075
+    },
+    {
+     "who": "NARRATOR",
+     "text": "But the teacher made the test. And while she marks last week's homework, she's mentally checking her answer key. Question one, forty two. Question two, seven point five.",
+     "start": 148.775,
+     "end": 158.92
+    }
+   ]
+  },
+  {
+   "id": "honest",
+   "start": 159.42,
+   "end": 168.133,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You could copy every answer. You don't. Mostly because you'd never be able to explain how you got a hundred percent without showing your working.",
+     "start": 159.67,
+     "end": 167.633
+    }
+   ]
+  },
+  {
+   "id": "poker",
+   "start": 168.133,
+   "end": 185.762,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Game night. Your friends play poker for crisps. You hear every hand. Pair of threes. Nothing, but act confident. Bluffing, bluffing, bluffing.",
+     "start": 168.383,
+     "end": 177.05
+    },
+    {
+     "who": "NARRATOR",
+     "text": "By ten o'clock, every bag of crisps in the house is on your side of the table. You stop inviting yourself to game night after that.",
+     "start": 177.75,
+     "end": 185.262
+    }
+   ]
+  },
+  {
+   "id": "penalty",
+   "start": 185.762,
+   "end": 199.531,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Penalties. The striker runs up, and his head is shouting: bottom left, bottom left, bottom left. You dive bottom left before he's even kicked it. Seven penalties. Seven saves. Nobody can work out how.",
+     "start": 186.012,
+     "end": 199.031
+    }
+   ]
+  },
+  {
+   "id": "gifts",
+   "start": 199.531,
+   "end": 210.264,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Birthdays get easy. You know exactly what everyone wants, because they think about it every time they walk past a shop window. Your gifts are perfect. Every single time.",
+     "start": 199.781,
+     "end": 209.764
+    }
+   ]
+  },
+  {
+   "id": "bike",
+   "start": 210.264,
+   "end": 225.858,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You want a second hand bike. The seller crosses his arms. Sixty pounds, he says. Not a penny less.",
+     "start": 210.514,
+     "end": 216.409
+    },
+    {
+     "who": "NARRATOR",
+     "text": "His head says: honestly, I'd take forty, I just want it out of the garden. You offer forty. He shakes your hand so fast it's almost rude.",
+     "start": 217.109,
+     "end": 225.358
+    }
+   ]
+  },
+  {
+   "id": "pins",
+   "start": 225.858,
+   "end": 239.863,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And then there are the things you really shouldn't hear. In the shop queue, people think their PIN numbers as they type them. Every single one. You stare at the ceiling, hum a song, and promise yourself you will never, ever use them.",
+     "start": 226.108,
+     "end": 239.363
+    }
+   ]
+  },
+  {
+   "id": "party",
+   "start": 239.863,
+   "end": 254.894,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Some things get ruined. Your friends spend three weeks planning a surprise party for you. You hear every detail. Every time. When they jump out and shout surprise, you have to act shocked, and you've been practising your face in the mirror for days.",
+     "start": 240.113,
+     "end": 254.394
+    }
+   ]
+  },
+  {
+   "id": "crush",
+   "start": 254.894,
+   "end": 266.617,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And then, at lunch, you hear something you weren't expecting. Someone at the next table glances over at you, and thinks: I hope they sit here.",
+     "start": 255.144,
+     "end": 263.134
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You sit there. It goes surprisingly well.",
+     "start": 263.834,
+     "end": 266.017
+    }
+   ]
+  },
+  {
+   "id": "quiz",
+   "start": 266.617,
+   "end": 287.821,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you go bigger. A TV quiz show. The host reads the question from a card, and you hear the answer printed on the back of it before he's finished asking.",
+     "start": 266.867,
+     "end": 275.906
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Ten in a row. By question eight, the host is thinking: please get one wrong, we're nearly out of budget. You don't. The studio goes wild. You walk away with five thousand pounds.",
+     "start": 276.606,
+     "end": 287.321
+    }
+   ]
+  },
+  {
+   "id": "police",
+   "start": 287.821,
+   "end": 314.137,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "A detective hears about the quiz. She asks if you'll sit in on an interview, just to watch. The man across the table says, I was home all night.",
+     "start": 288.071,
+     "end": 296.533
+    },
+    {
+     "who": "NARRATOR",
+     "text": "But in his head: the bag's under the bridge. They find it in twenty minutes.",
+     "start": 297.233,
+     "end": 301.209
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Normal lie detectors can't do that. A polygraph only measures heart rate, breathing and sweat. Signs of stress, not lies. Lots of scientists don't trust them at all. You don't need one.",
+     "start": 301.909,
+     "end": 313.537
+    }
+   ]
+  },
+  {
+   "id": "eeg",
+   "start": 314.137,
+   "end": 331.903,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Scientists hear about you too. They put an EEG cap on your head, dozens of little sensors that pick up electrical signals through your scalp. On the screen, just squiggly lines, the same as everyone else's. They can see that your brain is busy. They can't see why. You don't tell them.",
+     "start": 314.387,
+     "end": 331.403
+    }
+   ]
+  },
+  {
+   "id": "noise",
+   "start": 331.903,
+   "end": 360.577,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But it never switches off. One study estimated people have about six thousand two hundred thoughts a day. Your school has a thousand people in it. That's around six million thoughts a day, all around you, all the time.",
+     "start": 332.153,
+     "end": 344.658
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And at a football match, it's worse. Sixty thousand people, all thinking at once, about the referee mostly. You last eleven minutes.",
+     "start": 345.358,
+     "end": 353.105
+    },
+    {
+     "who": "NARRATOR",
+     "text": "The headaches start in week two. By week four, you eat lunch alone in the music room, just because it's quiet.",
+     "start": 353.805,
+     "end": 359.977
+    }
+   ]
+  },
+  {
+   "id": "truth",
+   "start": 360.577,
+   "end": 373.934,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And then there's the truth. Your best friend laughs at your joke. And thinks, not funny, but I'll laugh anyway.",
+     "start": 360.827,
+     "end": 366.645
+    },
+    {
+     "who": "NARRATOR",
+     "text": "It's not even mean. It's kind. But you can never not know. Every smile comes with subtitles.",
+     "start": 367.345,
+     "end": 373.334
+    }
+   ]
+  },
+  {
+   "id": "mum",
+   "start": 373.934,
+   "end": 384.919,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Some things are worse. You hear your mum worrying about money, at two in the morning, when she thinks everyone's asleep. She smiles at breakfast like nothing's wrong. You know better.",
+     "start": 374.184,
+     "end": 384.119
+    }
+   ]
+  },
+  {
+   "id": "help",
+   "start": 384.919,
+   "end": 397.109,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So one morning, you leave an envelope on the kitchen table. The quiz money, and a note. She doesn't say anything about it. But at breakfast, for the first time in weeks, the voice in her head is quiet.",
+     "start": 385.169,
+     "end": 396.509
+    }
+   ]
+  },
+  {
+   "id": "fair",
+   "start": 397.109,
+   "end": 407.1,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then, one summer afternoon, at the town fair, a woman starts screaming a name. Her little girl. Five years old. Gone. There are about twenty thousand people here.",
+     "start": 397.359,
+     "end": 406.7
+    }
+   ]
+  },
+  {
+   "id": "listen",
+   "start": 407.1,
+   "end": 427.452,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You close your eyes, and you do the thing you've spent months trying not to do. You listen to everyone.",
+     "start": 407.35,
+     "end": 412.612
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Twenty thousand minds hit you at once. Hot dogs. Phones. Rides. Lost my car keys. It's like standing inside a stadium full of people shouting.",
+     "start": 413.312,
+     "end": 423.12
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And somewhere under all of it, very small: I want mummy.",
+     "start": 423.82,
+     "end": 426.852
+    }
+   ]
+  },
+  {
+   "id": "search",
+   "start": 427.452,
+   "end": 458.387,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You can't tell where it's coming from. So you walk. Left, the voice gets quieter. Right, a little louder. You follow it like the dial on an old radio.",
+     "start": 427.702,
+     "end": 436.751
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Past the hook a duck. Past the bumper cars. Past a man thinking very hard about whether he locked his car. Your head is pounding. Your nose starts to bleed. Louder.",
+     "start": 437.451,
+     "end": 447.432
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Then a crowd blocks the way, and the voice is drowned out completely. You stand still, breathe, and wait. Three seconds. Five. There. Behind the ghost train.",
+     "start": 448.132,
+     "end": 457.987
+    }
+   ]
+  },
+  {
+   "id": "found",
+   "start": 458.387,
+   "end": 477.605,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Behind a generator, behind the ghost train, she's sitting on the grass, crying, too scared to come out. You kneel down. She doesn't know you. But you know exactly what to say, because you can hear exactly what she's afraid of.",
+     "start": 458.637,
+     "end": 471.447
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You walk her back. Her mum runs at you so fast she nearly knocks you both over.",
+     "start": 472.147,
+     "end": 476.605
+    }
+   ]
+  },
+  {
+   "id": "quiet",
+   "start": 477.605,
+   "end": 482.594,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That night, for the first time in months, all the noise feels a little bit warmer.",
+     "start": 477.855,
+     "end": 481.794
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 482.594,
+   "end": 507.215,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The next morning, there's a new kid in your class. And above everyone's head, the same old noise.",
+     "start": 482.844,
+     "end": 488.308
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Except theirs. Complete silence. Nothing at all.",
+     "start": 489.008,
+     "end": 492.025
+    },
+    {
+     "who": "NARRATOR",
+     "text": "They turn around, look straight at you, and you hear one thought, loud and clear, that isn't yours.",
+     "start": 492.925,
+     "end": 497.941
+    },
+    {
+     "who": "NARRATOR",
+     "text": "I can hear you too.",
+     "start": 498.741,
+     "end": 499.917
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And then, for the first time in your life, you realise how loud your own thoughts must be.",
+     "start": 500.917,
+     "end": 505.615
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 507.215,
+   "end": 517.198,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you want to read minds? Tell us in the comments. And if you'd have found that little girl too, subscribe for more what ifs.",
+     "start": 507.465,
+     "end": 514.698
+    }
+   ]
+  }
+ ]
+}
