@@ -48,10 +48,10 @@ export const SeedScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0, 12, 0], dist: 40, yaw: 30, pitch: -8, fov: 42},
 					{at: [-4, 14, -4], dist: 30, yaw: 20, pitch: 2, fov: 40},
 					{at: [-4, 15, -2], dist: 7, yaw: 30, pitch: 6, fov: 36},
-					{at: [seedAt[0], seedAt[1] + 1.5, seedAt[2]], dist: 11, yaw: -40, pitch: 8, fov: 38, ddist: 0, dyaw: 20},
-					{at: [seedAt[0], seedAt[1] + 2, seedAt[2]], dist: 15, yaw: 10, pitch: 30, fov: 38, ddist: 0},
-					{at: [seedAt[0], seedAt[1] + 5.5, seedAt[2]], dist: 10, yaw: 20, pitch: 14, fov: 36, ddist: 0},
-					{at: [seedAt[0], seedAt[1] + 2.5, seedAt[2]], dist: 13, yaw: 60, pitch: 6, fov: 38, ddist: 0},
+					{at: [seedAt[0], seedAt[1] + 4, seedAt[2]], dist: 25, yaw: -40, pitch: 8, fov: 40, ddist: 0, dyaw: 20},
+					{at: [seedAt[0], seedAt[1] + 4, seedAt[2]], dist: 26, yaw: 10, pitch: 20, fov: 40, ddist: 0},
+					{at: [seedAt[0], seedAt[1] + 7, seedAt[2]], dist: 15, yaw: 20, pitch: 14, fov: 40, ddist: 0},
+					{at: [seedAt[0], seedAt[1] + 4, seedAt[2]], dist: 25, yaw: 60, pitch: 6, fov: 40, ddist: 0},
 				]}
 				light={LIGHT.garden}
 				bg={BG.garden}
@@ -487,10 +487,10 @@ export const Home: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={
 					sill
 						? [
-								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
-								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
-								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
-								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
+								{at: [0.3, 1.2, -1.0], dist: 3.2, yaw: -40, pitch: 12, fov: 34},
+								{at: [0.3, 1.2, -1.0], dist: 3.2, yaw: -40, pitch: 12, fov: 34},
+								{at: [0.3, 1.2, -1.0], dist: 3.2, yaw: -40, pitch: 12, fov: 34},
+								{at: [0.3, 1.2, -1.0], dist: 3.2, yaw: -40, pitch: 12, fov: 34},
 								{at: [0.3, 0.6, 0], dist: 6, yaw: 20, pitch: 10, fov: 34},
 								{at: [-2.2, 0.8, 0], dist: 4.2, yaw: 30, pitch: 8, fov: 32},
 							]
@@ -587,9 +587,9 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={[
 					{at: [1, 1.2, 0], dist: 9, yaw: 10, pitch: 10, fov: 36},
 					{at: [14, 8, 0], dist: 42, yaw: 0, pitch: 6, fov: 44},
-					{at: [0, 0.9, 0], dist: 16, yaw: 90, pitch: 45, fov: 30},
+					{at: [0.5, 0.9, 0], dist: 12, yaw: 45, pitch: 48, fov: 30},
 					{at: [0, 1.1, 0], dist: 3.2, yaw: 30, pitch: 6, fov: 30},
-					{at: [10, 6, 0], dist: 34, yaw: -10, pitch: 6, fov: 46},
+					{at: [12, 7, 0], dist: 40, yaw: -10, pitch: 6, fov: 46},
 				]}
 				light={LIGHT.kitchen}
 				bg={BG.kitchen}
@@ -604,7 +604,7 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<group>
 						<Cornflake3D at={[2.6, 0.7, -1.2]} rot={[0.15, 0.6, 0.05]} s={0.42} />
 						<Hero3D who={P4.mum} position={[0, 0, 0]} turn={0.5} face={frame > waving ? 'shocked' : 'scared'} talk={0.7} armL={arms} armR={arms} hop={Math.abs(Math.sin(frame * 0.3)) * 0.3} />
-						<Hero3D position={[lerp(44, 30, closer), -34, -4]} height={60} turn={-Math.PI / 2} face="shocked" look={[0, -0.8]} lean={closer * 12} />
+						<Hero3D position={[lerp(50, 38, closer), -34, -4]} height={60} turn={-Math.PI / 2} face="shocked" look={[0, -0.8]} lean={closer * 12} />
 					</group>
 				}
 				overlay={(cam) => (

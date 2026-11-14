@@ -402,8 +402,8 @@ export const Mouse3D: React.FC<{at: V3; rot?: number; frame: number; shrew?: boo
 
 /** The cat's head, huge, facing +z, at ant scale (about 60 across). `pupil` 0..1 narrows the slits. */
 export const CatHead3D: React.FC<{at: V3; rot?: V3; frame: number; pupil?: number; glow?: number}> = ({at, rot, frame, pupil = 0.5, glow = 1}) => {
-	const fur = '#4A4A5E';
-	const furL = '#6A6A80';
+	const fur = '#D8844A';
+	const furL = '#F2C8A0';
 	const blink = (frame % 120) > 114 ? 0.1 : 1;
 	return (
 		<group position={at} rotation={rot}>
@@ -436,11 +436,11 @@ export const CatHead3D: React.FC<{at: V3; rot?: V3; frame: number; pupil?: numbe
 /** A cat's paw, huge, pad side down, at ant scale. */
 export const CatPaw3D: React.FC<{at: V3; rot?: V3; claws?: number}> = ({at, rot, claws = 0}) => (
 	<group position={at} rotation={rot}>
-		<T shape={{kind: 'cyl', r: 7, r2: 8, h: 60, seg: 32}} color="#4A4A5E" position={[0, 32, -3]} outline={0.5} />
-		<T shape={{kind: 'sphere', r: 9, seg: 40}} color="#4A4A5E" position={[0, 3, 0]} scale={[1.1, 0.6, 1.2]} outline={0.5} />
+		<T shape={{kind: 'cyl', r: 7, r2: 8, h: 60, seg: 32}} color="#D8844A" position={[0, 32, -3]} outline={0.5} />
+		<T shape={{kind: 'sphere', r: 9, seg: 40}} color="#F2C8A0" position={[0, 3, 0]} scale={[1.1, 0.6, 1.2]} outline={0.5} />
 		{[-1.5, -0.5, 0.5, 1.5].map((k) => (
 			<group key={k} position={[k * 4.4, 2, 8.5 - Math.abs(k) * 1.6]}>
-				<T shape={{kind: 'sphere', r: 3.2, seg: 24}} color="#4A4A5E" scale={[1, 0.75, 1.1]} outline={0.3} />
+				<T shape={{kind: 'sphere', r: 3.2, seg: 24}} color="#F2C8A0" scale={[1, 0.75, 1.1]} outline={0.3} />
 				<T shape={{kind: 'sphere', r: 2.1, seg: 20}} color="#FF9AB8" position={[0, -1.6, 0.3]} scale={[1, 0.4, 1]} outline={0} />
 				{claws > 0 ? <T shape={{kind: 'cone', r: 0.8, h: 3 * claws}} color="#F2F2F2" position={[0, -0.5, 3 + claws]} rotation={[Math.PI / 2 + 0.3, 0, 0]} outline={0.1} /> : null}
 			</group>

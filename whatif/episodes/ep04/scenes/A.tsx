@@ -82,8 +82,8 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={[
 					{at: [0, 0.6, 7.6], dist: 7, yaw: 25, pitch: 30, dyaw: 8},
 					{at: [0, 3, 0], dist: 30, yaw: 50, pitch: 14, fov: 42, dyaw: -10},
-					{at: [0, 8, -4], dist: 22, yaw: 12, pitch: -14, fov: 42, dyaw: 6},
-					{at: [18, 14, -10], dist: 30, yaw: -30, pitch: -18, fov: 42, dyaw: 4},
+					{at: [0, 6, -6], dist: 20, yaw: 8, pitch: -14, fov: 50, dyaw: 6},
+					{at: [13, 8, 0], dist: 23, yaw: -50, pitch: -16, fov: 58, dyaw: 4},
 					{at: [0, 1.25, 8], dist: 2.6, yaw: 12, pitch: 4, fov: 30},
 				]}
 				light={LIGHT.bedroom}
@@ -92,8 +92,8 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<group>
 						<Ground color="#F4F0FF" size={300} />
 						{[...Array(10)].map((_, i) => {
-							const x = (i % 2 ? 1 : -1) * (10 + (i % 5) * 7);
-							const z = 12 - Math.floor(i / 2) * 14;
+							const x = (i % 2 ? 1 : -1) * (18 + (i % 5) * 7);
+							const z = 2 - Math.floor(i / 2) * 14;
 							const r = 7 + (i % 3) * 3;
 							return <T key={i} shape={{kind: 'sphere', r, seg: 36}} color={i % 3 ? '#FF8A3D' : '#FFA45A'} position={[x, r * 0.2, z]} scale={[1.3, 0.5, 1]} outline={0.25} />;
 						})}
@@ -151,8 +151,8 @@ export const Size: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	} else {
 		far = (
 			<group>
-				<Carpet size={120} clear={5} gap={[0, 6]} seed={4} center={[0, 20]} holes={[[0, 26, 10]]} />
-				<BedTop top={150} edge={-10} />
+				<Carpet size={150} clear={5} gap={[0, 6]} seed={4} center={[0, 60]} lane={[0, 7]} tall={6} />
+				<BedTop top={110} edge={-10} />
 			</group>
 		);
 		near = <Hero3D position={[0, 0, 6]} turn={Math.PI} face="shocked" look={[0, 1]} />;
@@ -162,7 +162,7 @@ export const Size: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [0.5, 0.9, -2] as V3, dist: 6.5, yaw: 8, pitch: 30, fov: 32},
 		{at: [0, 0.8, -1.2] as V3, dist: 7.5, yaw: 12, pitch: 18, fov: 32},
 		{at: [0, 0, 0] as V3, dist: 34, yaw: 20, pitch: 58, fov: 40, ddist: 6},
-		{at: [0, 22, 0] as V3, dist: 32, yaw: 15, pitch: -32, fov: 46, dyaw: 0, ddist: -2},
+		{at: [0, 52, -10] as V3, dist: 150, yaw: 0, pitch: -6, fov: 50, dyaw: 0, ddist: -6},
 	];
 	if (shotOf === 0) {
 		overlay = null;
@@ -175,7 +175,7 @@ export const Size: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, l1.a - 6, rice - 4, carpet - 4, bed - 4]}
 				angles={angles}
-				light={shotOf === 4 ? LIGHT.bedroom : shotOf === 3 ? LIGHT.carpet : LIGHT.kitchen}
+				light={shotOf === 4 ? {...LIGHT.bedroom, fog: {color: '#B8A8E8', near: 90, far: 260}} : shotOf === 3 ? LIGHT.carpet : LIGHT.kitchen}
 				bg={shotOf >= 3 ? BG.carpet : BG.kitchen}
 				far={far}
 				near={near}
@@ -196,7 +196,13 @@ export const Size: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					if (shotOf === 3) {
 						return <Label text="CROSSING YOUR ROOM ≈ 2 KM" x={960} y={860} frame={frame} at={carpet + 4} size={56} color={UI.yellow} />;
 					}
-					return <Label text="YOUR BED = A SKYSCRAPER (250 M)" x={960} y={860} frame={frame} at={bed + 4} size={52} color={UI.yellow} />;
+					const [hx, hy] = project(cam, [0, 1.8, 6]);
+					return (
+						<>
+							<Label text="YOU" x={hx} y={hy - 60} frame={frame} at={bed} size={36} color={UI.yellow} />
+							<Label text="YOUR BED = A SKYSCRAPER (250 M)" x={960} y={220} frame={frame} at={bed + 4} size={52} color={UI.yellow} />
+						</>
+					);
 				}}
 			/>
 			{overlay}
@@ -235,7 +241,7 @@ export const Fall: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, fall - 4, land - 2, scratch - 6]}
 				angles={[
-					{at: [0, H - 6, 6], dist: 14, yaw: 180, pitch: 38, fov: 40, dyaw: 0},
+					{at: [0, 0, 20], dist: 97, yaw: 180, pitch: 79, fov: 55, dyaw: 0, ddist: -2},
 					{at: [0, Math.max(1, y) + 0.8, 3], dist: 7, yaw: 30, pitch: 4, fov: 36, dyaw: 30, ddist: 0},
 					{at: [0, 0.8, 3], dist: 6.5, yaw: -20, pitch: 8, fov: 34},
 					{at: [0, 1.2, 3], dist: 2.8, yaw: 10, pitch: 4, fov: 30},
@@ -244,7 +250,7 @@ export const Fall: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				bg={BG.bedroom}
 				far={
 					<group>
-						<Carpet size={90} clear={4} gap={[0, 3]} seed={7} />
+						<Carpet size={160} clear={4} gap={[0, 3]} seed={7} />
 						<BedTop top={H} edge={0} />
 					</group>
 				}
@@ -255,7 +261,7 @@ export const Fall: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						</group>
 					</group>
 				}
-				overlay={() =>
+				overlay={(cam) =>
 					airborne ? (
 						<AbsoluteFill style={{pointerEvents: 'none'}}>
 							{[...Array(14)].map((_, i) => {
@@ -264,6 +270,8 @@ export const Fall: React.FC<ShotProps> = ({frame, dur, lines}) => {
 								return <div key={i} style={{position: 'absolute', left: x, top: yy, width: 6, height: 140, borderRadius: 3, background: 'rgba(255,255,255,0.55)'}} />;
 							})}
 						</AbsoluteFill>
+					) : frame < slip + 6 ? (
+						<Label text="YOU" x={project(cam, [0, H + 1.8, -1])[0]} y={project(cam, [0, H + 1.8, -1])[1] - 60} frame={frame} at={6} size={36} color={UI.yellow} />
 					) : frame > scratch - 2 ? (
 						<Label text="NOT A SCRATCH" x={960} y={860} frame={frame} at={scratch} size={58} color={UI.green} />
 					) : null
@@ -334,11 +342,11 @@ export const Haldane: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0, shaft + 1, 0], dist: 9, yaw: 20, pitch: 60, fov: 40},
 					{at: [0, my + 0.5, 0], dist: 7, yaw: 25, pitch: 30, fov: 38, ddist: 0},
 					{at: [0.5, 0.6, 0], dist: 5, yaw: 30, pitch: 14, fov: 34},
-					{at: [0, 3.2, 0], dist: 12.5, yaw: 0, pitch: 4, fov: 36},
-					{at: [0, 3.2, 0], dist: 12, yaw: 8, pitch: 4, fov: 36},
+					{at: [0, 4.6, 0], dist: 13, yaw: 0, pitch: 4, fov: 36},
+					{at: [0, 4.6, 0], dist: 12.5, yaw: 8, pitch: 4, fov: 36},
 				]}
-				light={diagram ? LIGHT.studio : LIGHT.mine}
-				bg={diagram ? BG.studio : BG.mine}
+				light={diagram ? LIGHT.studio : {...LIGHT.mine, ambient: 1.7, sun: {from: [2, 30, 4], color: '#FFE0B0', intensity: 2.8}, fog: {color: '#6A4A30', near: 14, far: 50}}}
+				bg={diagram ? BG.studio : '#6A4A30'}
 				blur={diagram ? 0 : 2.5}
 				far={
 					diagram ? (
@@ -349,12 +357,12 @@ export const Haldane: React.FC<ShotProps> = ({frame, dur, lines}) => {
 							<Ground color="#6A4A2E" size={40} />
 							{[-1, 1].map((s) => (
 								<group key={s}>
-									<Box size={[0.6, shaft + 10, 8]} at={[s * 3.2, (shaft + 10) / 2, 0]} color="#5A3A26" outline={0.04} />
-									<Box size={[8, shaft + 10, 0.6]} at={[0, (shaft + 10) / 2, s * 3.2]} color="#4A2E1E" outline={0.04} />
+									<Box size={[0.6, shaft + 10, 16]} at={[s * 7, (shaft + 10) / 2, 0]} color="#A8724A" outline={0.04} />
+									<Box size={[16, shaft + 10, 0.6]} at={[0, (shaft + 10) / 2, s * 7]} color="#8A5A3A" outline={0.04} />
 								</group>
 							))}
 							{[...Array(6)].map((_, i) => (
-								<Box key={i} size={[6.4, 0.5, 0.5]} at={[0, 3 + i * 5, -2.9]} color="#A8724A" outline={0.03} />
+								<Box key={i} size={[13.4, 0.6, 0.6]} at={[0, 3 + i * 5, -6.6]} color="#D8A060" outline={0.03} />
 							))}
 							{[...Array(9)].map((_, i) => (
 								<T key={`e${i}`} shape={{kind: 'sphere', r: 0.6 + (i % 3) * 0.2, seg: 12}} color="#7A5A3A" position={[-2 + (i % 3) * 2, 0.05, -2 + Math.floor(i / 3) * 2]} scale={[1, 0.35, 1]} outline={0.03} />
@@ -365,12 +373,12 @@ export const Haldane: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				near={
 					diagram ? (
 						<group>
-							<group position={[-3.5, 6 - fallBig, 0]}>
+							<group position={[-3.5, 7.5 - fallBig, 0]}>
 								<T shape={{kind: 'box', w: big, h: big, d: big}} color="#FF8A3D" outline={0.04} />
 								<Arrow a={[0, -big / 2 - 0.1, big / 2 + 0.2]} b={[0, -big / 2 - 3.2, big / 2 + 0.2]} color="#FF5A5A" r={0.14} />
 								<Arrow a={[0, big / 2 + 0.1, big / 2 + 0.2]} b={[0, big / 2 + 1.2, big / 2 + 0.2]} color="#7FE0FF" r={0.14} />
 							</group>
-							<group position={[3.5, 6 - fallSmall, 0]}>
+							<group position={[3.5, 7.5 - fallSmall, 0]}>
 								<T shape={{kind: 'box', w: small, h: small, d: small}} color="#7CF2A0" outline={0.03} />
 								<Arrow a={[0, -small / 2 - 0.1, small / 2 + 0.2]} b={[0, -small / 2 - 0.7, small / 2 + 0.2]} color="#FF5A5A" r={0.1} />
 								<Arrow a={[0, small / 2 + 0.1, small / 2 + 0.2]} b={[0, small / 2 + 0.7, small / 2 + 0.2]} color="#7FE0FF" r={0.1} />

@@ -99,6 +99,8 @@ export const BedTop: React.FC<{top: number; edge?: number}> = ({top, edge = 0}) 
 		{/* the mattress side: a sheer wall down to the floor, in front of z = edge */}
 		{top > 0 ? <Box size={[300, top, 6]} at={[0, top / 2, edge - 3]} color="#E8E0F8" outline={0} /> : null}
 		{top > 0 ? <Box size={[300, 0.4, 0.4]} at={[0, top - 1, edge + 0.1]} color="#C9B8F0" outline={0} /> : null}
+		{top > 0 ? <Box size={[300, Math.min(30, top * 0.25), 1]} at={[0, top - Math.min(30, top * 0.25) / 2, edge + 0.6]} color="#FF8A3D" outline={0.1} /> : null}
+		{top > 0 ? <Box size={[300, 1.2, 1.2]} at={[0, top - Math.min(30, top * 0.25), edge + 0.9]} color="#FFD84A" outline={0.05} /> : null}
 		<Box size={[300, 0.6, 200]} at={[0, top - 0.3, edge - 100]} color="#F2EEFF" outline={0} />
 		{[...Array(9)].map((_, i) => {
 			const x = -60 + i * 16 + rnd(i) * 6;
@@ -210,15 +212,15 @@ export const Sock3D: React.FC<{at: V3; rot?: number}> = ({at, rot = 0}) => (
 /** A cornflake as big as a bus (about 14 across), lying flat at its position. */
 export const Cornflake3D: React.FC<{at: V3; rot?: V3; s?: number}> = ({at, rot, s = 1}) => (
 	<group position={at} rotation={rot} scale={s}>
-		<T shape={{kind: 'sphere', r: 7, seg: 48}} color="#F2B84A" scale={[1, 0.12, 0.78]} outline={0.12} />
+		<T shape={{kind: 'sphere', r: 7, seg: 48}} color="#F2B84A" scale={[1, 0.12, 0.78]} outline={0.12} shadow={false} emissive="#8A5A1A" emissiveIntensity={0.5} />
 		{[...Array(9)].map((_, i) => {
 			const a = i * 2.4;
 			const d = 1.5 + rnd(i) * 4;
-			return <T key={i} shape={{kind: 'sphere', r: 1.2 + rnd(i * 2) * 1.2, seg: 20}} color={i % 3 ? '#E8A23A' : '#FFD27A'} position={[Math.cos(a) * d, 0.55, Math.sin(a) * d * 0.7]} scale={[1, 0.3, 1]} outline={0} />;
+			return <T key={i} shape={{kind: 'sphere', r: 1.2 + rnd(i * 2) * 1.2, seg: 20}} color={i % 3 ? '#E8A23A' : '#FFD27A'} position={[Math.cos(a) * d, 0.55, Math.sin(a) * d * 0.7]} scale={[1, 0.3, 1]} outline={0} shadow={false} />;
 		})}
 		{[...Array(6)].map((_, i) => {
 			const a = i * 1.05 + 0.4;
-			return <T key={`b${i}`} shape={{kind: 'sphere', r: 0.5, seg: 12}} color="#C9782A" position={[Math.cos(a) * 4, 0.7, Math.sin(a) * 3]} scale={[1, 0.3, 1]} outline={0} />;
+			return <T key={`b${i}`} shape={{kind: 'sphere', r: 0.5, seg: 12}} color="#C9782A" position={[Math.cos(a) * 4, 0.7, Math.sin(a) * 3]} scale={[1, 0.3, 1]} outline={0} shadow={false} />;
 		})}
 	</group>
 );

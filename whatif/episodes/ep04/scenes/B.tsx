@@ -76,7 +76,7 @@ export const CountScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				cuts={[0, scientists - 4, each - 4, scale - 4]}
 				angles={[
 					{at: [0, 1.4, -6], dist: 18, yaw: 160, pitch: 14, fov: 40, ddist: 4},
-					{at: [0, 1.5, 0], dist: 14, yaw: 20, pitch: 10, fov: 36},
+					{at: [0, 1.5, -10], dist: 26, yaw: 200, pitch: 24, fov: 40, dyaw: -12},
 					{at: [0, 1.4, -6], dist: 22, yaw: 190, pitch: 20, fov: 40},
 					{at: [0, 6, 0], dist: 22, yaw: 0, pitch: 6, fov: 40, dyaw: 0},
 				]}
@@ -88,7 +88,7 @@ export const CountScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<group>
 							<Hero3D position={[-1, 0, 4]} turn={Math.PI} face="shocked" />
 							<Ant3D at={[1.2, 0, 4]} rot={Math.PI} frame={frame} pip />
-							{frame < scientists - 4 || frame > each - 4 ? <AntCrowd frame={frame} ants={crowd} /> : null}
+							<AntCrowd frame={frame} ants={crowd} />
 						</group>
 					) : (
 						<group>
@@ -121,8 +121,8 @@ export const CountScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				overlay={(cam) =>
 					frame < scientists - 4 ? null : frame < each - 4 ? (
-						<AbsoluteFill style={{background: 'rgba(10,6,30,0.55)'}}>
-							<Count from={0} to={20_000_000_000_000_000} x={960} y={500} size={96} frame={frame} at={quad - 30} dur={36} />
+						<AbsoluteFill style={{background: 'rgba(10,6,30,0.4)'}}>
+							<Count from={0} to={20_000_000_000_000_000} x={960} y={500} size={96} frame={frame} at={scientists + 10} dur={quad - scientists - 4} />
 							<Label text="ANTS ON EARTH" x={960} y={640} frame={frame} at={quad} size={56} color={UI.cream} />
 							<Label text="2022 · HUNDREDS OF STUDIES WORLDWIDE" x={960} y={760} frame={frame} at={scientists + 8} size={40} color={UI.cyan} />
 						</AbsoluteFill>
@@ -137,7 +137,7 @@ export const CountScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					)
 				}
 			/>
-			<Sound name="tick" at={quad - 30} volume={0.3} loop={36} />
+			<Sound name="tick" at={scientists + 10} volume={0.25} loop={quad - scientists - 4} />
 			<Sound name="boom" at={quad + 6} volume={0.3} />
 			<Sound name="thud" at={outweigh + 4} volume={0.35} />
 		</>
@@ -457,7 +457,7 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [17, 1.2, 4], dist: 6, yaw: 30, pitch: 6, fov: 34, dyaw: 0},
 					{at: [8, 6, -4], dist: 42, yaw: 40, pitch: 8, fov: 42, dyaw: 0},
 					{at: [0, 78, -12], dist: 110, yaw: 30, pitch: -40, fov: 46, dyaw: 2},
-					{at: [17, 1.3, 4], dist: 3.4, yaw: 25, pitch: 10, fov: 32},
+					{at: [17, 1.3, 4], dist: 3.8, yaw: -150, pitch: 14, fov: 32},
 					{at: [14, 6, 4], dist: 36, yaw: 70, pitch: 6, fov: 44, dyaw: -10},
 				]}
 				light={{...LIGHT.kitchen, fog: undefined}}
@@ -547,9 +547,9 @@ export const Voice: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={[
 					{at: [0, 1.2, 0], dist: 3.4, yaw: 20, pitch: 6, fov: 32},
 					{at: [0, 0.35, 0], dist: 6, yaw: -15, pitch: 2, fov: 34, dy: 0},
-					{at: [0, 0.0, 0], dist: 4.6, yaw: 30, pitch: 8, fov: 34},
-					{at: [0, 0.05, 0], dist: 3.8, yaw: -20, pitch: 6, fov: 32},
-					{at: [0.8, 0.1, 0], dist: 4.8, yaw: 40, pitch: 8, fov: 34},
+					{at: [0, 0.3, 0], dist: 5.6, yaw: 30, pitch: 8, fov: 34},
+					{at: [0, 0.3, 0], dist: 5, yaw: -20, pitch: 6, fov: 32},
+					{at: [0.8, 0.35, 0], dist: 5.6, yaw: 40, pitch: 8, fov: 34},
 				]}
 				light={mouseSet ? LIGHT.lab ?? LIGHT.studio : LIGHT.kitchen}
 				bg={mouseSet ? BG.studio : BG.kitchen}
@@ -611,8 +611,8 @@ export const Cat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0.5, 1.2, 0], dist: 5, yaw: 200, pitch: 4, fov: 34},
 					{at: [0, 30, -40], dist: 60, yaw: 0, pitch: -8, fov: 40},
 					{at: [0, 32, -40], dist: 30, yaw: 4, pitch: -4, fov: 38, ddist: -8},
-					{at: [2, 7, -2], dist: 20, yaw: 20, pitch: -6, fov: 44, dyaw: 0},
-					{at: [0, 1, flee + 1], dist: 8, yaw: 90, pitch: 8, fov: 38, ddist: 0},
+					{at: [2, 8, -3], dist: 38, yaw: 30, pitch: 0, fov: 44, dyaw: 0},
+					{at: [0, 1, flee], dist: 9.5, yaw: 75, pitch: 8, fov: 38, ddist: 0},
 				]}
 				light={{...LIGHT.dark, ambient: 1.05, sun: {from: [8, 16, 12], color: '#B8C8FF', intensity: 2.1}}}
 				bg={BG.dark}
