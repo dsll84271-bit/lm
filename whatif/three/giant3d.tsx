@@ -19,14 +19,14 @@ export const MM = 0.567;
 const fibreG = () => new THREE.CylinderGeometry(0.18, 0.32, 1, 7).translate(0, 0.5, 0);
 
 /** Carpet: a forest of fibre tufts over a square of side `size`, leaving a clear circle of radius `clear` round `gap`. */
-export const Carpet: React.FC<{size?: number; clear?: number; gap?: [number, number]; seed?: number; color?: string; tall?: number; center?: [number, number]}> = ({size = 60, clear = 4, gap = [0, 0], seed = 0, color = '#6A4AA8', tall = 4.5, center = [0, 0]}) => {
+export const Carpet: React.FC<{size?: number; clear?: number; gap?: [number, number]; seed?: number; color?: string; tall?: number; center?: [number, number]; holes?: Array<[number, number, number]>; lane?: [number, number]}> = ({size = 60, clear = 4, gap = [0, 0], seed = 0, color = '#6A4AA8', tall = 4.5, center = [0, 0], holes = [], lane}) => {
 	const items: Copy[] = [];
 	const c = new THREE.Color(color);
 	const n = Math.round((size * size) / 2.2);
 	for (let i = 0; i < n; i++) {
 		const x = center[0] + (rnd(i + seed) - 0.5) * size;
 		const z = center[1] + (rnd(i * 3.1 + seed + 7) - 0.5) * size;
-		if (Math.hypot(x - gap[0], z - gap[1]) < clear + rnd(i * 5) * 1.5) {
+		if (Math.hypot(x - gap[0], z - gap[1]) < clear + rnd(i * 5) * 1.5 || holes.some(([hx, hz, hr]) => Math.hypot(x - hx, z - hz) < hr) || (lane && Math.abs(x - lane[0]) < lane[1])) {
 			continue;
 		}
 		const h = tall * (0.7 + rnd(i * 1.7 + seed) * 0.6);
@@ -58,14 +58,14 @@ const bladeG = () => {
 };
 
 /** A forest of grass blades round a clearing. */
-export const Grass: React.FC<{size?: number; clear?: number; gap?: [number, number]; seed?: number; tall?: number; density?: number}> = ({size = 80, clear = 6, gap = [0, 0], seed = 0, tall = 30, density = 1}) => {
+export const Grass: React.FC<{size?: number; clear?: number; gap?: [number, number]; seed?: number; tall?: number; density?: number; holes?: Array<[number, number, number]>}> = ({size = 80, clear = 6, gap = [0, 0], seed = 0, tall = 30, density = 1, holes = []}) => {
 	const items: Copy[] = [];
 	const greens = ['#3FA84A', '#58C25A', '#2E8A44', '#7AD06A', '#46B05A'];
 	const n = Math.round(((size * size) / 14) * density);
 	for (let i = 0; i < n; i++) {
 		const x = (rnd(i * 1.3 + seed) - 0.5) * size;
 		const z = (rnd(i * 2.9 + seed + 3) - 0.5) * size;
-		if (Math.hypot(x - gap[0], z - gap[1]) < clear + rnd(i * 5) * 3) {
+		if (Math.hypot(x - gap[0], z - gap[1]) < clear + rnd(i * 5) * 3 || holes.some(([hx, hz, hr]) => Math.hypot(x - hx, z - hz) < hr)) {
 			continue;
 		}
 		const h = tall * (0.45 + rnd(i * 1.9 + seed) * 0.8);
@@ -225,14 +225,13 @@ export const Cornflake3D: React.FC<{at: V3; rot?: V3; s?: number}> = ({at, rot, 
 
 /** A crumb of toast as big as a sofa. */
 export const Crumb3D: React.FC<{at: V3; rot?: number; s?: number; bitten?: number}> = ({at, rot = 0, s = 1, bitten = 0}) => (
-	<group position={at} rotation={[0, rot, 0]} scale={s}>
+	<group position={at} rotation={[0, rot, 0]} scale={[s * (1 - bitten * 0.45), s * (1 - bitten * 0.3), s * (1 - bitten * 0.3)]}>
 		<T shape={{kind: 'box', w: 3.2, h: 1.7, d: 2.2}} color="#F2D8A0" position={[0, 0.85, 0]} rotation={[0.1, 0.2, 0.05]} outline={0.06} />
 		<T shape={{kind: 'box', w: 3.3, h: 0.5, d: 2.3}} color="#B8642A" position={[0, 1.75, 0]} rotation={[0.1, 0.2, 0.05]} outline={0.05} />
 		<T shape={{kind: 'box', w: 0.5, h: 1.8, d: 2.3}} color="#C9782A" position={[-1.6, 0.9, -0.1]} rotation={[0.1, 0.2, 0.05]} outline={0.05} />
 		{[...Array(6)].map((_, i) => (
 			<T key={i} shape={{kind: 'sphere', r: 0.18 + rnd(i) * 0.15, seg: 10}} color="#D8B070" position={[-1 + rnd(i * 2) * 2.4, 0.4 + rnd(i * 3) * 1.1, 1.18]} scale={[1, 1, 0.3]} outline={0} />
 		))}
-		{bitten > 0 ? <T shape={{kind: 'sphere', r: 1.1 * bitten, seg: 20}} color="#F2D8A0" position={[1.5, 1.3, 0.8]} outline={0} /> : null}
 	</group>
 );
 
@@ -446,8 +445,8 @@ export const AntHill3D: React.FC<{at: V3; r?: number}> = ({at, r = 14}) => {
 };
 
 /** A twig, about 20 long, as thick as a tree trunk, lying along x. */
-export const Twig3D: React.FC<{at: V3; rot?: V3; len?: number}> = ({at, rot, len = 20}) => (
-	<group position={at} rotation={rot}>
+export const Twig3D: React.FC<{at: V3; rot?: V3; len?: number; thick?: number}> = ({at, rot, len = 20, thick = 1}) => (
+	<group position={at} rotation={rot} scale={[1, thick, thick]}>
 		<T shape={{kind: 'cyl', r: 0.45, r2: 0.6, h: len, seg: 12}} color="#8A5A3A" rotation={[0, 0, Math.PI / 2]} outline={0.06} />
 		<T shape={{kind: 'cyl', r: 0.22, r2: 0.3, h: 5, seg: 8}} color="#7A4A2E" position={[len * 0.2, 1.6, 0]} rotation={[0, 0, -0.7]} outline={0.04} />
 		{[-0.3, 0.1, 0.35].map((x) => (

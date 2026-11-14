@@ -242,7 +242,7 @@ export const Ride: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				far={
 					set === 'carpet' ? (
 						<group>
-							<Carpet size={120} clear={3} gap={[0, 0]} seed={29} />
+							<Carpet size={120} clear={4} gap={[0, 0]} seed={29} lane={[0, 3.5]} holes={[[6, 0, 7]]} />
 							<Trail z0={-20} z1={60} frame={frame} />
 						</group>
 					) : set === 'door' ? (
@@ -286,7 +286,7 @@ export const Crumbs: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const freezing = cue(l0, 'And freezing');
 	const cold = frame > later - 4;
 	const shiver = frame > freezing ? Math.sin(frame * 2.2) * 0.04 : 0;
-	const you: V3 = [0.8 + shiver, 0, 1.2];
+	const you: V3 = [1.4 + shiver, 0, 1.4];
 	const bites = cold ? 1 : span(frame, eat, eat + 40);
 	const breaths = frame > freezing ? [0, 1, 2].map((k) => ((frame - freezing + k * 12) % 36) / 36) : [];
 	return (
@@ -298,9 +298,9 @@ export const Crumbs: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				cuts={[0, eat - 4, later - 4, freezing - 4]}
 				angles={[
 					{at: [0, 1.2, 0], dist: 10, yaw: 25, pitch: 10, fov: 36},
-					{at: [0.5, 1.3, 1], dist: 4.2, yaw: 50, pitch: 6, fov: 32},
+					{at: [0, 1.2, 0.6], dist: 5.4, yaw: 40, pitch: 8, fov: 34},
 					{at: [0.5, 1.2, 1], dist: 6.5, yaw: -30, pitch: 10, fov: 34},
-					{at: [0.8, 1.25, 1.2], dist: 2.8, yaw: 10, pitch: 4, fov: 30},
+					{at: [1.4, 1.2, 1.4], dist: 3.2, yaw: -20, pitch: 4, fov: 30},
 				]}
 				light={cold ? LIGHT.cold : LIGHT.kitchen}
 				bg={cold ? '#C8D8F0' : BG.kitchen}
@@ -312,7 +312,7 @@ export const Crumbs: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Hero3D position={you} turn={cold ? 0 : -1.1} face={cold ? 'scared' : bites > 0 && bites < 1 ? 'happy' : 'happy'} talk={bites > 0 && bites < 1 ? 0.5 : 0} armL={cold ? [40, 120] : [60, 110]} armR={cold ? [40, 120] : [60, 110]} reachL={cold ? 60 : 30} reachR={cold ? 60 : 30} />
 						<Ant3D at={[2.8, 0, -1.6]} rot={-0.6} frame={frame} pip />
 						{breaths.map((t, k) => (
-							<Glow key={k} shape={{kind: 'sphere', r: 0.12 + t * 0.25, seg: 12}} color="#FFFFFF" position={[you[0] + 0.05, 1.3 + t * 0.4, you[2] + 0.4 + t * 0.6]} opacity={0.6 * (1 - t)} />
+							<Glow key={k} shape={{kind: 'sphere', r: 0.12 + t * 0.25, seg: 12}} color="#FFFFFF" position={[you[0] + 0.35 + t * 0.3, 1.25 + t * 0.6, you[2] + 0.3 + t * 0.3]} opacity={0.45 * (1 - t)} />
 						))}
 					</group>
 				}
@@ -361,9 +361,9 @@ export const Shrew: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={[
 					{at: [0, 1.1, 0], dist: 5, yaw: 20, pitch: 6, fov: 34},
 					{at: [0, 0.6, 0], dist: 4.5, yaw: 40, pitch: 10, fov: 34},
-					{at: [0, 0.6, 0], dist: 3.2, yaw: 10, pitch: 6, fov: 32},
+					{at: [0.6, 0.5, 0], dist: 3.6, yaw: 10, pitch: 6, fov: 32},
 					{at: [0.3, 0.5, 0.3], dist: 2.8, yaw: -30, pitch: 10, fov: 32},
-					{at: [0, 0.8, 0], dist: 8, yaw: 0, pitch: 6, fov: 36},
+					{at: [0, 0.7, 0], dist: 5.5, yaw: 0, pitch: 8, fov: 36},
 					{at: [1.6, 0.6, 0], dist: 4.5, yaw: 30, pitch: 8, fov: 34},
 					{at: [-1.6, 1.1, 0], dist: 3.6, yaw: -10, pitch: 4, fov: 32},
 				]}
@@ -413,7 +413,7 @@ export const Shrew: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<>
 						{frame < etruscan - 4 ? <Label text="SMALL BODIES LOSE HEAT FAST" x={960} y={870} frame={frame} at={10} size={48} color={UI.orange} /> : null}
 						{shrewSet ? <Label text="ETRUSCAN SHREW · ABOUT 2 GRAMS" x={960} y={210} frame={frame} at={etruscan + 6} size={44} color={UI.cream} /> : null}
-						{frame > heart - 4 && frame < eat - 4 ? <HeartMonitor frame={frame} at={heart} bpm={900} label="HEART" tag="UP TO 1,511 / MIN" x={960} y={820} color={UI.red} /> : null}
+						{frame > heart - 4 && frame < eat - 4 ? <HeartMonitor frame={frame} at={heart} bpm={900} label="HEART" tag="UP TO 1,511 / MIN" x={1440} y={760} color={UI.red} /> : null}
 						{frame > eat - 4 && shrewSet ? <Label text="EATS ALMOST ALL DAY" x={960} y={870} frame={frame} at={eat + 6} size={48} color={UI.yellow} /> : null}
 						{frame > l1.a - 4 && frame < you - 4 ? <Label text="NO WARM-BLOODED ANIMAL IS THIS SMALL" x={960} y={210} frame={frame} at={l1.a + 4} size={44} color={UI.cream} /> : null}
 						{frame > ants - 4 && frame < you - 4 ? <Label text="ANTS: NO BODY HEAT OF THEIR OWN" x={1300} y={870} frame={frame} at={ants + 4} size={40} color={UI.cyan} /> : null}
@@ -445,7 +445,7 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const mumZ = lerp(-12, -12 + 40 * Math.min(1, stepT * 1.4), 1);
 	const sh = shake(frame, slipper + 10, 20, 16);
 	const sh2 = shake(frame, step + 30, 14, 12);
-	const you: V3 = [6, 0, 6];
+	const you: V3 = [17, 0, 4];
 	return (
 		<>
 			<Shot3
@@ -454,13 +454,13 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, slipper - 4, where - 4, shout - 4, step - 4]}
 				angles={[
-					{at: [6, 1.2, 6], dist: 6, yaw: 30, pitch: 6, fov: 34, dyaw: 0},
-					{at: [0, 6, -6], dist: 40, yaw: 30, pitch: 6, fov: 40, dyaw: 0},
-					{at: [0, 60, -12], dist: 70, yaw: 12, pitch: -32, fov: 44, dyaw: 2},
-					{at: [6, 1.3, 6], dist: 3.2, yaw: 15, pitch: 10, fov: 32},
-					{at: [6, 4, 6], dist: 30, yaw: 70, pitch: 4, fov: 42, dyaw: -10},
+					{at: [17, 1.2, 4], dist: 6, yaw: 30, pitch: 6, fov: 34, dyaw: 0},
+					{at: [8, 6, -4], dist: 42, yaw: 40, pitch: 8, fov: 42, dyaw: 0},
+					{at: [0, 78, -12], dist: 110, yaw: 30, pitch: -40, fov: 46, dyaw: 2},
+					{at: [17, 1.3, 4], dist: 3.4, yaw: 25, pitch: 10, fov: 32},
+					{at: [14, 6, 4], dist: 36, yaw: 70, pitch: 6, fov: 44, dyaw: -10},
 				]}
-				light={LIGHT.kitchen}
+				light={{...LIGHT.kitchen, fog: undefined}}
 				bg={BG.kitchen}
 				far={<Ground color="#F2E8D8" lines={{every: 60, color: '#D8C8B0'}} />}
 				near={
@@ -546,10 +546,10 @@ export const Voice: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				cuts={[0, faster - 4, mice - 4, found - 4, mics - 4]}
 				angles={[
 					{at: [0, 1.2, 0], dist: 3.4, yaw: 20, pitch: 6, fov: 32},
-					{at: [0, 1.5, 0], dist: 5, yaw: -15, pitch: 2, fov: 34, dy: 0},
-					{at: [0, 0.6, 0], dist: 4, yaw: 30, pitch: 8, fov: 34},
-					{at: [0, 0.7, 0], dist: 3, yaw: -20, pitch: 6, fov: 32},
-					{at: [0.8, 0.8, 0], dist: 4.2, yaw: 40, pitch: 8, fov: 34},
+					{at: [0, 0.35, 0], dist: 6, yaw: -15, pitch: 2, fov: 34, dy: 0},
+					{at: [0, 0.0, 0], dist: 4.6, yaw: 30, pitch: 8, fov: 34},
+					{at: [0, 0.05, 0], dist: 3.8, yaw: -20, pitch: 6, fov: 32},
+					{at: [0.8, 0.1, 0], dist: 4.8, yaw: 40, pitch: 8, fov: 34},
 				]}
 				light={mouseSet ? LIGHT.lab ?? LIGHT.studio : LIGHT.kitchen}
 				bg={mouseSet ? BG.studio : BG.kitchen}
@@ -611,10 +611,10 @@ export const Cat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0.5, 1.2, 0], dist: 5, yaw: 200, pitch: 4, fov: 34},
 					{at: [0, 30, -40], dist: 60, yaw: 0, pitch: -8, fov: 40},
 					{at: [0, 32, -40], dist: 30, yaw: 4, pitch: -4, fov: 38, ddist: -8},
-					{at: [1, 3, -1], dist: 18, yaw: 25, pitch: 10, fov: 40, dyaw: 0},
-					{at: [0.5, 1, flee], dist: 6, yaw: 160, pitch: 10, fov: 36, ddist: 0},
+					{at: [2, 7, -2], dist: 20, yaw: 20, pitch: -6, fov: 44, dyaw: 0},
+					{at: [0, 1, flee + 1], dist: 8, yaw: 90, pitch: 8, fov: 38, ddist: 0},
 				]}
-				light={LIGHT.dark}
+				light={{...LIGHT.dark, ambient: 1.05, sun: {from: [8, 16, 12], color: '#B8C8FF', intensity: 2.1}}}
 				bg={BG.dark}
 				far={
 					<group>
@@ -664,7 +664,7 @@ export const DropScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={[
 					{at: [-0.5, 1.2, 0], dist: 9, yaw: 30, pitch: 10, fov: 36},
 					{at: [-1, 1.1, 0], dist: 4.5, yaw: 15, pitch: 6, fov: 32},
-					{at: [-0.6, 1.1, 0], dist: 3.2, yaw: 60, pitch: 4, fov: 32},
+					{at: [-1.0, 1.1, 0], dist: 4, yaw: -40, pitch: 4, fov: 32},
 					{at: [-0.4, 1.1, 0], dist: 5, yaw: -30, pitch: 8, fov: 34},
 					{at: [-2, 1.1, 0], dist: 6, yaw: 35, pitch: 8, fov: 34},
 					{at: [-2.4, 1.2, 0], dist: 4.2, yaw: 20, pitch: 6, fov: 32},

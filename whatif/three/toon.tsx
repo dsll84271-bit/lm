@@ -107,7 +107,7 @@ export const Glow: React.FC<{shape: Shape; color: string; position?: [number, nu
 	const geom = useMemo(() => geomFor(shape), [key]);
 	return (
 		<mesh geometry={geom} position={position} rotation={rotation}>
-			<meshBasicMaterial color={color} toneMapped={false} transparent={opacity < 1} opacity={opacity} />
+			<meshBasicMaterial color={color} toneMapped={false} transparent={opacity < 1} opacity={opacity} depthWrite={opacity >= 1} />
 		</mesh>
 	);
 };

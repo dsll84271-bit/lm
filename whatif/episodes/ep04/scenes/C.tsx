@@ -44,14 +44,14 @@ export const SeedScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, forest - 4, clock - 4, grab - 4, lifts - 4, l1.a - 4, ringAt - 4, slows - 4]}
 				angles={[
-					{at: [0, 3, 0], dist: 14, yaw: 200, pitch: 4, fov: 38},
+					{at: [-1, 3.5, 2], dist: 15, yaw: 20, pitch: 4, fov: 40},
 					{at: [0, 12, 0], dist: 40, yaw: 30, pitch: -8, fov: 42},
 					{at: [-4, 14, -4], dist: 30, yaw: 20, pitch: 2, fov: 40},
 					{at: [-4, 15, -2], dist: 7, yaw: 30, pitch: 6, fov: 36},
-					{at: [seedAt[0], seedAt[1] + 2, seedAt[2]], dist: 14, yaw: -40, pitch: 8, fov: 38, ddist: 0, dyaw: 20},
-					{at: [seedAt[0], seedAt[1] + 3, seedAt[2]], dist: 18, yaw: 10, pitch: 30, fov: 38, ddist: 0},
-					{at: [seedAt[0], seedAt[1] + 5, seedAt[2]], dist: 13, yaw: 20, pitch: 12, fov: 36, ddist: 0},
-					{at: [seedAt[0], seedAt[1] + 3, seedAt[2]], dist: 16, yaw: 60, pitch: 6, fov: 38, ddist: 0},
+					{at: [seedAt[0], seedAt[1] + 1.5, seedAt[2]], dist: 11, yaw: -40, pitch: 8, fov: 38, ddist: 0, dyaw: 20},
+					{at: [seedAt[0], seedAt[1] + 2, seedAt[2]], dist: 15, yaw: 10, pitch: 30, fov: 38, ddist: 0},
+					{at: [seedAt[0], seedAt[1] + 5.5, seedAt[2]], dist: 10, yaw: 20, pitch: 14, fov: 36, ddist: 0},
+					{at: [seedAt[0], seedAt[1] + 2.5, seedAt[2]], dist: 13, yaw: 60, pitch: 6, fov: 38, ddist: 0},
 				]}
 				light={LIGHT.garden}
 				bg={BG.garden}
@@ -130,7 +130,7 @@ export const Garden: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				far={
 					<group>
 						<Ground color="#6A5A3A" />
-						<Grass size={160} clear={22} gap={[0, 0]} seed={43} tall={32} />
+						<Grass size={190} clear={38} gap={[0, 4]} seed={43} tall={32} />
 						<AntHill3D at={[0, 0, -6]} r={13} />
 						<Pebble3D at={[12, 1.5, -2]} r={3} />
 					</group>
@@ -168,7 +168,7 @@ export const RainScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	// the mosquito scene: a big drop falls onto it, carries it, it peels off
 	const dropY = frame < light ? 20 : lerp(20, -4, span(frame, light, slips + 10, (t) => t));
 	const ride = frame > carries - 10 && frame < slips;
-	const mq: V3 = ride ? [0.4, dropY - 1.3, 0.6] : frame >= slips ? [lerp(0.4, 3.5, span(frame, slips, slips + 30)), lerp(dropY, 3.2, 0.7), lerp(0.6, 1.2, span(frame, slips, slips + 30))] : [0, 3.2, 0];
+	const mq: V3 = ride ? [0.5, dropY - 1.2, 1.5] : frame >= slips ? [lerp(0.4, 3.5, span(frame, slips, slips + 30)), lerp(dropY, 3.2, 0.7), lerp(0.6, 1.2, span(frame, slips, slips + 30))] : [0, 3.2, 0];
 	const big: V3 = [0, 0, 0];
 	const hitAt = bigger + 18;
 	const splash = span(frame, hitAt, hitAt + 18);
@@ -184,7 +184,7 @@ export const RainScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [1.5, 1.4, 1], dist: 9, yaw: -30, pitch: 4, fov: 38},
 					{at: [0, 2, 0], dist: 18, yaw: 50, pitch: 18, fov: 40},
 					{at: [0, 3.2, 0], dist: 9, yaw: 20, pitch: 4, fov: 36},
-					{at: [0, 3, 0], dist: 12, yaw: -20, pitch: 6, fov: 38},
+					{at: [0, Math.max(1.5, dropY - 0.8), 0], dist: 10, yaw: -20, pitch: 6, fov: 38, ddist: 0},
 					{at: [1.5, 3, 0.6], dist: 10, yaw: 30, pitch: 6, fov: 38},
 				]}
 				light={LIGHT.rain}
@@ -304,7 +304,7 @@ export const Flood: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						{free ? null : <Drop3D at={dropAt} r={1.2} frame={frame} wobble={0.6 + pry * 0.6} squash={0.85 + pry * 0.1} />}
 						<Ant3D at={pipAt} rot={free ? -0.6 + tumble * 3 : 0.4} frame={frame} pip walk={free ? undefined : frame / 6} tilt={free ? (1 - tumble) * 1.2 : 0} gaze={free ? [0, 0] : [0.3, 0.2]} />
 						<Hero3D position={[-0.2, 0, 0.2]} turn={Math.PI / 2} face={free ? 'happy' : twigOn ? 'determined' : 'shocked'} armL={twigOn ? [80, 100] : undefined} armR={twigOn ? [80, 100] : undefined} reachL={twigOn ? 20 : 0} reachR={twigOn ? 20 : 0} lean={twigOn ? -10 - pry * 8 : 0} />
-						{twigOn ? <Twig3D at={[0.6 + pry * 0.1, 1.1 - pry * 0.25, 0.2]} rot={[0, 0, -0.22 + pry * 0.32]} len={4.2} /> : null}
+						{twigOn ? <Twig3D at={[0.9 + pry * 0.1, 1.05 - pry * 0.2, 0.3]} rot={[0, 0, -0.22 + pry * 0.32]} len={3.6} thick={0.3} /> : null}
 					</group>
 				}
 				overlay={() => (
@@ -367,7 +367,7 @@ export const Raft: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0, 1.4, 0], dist: 12, yaw: 50, pitch: 40, fov: 38},
 					{at: [drift, 2.2, 0], dist: 7, yaw: 10, pitch: 10, fov: 34, ddist: 0},
 					{at: [0, 1.4, 0], dist: 9, yaw: -30, pitch: 50, fov: 38},
-					{at: [0, 1.0, 0], dist: 6, yaw: 30, pitch: 14, fov: 34},
+					{at: [0, 1.2, 0], dist: 10, yaw: 30, pitch: 38, fov: 36},
 				]}
 				light={LIGHT.rain}
 				bg={BG.rain}
@@ -422,7 +422,7 @@ export const Night: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const level = 1.2;
 	const bob = Math.sin(frame * 0.05) * 0.06;
 	const lying = (
-		<group position={[-0.4, level + 0.4, 0.3]} rotation={[-Math.PI / 2, 0, 0.3]}>
+		<group position={[-0.4, level + 0.95, 0.3]} rotation={[-Math.PI / 2, 0, 0.3]}>
 			<Hero3D position={[0, 0, 0]} face={frame > warm ? 'happy' : frame > miss ? 'sad' : 'neutral'} look={[0, 0]} armL={[60, 120]} armR={[40, 100]} still />
 		</group>
 	);
@@ -434,11 +434,11 @@ export const Night: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, stars - 4, alone - 4, miss - 4, warm - 4]}
 				angles={[
-					{at: [0, 3, 0], dist: 22, yaw: 200, pitch: 10, fov: 42, dyaw: 6},
-					{at: [0, 20, -60], dist: 50, yaw: 180, pitch: -10, fov: 44},
-					{at: [0, 1.6, 0], dist: 9, yaw: 160, pitch: 30, fov: 38},
-					{at: [-0.4, 1.8, 0.3], dist: 3.2, yaw: 180, pitch: 60, fov: 32},
-					{at: [0, 1.6, 0], dist: 6, yaw: 200, pitch: 40, fov: 36},
+					{at: [0, 6, -10], dist: 30, yaw: 10, pitch: 4, fov: 46, dyaw: 6},
+					{at: [0, 40, -80], dist: 90, yaw: 0, pitch: -15, fov: 46},
+					{at: [0, 1.6, 0], dist: 9, yaw: 20, pitch: 30, fov: 38},
+					{at: [-0.4, 2.2, 0.3], dist: 3.4, yaw: 10, pitch: 62, fov: 32},
+					{at: [0, 1.6, 0], dist: 7, yaw: -20, pitch: 36, fov: 36},
 				]}
 				light={LIGHT.night}
 				bg={BG.night}
@@ -487,12 +487,12 @@ export const Home: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={
 					sill
 						? [
-								{at: [0, 0.9, -1.3], dist: 3, yaw: 10, pitch: 12, fov: 34},
-								{at: [0, 0.9, -1.3], dist: 3, yaw: 10, pitch: 12, fov: 34},
-								{at: [0, 0.9, -1.3], dist: 3, yaw: 10, pitch: 12, fov: 34},
-								{at: [0, 0.9, -1.3], dist: 3, yaw: 10, pitch: 12, fov: 34},
-								{at: [0.3, 0.12, 0], dist: 3.6, yaw: 20, pitch: 10, fov: 32},
-								{at: [-2.2, 0.6, 0], dist: 2.4, yaw: 30, pitch: 8, fov: 30},
+								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
+								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
+								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
+								{at: [0.2, 1.2, -1.2], dist: 2.6, yaw: 55, pitch: 14, fov: 34},
+								{at: [0.3, 0.6, 0], dist: 6, yaw: 20, pitch: 10, fov: 34},
+								{at: [-2.2, 0.8, 0], dist: 4.2, yaw: 30, pitch: 8, fov: 32},
 							]
 						: [
 								{at: [-1.0, 0.9, -2.6], dist: 4.2, yaw: 20, pitch: 22, fov: 34},
@@ -538,7 +538,7 @@ export const Home: React.FC<ShotProps> = ({frame, dur, lines}) => {
 								<Box size={[3, 0.12, 0.6]} at={[0, 0.94, -1.3]} color="#F2F2F2" outline={0.01} />
 								<Box size={[3, 1.6, 0.05]} at={[0, 1.8, -1.6]} color="#BFE3FA" outline={0.01} />
 								<Crumb3D at={[0.1, 1.0, -1.25]} s={0.04} />
-								<Hero3D position={[0.4, 0, -0.4]} turn={Math.PI} armR={[60, 80]} reachR={50} />
+								<Hero3D position={[0.9, 0, -0.5]} turn={Math.PI + 0.5} armR={[60, 80]} reachR={50} face="happy" />
 							</group>
 						)
 					) : (
@@ -549,7 +549,7 @@ export const Home: React.FC<ShotProps> = ({frame, dur, lines}) => {
 									<T key={k} shape={{kind: 'sphere', r: 0.05, seg: 8}} color="#7A5A3A" position={[-0.12 + k * 0.09, 0.7 + (k % 2) * 0.2, 0.28]} scale={[1, 0.6, 0.4]} outline={0} />
 								))}
 							</group>
-							<Box size={[0.98, 0.62, 0.12]} at={[-1.0, 0.98, -2.7]} color="#FF8A3D" />
+							<Box size={[1.0, 0.16, 0.95]} at={[-1.0, 0.72, -2.55]} color="#FF8A3D" />
 							{frame > mum - 6 ? <Hero3D who={P4.mum} position={[1.6, 0, -2.2]} turn={-1.1} face="smug" talk={frame > mum && frame < mum + 50 ? 0.6 : 0} armL={[40, 100]} /> : null}
 						</group>
 					)
@@ -585,14 +585,15 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, lean - 4, itsMum - 4, waving - 2, runs - 4]}
 				angles={[
-					{at: [0, 1.2, 0], dist: 8, yaw: 60, pitch: 10, fov: 36},
-					{at: [0, 9, 18], dist: 48, yaw: 90, pitch: 6, fov: 40},
-					{at: [0, 0.9, 0], dist: 14, yaw: 0, pitch: 45, fov: 30},
-					{at: [0, 1.1, 0], dist: 3, yaw: 35, pitch: 6, fov: 30},
-					{at: [0, 4, 4], dist: 14, yaw: -62, pitch: 4, fov: 44},
+					{at: [1, 1.2, 0], dist: 9, yaw: 10, pitch: 10, fov: 36},
+					{at: [14, 8, 0], dist: 42, yaw: 0, pitch: 6, fov: 44},
+					{at: [0, 0.9, 0], dist: 16, yaw: 90, pitch: 45, fov: 30},
+					{at: [0, 1.1, 0], dist: 3.2, yaw: 30, pitch: 6, fov: 30},
+					{at: [10, 6, 0], dist: 34, yaw: -10, pitch: 6, fov: 46},
 				]}
 				light={LIGHT.kitchen}
 				bg={BG.kitchen}
+				blur={0}
 				far={
 					<group>
 						<Ground color="#E8E0F2" lines={{every: 30, color: '#D0C4E0'}} />
@@ -602,8 +603,8 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				near={
 					<group>
 						<Cornflake3D at={[2.6, 0.7, -1.2]} rot={[0.15, 0.6, 0.05]} s={0.42} />
-						<Hero3D who={P4.mum} position={[0, 0, 0]} face={frame > waving ? 'shocked' : 'scared'} talk={0.7} armL={arms} armR={arms} hop={Math.abs(Math.sin(frame * 0.3)) * 0.3} />
-						<Hero3D position={[0, lerp(-30, -34, closer), lerp(60, 34, closer)]} height={60} turn={Math.PI} face="shocked" look={[0, -0.8]} lean={closer * 12} />
+						<Hero3D who={P4.mum} position={[0, 0, 0]} turn={0.5} face={frame > waving ? 'shocked' : 'scared'} talk={0.7} armL={arms} armR={arms} hop={Math.abs(Math.sin(frame * 0.3)) * 0.3} />
+						<Hero3D position={[lerp(44, 30, closer), -34, -4]} height={60} turn={-Math.PI / 2} face="shocked" look={[0, -0.8]} lean={closer * 12} />
 					</group>
 				}
 				overlay={(cam) => (
@@ -635,7 +636,7 @@ export const Outro: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				dur={dur}
 				lines={lines}
 				cuts={[0]}
-				angles={[{at: [0, 1.4, 0], dist: 7, yaw: 25, pitch: 10, fov: 36, dyaw: 12, ddist: -0.6}]}
+				angles={[{at: [0, 1.2, 0], dist: 7, yaw: 70, pitch: 10, fov: 36, dyaw: 12, ddist: -0.6}]}
 				light={LIGHT.studio}
 				bg={BG.studio}
 				blur={0}

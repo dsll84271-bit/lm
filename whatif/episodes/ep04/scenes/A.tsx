@@ -80,18 +80,26 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, miles - 4, cliff - 4, alarm - 4, shrunk - 6]}
 				angles={[
-					{at: [0, 0.6, 7], dist: 7, yaw: 25, pitch: 30, dyaw: 8},
-					{at: [-10, 4, -10], dist: 46, yaw: 35, pitch: 10, fov: 40, dyaw: -8},
-					{at: [-4, 9, -30], dist: 46, yaw: -12, pitch: 3, fov: 40},
-					{at: [30, 28, -50], dist: 70, yaw: -28, pitch: -14, fov: 40, dyaw: 4},
+					{at: [0, 0.6, 7.6], dist: 7, yaw: 25, pitch: 30, dyaw: 8},
+					{at: [0, 3, 0], dist: 30, yaw: 50, pitch: 14, fov: 42, dyaw: -10},
+					{at: [0, 8, -4], dist: 22, yaw: 12, pitch: -14, fov: 42, dyaw: 6},
+					{at: [18, 14, -10], dist: 30, yaw: -30, pitch: -18, fov: 42, dyaw: 4},
 					{at: [0, 1.25, 8], dist: 2.6, yaw: 12, pitch: 4, fov: 30},
 				]}
 				light={LIGHT.bedroom}
 				bg={BG.bedroom}
 				far={
 					<group>
-						<BedTop top={0} edge={30} />
-						<Alarm3D at={[34, 0, -62]} frame={frame} ring={frame > alarm - 10 ? 1 : 0.4} s={2.2} />
+						<Ground color="#F4F0FF" size={300} />
+						{[...Array(10)].map((_, i) => {
+							const x = (i % 2 ? 1 : -1) * (10 + (i % 5) * 7);
+							const z = 12 - Math.floor(i / 2) * 14;
+							const r = 7 + (i % 3) * 3;
+							return <T key={i} shape={{kind: 'sphere', r, seg: 36}} color={i % 3 ? '#FF8A3D' : '#FFA45A'} position={[x, r * 0.2, z]} scale={[1.3, 0.5, 1]} outline={0.25} />;
+						})}
+						<T shape={{kind: 'box', w: 60, h: 20, d: 24}} color="#FFFFFF" position={[-4, 10, -16]} outline={0.3} />
+						<T shape={{kind: 'capsule', r: 10, len: 40}} color="#FFFFFF" position={[-4, 19, -16]} rotation={[0, 0, Math.PI / 2]} scale={[0.3, 1, 1.1]} outline={0.3} />
+						<Alarm3D at={[26, 0, -8]} frame={frame} ring={frame > alarm - 10 ? 1 : 0.4} s={1.1} />
 					</group>
 				}
 				near={stand > 0.5 ? hero : <Lying at={[you[0], 0.3, you[2] + 0.2]} up={sitUp}>{hero}</Lying>}
@@ -143,18 +151,18 @@ export const Size: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	} else {
 		far = (
 			<group>
-				<Carpet size={120} clear={3} gap={[0, 18]} seed={4} center={[0, 10]} />
+				<Carpet size={120} clear={5} gap={[0, 6]} seed={4} center={[0, 20]} holes={[[0, 26, 10]]} />
 				<BedTop top={150} edge={-10} />
 			</group>
 		);
-		near = <Hero3D position={[0, 0, 18]} turn={Math.PI} face="shocked" look={[0, 1]} />;
+		near = <Hero3D position={[0, 0, 6]} turn={Math.PI} face="shocked" look={[0, 1]} />;
 	}
 	const angles = [
 		{at: [0.5, 0.9, -2] as V3, dist: 7.5, yaw: 0, pitch: 18, fov: 32, dyaw: 0},
 		{at: [0.5, 0.9, -2] as V3, dist: 6.5, yaw: 8, pitch: 30, fov: 32},
 		{at: [0, 0.8, -1.2] as V3, dist: 7.5, yaw: 12, pitch: 18, fov: 32},
 		{at: [0, 0, 0] as V3, dist: 34, yaw: 20, pitch: 58, fov: 40, ddist: 6},
-		{at: [0, 40, -10] as V3, dist: 60, yaw: 0, pitch: -26, fov: 44, dyaw: 0, ddist: -4},
+		{at: [0, 22, 0] as V3, dist: 32, yaw: 15, pitch: -32, fov: 46, dyaw: 0, ddist: -2},
 	];
 	if (shotOf === 0) {
 		overlay = null;
@@ -167,7 +175,7 @@ export const Size: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, l1.a - 6, rice - 4, carpet - 4, bed - 4]}
 				angles={angles}
-				light={shotOf >= 3 ? LIGHT.carpet : LIGHT.kitchen}
+				light={shotOf === 4 ? LIGHT.bedroom : shotOf === 3 ? LIGHT.carpet : LIGHT.kitchen}
 				bg={shotOf >= 3 ? BG.carpet : BG.kitchen}
 				far={far}
 				near={near}
@@ -227,12 +235,12 @@ export const Fall: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, fall - 4, land - 2, scratch - 6]}
 				angles={[
-					{at: [0, H + 0.6, -1], dist: 6.5, yaw: 160, pitch: 38, fov: 38, dyaw: 0},
+					{at: [0, H - 6, 6], dist: 14, yaw: 180, pitch: 38, fov: 40, dyaw: 0},
 					{at: [0, Math.max(1, y) + 0.8, 3], dist: 7, yaw: 30, pitch: 4, fov: 36, dyaw: 30, ddist: 0},
 					{at: [0, 0.8, 3], dist: 6.5, yaw: -20, pitch: 8, fov: 34},
 					{at: [0, 1.2, 3], dist: 2.8, yaw: 10, pitch: 4, fov: 30},
 				]}
-				light={LIGHT.bedroom}
+				light={{...LIGHT.bedroom, fog: {color: '#B8A8E8', near: 60, far: 200}}}
 				bg={BG.bedroom}
 				far={
 					<group>
@@ -243,7 +251,7 @@ export const Fall: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				near={
 					<group position={[0, hop, 0]}>
 						<group position={pos} rotation={[airborne ? Math.sin(spin) * 0.5 : tip * 0.5, spin, airborne ? Math.cos(spin * 0.7) * 0.3 : 0]}>
-							<Hero3D position={[0, 0, 0]} turn={frame < slip + 6 ? Math.PI : 0} face={frame > scratch - 4 ? 'happy' : frame > slip ? 'scared' : 'neutral'} look={frame < slip ? [0, -0.8] : [0, 0]} armL={airborne ? [150, 165] : frame > scratch ? [150, 200] : undefined} armR={airborne ? [150, 165] : frame > scratch ? [150, 200] : undefined} />
+							<Hero3D position={[0, 0, 0]} turn={0} face={frame > scratch - 4 ? 'happy' : frame > slip ? 'scared' : 'neutral'} look={frame < slip ? [0, -0.8] : [0, 0]} armL={airborne ? [150, 165] : frame > scratch ? [120, 150] : undefined} armR={airborne ? [150, 165] : frame > scratch ? [120, 150] : undefined} />
 						</group>
 					</group>
 				}
@@ -326,8 +334,8 @@ export const Haldane: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0, shaft + 1, 0], dist: 9, yaw: 20, pitch: 60, fov: 40},
 					{at: [0, my + 0.5, 0], dist: 7, yaw: 25, pitch: 30, fov: 38, ddist: 0},
 					{at: [0.5, 0.6, 0], dist: 5, yaw: 30, pitch: 14, fov: 34},
-					{at: [0, 3, 0], dist: 16, yaw: 0, pitch: 4, fov: 36},
-					{at: [0, 3, 0], dist: 15, yaw: 10, pitch: 4, fov: 36},
+					{at: [0, 3.2, 0], dist: 12.5, yaw: 0, pitch: 4, fov: 36},
+					{at: [0, 3.2, 0], dist: 12, yaw: 8, pitch: 4, fov: 36},
 				]}
 				light={diagram ? LIGHT.studio : LIGHT.mine}
 				bg={diagram ? BG.studio : BG.mine}
@@ -416,17 +424,17 @@ export const CarpetScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={[
 					{at: [0, 3, 0], dist: 18, yaw: 15, pitch: 8, fov: 40},
 					{at: [you[0], 1.2, you[2]], dist: 5, yaw: 150, pitch: 18, fov: 36, dyaw: 20},
-					{at: [0, 1.5, -2], dist: 10, yaw: 5, pitch: 4, fov: 38, dyaw: 0},
-					{at: [-6, 4, -14], dist: 26, yaw: 30, pitch: 4, fov: 38},
-					{at: [10, 8, -30], dist: 46, yaw: -10, pitch: 4, fov: 40},
+					{at: [0, 1.5, -1], dist: 13, yaw: 0, pitch: 6, fov: 40, dyaw: 0},
+					{at: [-8, 3, -12], dist: 20, yaw: 25, pitch: 8, fov: 40},
+					{at: [12, 6, -26], dist: 34, yaw: -12, pitch: 8, fov: 42},
 				]}
 				light={LIGHT.carpet}
 				bg={BG.carpet}
 				far={
 					<group>
-						<Carpet size={110} clear={3.5} gap={[0, 0]} seed={11} />
+						<Carpet size={110} clear={5} gap={[0, 1]} seed={11} holes={[[-12, -16, 13], [18, -34, 30], [0, 10, 6]]} />
 						<Brick3D at={[-12, 0, -16]} rot={0.4} color="#3FB7E8" />
-						<Sock3D at={[18, 0, -46]} rot={-0.3} />
+						<Sock3D at={[18, 0, -36]} rot={-0.3} />
 					</group>
 				}
 				near={
@@ -452,7 +460,7 @@ export const Strong: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const shake = cue(l0, 'Your arms');
 	const slide = span(frame, moves - 6, moves + 14);
 	const up = span(frame, lift, lift + 24);
-	const flakeAt: V3 = up > 0 ? [0, lerp(0.9, 2.55, up), lerp(-3.4, 0, up)] : [0, 0.9, lerp(-3.9, -3.4, slide)];
+	const flakeAt: V3 = up > 0 ? [0, lerp(0.35, 2.6, up), lerp(-3.4, 0, up)] : [0, 0.35, lerp(-3.9, -3.4, slide)];
 	const pushArm: [number, number] = [70, 95];
 	const liftArm: [number, number] = [172, 178];
 	return (
@@ -465,8 +473,8 @@ export const Strong: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={[
 					{at: [0, 1.5, -2], dist: 13, yaw: 25, pitch: 10, fov: 38},
 					{at: [0, 1, -1.5], dist: 5.5, yaw: 70, pitch: 6, fov: 36},
-					{at: [0, 1.6, 0], dist: 8, yaw: -25, pitch: 2, fov: 36},
-					{at: [0, 1.5, 0], dist: 4.2, yaw: 15, pitch: -4, fov: 34},
+					{at: [0, 1.8, 0], dist: 8.5, yaw: -20, pitch: 0, fov: 38},
+					{at: [0, 1.6, 0], dist: 5, yaw: 15, pitch: -6, fov: 36},
 				]}
 				light={LIGHT.underbed}
 				bg={BG.under}
@@ -478,8 +486,8 @@ export const Strong: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				near={
 					<group>
-						<Hero3D position={[0, 0, up > 0 ? 0 : lerp(-0.6, -0.2, slide)]} turn={Math.PI} armL={up > 0 ? liftArm : pushArm} armR={up > 0 ? liftArm : pushArm} reachL={up > 0 ? 0 : 40} reachR={up > 0 ? 0 : 40} face={frame > shake ? 'smug' : 'determined'} lean={up > 0 ? 0 : 10} walk={frame > push && frame < moves + 10 && up === 0 ? frame / 16 : undefined} />
-						<Cornflake3D at={flakeAt} rot={[up > 0 ? 0 : -1.2 + 1.2 * 0, 0.3, 0]} s={0.42} />
+						<Hero3D position={[0, 0, up > 0 ? 0 : lerp(-0.6, -0.2, slide)]} turn={up > 0 ? 0 : Math.PI} armL={up > 0 ? liftArm : pushArm} armR={up > 0 ? liftArm : pushArm} reachL={up > 0 ? 0 : 40} reachR={up > 0 ? 0 : 40} face={frame > shake ? 'smug' : 'determined'} lean={up > 0 ? 0 : 10} walk={frame > push && frame < moves + 10 && up === 0 ? frame / 16 : undefined} />
+						<Cornflake3D at={flakeAt} rot={[0, 0.3, up > 0 ? 0 : 0.1]} s={0.42} />
 					</group>
 				}
 				overlay={() => <Big text="LIKE LIFTING A BUS" x={960} y={880} size={80} frame={frame} at={lift + 20} color={UI.yellow} />}
@@ -612,16 +620,16 @@ export const AntScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, legs - 4, antIs - 4, pony - 4, taps - 4, pip - 4]}
 				angles={[
-					{at: [0, 1.2, -3], dist: 9, yaw: 160, pitch: 6, fov: 36},
-					{at: [antAt[0], 0.8, antAt[2]], dist: 4.2, yaw: 20, pitch: 6, fov: 34},
+					{at: [0, 1.0, -3], dist: 10, yaw: 80, pitch: 8, fov: 38},
+					{at: [antAt[0], 0.8, antAt[2]], dist: 4.6, yaw: 25, pitch: 6, fov: 34, ddist: 0},
 					{at: [0, 1, 0.5], dist: 8, yaw: 70, pitch: 10, fov: 36},
 					{at: [0.2, 1, 0.5], dist: 7, yaw: 90, pitch: 4, fov: 34},
 					{at: [-0.1, 1.2, 1], dist: 3.6, yaw: 40, pitch: 6, fov: 32},
-					{at: [0.1, 1.1, 0.6], dist: 5.2, yaw: -30, pitch: 6, fov: 34},
+					{at: [0.1, 1.1, 0.6], dist: 5.6, yaw: 70, pitch: 6, fov: 34},
 				]}
 				light={LIGHT.carpet}
 				bg={BG.carpet}
-				far={<Carpet size={100} clear={4} gap={[0, -2]} seed={17} />}
+				far={<Carpet size={100} clear={9} gap={[0, -2]} seed={17} holes={[[0, 8, 8], [8, 0, 7]]} />}
 				near={
 					<group>
 						<Ant3D at={antAt} rot={0} frame={frame} pip walk={come < 1 ? frame / 16 : undefined} tap={tap} gaze={frame > taps ? [-0.3, 0.6] : [0, 0]} jaws={frame > taps && frame < notFood ? 0.4 : 0} />
