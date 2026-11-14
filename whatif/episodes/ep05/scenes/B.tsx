@@ -71,16 +71,16 @@ export const Race: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<Bird3D kind="pigeon" at={[pigeonX, 3.4, 1.2]} frame={frame} yaw={90} s={1.6} rate={0.9} />
 			</group>
 		);
-		angle = {at: [heroX - 0.6, 3.2, 0.6], dist: 6, yaw: 5, pitch: 4, fov: 40, ddist: 0, dyaw: 0};
+		angle = {at: [heroX + 0.4, 3.3, 0.6], dist: 6, yaw: 45, pitch: 4, fov: 40, ddist: 0, dyaw: 0};
 	} else if (seg === 2) {
 		near = (
 			<group>
 				<StreetLamp3 at={[0, 0, 0]} on={false} />
 				<Bird3D kind="pigeon" at={[0.42, 4.33, 0]} frame={frame} wing="fold" perch s={1.6} yaw={0.6} look={0.3} />
-				<Flyer at={[3.2, 3.4, 1.5]} pitch={20} yaw={-60} frame={frame} pose="float" face="smug" />
+				<Flyer at={[2.4, 3.6, 1.6]} pitch={20} yaw={-60} frame={frame} pose="float" face="smug" />
 			</group>
 		);
-		angle = {at: [1.4, 3.9, 0.6], dist: 5.5, yaw: 10, pitch: 4, fov: 38};
+		angle = frame < lamp + 30 ? {at: [0.5, 4.4, 0], dist: 2.8, yaw: 20, pitch: 4, fov: 36} : {at: [1.3, 4.1, 0.6], dist: 4.6, yaw: 10, pitch: 4, fov: 38};
 	} else if (seg === 3) {
 		const ft = span(frame, missile - 4, missile + 20, (v) => v);
 		near = (
@@ -193,7 +193,7 @@ export const Clouds: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			</group>
 		);
 		near = <Flyer at={[0, y, 0]} pitch={seg === 3 ? 40 : 0} frame={frame} pose={seg === 3 ? 'glide' : 'super'} face="happy" headUp={seg === 3 ? 20 : -10} />;
-		angle = seg === 2 ? {at: [0, 4, 0], dist: 10, yaw: 25, pitch: 6, fov: 44} : {at: [0, 6, 0], dist: 26, yaw: 160, pitch: 12, fov: 50, dyaw: 12};
+		angle = seg === 2 ? {at: [0, 5, 0], dist: 8, yaw: 20, pitch: 8, fov: 46} : {at: [0, 6, 0], dist: 26, yaw: 160, pitch: 12, fov: 50, dyaw: 12};
 	} else {
 		light = LIGHT.day;
 		bg = BG.day;
@@ -210,7 +210,7 @@ export const Clouds: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<Flyer at={[14, 14, 12]} pitch={20} yaw={-60} frame={frame} pose="float" face="shocked" look={[-0.4, 0.4]} />
 			</group>
 		);
-		angle = frame < elephants - 4 ? {at: [0, 16, 2], dist: 52, yaw: 25, pitch: 8, fov: 46} : {at: [0, 6, 0], dist: 42, yaw: 35, pitch: 18, fov: 46, dyaw: 8};
+		angle = frame < elephants - 4 ? {at: [0, 14, 2], dist: 44, yaw: 25, pitch: 6, fov: 46} : {at: [0, 3, 2], dist: 26, yaw: 35, pitch: 22, fov: 46, dyaw: 8};
 		blur = 2;
 	}
 	return (
@@ -390,7 +390,7 @@ export const Geese: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [vx * 0.5, 14, 2], dist: 9, yaw: 10, pitch: 2, fov: 42, ddist: 0},
 					{at: [0, 22, -40], dist: 90, yaw: 8, pitch: 6, fov: 46},
 					{at: [vx, 14, 0], dist: 7, yaw: 70, pitch: 6, fov: 40, ddist: 0, dyaw: 0},
-					{at: [vx - 1, 14, 0], dist: 3.6, yaw: 40, pitch: 4, fov: 36, ddist: 0, dyaw: 0},
+					{at: [vx - 2, 14, 0], dist: 7, yaw: 40, pitch: 6, fov: 38, ddist: 0, dyaw: 0},
 					{at: [0, 14.4, 4], dist: 3, yaw: -25, pitch: 2, fov: 34},
 					{at: [0, 14.4, 4], dist: 3.2, yaw: 30, pitch: 4, fov: 36, roll: Math.sin(frame * 0.15) * 8},
 					{at: [0, 10, 4], dist: 14, yaw: 20, pitch: 22, fov: 46, ddist: 0},
@@ -443,7 +443,7 @@ export const Lost: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, starving - 4, noIdea - 4, fields - 4, towns - 4, sea - 4, phone - 4]}
 				angles={[
-					{at: [0, 30, 0], dist: 9, yaw: 25, pitch: 6, fov: 40},
+					{at: [0, 30, 0], dist: 9, yaw: 205, pitch: 14, fov: 42},
 					{at: [0, 30.3, 0], dist: 2.8, yaw: 15, pitch: 4, fov: 34},
 					{at: [0, 30.2, 0], dist: 4, yaw: -25, pitch: 4, fov: 38},
 					{at: [0, 0, 20], dist: 90, yaw: 20, pitch: 60, fov: 50},
@@ -498,7 +498,7 @@ const PacificMap: React.FC<{frame: number; at: number; t: number}> = ({frame, at
 	};
 	const [gx, gy] = bx(t);
 	return (
-		<div style={{position: 'absolute', left: 960, top: 520, transform: `translate(-50%, -50%) scale(${0.9 + 0.1 * p})`, opacity: p, borderRadius: 28, overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.6)', border: `4px solid ${UI.edge}`}}>
+		<div style={{position: 'absolute', left: 700, top: 540, transform: `translate(-50%, -50%) scale(${(0.9 + 0.1 * p) * 0.82})`, opacity: p, borderRadius: 28, overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.6)', border: `4px solid ${UI.edge}`}}>
 			<svg viewBox="0 0 900 680" width={900} height={680}>
 				<rect width={900} height={680} fill="#1E5A9A" />
 				{[...Array(10)].map((_, i) => (
@@ -568,14 +568,15 @@ export const Godwit: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						{frame > year && frame < flew ? <Label text="BAR-TAILED GODWIT · 2022" x={960} y={200} frame={frame} at={year + 4} size={50} color={UI.yellow} /> : null}
 						{frame > sugar && frame < flew ? <Label text="LIGHTER THAN A BAG OF SUGAR" x={960} y={860} frame={frame} at={sugar + 4} size={46} /> : null}
 						{mapOn ? <PacificMap frame={frame} at={flew - 6} t={span(frame, flew, days + 30, (v) => v)} /> : null}
-						{mapOn && frame > km ? <Count from={0} to={13560} x={960} y={960} size={80} frame={frame} at={km + 2} dur={40} suffix=" KM" /> : null}
-						{mapOn && frame > days ? <Label text="11 DAYS · NO FOOD · NO REST" x={960} y={110} frame={frame} at={days + 4} size={46} color={UI.cyan} /> : null}
+						{mapOn && frame > km ? <Count from={0} to={13560} x={1460} y={430} size={84} frame={frame} at={km + 2} dur={40} suffix=" KM" /> : null}
+						{mapOn && frame > days ? <Label text="11 DAYS" x={1460} y={560} frame={frame} at={days + 4} size={52} color={UI.cyan} /> : null}
+						{mapOn && frame > days + 12 ? <Label text="NO FOOD · NO REST" x={1460} y={660} frame={frame} at={days + 12} size={44} color={UI.cream} /> : null}
 						{frame > taught && frame < find - 4 ? <Label text="ITS VERY FIRST TRIP" x={960} y={860} frame={frame} at={taught + 4} size={50} color={UI.yellow} /> : null}
 						{night ? (
 							<>
-								<Label text="THE SUN" x={560} y={860} frame={frame} at={find + 10} size={46} color={UI.yellow} />
-								<Label text="THE STARS" x={960} y={860} frame={frame} at={stars} size={46} color={UI.cream} />
-								<Label text="EARTH'S MAGNETIC FIELD" x={1390} y={860} frame={frame} at={magnetic} size={46} color={UI.cyan} />
+								<Label text="THE SUN" x={470} y={860} frame={frame} at={find + 10} size={46} color={UI.yellow} />
+								<Label text="THE STARS" x={880} y={860} frame={frame} at={stars} size={46} color={UI.cream} />
+								<Label text="EARTH'S MAGNETIC FIELD" x={1420} y={860} frame={frame} at={magnetic} size={46} color={UI.cyan} />
 							</>
 						) : null}
 					</AbsoluteFill>
@@ -641,7 +642,7 @@ export const Sleep: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0, 8, 0], dist: 6, yaw: 35, pitch: 6, fov: 40},
 					{at: [0, 8.1, 0.2], dist: 3.2, yaw: 50, pitch: 4, fov: 34},
 					{at: [-0.6, 8, 0], dist: 6, yaw: 20, pitch: 6, fov: 40},
-					{at: [0, 10, 0], dist: 10, yaw: 15, pitch: 4, fov: 44, dyaw: 10},
+					{at: [0, 10, -2], dist: 7, yaw: 15, pitch: 4, fov: 44, dyaw: 10},
 				]}
 				light={LIGHT.sunset}
 				bg={BG.sunset}
@@ -661,7 +662,7 @@ export const Sleep: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<group>
 							{[...Array(6)].map((_, i) => {
 								const ph = ((frame * 0.05 + i * 0.37) % 1.4) - 0.7;
-								return <Bird3D key={i} kind="swift" at={[ph * 30 + i * 0.5, 9 + Math.sin(frame * 0.07 + i) * 1.5 + (i % 3), -i * 2]} frame={frame} yaw={90 + Math.sin(frame * 0.05 + i) * 20} wing={i % 2 ? 'glide' : 'flap'} rate={1.1} s={3} bank={Math.sin(frame * 0.07 + i) * 30} />;
+								return <Bird3D key={i} kind="swift" at={[ph * 14 + i * 0.4, 9.5 + Math.sin(frame * 0.07 + i) * 0.8 + (i % 3) * 0.5, -i * 1.2]} frame={frame} yaw={90 + Math.sin(frame * 0.05 + i) * 20} wing={i % 2 ? 'glide' : 'flap'} rate={1.1} s={3} bank={Math.sin(frame * 0.07 + i) * 30} />;
 							})}
 						</group>
 					) : (
@@ -704,12 +705,12 @@ export const Tired: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, ache - 4, sun - 4, coast - 4, harder - 4, ifYou - 4]}
 				angles={[
-					{at: [0, y, 0], dist: 6, yaw: 30, pitch: 4, fov: 40, ddist: 0},
-					{at: [0, y + 0.2, 0], dist: 2.6, yaw: -30, pitch: 4, fov: 34, ddist: 0},
-					{at: [0, y + 2, -10], dist: 30, yaw: 170, pitch: 2, fov: 46, ddist: 0},
-					{at: [0, y + 2, 30], dist: 22, yaw: 10, pitch: 4, fov: 46, ddist: 0},
-					{at: [0, y, 0], dist: 4, yaw: 50, pitch: 4, fov: 38, ddist: 0},
-					{at: [0, y, 0], dist: 50, yaw: 20, pitch: 30, fov: 46, ddist: 20},
+					{at: [0, y, 0], dist: 6, yaw: 210, pitch: 4, fov: 40, ddist: 0},
+					{at: [0, y + 0.2, 0], dist: 2.6, yaw: 150, pitch: 4, fov: 34, ddist: 0},
+					{at: [0, y + 1.5, -20], dist: 30, yaw: -12, pitch: -2, fov: 46, ddist: 0},
+					{at: [0, y, 20], dist: 24, yaw: 185, pitch: 3, fov: 46, ddist: 0},
+					{at: [0, y, 0], dist: 4, yaw: 220, pitch: 4, fov: 38, ddist: 0},
+					{at: [0, y, 0], dist: 18, yaw: 200, pitch: 22, fov: 46, ddist: 14},
 				]}
 				light={LIGHT.dusk}
 				bg={BG.dusk}

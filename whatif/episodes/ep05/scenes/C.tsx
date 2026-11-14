@@ -52,9 +52,9 @@ export const Thermal: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						: [
 								{at: [0, 20, 0], dist: 14, yaw: 30, pitch: 4, fov: 44},
 								{at: [0, 20, 0], dist: 14, yaw: 30, pitch: 4, fov: 44},
-								{at: [-10, 20, -30], dist: 64, yaw: 25, pitch: 6, fov: 46},
-								{at: hero, dist: 6, yaw: 30, pitch: 8, fov: 42, ddist: 0, dyaw: 0},
-								{at: [c[0], lerp(28, 40, rise), c[2]], dist: 34, yaw: 20 + rise * 40, pitch: 12, fov: 46, ddist: 0, dyaw: 0},
+								{at: [-6, 24, -34], dist: 36, yaw: 25, pitch: 8, fov: 46},
+								{at: hero, dist: 7, yaw: 30, pitch: 10, fov: 42, ddist: 0, dyaw: 0},
+								{at: [c[0], lerp(30, 44, rise), c[2]], dist: 15, yaw: 20 + rise * 40, pitch: 12, fov: 50, ddist: 0, dyaw: 0},
 							]
 				}
 				light={flash ? LIGHT.andes : LIGHT.cliffs}
@@ -77,7 +77,7 @@ export const Thermal: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Bird3D kind="argentavis" at={[0, 20, 0]} frame={frame} wing="glide" yaw={70} bank={-8} />
 					) : (
 						<group>
-							<Thermal3D at={[c[0], 20, c[2]]} frame={frame} h={40} r={8} color="#FFB060" opacity={0.55} />
+							<Thermal3D at={[c[0], 20, c[2]]} frame={frame} h={40} r={8} color="#FF9A40" opacity={0.8} />
 							<Flyer at={hero} pitch={circling ? 75 : 80} yaw={circling ? yawOf(a) : 90} bank={circling ? -22 : 0} frame={frame} pose={circling ? 'glide' : 'tired'} face={circling ? 'happy' : 'determined'} />
 							{circling ? <Bird3D kind="condor" at={[c[0] + R * 1.3 * Math.sin(ca), lerp(29, 47, rise), c[2] + R * 1.3 * Math.cos(ca)]} frame={frame} wing="glide" yaw={yawOf(ca)} bank={-22} /> : null}
 						</group>
@@ -194,8 +194,8 @@ export const VeeScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, home - 4, tuck - 4, easier - 4, riding - 4, ibis - 4]}
 				angles={[
-					{at: [0, 30, -4], dist: 30, yaw: 200, pitch: 18, fov: 46},
-					{at: [0, 20, -60], dist: 60, yaw: 180, pitch: 10, fov: 46},
+					{at: [0, 30, 3], dist: 13, yaw: 210, pitch: 12, fov: 46},
+					{at: [0, 24, -40], dist: 44, yaw: 8, pitch: 6, fov: 46},
 					{at: [hp[0], 30 + hp[1], hp[2]], dist: 9, yaw: 230, pitch: 10, fov: 42, ddist: 0, dyaw: 0},
 					{at: [hp[0] + 1, 30.3, hp[2]], dist: 4, yaw: 120, pitch: 6, fov: 38},
 					{at: [-2, 30, -2], dist: 9, yaw: 150, pitch: 30, fov: 44},
@@ -208,7 +208,7 @@ export const VeeScene: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<Fields3D dusk seed={6} />
 						<Sun3D at={[-60, 30, 160]} r={12} color="#FFC070" />
 						{frame > home - 4 && frame < tuck - 4 ? (
-							<group position={[0, 0, -150]}>
+							<group position={[0, 0, -105]}>
 								<Town3D size={96} seed={5} night cars={false} />
 							</group>
 						) : null}
@@ -282,11 +282,11 @@ export const Turns: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, take - 4, leader - 4, your - 4, lead - 4]}
 				angles={[
-					{at: [0, 30.3, 0], dist: 5, yaw: 200, pitch: 6, fov: 38},
+					{at: [0, 30.3, -1], dist: 9, yaw: 200, pitch: 8, fov: 40},
 					{at: [0, 30, -3], dist: 22, yaw: 160, pitch: 40, fov: 44},
 					{at: [0, 30, -3], dist: 20, yaw: 120, pitch: 30, fov: 44},
 					{at: [0, 30, -3], dist: 18, yaw: 220, pitch: 25, fov: 44},
-					{at: [0, 26, -20], dist: 42, yaw: 170, pitch: 12, fov: 46, dyaw: -10},
+					{at: [0, 28, -16], dist: 24, yaw: 15, pitch: 9, fov: 46, dyaw: -10},
 				]}
 				light={LIGHT.dusk}
 				bg={BG.dusk}
@@ -294,7 +294,7 @@ export const Turns: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<group>
 						<Fields3D dusk seed={6} />
 						{town ? (
-							<group position={[0, 0, -130]}>
+							<group position={[0, 0, -105]}>
 								<Town3D size={128} seed={7} night cars={false} />
 							</group>
 						) : null}
@@ -349,16 +349,16 @@ export const Home: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0, 3, 6], dist: 26, yaw: 20, pitch: 18, fov: 46},
 					{at: [0, 2.4, 5], dist: 12, yaw: 15, pitch: 6, fov: 42},
 					{at: [0, 1.5, 4.6], dist: 6, yaw: 25, pitch: 4, fov: 38},
-					{at: [0, 1.6, 4.8], dist: 3.4, yaw: -30, pitch: 4, fov: 34},
+					{at: [0, 1.5, 4.8], dist: 4.2, yaw: 70, pitch: 4, fov: 36},
 					{at: [0, 1.3, 5.4], dist: 4, yaw: 40, pitch: 6, fov: 34, ddist: -0.4},
 				]}
 				light={LIGHT.evening}
 				bg={BG.evening}
 				far={
 					<group>
-						<Town3D frame={frame} night={on} clear={[{at: [0, 0], r: 14}]} cars={false} />
+						<Town3D frame={frame} night lit={on} clear={[{at: [0, 0], r: 14}]} cars={false} />
 						<Ground color="#4A6A5A" size={28} />
-						<House night={on} door={street ? open : 0} />
+						<House night lit={on} door={street ? open : 0} />
 						{[-6, 6].map((x) => (
 							<StreetLamp3 key={x} at={[x, 0, 9]} on={on} />
 						))}
@@ -401,7 +401,7 @@ export const Night: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const take = cue(l0, 'And they take');
 	const outside = cue(l0, 'Outside your');
 	const sky = frame >= outside - 4;
-	const vx = lerp(-20, 30, span(frame, outside, dur, (v) => v));
+	const vx = lerp(0, 45, span(frame, outside, dur, (v) => v));
 	return (
 		<>
 			<Shot3
@@ -411,7 +411,7 @@ export const Night: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				cuts={[0, flew - 4, turns - 4, outside - 4]}
 				angles={
 					sky
-						? [{at: [50, 70, -150], dist: 175, yaw: 160, pitch: -22, fov: 30, ddist: 0, dyaw: 0}]
+						? [{at: [50, 70, -150], dist: 181, yaw: -17, pitch: -22, fov: 30, ddist: 0, dyaw: 0}]
 						: [
 								{at: [-1, 1.0, -2.4], dist: 4.2, yaw: 30, pitch: 34, fov: 38},
 								{at: [-1, 0.9, -3.0], dist: 2.2, yaw: 20, pitch: 50, fov: 34},
@@ -432,7 +432,7 @@ export const Night: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				near={
 					sky ? (
-						<Vee at={[vx, 40, -90]} frame={frame} n={4} gap={GAP} s={3.2} yaw={90} />
+						<Vee at={[vx, 33, -66]} frame={frame} n={4} gap={GAP} s={2.6} yaw={90} />
 					) : (
 						<group>
 							<group position={[-1, 0.66, -1.65]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -444,9 +444,9 @@ export const Night: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				overlay={() => (
 					<AbsoluteFill>
-						{!sky && frame > ride ? <Label text="RIDE THE WARM AIR" x={520} y={860} frame={frame} at={ride} size={42} color={UI.orange} /> : null}
+						{!sky && frame > ride ? <Label text="RIDE THE WARM AIR" x={450} y={860} frame={frame} at={ride} size={42} color={UI.orange} /> : null}
 						{!sky && frame > follow ? <Label text="FOLLOW EACH OTHER" x={960} y={860} frame={frame} at={follow} size={42} color={UI.cyan} /> : null}
-						{!sky && frame > take ? <Label text="TAKE TURNS" x={1400} y={860} frame={frame} at={take} size={42} color={UI.green} /> : null}
+						{!sky && frame > take ? <Label text="TAKE TURNS" x={1480} y={860} frame={frame} at={take} size={42} color={UI.green} /> : null}
 					</AbsoluteFill>
 				)}
 			/>
@@ -544,7 +544,7 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 							const h = headAt(w.p);
 							return (
 								<group key={i}>
-									<Hero3D who={P5[w.who]} position={w.p} turn={turn} armL={[60, 150]} armR={[60, 150]} reachL={70} reachR={70} face={out ? 'shocked' : 'neutral'} look={[0, 0.3]} lite />
+									<Hero3D who={P5[w.who]} position={w.p} turn={turn} armL={[25, -65]} armR={[25, -65]} reachL={130} reachR={130} face={out ? 'shocked' : 'neutral'} look={[0, 0.3]} lite />
 									<Binoculars at={[h[0] + Math.sin(turn) * 0.36, h[1] + 0.02, h[2] + Math.cos(turn) * 0.36]} turn={turn} />
 								</group>
 							);

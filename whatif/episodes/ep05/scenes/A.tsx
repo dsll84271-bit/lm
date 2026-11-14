@@ -18,13 +18,16 @@ import {mixArm, top, type V3} from './util';
 // how big wings would need to be, and the people who pedalled across the sea.
 
 /** Your house from the front: two floors, a pitched roof, your bedroom window upstairs. Front faces +z. */
-export const House: React.FC<{at?: V3; open?: number; night?: boolean; door?: number}> = ({at = [0, 0, 0], open = 0, night = false, door = 0}) => {
-	const glass = night ? '#FFD98A' : '#BFE3FA';
+export const House: React.FC<{at?: V3; open?: number; night?: boolean; door?: number; lit?: boolean}> = ({at = [0, 0, 0], open = 0, night = false, door = 0, lit}) => {
+	const glass = (lit ?? night) ? '#FFD98A' : night ? '#3A3470' : '#BFE3FA';
 	return (
 		<group position={at}>
 			<T shape={{kind: 'box', w: 9, h: 6.4, d: 7}} color={night ? '#6A5A9A' : '#FFE2C0'} position={[0, 3.2, 0]} outline={0.05} />
-			<T shape={{kind: 'box', w: 6.8, h: 6.8, d: 7.4}} color={night ? '#3A2E6A' : '#D8583A'} position={[0, 6.4, 0]} rotation={[0, 0, Math.PI / 4]} outline={0.05} />
-			<T shape={{kind: 'box', w: 1, h: 2.4, d: 1}} color="#8A5A4A" position={[2.6, 9.2, -1]} outline={0.03} />
+			<T shape={{kind: 'box', w: 6.36, h: 6.36, d: 6.9}} color={night ? '#6A5A9A' : '#FFE2C0'} position={[0, 6.4, 0]} rotation={[0, 0, Math.PI / 4]} outline={0.04} />
+			{[-1, 1].map((x) => (
+				<T key={x} shape={{kind: 'box', w: 6.9, h: 0.35, d: 7.8}} color={night ? '#3A2E6A' : '#D8583A'} position={[x * 2.35, 8.85, 0]} rotation={[0, 0, -x * (Math.PI / 4)]} outline={0.05} />
+			))}
+			<T shape={{kind: 'box', w: 1, h: 2.4, d: 1}} color="#8A5A4A" position={[2.6, 10.2, -1]} outline={0.03} />
 			{/* windows */}
 			{[[-2.4, 1.9], [2.4, 1.9], [-2.4, 4.6], [2.4, 4.6]].map(([x, y], i) => (
 				<group key={i} position={[x, y, 3.52]}>
@@ -129,8 +132,8 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={[0, duvet - 4, bed - 4, holding - 4, down - 4, up - 4, fly - 4]}
 				angles={[
-					{at: [-1, 3.55, -2.4], dist: 2.6, yaw: 35, pitch: -38, fov: 40, dyaw: 6},
-					{at: [0.6, 0.2, -1.4], dist: 3.0, yaw: 25, pitch: 62, fov: 44},
+					{at: [-1, 3.6, -2.5], dist: 2.2, yaw: 20, pitch: 72, fov: 44, dyaw: 6},
+					{at: [0, 0.4, -1.8], dist: 4.4, yaw: 40, pitch: 34, fov: 44},
 					{at: [-1, 0.6, -2.6], dist: 2.8, yaw: 8, pitch: 74, fov: 46},
 					{at: [-0.6, 2.3, -2.0], dist: 8.6, yaw: 12, pitch: 4, fov: 38},
 					{at: [-1, 2.4, -1.8], dist: 5.2, yaw: -22, pitch: 4, fov: 36, dy: -0.6},
@@ -142,7 +145,7 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				far={
 					<group>
 						<Bedroom />
-						<Ceiling />
+						{frame >= duvet - 4 ? <Ceiling /> : null}
 						<group position={[0.7, 0.04, -1.2]} rotation={[0, 0.5, 0]}>
 							<T shape={{kind: 'box', w: 1.3, h: 0.08, d: 1.5}} color="#FF8A3D" outline={0.015} />
 							<T shape={{kind: 'capsule', r: 0.09, len: 1.1}} color="#FF8A3D" position={[0, 0.06, 0.5]} rotation={[0, 0, Math.PI / 2]} outline={0.015} />
@@ -268,8 +271,8 @@ export const Window: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<Ground color="#8ED46A" size={30} />
 			</group>
 		);
-		near = <Flyer at={[lerp(-6, 6, t), 3.2, 0]} pitch={85} yaw={90} bank={Math.sin(frame * 0.12) * 10} frame={frame} face="happy" look={[0, -0.6]} />;
-		angle = {at: [lerp(-5, 5, t), 1.4, 0], dist: 9, yaw: 20, pitch: 22, fov: 42, ddist: 0, dyaw: 0};
+		near = <Flyer at={[lerp(-6, 6, t), 3.2, 9]} pitch={85} yaw={90} bank={Math.sin(frame * 0.12) * 10} frame={frame} face="happy" look={[0, -0.6]} />;
+		angle = {at: [lerp(-5, 5, t), 2.2, 9], dist: 6.5, yaw: 30, pitch: 16, fov: 42, ddist: 0, dyaw: 0};
 		blur = 0;
 	}
 	return (
@@ -337,7 +340,7 @@ export const School: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			</Street3>
 		);
 		near = <Flyer at={[x, y, 1.2]} pitch={84} yaw={90} frame={frame} face="happy" />;
-		angles = [{at: [x - 1, 3.6, 1.2], dist: 13, yaw: -10, pitch: 6, fov: 46, ddist: 0, dyaw: 0}];
+		angles = [{at: [x - 1, 4.4, 1.2], dist: 9.5, yaw: -10, pitch: 4, fov: 46, ddist: 0, dyaw: 0}];
 		blur = 1.5;
 		overlay = (cam) => {
 			const [bx, by] = project(cam, [0, 4.2, 1.2]);
@@ -444,9 +447,9 @@ export const Flap: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [0, 1.2, 0.5], dist: 11, yaw: 0, pitch: 8, fov: 42},
 					{at: [-0.2, 1.1, 1.0], dist: 5, yaw: 15, pitch: 6, fov: 38},
 					{at: [-3.6, 1.0, 2.2], dist: 5, yaw: 30, pitch: 6, fov: 38},
-					{at: [3.4, 1.6, 0], dist: 6.2, yaw: -30, pitch: 4, fov: 40},
+					{at: [3.4, 2.9, 0], dist: 7.5, yaw: -30, pitch: 4, fov: 40},
 					{at: [0, 1.0, 1], dist: 10, yaw: -8, pitch: 6, fov: 42},
-					{at: [1.4, 0.5 + lift * 1.6, 3.2], dist: 2.6, yaw: 25, pitch: 6, fov: 38, ddist: 0},
+					{at: [1.4 + lift * 0.5, 0.3 + lift * 3, 3.2], dist: 2.8, yaw: 25, pitch: 6, fov: 38, ddist: 0},
 				]}
 				light={LIGHT.street}
 				bg={BG.town}
@@ -547,7 +550,7 @@ export const Borelli: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				}
 				overlay={() => (
 					<AbsoluteFill>
-						<Card frame={frame} at={nearly - 4} until={pigeon - 10}>
+						<Card frame={frame} at={nearly - 4} until={pigeon - 18}>
 							<div style={{fontSize: 24, letterSpacing: 6, textAlign: 'center'}}>ROME · 1680</div>
 							<div style={{height: 4, background: '#3A2A1A', margin: '14px 0 22px'}} />
 							<div style={{fontSize: 60, lineHeight: 1.05, textAlign: 'center', fontWeight: 700}}>De Motu Animalium</div>
@@ -681,7 +684,7 @@ export const Giant: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					{at: [1.5, 1.2, 2], dist: 4, yaw: 20, pitch: 6, fov: 36},
 					{at: [-1, 2.5, 0], dist: 16, yaw: 25, pitch: 6, fov: 44},
 					{at: [-1, 1.4, 1], dist: 8, yaw: 10, pitch: 4, fov: 40},
-					{at: [-1, 1.6, 0], dist: 15, yaw: 0, pitch: 8, fov: 44},
+					{at: [-1, 2.0, -1], dist: 13, yaw: 0, pitch: 6, fov: 46},
 					{at: [-1.5, 1.6, 0], dist: 10, yaw: 35, pitch: 6, fov: 42},
 					{at: [6, 5, 0], dist: 26, yaw: 20, pitch: 6, fov: 46, ddist: 0},
 				]}
@@ -703,8 +706,8 @@ export const Giant: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				overlay={(cam) => {
 					const [lx, ly] = project(cam, [bird[0] - 3.5, bird[1] + 0.4, bird[2]]);
 					const [rx, ry] = project(cam, [bird[0] + 3.5, bird[1] + 0.4, bird[2]]);
-					const [ax, ay] = project(cam, [-1.85, 2.2, -3.4]);
-					const [bx, by] = project(cam, [2.25, 2.2, -3.4]);
+					const [ax, ay] = project(cam, [-1.85, 0.05, -3.4]);
+					const [bx, by] = project(cam, [2.25, 0.05, -3.4]);
 					const showSpan = frame > wings && frame < even;
 					return (
 						<AbsoluteFill>
@@ -720,7 +723,7 @@ export const Giant: React.FC<ShotProps> = ({frame, dur, lines}) => {
 									{frame > car ? (
 										<>
 											<line x1={ax} y1={ay} x2={bx} y2={by} stroke={UI.cyan} strokeWidth={6} strokeDasharray="10 8" />
-											<text x={(ax + bx) / 2} y={(ay + by) / 2 - 18} textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize={42} fill={UI.cyan} stroke={UI.ink} strokeWidth={8} paintOrder="stroke">
+											<text x={(ax + bx) / 2} y={(ay + by) / 2 + 52} textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize={42} fill={UI.cyan} stroke={UI.ink} strokeWidth={8} paintOrder="stroke">
 												CAR ≈ 4 M
 											</text>
 										</>

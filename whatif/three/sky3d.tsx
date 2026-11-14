@@ -125,7 +125,7 @@ export const Bird3D: React.FC<{
 	const big = L > 0.6;
 	const beat = wing === 'flap' ? Math.sin(frame * (rate ?? (big ? 0.28 : 0.6)) + phase) : 0;
 	const fold = wing === 'fold' ? 1 : wing === 'dive' ? 0.72 : 0;
-	const lift = wing === 'flap' ? beat * 0.55 : wing === 'glide' ? 0.08 + Math.sin(frame * 0.05 + phase) * 0.04 : wing === 'dive' ? 0.15 : 0.1;
+	const lift = wing === 'flap' ? beat * 0.5 : wing === 'glide' ? 0.08 + Math.sin(frame * 0.05 + phase) * 0.04 : wing === 'dive' ? 0.15 : 0.1;
 	const half = b.span / 2;
 	const inner = half * 0.48;
 	const outer = half * 0.52;
@@ -177,16 +177,18 @@ export const Bird3D: React.FC<{
 					)}
 					{/* wings */}
 					{[-1, 1].map((side) => (
-						<group key={side} position={[side * L * 0.2, L * 0.1, L * 0.08]} rotation={[0, side * deg(90) * fold, side * lift]} scale={[1 - 0.5 * fold, 1, 1]}>
-							<T shape={{kind: 'box', w: inner, h: thick, d: b.chord}} color={b.wing} position={[side * inner * 0.5, 0, 0]} outline={ol} />
-							{kind === 'condor' ? <T shape={{kind: 'box', w: inner * 0.9, h: thick * 1.1, d: b.chord * 0.38}} color="#F4F2F8" position={[side * inner * 0.5, 0.002, -b.chord * 0.3]} outline={0} /> : null}
-							<group position={[side * inner, 0, 0]} rotation={[0, wing === 'glide' || wing === 'dive' ? side * 0.12 : 0, side * lift * 0.6]}>
-								<T shape={{kind: 'box', w: outer * (b.fingers ? 0.7 : 1), h: thick * 0.9, d: b.chord * (b.pointed ? 0.62 : 0.8)}} color={b.tip} position={[side * outer * (b.fingers ? 0.35 : 0.5), 0, b.pointed ? -b.chord * 0.12 : 0]} rotation={[0, b.pointed ? side * 0.22 : 0, 0]} outline={ol} />
-								{b.fingers
-									? [...Array(5)].map((_, i) => (
-											<T key={i} shape={{kind: 'box', w: outer * 0.42, h: thick * 0.6, d: b.chord * 0.12}} color={b.tip} position={[side * outer * 0.88, 0, b.chord * (0.3 - i * 0.15)]} rotation={[0, side * (0.35 - i * 0.18), 0]} outline={ol * 0.6} />
-										))
-									: null}
+						<group key={side} position={[side * L * 0.2, L * (0.1 - 0.06 * fold), L * 0.08]} rotation={[0, side * deg(90) * fold, 0]}>
+							<group rotation={[deg(75) * fold, 0, side * (lift - 0.25 * fold)]} scale={[1 - 0.45 * fold, 1, 1]}>
+								<T shape={{kind: 'box', w: inner, h: thick, d: b.chord}} color={b.wing} position={[side * inner * 0.5, 0, 0]} outline={ol} />
+								{kind === 'condor' ? <T shape={{kind: 'box', w: inner * 0.9, h: thick * 1.1, d: b.chord * 0.38}} color="#F4F2F8" position={[side * inner * 0.5, 0.002, -b.chord * 0.3]} outline={0} /> : null}
+								<group position={[side * inner, 0, 0]} rotation={[0, wing === 'glide' || wing === 'dive' ? side * 0.12 : 0, side * lift * 0.3]}>
+									<T shape={{kind: 'box', w: outer * (b.fingers ? 0.7 : 1), h: thick * 0.9, d: b.chord * (b.pointed ? 0.62 : 0.8)}} color={b.tip} position={[side * outer * (b.fingers ? 0.35 : 0.5), 0, b.pointed ? -b.chord * 0.12 : 0]} rotation={[0, b.pointed ? side * 0.22 : 0, 0]} outline={ol} />
+									{b.fingers
+										? [...Array(5)].map((_, i) => (
+												<T key={i} shape={{kind: 'box', w: outer * 0.42, h: thick * 0.6, d: b.chord * 0.12}} color={b.tip} position={[side * outer * 0.88, 0, b.chord * (0.3 - i * 0.15)]} rotation={[0, side * (0.35 - i * 0.18), 0]} outline={ol * 0.6} />
+											))
+										: null}
+								</group>
 							</group>
 						</group>
 					))}
@@ -247,15 +249,19 @@ const puff = () => new THREE.SphereGeometry(1, 18, 12);
 /** One puffy cartoon cloud, `s` across-ish, centred on `at`. */
 export const Cloud3D: React.FC<{at: V3; s?: number; seed?: number; color?: string; shade?: string; outline?: number}> = ({at, s = 10, seed = 0, color = '#FFFFFF', shade = '#E4E0FF', outline = 0.04}) => {
 	const items: Copy[] = [];
-	const n = 9;
+	// a flat-bottomed row of puffs, bigger in the middle, with a second layer on top
+	const n = 7;
 	for (let i = 0; i < n; i++) {
-		const a = (i / n) * Math.PI * 2 + rnd(seed + i) * 0.6;
-		const rr = 0.25 + rnd(seed * 3 + i) * 0.22;
-		const r = s * rr;
-		items.push({p: [Math.cos(a) * s * 0.32, r * 0.35 + rnd(seed + i * 7) * s * 0.06, Math.sin(a) * s * 0.2], s: [r, r * 0.8, r], c: i % 3 === 0 ? shade : color});
+		const u = i / (n - 1) - 0.5;
+		const r = s * (0.2 + (0.5 - Math.abs(u)) * 0.22 + rnd(seed + i) * 0.05);
+		items.push({p: [u * s * 0.95, r * 0.55, (rnd(seed * 3 + i) - 0.5) * s * 0.18], s: [r, r * 0.85, r * 0.9], c: i % 3 === 1 ? shade : color});
 	}
-	items.push({p: [0, s * 0.2, 0], s: [s * 0.36, s * 0.32, s * 0.3], c: color});
-	items.push({p: [s * 0.1, s * 0.3, 0], s: [s * 0.24, s * 0.22, s * 0.22], c: color});
+	for (let i = 0; i < 4; i++) {
+		const u = (i + 0.5) / 4 - 0.5;
+		const r = s * (0.18 + (0.5 - Math.abs(u)) * 0.2 + rnd(seed * 5 + i) * 0.04);
+		items.push({p: [u * s * 0.6, s * 0.3 + r * 0.5, (rnd(seed * 7 + i) - 0.5) * s * 0.12], s: [r, r * 0.9, r * 0.9], c: color});
+	}
+	items.push({p: [0, s * 0.02, 0], s: [s * 0.55, s * 0.12, s * 0.22], c: shade});
 	return (
 		<group position={at}>
 			<Many kind={`cloud${seed}`} geom={puff} items={items} outline={outline} shadow={false} />
@@ -282,7 +288,7 @@ export const CloudSea: React.FC<{y: number; size?: number; seed?: number; hole?:
 	}
 	return (
 		<group>
-			<Many kind={`sea${seed}${size}${hole ? 'h' : ''}`} geom={puff} items={items} outline={0.05} shadow={false} />
+			<Many kind={`sea${seed}${size}${hole ? 'h' : ''}`} geom={puff} items={items} outline={0.028} shadow={false} />
 			<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, y - 3, 0]}>
 				<planeGeometry args={[size, size]} />
 				<meshBasicMaterial color={shade} />
@@ -311,7 +317,7 @@ export const Thermal3D: React.FC<{at: V3; frame: number; h?: number; r?: number;
 			return (
 				<group key={i} position={[Math.sin(t * 9 + i) * r * 0.2, y, Math.cos(t * 9 + i) * r * 0.2]} rotation={[Math.PI / 2 + Math.sin(i) * 0.15, 0, frame * 0.02 + i]}>
 					<mesh>
-						<torusGeometry args={[rr, 0.12 + t * 0.1, 6, 48, Math.PI * 1.5]} />
+						<torusGeometry args={[rr, (0.12 + t * 0.1) * (r / 6) * 1.6, 6, 48, Math.PI * 1.5]} />
 						<meshBasicMaterial color={color} transparent opacity={opacity * fade} depthWrite={false} toneMapped={false} />
 					</mesh>
 				</group>
@@ -330,14 +336,15 @@ const WALLS = ['#FFE8C8', '#F6D2B0', '#E8C8E8', '#CFE0F2', '#F2E2A8', '#E8B8A0']
 const ROOFS = ['#D8583A', '#B8462E', '#5A5E8A', '#3A8A8A', '#C86A3A'];
 const CARS = ['#E8453C', '#2E8AE8', '#F2C24A', '#FFFFFF', '#3AB87A', '#8A5AE8', '#2A2638'];
 
-export type TownOpts = {size?: number; block?: number; road?: number; seed?: number; clear?: Array<{at: [number, number]; r: number}>; frame?: number; cars?: boolean; park?: [number, number]; school?: [number, number]; jam?: number; night?: boolean};
+export type TownOpts = {size?: number; block?: number; road?: number; seed?: number; clear?: Array<{at: [number, number]; r: number}>; frame?: number; cars?: boolean; park?: [number, number]; school?: [number, number]; jam?: number; night?: boolean; lit?: boolean};
 
 /**
  * A town seen from the sky: a grid of roads, houses with pitched roofs,
  * gardens, trees and cars. Blocks listed in `park` or `school` (grid cell
  * i, j) are a park or the school instead of houses.
  */
-export const Town3D: React.FC<TownOpts> = ({size = 220, block = 26, road = 6, seed = 0, clear = [], frame = 0, cars = true, park, school, jam, night = false}) => {
+export const Town3D: React.FC<TownOpts> = ({size = 220, block = 26, road = 6, seed = 0, clear = [], frame = 0, cars = true, park, school, jam, night = false, lit: litIn}) => {
+	const lights = litIn ?? night;
 	const cell = block + road;
 	const n = Math.ceil(size / cell);
 	const walls: Copy[] = [];
@@ -394,7 +401,7 @@ export const Town3D: React.FC<TownOpts> = ({size = 220, block = 26, road = 6, se
 					walls.push({p: [x, ht / 2, z], s: side % 2 ? [d, ht, w] : [w, ht, d], c: night ? '#4A4280' : WALLS[Math.floor(rnd(k * 3.3) * WALLS.length)]});
 					const a = w * 0.74;
 					roofs.push({p: [x, ht, z], s: [a, a, d * 1.04], r: [0, yaw, Math.PI / 4], c: night ? '#2A2458' : ROOFS[Math.floor(rnd(k * 4.7) * ROOFS.length)]});
-					if (night && rnd(k * 6.1) > 0.35) {
+					if (lights && rnd(k * 6.1) > 0.35) {
 						const fx = side === 1 ? -1 : side === 3 ? 1 : 0;
 						const fz = side === 0 ? 1 : side === 2 ? -1 : 0;
 						lit.push({p: [x + fx * (d / 2 + 0.02), ht * 0.45, z + fz * (d / 2 + 0.02)], s: [fx ? 0.05 : 1.2, 1, fz ? 0.05 : 1.2], c: '#FFD98A'});
@@ -666,11 +673,14 @@ export const Gossamer3D: React.FC<{at: V3; frame: number; yaw?: number; children
 		<T shape={{kind: 'cyl', r: 0.06, h: 6}} color="#2A2638" position={[0, 2.4, 3]} rotation={[Math.PI / 2, 0, 0]} outline={0} />
 		<T shape={{kind: 'box', w: 6, h: 0.06, d: 1.2}} color="#F4F2FF" position={[0, 2.5, 6]} outline={0.03} opacity={0.85} />
 		{/* pod */}
-		<T shape={{kind: 'capsule', r: 0.85, len: 1.6}} color="#DCEFFF" position={[0, 1.4, 0.2]} rotation={[Math.PI / 2, 0, 0]} outline={0.03} opacity={0.35} />
+		<mesh position={[0, 1.4, 0.2]} rotation={[Math.PI / 2, 0, 0]} renderOrder={5}>
+			<capsuleGeometry args={[0.85, 1.6, 8, 24]} />
+			<meshBasicMaterial color="#DCEFFF" transparent opacity={0.22} depthWrite={false} />
+		</mesh>
 		{children}
 		{/* propeller */}
 		<group position={[0, 1.6, -1.6]} rotation={[0, 0, frame * 0.7]}>
-			<T shape={{kind: 'box', w: 3.4, h: 0.22, d: 0.06}} color="#2A2638" outline={0.01} />
+			<T shape={{kind: 'box', w: 3.4, h: 0.12, d: 0.04}} color="#8A8AA8" outline={0} />
 		</group>
 	</group>
 );
