@@ -1,0 +1,359 @@
+{
+ "seconds": 484.116,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 14.727,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up with your nose pressed against the ceiling. Your duvet is on the floor. Your bed is a long way down. And you're not holding on to anything.",
+     "start": 0.25,
+     "end": 8.647
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You think, down, and you drift down. You think, up, and you float back up. You can fly.",
+     "start": 9.347,
+     "end": 14.127
+    }
+   ]
+  },
+  {
+   "id": "window",
+   "start": 14.727,
+   "end": 33.602,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So you do what anyone would do. You open the window, and you jump. The street drops away beneath you. The houses look like toys. The cars look like beetles. The wind roars in your ears, and you're laughing so hard you can barely breathe. You do a loop the loop over your own roof, and chase your shadow across the gardens.",
+     "start": 14.977,
+     "end": 33.102
+    }
+   ]
+  },
+  {
+   "id": "school",
+   "start": 33.602,
+   "end": 54.615,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your walk to school usually takes twenty minutes. Today it takes two. You fly right over the traffic jam, over the school bus, over your teacher's car, and land in the middle of the playground. For a second, everyone just stares. Then everyone screams. Your best friend runs over and asks if you can teach them. You have absolutely no idea how.",
+     "start": 33.852,
+     "end": 54.115
+    }
+   ]
+  },
+  {
+   "id": "flap",
+   "start": 54.615,
+   "end": 70.617,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Of course, at break time, everyone wants to try. Your friends flap their arms. They jump off benches. They jump off the climbing frame. Nobody leaves the ground for more than half a second. And a pigeon just flaps twice, and lifts off as if it's nothing.",
+     "start": 54.865,
+     "end": 70.117
+    }
+   ]
+  },
+  {
+   "id": "borelli",
+   "start": 70.617,
+   "end": 94.563,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Real people can't fly by flapping, and we've known why for a long time. Nearly three hundred and fifty years ago, an Italian scientist called Giovanni Borelli compared people with birds, and showed that our chest and arm muscles are far too weak to lift us.",
+     "start": 70.867,
+     "end": 86.735
+    },
+    {
+     "who": "NARRATOR",
+     "text": "A pigeon's main flight muscle alone is about a fifth of its whole weight. Yours are a tiny fraction of that.",
+     "start": 87.435,
+     "end": 94.063
+    }
+   ]
+  },
+  {
+   "id": "bones",
+   "start": 94.563,
+   "end": 115.915,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You've probably heard that birds fly because they have hollow bones. Their bones are hollow. But in twenty ten, a scientist called Elizabeth Dumont found that they're also heavier for their size than ours. A bird's skeleton weighs about as much as a mammal's the same size. Light bones aren't the secret. Huge muscles, and the right wings, are.",
+     "start": 94.813,
+     "end": 115.415
+    }
+   ]
+  },
+  {
+   "id": "giant",
+   "start": 115.915,
+   "end": 136.8,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So how big would your wings need to be? The biggest bird that ever flew, Argentavis, lived in South America six million years ago. It weighed about seventy kilograms, like a grown up person, and its wings stretched about seven metres, longer than a car. And even it was probably too heavy to keep itself up just by flapping. It soared.",
+     "start": 116.165,
+     "end": 136.3
+    }
+   ]
+  },
+  {
+   "id": "gossamer",
+   "start": 136.8,
+   "end": 167.152,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "People have flown on their own muscle power, though. In nineteen seventy nine, a cyclist called Bryan Allen pedalled a plane called the Gossamer Albatross all the way across the English Channel. Its wings were nearly thirty metres long, and the whole plane weighed less than he did. It took him almost three hours, skimming just above the waves. Nine years later, a Greek cyclist went even further, pedalling a plane called Daedalus a hundred and fifteen kilometres, from Crete to the island of Santorini.",
+     "start": 137.05,
+     "end": 166.652
+    }
+   ]
+  },
+  {
+   "id": "race",
+   "start": 167.152,
+   "end": 187.403,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But you don't need any of that. After school, you race a pigeon across the park, and you win. The pigeon lands on a lamp post and glares at you. Then something shoots past you like a missile. A peregrine falcon, diving. Peregrines are the fastest animals on Earth. When they dive, they can go more than three hundred kilometres an hour.",
+     "start": 167.402,
+     "end": 186.903
+    }
+   ]
+  },
+  {
+   "id": "clouds",
+   "start": 187.403,
+   "end": 220.047,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Next, you want to see what's above the clouds. Inside a cloud, it's just cold, wet fog. Then you burst out of the top into sunshine, and there's a whole white world underneath you, like a field of snow that goes on forever.",
+     "start": 187.653,
+     "end": 201.0
+    },
+    {
+     "who": "NARRATOR",
+     "text": "That fluffy cloud you just flew through isn't light, either. Scientists at the National Center for Atmospheric Research in America worked out that an ordinary puffy cloud holds about five hundred tonnes of water. That's about as heavy as a hundred elephants, floating over your head as tiny droplets.",
+     "start": 201.7,
+     "end": 219.547
+    }
+   ]
+  },
+  {
+   "id": "high",
+   "start": 220.047,
+   "end": 245.288,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You keep climbing, and it gets cold. Fast. Every kilometre you go up, the air gets about six and a half degrees colder. Frost grows on your hoodie. And no matter how hard you breathe, you can't get enough air. Your ears pop. Your fingers go numb.",
+     "start": 220.297,
+     "end": 235.241
+    },
+    {
+     "who": "NARRATOR",
+     "text": "The air up here is thin. At the top of Mount Everest, nearly nine kilometres up, every breath has only about a third of the oxygen you'd get at the beach.",
+     "start": 235.941,
+     "end": 244.788
+    }
+   ]
+  },
+  {
+   "id": "geese",
+   "start": 245.288,
+   "end": 265.566,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And yet, something flies past you. Geese. Bar headed geese cross the Himalayas, the highest mountains on Earth, every year. When scientists tracked them, one was flying over seven thousand metres up. Their blood is built to grab oxygen out of thin air. Yours isn't. Your head spins, and you drop back below the clouds.",
+     "start": 245.538,
+     "end": 265.066
+    }
+   ]
+  },
+  {
+   "id": "lost",
+   "start": 265.566,
+   "end": 279.499,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That's when you notice two problems. You're starving. And you have no idea where you are. Every field looks the same. Every town looks the same. And straight ahead, there's nothing but sea. Your phone is at home, on your bed.",
+     "start": 265.816,
+     "end": 278.999
+    }
+   ]
+  },
+  {
+   "id": "godwit",
+   "start": 279.499,
+   "end": 306.156,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Birds manage journeys much longer than yours. In twenty twenty two, a young bar tailed godwit, a bird that weighs less than a bag of sugar, flew from Alaska to Tasmania without stopping once. Thirteen and a half thousand kilometres, in eleven days, with no food and no rest. Nobody even taught it the way. It was making the trip for the first time. Birds find their way using the sun, the stars, and even the Earth's magnetic field. You've got none of that.",
+     "start": 279.749,
+     "end": 305.656
+    }
+   ]
+  },
+  {
+   "id": "sleep",
+   "start": 306.156,
+   "end": 329.749,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You're so tired that you nod off, drop like a stone, and wake up with your toes in the sea. Some birds have solved this, too. In twenty sixteen, scientists found that frigatebirds can sleep while they fly, sometimes with just half of their brain at a time, keeping one eye open to see where they're going.",
+     "start": 306.406,
+     "end": 324.344
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And common swifts can stay up in the air for ten months without ever landing.",
+     "start": 325.044,
+     "end": 329.249
+    }
+   ]
+  },
+  {
+   "id": "tired",
+   "start": 329.749,
+   "end": 344.968,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But you can't sleep up here, and flying takes everything you've got. Your arms ache. The sun is going down. The coast is a thin line far behind you. You flap harder, and that only makes it worse. If you keep going like this, you won't make it.",
+     "start": 329.999,
+     "end": 344.468
+    }
+   ]
+  },
+  {
+   "id": "thermal",
+   "start": 344.968,
+   "end": 360.452,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you remember the giant bird. It didn't flap. It soared. Over the sunny cliffs, warm air is rising like an invisible chimney. So you spread your arms, stop fighting, and let it carry you round and round, up and up, without doing anything at all.",
+     "start": 345.218,
+     "end": 360.052
+    }
+   ]
+  },
+  {
+   "id": "condor",
+   "start": 360.452,
+   "end": 378.836,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Andean condors, the heaviest soaring birds alive today, live like this. In twenty twenty, scientists fitted them with trackers, and found they flap only about one percent of the time they're in the air. One flew for over five hours, and a hundred and seventy kilometres, without flapping once.",
+     "start": 360.702,
+     "end": 378.336
+    }
+   ]
+  },
+  {
+   "id": "vee",
+   "start": 378.836,
+   "end": 403.148,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "From the top, you spot a flock of geese flying in a V, heading inland. Towards home. You tuck in at the end of the line, and suddenly flying gets easier. Every bird is riding the swirl of rising air that comes off the wingtip of the bird in front.",
+     "start": 379.086,
+     "end": 394.169
+    },
+    {
+     "who": "NARRATOR",
+     "text": "In twenty fourteen, scientists flew alongside a flock of ibises, and found the birds even time their wingbeats to catch that lift.",
+     "start": 394.869,
+     "end": 402.748
+    }
+   ]
+  },
+  {
+   "id": "turns",
+   "start": 403.148,
+   "end": 419.375,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And the front of the V is the hardest place to be, because there's nobody to ride behind. So the birds take turns. When the leader gets tired, it drops back and another one takes over. So when it's your turn, you fly up to the front, and you lead the whole flock home.",
+     "start": 403.398,
+     "end": 418.875
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "start": 419.375,
+   "end": 432.714,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The geese drop you off right over your street, just as the streetlights come on. You land on your doorstep, and your mum throws the door open. Where have you been, she says. And then she just hugs you, for a really long time.",
+     "start": 419.625,
+     "end": 432.214
+    }
+   ]
+  },
+  {
+   "id": "night",
+   "start": 432.714,
+   "end": 452.607,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That night, you lie in bed and think about it all. You flew higher than mountains and faster than cars, and you still nearly didn't make it home. Turns out even birds don't do the hard parts alone. They ride the warm air. They follow each other. And they take turns. Outside your window, far away, a flock of geese crosses the moon.",
+     "start": 432.964,
+     "end": 452.007
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 452.607,
+   "end": 469.682,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The next morning, your street is full of people with binoculars. Last night, somebody spotted a very rare, very large, very orange bird flying with a flock of geese, and now every bird watcher in the country wants to see it.",
+     "start": 452.857,
+     "end": 466.407
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You might want to keep your hood up today.",
+     "start": 467.107,
+     "end": 468.882
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 469.682,
+   "end": 484.116,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, if you could fly for a day, where would you go first? Above the clouds, over the mountains, or just straight over the traffic to school? Tell us in the comments. And if you want more what ifs, subscribe. See you in the next one.",
+     "start": 469.932,
+     "end": 483.116
+    }
+   ]
+  }
+ ]
+}

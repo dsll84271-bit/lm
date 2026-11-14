@@ -33,6 +33,10 @@ export type Hero3DProps = {
 	sit?: boolean;
 	hop?: number;
 	tilt?: number;
+	/** Degrees the head tips back (to look ahead while flying face-down). */
+	headUp?: number;
+	/** The hoodie's hood pulled up over the head. */
+	hood?: boolean;
 	lean?: number;
 	still?: boolean;
 	opacity?: number;
@@ -93,6 +97,8 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 	sit = false,
 	hop = 0,
 	tilt = 0,
+	headUp = 0,
+	hood = false,
 	lean = 0,
 	still = false,
 	opacity = 1,
@@ -205,10 +211,16 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 				<Limb side={-1} a={baseL} reach={reachL + (walk !== undefined ? armSwing * 40 : 0)} color={who.hoodie} dark={who.hoodieDark} hand={who.head} fist={fists} sway={sway} />
 				<Limb side={1} a={baseR} reach={reachR - (walk !== undefined ? armSwing * 40 : 0)} color={who.hoodie} dark={who.hoodieDark} hand={who.head} fist={fists} sway={-sway} />
 				{/* head */}
-				<group position={[0, 1.36, 0]} rotation={[nod, 0, deg(tilt)]}>
+				<group position={[0, 1.36, 0]} rotation={[nod - deg(headUp), 0, deg(tilt)]}>
 					{who.hair === 'long' ? <T shape={{kind: 'capsule', r: 0.31, len: 0.25}} color={hairColor} position={[0, -0.1, -0.08]} /> : null}
 					{who.hair === 'bun' ? <T shape={{kind: 'sphere', r: 0.11}} color={hairColor} position={[0, 0.34, -0.06]} /> : null}
 					<T shape={{kind: 'sphere', r: R, seg: 48}} color={who.head} outline={0.02} />
+					{hood ? (
+						<group>
+							<T shape={{kind: 'sphere', r: R * 1.14, seg: 40}} color={who.hoodie} position={[0, 0.04, -0.07]} scale={[1, 1.02, 0.95]} outline={0.02} />
+							<T shape={{kind: 'torus', r: R * 0.98, tube: 0.05}} color={who.hoodieDark} position={[0, 0.03, 0.17]} rotation={[0, 0, 0]} scale={[1, 1.06, 1]} outline={0.01} />
+						</group>
+					) : null}
 					<mesh geometry={decal} renderOrder={3}>
 						<meshBasicMaterial map={tex} transparent alphaTest={0.05} toneMapped={false} />
 					</mesh>

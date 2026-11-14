@@ -7,10 +7,12 @@ import {Test3D} from '../three/Test3D';
 import {Test3D2} from '../three/Test3D2';
 import {TestGhost} from '../three/TestGhost';
 import {TestAnt} from '../three/TestAnt';
+import {TestFly} from '../three/TestFly';
 import {EP01_FRAMES, Episode01} from '../episodes/ep01/Episode';
 import {EP02_FRAMES, Episode02} from '../episodes/ep02/Episode';
 import {EP03_FRAMES, Episode03} from '../episodes/ep03/Episode';
 import {EP04_FRAMES, Episode04} from '../episodes/ep04/Episode';
+import {EP05_FRAMES, Episode05} from '../episodes/ep05/Episode';
 
 export const Root: React.FC = () => (
 	<>
@@ -18,10 +20,12 @@ export const Root: React.FC = () => (
 		<Composition id="Ep02" component={Episode02} width={1920} height={1080} fps={30} durationInFrames={EP02_FRAMES} />
 		<Composition id="Ep03" component={Episode03} width={1920} height={1080} fps={30} durationInFrames={EP03_FRAMES} />
 		<Composition id="Ep04" component={Episode04} width={1920} height={1080} fps={30} durationInFrames={EP04_FRAMES} />
+		<Composition id="Ep05" component={Episode05} width={1920} height={1080} fps={30} durationInFrames={EP05_FRAMES} />
 		<Still id="HeroSheet" component={HeroSheet} width={1920} height={1080} />
 		<Still id="TestThumb" component={TestThumb} width={1920} height={1080} />
 		<Still id="Test3D" component={Test3D} width={1920} height={1080} />
 		<Composition id="TestGhost" component={TestGhost} width={1920} height={1080} fps={30} durationInFrames={100} />
+		<Composition id="TestFly" component={TestFly} width={1920} height={1080} fps={30} durationInFrames={80} />
 		<Composition id="TestAnt" component={TestAnt} width={1920} height={1080} fps={30} durationInFrames={80} />
 		<Composition id="Test3D2" component={Test3D2} width={1920} height={1080} fps={30} durationInFrames={300} />
 	</>
