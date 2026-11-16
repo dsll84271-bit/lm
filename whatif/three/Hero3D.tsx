@@ -48,6 +48,9 @@ export type Hero3DProps = {
 	ghost?: number;
 	/** Little sparkles around an invisible body (default on when ghost > 0.3). */
 	shimmer?: boolean;
+	/** Scuba gear: dive mask, mouthpiece, tank on the back, straps and fins. `mask` 0 pushes the mask up onto the forehead. */
+	scuba?: boolean;
+	mask?: number;
 };
 
 const R = 0.32; // head radius
@@ -106,6 +109,8 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 	lite = false,
 	ghost = 0,
 	shimmer,
+	scuba = false,
+	mask = 1,
 }) => {
 	const g = Math.max(0, Math.min(1, ghost));
 	const eyesOnly = g > 0.5;
@@ -176,6 +181,7 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 						<group position={[0, -0.42, 0.05]} rotation={[sit ? Math.PI / 2 : 0, 0, 0]}>
 							<T shape={{kind: 'box', w: 0.15, h: 0.09, d: 0.27}} color={who.shoe} position={[0, 0.01, 0.02]} outline={0.012} />
 							<T shape={{kind: 'box', w: 0.16, h: 0.035, d: 0.29}} color={who.sole} position={[0, -0.045, 0.02]} outline={0.01} />
+							{scuba ? <T shape={{kind: 'box', w: 0.22, h: 0.025, d: 0.46}} color={SCUBA.fin} position={[0, -0.05, 0.36]} outline={0.01} /> : null}
 						</group>
 					</group>
 				);
@@ -205,6 +211,20 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 						</mesh>
 					</group>
 				) : null}
+				{scuba ? (
+					<group>
+						<T shape={{kind: 'capsule', r: 0.12, len: 0.4}} color={SCUBA.tank} position={[0, 0.84, -0.4]} outline={0.015} />
+						<T shape={{kind: 'cyl', r: 0.04, h: 0.08}} color={SCUBA.rubber} position={[0, 1.16, -0.4]} outline={0.008} />
+						<T shape={{kind: 'cyl', r: 0.025, h: 0.12}} color="#B8B8C8" position={[0, 1.2, -0.4]} rotation={[0, 0, Math.PI / 2]} outline={0.006} />
+						<T shape={{kind: 'cyl', r: 0.305, r2: 0.29, h: 0.07, seg: 40}} color={SCUBA.rubber} position={[0, 0.58, 0]} outline={0.008} />
+						{[-1, 1].map((x) => (
+							<T key={x} shape={{kind: 'box', w: 0.06, h: 0.5, d: 0.03}} color={SCUBA.rubber} position={[x * 0.16, 0.8, 0.255]} rotation={[0.08, 0, x * 0.12]} outline={0.006} />
+						))}
+						{[-1, 1].map((x) => (
+							<T key={`b${x}`} shape={{kind: 'box', w: 0.06, h: 0.03, d: 0.6}} color={SCUBA.rubber} position={[x * 0.2, 1.06, -0.05]} outline={0.006} />
+						))}
+					</group>
+				) : null}
 				{!who.collar
 					? [-0.07, 0.07].map((x) => <T key={x} shape={{kind: 'capsule', r: 0.012, len: 0.12}} color={who.sole} position={[x, 0.98, 0.25]} outline={0.006} />)
 					: null}
@@ -224,6 +244,7 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 					<mesh geometry={decal} renderOrder={3}>
 						<meshBasicMaterial map={tex} transparent alphaTest={0.05} toneMapped={false} />
 					</mesh>
+					{scuba ? <Mask down={mask} /> : null}
 					{/* gloss highlight */}
 					<mesh position={[-0.13, 0.17, 0.22]} rotation={[0, -0.4, -0.5]} scale={[1, 0.55, 0.3]}>
 						<sphereGeometry args={[0.06, 16, 12]} />
@@ -245,6 +266,33 @@ export const Hero3D: React.FC<Hero3DProps> = ({
 			</group>
 		</group>
 		</Fade.Provider>
+	);
+};
+
+const SCUBA = {fin: '#FFD23A', tank: '#FFD23A', rubber: '#24203A', frame: '#2EC4E8'};
+
+/** A dive mask over the eyes (down = 1) or pushed up on the forehead (down = 0), with its strap, and a mouthpiece. */
+const Mask: React.FC<{down: number}> = ({down}) => {
+	const up = 1 - down;
+	return (
+		<group>
+			<T shape={{kind: 'torus', r: R * 1.02, tube: 0.022}} color={SCUBA.rubber} position={[0, 0.02 + up * 0.17, 0]} rotation={[Math.PI / 2 - 0.1 - up * 0.25, 0, 0]} outline={0.006} />
+			<group position={[0, -0.025 + up * 0.24, 0.27 - up * 0.04]} rotation={[-up * 0.7, 0, 0]}>
+				<T shape={{kind: 'torus', r: 0.15, tube: 0.03}} color={SCUBA.frame} scale={[1.28, 0.72, 1.2]} outline={0.01} />
+				<mesh position={[0, 0, 0.005]} scale={[1.28, 0.72, 1]}>
+					<circleGeometry args={[0.15, 40]} />
+					<meshBasicMaterial color="#BFF0FF" transparent opacity={0.22} depthWrite={false} toneMapped={false} />
+				</mesh>
+				<mesh position={[-0.07, 0.03, 0.008]} rotation={[0, 0, -0.5]}>
+					<planeGeometry args={[0.02, 0.09]} />
+					<meshBasicMaterial color="#ffffff" transparent opacity={0.7} toneMapped={false} />
+				</mesh>
+				<T shape={{kind: 'sphere', r: 0.05}} color={SCUBA.rubber} position={[0, -0.09, 0.02]} scale={[0.8, 0.9, 0.9]} outline={0.006} />
+			</group>
+			<T shape={{kind: 'cyl', r: 0.05, h: 0.1}} color={SCUBA.rubber} position={[0, -0.2, 0.28]} rotation={[Math.PI / 2, 0, 0]} outline={0.008} />
+			<T shape={{kind: 'cyl', r: 0.032, h: 0.03}} color="#8A8AA0" position={[0, -0.2, 0.34]} rotation={[Math.PI / 2, 0, 0]} outline={0.006} />
+			<T shape={{kind: 'capsule', r: 0.022, len: 0.22}} color={SCUBA.rubber} position={[0.14, -0.28, 0.17]} rotation={[0.6, 0, 1.0]} outline={0.006} />
+		</group>
 	);
 };
 
