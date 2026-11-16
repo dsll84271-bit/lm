@@ -145,7 +145,7 @@ export const Slime3D: React.FC<{at?: V3; top: number; frame: number; n?: number;
 		const L = 0.4 + rnd(i * 6.7 + seed) * 1.0 + Math.sin(frame * 0.03 + i) * 0.08;
 		strands.push({p: [x, top - L / 2, z], s: [0.05, L / 2, 0.05]});
 		const t = ((frame * 0.02 + rnd(i * 3.3 + seed)) % 1);
-		drops.push({p: [x, top - L - t * t * (top - L), z], s: 0.06 * (1 - t * 0.3)});
+		drops.push({p: [x, top - L - t * t * (top - L), z], s: 0.035 * (1 - t * 0.3)});
 	}
 	return (
 		<group>

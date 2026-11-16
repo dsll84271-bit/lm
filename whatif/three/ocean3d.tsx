@@ -254,7 +254,7 @@ const spermR = curve([[0, 0], [0.025, 0.016], [0.1, 0.028], [0.25, 0.055], [0.45
 /** Mottled grey-blue skin with a paler belly and throat grooves. */
 const baleenSkin = (P: typeof BLUE, seed: number, grooveFrom: number) => (t: number, a: number) => {
 	const s = Math.sin(a);
-	const spot = rnd(Math.floor(t * 60) * 13.1 + Math.floor(((a + 7) % (Math.PI * 2)) * 6) * 7.7 + seed) > 0.8;
+	const spot = Math.sin(t * 95 + Math.sin(a * 5 + seed) * 2.5) * Math.sin(a * 7 + t * 40 + seed) > 0.45;
 	let c = s > -0.25 ? (spot ? P.mottle : P.top) : mix(P.top, P.belly, Math.min(1, (-s - 0.25) * 2.5));
 	if (s < -0.45 && t > grooveFrom && Math.floor(a * 9) % 2 === 0) {
 		c = P.groove;
@@ -295,13 +295,13 @@ export const Whale3D: React.FC<WhaleProps & {kind: WhaleKind}> = ({kind, at, rot
 			color: (t, a) => {
 				const s = Math.sin(a);
 				const cc = Math.cos(a);
-				if (t > 0.64 && t < 0.975 && s < -0.86 && Math.abs(cc) < 0.5) {
+				if (t > 0.64 && t < 0.975 && s < -0.95 && Math.abs(cc) < 0.22) {
 					return SPERM.lip;
 				}
 				if (t < 0.62) {
-					return Math.floor(t * 70 + Math.sin(a * 3) * 0.6) % 3 === 0 ? SPERM.wrinkle : rnd(Math.floor(t * 50) + Math.floor(a * 5) * 3.3 + seed) > 0.94 ? SPERM.light : SPERM.top;
+					return Math.floor(t * 70 + Math.sin(a * 3) * 0.6) % 3 === 0 ? SPERM.wrinkle : Math.sin(t * 80 + Math.sin(a * 4) * 3) * Math.sin(a * 6 + t * 30) > 0.7 ? SPERM.light : SPERM.top;
 				}
-				return rnd(Math.floor(t * 40) * 7 + Math.floor(a * 4) * 3.1 + seed) > 0.96 ? SPERM.light : SPERM.top;
+				return Math.sin(t * 60 + Math.sin(a * 3) * 2) * Math.sin(a * 5 + t * 20) > 0.8 ? SPERM.light : SPERM.top;
 			},
 		};
 		const head = (t: number) => spermR(t) * h(t);
@@ -323,8 +323,6 @@ export const Whale3D: React.FC<WhaleProps & {kind: WhaleKind}> = ({kind, at, rot
 						items={[...Array(40)].map((_, i) => ({p: [(i % 2 ? 1 : -1) * 0.0085, 0.012, 0.035 + Math.floor(i / 2) * 0.0125] as V3, s: 1 - Math.floor(i / 2) * 0.012}))}
 					/>
 				</group>
-				{/* the white roof of the mouth, seen when the jaw drops */}
-				{jaw > 0.02 ? <T shape={{kind: 'box', w: 0.05, h: 0.004, d: 0.31}} color={SPERM.mouth} position={[0, jawY + 0.002, 0.8]} outline={0} /> : null}
 				{/* the blowhole, on the front left of the head */}
 				<T shape={{kind: 'capsule', r: 0.004, len: 0.012}} color="#231E2C" position={[0.045, head(0.955) - 0.002, 0.955]} rotation={[Math.PI / 2, 0, 0.5]} outline={0} />
 				{/* the hump and knuckles on the back */}
@@ -516,7 +514,7 @@ const rippleTex = () => {
 		const x = c.getContext('2d')!;
 		x.fillStyle = '#8FDcF8';
 		x.fillRect(0, 0, 512, 512);
-		x.strokeStyle = 'rgba(255,255,255,0.75)';
+		x.strokeStyle = 'rgba(255,255,255,0.45)';
 		x.lineWidth = 6;
 		for (let i = 0; i < 70; i++) {
 			const cx = rnd(i * 3.3) * 512;
@@ -529,7 +527,7 @@ const rippleTex = () => {
 		ripple = new THREE.CanvasTexture(c);
 		ripple.wrapS = THREE.RepeatWrapping;
 		ripple.wrapT = THREE.RepeatWrapping;
-		ripple.repeat.set(10, 10);
+		ripple.repeat.set(18, 18);
 		ripple.colorSpace = THREE.SRGBColorSpace;
 	}
 	return ripple;
@@ -557,13 +555,13 @@ const rayFade = () => {
  * sunbeams slanting down, drifting specks around `center`, and (optionally) a
  * sandy floor with rocks and swaying kelp.
  */
-export const Underwater3D: React.FC<{frame: number; surface?: number; center?: V3; floor?: number; rays?: number; snow?: number; dark?: number}> = ({frame, surface = 0, center = [0, -6, 0], floor, rays = 1, snow = 1, dark = 0}) => {
+export const Underwater3D: React.FC<{frame: number; surface?: number; center?: V3; floor?: number; rays?: number; snow?: number; dark?: number; rise?: number}> = ({frame, surface = 0, center = [0, -6, 0], floor, rays = 1, snow = 1, dark = 0, rise = 0}) => {
 	const tex = rippleTex();
 	tex.offset.set(frame * 0.0015, frame * 0.001);
 	const specks: Copy[] = [];
 	for (let i = 0; i < Math.round(260 * snow); i++) {
-		const t = (frame * 0.002 + rnd(i * 1.9)) % 1;
-		specks.push({p: [center[0] + (rnd(i * 3.7) - 0.5) * 30, center[1] + (rnd(i * 5.3) - 0.5) * 16 - t * 2, center[2] + (rnd(i * 7.9) - 0.5) * 30], s: 0.02 + rnd(i * 2.2) * 0.03});
+		const t = (frame * (0.002 + rise * 0.01) + rnd(i * 1.9)) % 1;
+		specks.push({p: [center[0] + (rnd(i * 3.7) - 0.5) * 30, center[1] + (rnd(i * 5.3) - 0.5) * 16 + (rise > 0 ? (t - 0.5) * 16 : -t * 2), center[2] + (rnd(i * 7.9) - 0.5) * 30], s: 0.02 + rnd(i * 2.2) * 0.03});
 	}
 	const kelp: Copy[] = [];
 	const rocks: Copy[] = [];
@@ -574,7 +572,7 @@ export const Underwater3D: React.FC<{frame: number; surface?: number; center?: V
 			rocks.push({p: [x, floor, z], s: [1 + rnd(i) * 2, 0.5 + rnd(i * 2) * 1.2, 1 + rnd(i * 3) * 2], c: rnd(i * 8) > 0.5 ? '#6A6A8A' : '#7A6A7A'});
 			for (let k = 0; k < 6; k++) {
 				const sway = Math.sin(frame * 0.04 + i + k * 0.5) * 0.12 * k;
-				kelp.push({p: [x + 1.5 + sway, floor + 0.6 + k * 1.1, z + 0.5], s: [0.25, 0.7, 0.12], r: [0, i, sway * 0.5], c: k % 2 ? '#3FA86A' : '#4FB87A'});
+				kelp.push({p: [x + 1.5 + sway, floor + 0.4 + k * 0.75, z + 0.5], s: [0.14, 0.45, 0.07], r: [0, i, sway * 0.5], c: k % 2 ? '#3FA86A' : '#4FB87A'});
 			}
 		}
 	}
@@ -582,7 +580,7 @@ export const Underwater3D: React.FC<{frame: number; surface?: number; center?: V
 		<group>
 			<mesh position={[center[0], surface, center[2]]} rotation={[Math.PI / 2, 0, 0]}>
 				<planeGeometry args={[400, 400]} />
-				<meshBasicMaterial map={tex} color={dark > 0 ? mix('#ffffff', '#20405A', dark) : '#ffffff'} toneMapped={false} fog={false} side={THREE.DoubleSide} />
+				<meshBasicMaterial map={tex} color={dark > 0 ? mix('#ffffff', '#20405A', dark) : '#ffffff'} toneMapped={false} side={THREE.DoubleSide} />
 			</mesh>
 			{rays > 0
 				? [...Array(9)].map((_, i) => {
@@ -639,6 +637,14 @@ export const Boat3D: React.FC<{at: V3; rot?: number; frame: number; rock?: numbe
 			<group position={[0, 0.85, -L / 2]} scale={L}>
 				<BodyMesh spec={hull} k="boat" outline={0.004} bend={() => 0} />
 			</group>
+			<mesh position={[0, 0.85, -L / 2 - 0.01]} rotation={[0, Math.PI, 0]} scale={[0.12 * L, 0.09 * L, 1]}>
+				<circleGeometry args={[1, 24, Math.PI, Math.PI]} />
+				<meshToonMaterial color="#F4F4F8" gradientMap={toonRamp()} side={THREE.DoubleSide} />
+			</mesh>
+			<mesh position={[0, 0.85, -L / 2 + 0.02]} rotation={[0, Math.PI, 0]} scale={[0.12 * L + 0.05, 0.09 * L + 0.05, 1]}>
+				<circleGeometry args={[1, 24, Math.PI, Math.PI]} />
+				<meshBasicMaterial color={INK} side={THREE.DoubleSide} />
+			</mesh>
 			{/* the cabin */}
 			<T shape={{kind: 'box', w: 1.6, h: 1.2, d: 1.8}} color="#F4F4F8" position={[0, 1.45, 1.0]} outline={0.03} />
 			<T shape={{kind: 'box', w: 1.8, h: 0.12, d: 2.1}} color="#2E7FD8" position={[0, 2.1, 1.0]} outline={0.03} />

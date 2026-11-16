@@ -77,7 +77,7 @@ export const Gulp: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			</group>
 		);
 	} else {
-		far = <Underwater3D frame={frame} surface={6} center={[0, -7, -4]} rays={0.5} />;
+		far = <Underwater3D frame={frame} surface={6} center={[0, -7, -4]} rays={0} />;
 		near = (
 			<group>
 				<Whale3D kind="sperm" at={wAt} rot={rot} len={len} frame={frame} swim={turnP > 0.9 ? 0.2 : 0.6} jaw={jaw} />
@@ -96,7 +96,7 @@ export const Gulp: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [0, -6.4, 0], dist: 3.2, yaw: 20, pitch: 4, fov: 40, dyaw: -6},
 		{at: [-6, -6.5, -16], dist: 24, yaw: 60, pitch: 4, fov: 44, dyaw: 6},
 		{at: [0, -6.6, -4], dist: 10, yaw: 160, pitch: 6, fov: 44, dyaw: -6},
-		{at: [0, -7.5, -2], dist: 7.5, yaw: 200, pitch: -6, fov: 46, dyaw: 4},
+		{at: [0, -7.2, -3], dist: 10, yaw: 118, pitch: -4, fov: 46, dyaw: 4},
 		{at: [0, -7, -1.5], dist: 9, yaw: 95, pitch: 4, fov: 44, dyaw: -4},
 		withShake({at: [0, -7, -2], dist: 8, yaw: 110, pitch: 2, fov: 44, dyaw: 2}, frame, snap, 0.3),
 		{at: [0, -7, -2], dist: 8, yaw: 110, pitch: 2, fov: 44},
@@ -118,8 +118,8 @@ export const Gulp: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				grade={inside ? 'saturate(1.15)' : undefined}
 				overlay={() => (
 					<AbsoluteFill>
-						<Label text="IN REAL LIFE: ALMOST CERTAINLY NEVER" x={960} y={140} size={50} frame={frame} at={6} until={notSquid - 6} color={UI.cream} />
-						<Label text="YOU ARE NOT A SQUID" x={960} y={140} size={56} frame={frame} at={notSquid + 4} until={swings - 6} color={UI.orange} />
+						<Label text="IN REAL LIFE: ALMOST CERTAINLY NEVER" x={960} y={199} size={50} frame={frame} at={6} until={notSquid - 6} color={UI.cream} />
+						<Label text="YOU ARE NOT A SQUID" x={960} y={204} size={56} frame={frame} at={notSquid + 4} until={swings - 6} color={UI.orange} />
 						<Big text="SNAP!" x={960} y={480} size={170} frame={frame} at={snap} until={darkness + 8} color={UI.cream} />
 						{blackout ? <AbsoluteFill style={{background: '#000', opacity: span(frame, snap + 6, snap + 12)}} /> : null}
 						{inside ? <Vignette amount={0.5} /> : null}
@@ -185,13 +185,13 @@ export const Beaks: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const holdBeak = frame > hard && frame < camera;
 	const camSpot: V3 = [1.25, 0.1, 2.3];
 	const picked = frame > camera + 26;
-	const light = gutLight(torchHand(pos, turn), frame >= camera - 4 ? camSpot : beamSpot(pos, turn, aim, tip, 3), 1);
+	const light = gutLight(torchHand(pos, turn), frame >= camera - 4 ? [camSpot[0], camSpot[1] + 0.9, camSpot[2] - 0.3] : beamSpot(pos, turn, aim, tip, 3), 1);
 	const lh = handAt(pos, turn, [30, 100], 70, -1);
 	const near = (
 		<group>
 			<Hero3D position={pos} turn={turn} scuba armR={TORCH_ARM} reachR={70} armL={holdBeak ? [30, 100] : picked ? [30, 100] : [12, 8]} reachL={holdBeak || picked ? 70 : 0} face={frame > camera ? 'happy' : frame > bag && frame < floor ? 'scared' : 'neutral'} look={[aim, -tip * 0.6]} />
 			<HandTorch pos={pos} turn={turn} aim={frame >= camera - 4 ? 0.35 : aim} tip={tip} beam={4.5} />
-			{holdBeak ? <Beaks3D at={[lh[0], lh[1] + 0.05, lh[2]]} r={0.001} n={1} y={0} s={1.8} seed={2} /> : null}
+			{holdBeak ? <Beaks3D at={[lh[0], lh[1] + 0.05, lh[2]]} r={0.001} n={1} y={0} s={1.0} seed={2} /> : null}
 			{picked ? <UwCamera3D at={[lh[0], lh[1] + 0.1, lh[2]]} rot={[0, turn, 0]} s={1.0} /> : null}
 		</group>
 	);
@@ -199,12 +199,12 @@ export const Beaks: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const angles: Angle3[] = [
 		{at: [head[0], head[1] - 0.2, head[2]], dist: 2.4, yaw: 35, pitch: 4, fov: 36, dyaw: 6},
 		{at: [-0.6, 1.6, 0.6], dist: 3.2, yaw: 140, pitch: 6, fov: 52, dyaw: -8},
-		{at: [0.4, 1.4, 1.6], dist: 2.4, yaw: 200, pitch: 8, fov: 46, dyaw: 8},
+		{at: [0.5, 1.4, 1.8], dist: 3.0, yaw: 218, pitch: 8, fov: 46, dyaw: 8},
 		withShake({at: [0, 2, 0], dist: 3.2, yaw: 75, pitch: 2, fov: 56, dyaw: -6}, frame, bag + 6, 0.12, 1, 30),
 		{at: [0.4, 0.1, 2.2], dist: 1.4, yaw: 20, pitch: 28, fov: 44, dyaw: 10},
 		{at: [lh[0], lh[1] + 0.1, lh[2]], dist: 1.2, yaw: 50, pitch: 8, fov: 36, dyaw: -6},
 		{at: [0, 0.2, 0.8], dist: 3.4, yaw: 120, pitch: 50, fov: 50, dyaw: 8},
-		{at: [camSpot[0] - 0.3, 0.4, camSpot[2] - 0.2], dist: 2.2, yaw: 230, pitch: 22, fov: 44, dyaw: -6},
+		{at: [camSpot[0] - 0.2, 0.5, camSpot[2] - 0.2], dist: 2.4, yaw: 60, pitch: 20, fov: 44, dyaw: -6},
 	];
 	return (
 		<>
@@ -228,9 +228,9 @@ export const Beaks: React.FC<ShotProps> = ({frame, dur, lines}) => {
 								<Chambers frame={frame} at={several} />
 							</Panel>
 						) : null}
-						<Label text="NO ACID IN HERE" x={960} y={930} size={56} frame={frame} at={noAcid + 8} until={bag - 6} color={UI.green} />
-						<Label text="A SQUEEZING BAG OF MUSCLE" x={960} y={930} size={56} frame={frame} at={bag + 8} until={floor - 6} color={UI.cream} />
-						<Label text="SQUID BEAKS" x={960} y={930} size={60} frame={frame} at={floor + 10} until={whalers - 6} color={UI.orange} />
+						<Label text="NO ACID IN HERE" x={960} y={876} size={56} frame={frame} at={noAcid + 8} until={bag - 6} color={UI.green} />
+						<Label text="A SQUEEZING BAG OF MUSCLE" x={960} y={876} size={56} frame={frame} at={bag + 8} until={floor - 6} color={UI.cream} />
+						<Label text="SQUID BEAKS" x={960} y={873} size={60} frame={frame} at={floor + 10} until={whalers - 6} color={UI.orange} />
 						{frame >= whalers - 4 && frame < camera - 4 ? <Count from={0} to={14000} x={960} y={500} size={150} frame={frame} at={whalers + 6} dur={36} prefix="UP TO " color={UI.yellow} /> : null}
 						<Label text="BEAKS IN ONE STOMACH" x={960} y={640} size={56} frame={frame} at={whalers + 30} until={camera - 6} color={UI.cream} />
 					</AbsoluteFill>
@@ -286,7 +286,7 @@ export const Air: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const head = headAt(pos);
 	const near = (
 		<group>
-			<Hero3D position={pos} turn={turn} scuba armR={TORCH_ARM} reachR={70} armL={tankTap ? [150, 190] : frame > noOx && frame < most ? [40, 150] : [12, 8]} reachL={tankTap ? -40 : frame > noOx && frame < most ? 55 : 0} face={frame > luckily ? 'happy' : frame > isnt ? 'scared' : 'neutral'} />
+			<Hero3D position={pos} turn={turn} scuba armR={TORCH_ARM} reachR={70} armL={tankTap ? [40, 150] : frame > noOx && frame < most ? [40, 150] : [12, 8]} reachL={tankTap ? 40 : frame > noOx && frame < most ? 55 : 0} face={frame > luckily ? 'happy' : frame > isnt ? 'scared' : 'neutral'} />
 			<HandTorch pos={pos} turn={turn} tip={0.3} beam={4} />
 		</group>
 	);
@@ -316,7 +316,7 @@ export const Air: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<AbsoluteFill>
 						<Vignette amount={0.45} />
 						<AirHud frame={frame} left={AIR.air} at={0} />
-						<Big text="NO OXYGEN" x={960} y={880} size={110} frame={frame} at={noOx + 8} until={most - 6} color={UI.red} />
+						<Big text="NO OXYGEN" x={960} y={852} size={110} frame={frame} at={noOx + 8} until={most - 6} color={UI.red} />
 						{frame >= most - 4 && frame < luckily - 4 ? (
 							<Bars
 								x={340}
@@ -331,10 +331,10 @@ export const Air: React.FC<ShotProps> = ({frame, dur, lines}) => {
 							/>
 						) : null}
 						<Label text="…AFTER BREATHING PURE OXYGEN" x={960} y={700} size={50} frame={frame} at={pure + 6} until={luckily - 6} color={UI.cyan} />
-						<Label text="SCUBA TANK" x={960} y={140} size={60} frame={frame} at={luckily + 10} until={so - 6} color={UI.yellow} />
+						<Label text="SCUBA TANK" x={960} y={207} size={60} frame={frame} at={luckily + 10} until={so - 6} color={UI.yellow} />
 						<Gauge frame={frame} at={nearS + 4} until={so - 6} value={0.95} x={1500} y={520} />
 						<Label text="≈ 1 HOUR" x={1500} y={800} size={64} frame={frame} at={nearS + 14} until={so - 6} color={UI.green} />
-						<Big text="1 HOUR TO ESCAPE" x={960} y={880} size={110} frame={frame} at={so + 10} color={UI.yellow} />
+						<Big text="1 HOUR TO ESCAPE" x={960} y={852} size={110} frame={frame} at={so + 10} color={UI.yellow} />
 					</AbsoluteFill>
 				)}
 			/>
@@ -380,7 +380,7 @@ const LungsPanel: React.FC<{frame: number; fold: number; dark: number}> = ({fram
 	const muscle = `rgb(${Math.round(lerp(200, 40, dark))},${Math.round(lerp(60, 20, dark))},${Math.round(lerp(70, 34, dark))})`;
 	return (
 		<svg viewBox="0 0 700 480" width={700} height={480} style={{position: 'absolute', left: 30, top: 10}}>
-			<g transform={`translate(190 200) scale(${0.6 + 0.4 * sq} ${sq})`}>
+			<g transform={`translate(190 190) scale(${1.45 * (0.6 + 0.4 * sq)} ${1.45 * sq})`}>
 				<path d="M-10 -120 L-10 -40" stroke="#E8A0B0" strokeWidth={18} />
 				<ellipse cx={-70} cy={20} rx={60} ry={100} fill="#F4A0B8" stroke="#140A28" strokeWidth={6} />
 				<ellipse cx={50} cy={20} rx={60} ry={100} fill="#F4A0B8" stroke="#140A28" strokeWidth={6} />
@@ -441,9 +441,9 @@ export const Dive: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			</group>
 		);
 	} else if (frame < survive - 4) {
-		light = {...LIGHT.deep, ambient: 1.0 - dark * 0.6, sun: {...LIGHT.deep.sun, intensity: 1.4 * (1 - dark * 0.7)}, fog: {color: dark > 0.5 ? '#041428' : '#0C3A66', near: 6, far: 70 - dark * 30}};
+		light = {...LIGHT.deep, ambient: 1.3 - dark * 0.45, sun: {...LIGHT.deep.sun, intensity: 2.1 * (1 - dark * 0.5)}, fog: {color: dark > 0.5 ? '#061E3A' : '#0C3A66', near: 8, far: 85 - dark * 25}};
 		bg = dark > 0.5 ? BG.dark : BG.deep;
-		far = <Underwater3D frame={frame} surface={60} center={[0, 0, 0]} rays={1 - dark} dark={dark} />;
+		far = <Underwater3D frame={frame} surface={60} center={[0, 0, 0]} rays={1 - dark} dark={dark} rise={lucky > frame ? 1.5 : -0.5} />;
 		near = <Whale3D kind="sperm" at={wAt} rot={[pitch, 0.4, 0]} len={16} frame={frame} swim={0.8} />;
 	} else {
 		light = LIGHT.ocean;
@@ -483,17 +483,17 @@ export const Dive: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						{insidePart ? <AirHud frame={frame} left={AIR.dive} /> : null}
 						<Big text="UH OH" x={960} y={300} size={150} frame={frame} at={uhoh} until={diving + 20} color={UI.yellow} rotate={-5} />
 						<DepthBar frame={frame} at={diving + 4} until={survive - 6} depth={depth} />
-						<Label text="OFTEN 1–2 KM DOWN · OVER AN HOUR" x={1100} y={140} size={52} frame={frame} at={often + 8} until={deepest - 6} color={UI.cyan} />
-						<Label text="DEEPEST MEASURED ≈ 2.25 KM" x={1100} y={140} size={52} frame={frame} at={deepest + 8} until={downThere - 6} color={UI.yellow} />
-						<Big text="200× THE PRESSURE" x={1100} y={880} size={96} frame={frame} at={downThere + 10} until={lucky - 6} color={UI.red} />
-						<Label text="IT JUST ATE. IT TURNS BACK UP." x={1100} y={140} size={52} frame={frame} at={lucky + 10} until={survive - 6} color={UI.green} />
+						<Label text="OFTEN 1–2 KM DOWN · OVER AN HOUR" x={1100} y={201} size={52} frame={frame} at={often + 8} until={deepest - 6} color={UI.cyan} />
+						<Label text="DEEPEST MEASURED ≈ 2.25 KM" x={1100} y={201} size={52} frame={frame} at={deepest + 8} until={downThere - 6} color={UI.yellow} />
+						<Big text="200× THE PRESSURE" x={1100} y={860} size={96} frame={frame} at={downThere + 10} until={lucky - 6} color={UI.red} />
+						<Label text="IT JUST ATE. IT TURNS BACK UP." x={1100} y={201} size={52} frame={frame} at={lucky + 10} until={survive - 6} color={UI.green} />
 						{frame >= lungs - 4 ? (
 							<Panel frame={frame} at={lungs} x={1430} y={560} w={760} h={560} title="HOW WHALES DIVE">
 								<LungsPanel frame={frame} fold={span(frame, lungs + 6, lungs + 30)} dark={span(frame, muscles + 6, black + 30)} />
 							</Panel>
 						) : null}
-						<Label text="OXYGEN STORED IN MUSCLE · MYOGLOBIN" x={960} y={950} size={48} frame={frame} at={muscles + 30} until={black - 6} color={UI.cream} />
-						<Label text="MEAT: ALMOST BLACK" x={960} y={950} size={54} frame={frame} at={black + 10} color={UI.cream} />
+						<Label text="OXYGEN STORED IN MUSCLE · MYOGLOBIN" x={960} y={882} size={48} frame={frame} at={muscles + 30} until={black - 6} color={UI.cream} />
+						<Label text="MEAT: ALMOST BLACK" x={960} y={877} size={54} frame={frame} at={black + 10} color={UI.cream} />
 					</AbsoluteFill>
 				)}
 			/>
@@ -536,17 +536,16 @@ const Melts: React.FC<{frame: number; at: number; real: number}> = ({frame, at, 
 export const Acid: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const [l0] = lines;
 	const next = cue(l0, 'into the next');
-	const worse = cue(l0, "and it's even");
 	const acid = cue(l0, 'This is where');
 	const gloves = cue(l0, 'Your gloves');
 	const cartoons = cue(l0, 'In cartoons');
 	const real = cue(l0, 'In real life');
 	const skin = cue(l0, 'But your skin');
 	const cuts = [0, next - 4, acid - 4, gloves - 4, cartoons - 4, skin - 4];
-	const through = frame < next + 10;
-	const open = span(frame, 10, 34) * (1 - span(frame, next, next + 10));
+	const through = frame < next - 4;
+	const open = span(frame, 10, 34) * (1 - span(frame, next - 8, next));
 	// Squeezing through, then standing by the acid pool.
-	const sq = span(frame, 20, next + 6, (v) => v);
+	const sq = span(frame, 20, next - 6, (v) => v);
 	const posA: V3 = [0, 0, lerp(-3.6, -6.4, sq)];
 	const pos: V3 = [frame > skin + 10 ? lerp(-0.4, -1.2, span(frame, skin + 10, skin + 30)) : -0.4, 0, 2.0];
 	const turn = Math.PI - 0.3;
@@ -573,7 +572,7 @@ export const Acid: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<Gut3D at={[0, 2.2, 0]} len={14} r={() => 3.1} frame={frame} color="#D86A80" fold="#A84A60" squeeze={0.04} />
 				<GutFloor frame={frame} w={8} d={13} color="#C85A70" />
 				<AcidPool3D at={[0, 0, -1.5]} r={2.2} frame={frame} />
-				<Smoke at={[0, 0.1, -1.5]} frame={frame} amount={0.8} r={1.3} n={12} rise={1.4} color="#9AC85A" seed={4} />
+				<Smoke at={[0, 0.1, -1.5]} frame={frame} amount={0.6} r={0.7} n={8} rise={1.2} color="#9AC85A" seed={4} />
 				<Sphincter3D at={[0, 1.6, 6.4]} r={1.5} open={0.2} />
 				<Slime3D top={4.8} frame={frame} n={12} area={5} seed={6} />
 			</group>
@@ -617,7 +616,7 @@ export const Acid: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<AbsoluteFill>
 						<Vignette amount={0.45} />
 						<AirHud frame={frame} left={AIR.acid} />
-						<Label text="CHAMBER 2 · ACID" x={960} y={140} size={60} frame={frame} at={acid + 6} until={cartoons - 6} color={UI.green} />
+						<Label text="CHAMBER 2 · ACID" x={960} y={207} size={60} frame={frame} at={acid + 6} until={cartoons - 6} color={UI.green} />
 						<Big text="FIZZ!" x={1300} y={420} size={120} frame={frame} at={gloves + 6} until={cartoons - 6} color={UI.green} rotate={8} />
 						{frame >= cartoons - 4 && frame < skin + 60 ? (
 							<Panel frame={frame} at={cartoons} until={skin + 50} x={1430} y={540} w={760} h={500} title="HOW FAST DOES ACID WORK?">
@@ -647,7 +646,7 @@ const Layers: React.FC<{frame: number; n: number}> = ({frame, n}) => (
 			return <ellipse key={i} cx={350} cy={220} rx={r * 1.2} ry={r * 0.9} fill={i % 2 ? '#A8A090' : '#8A8478'} stroke="#140A28" strokeWidth={4} />;
 		}).reverse()}
 		<path d="M330 250 Q340 180 380 190 Q360 205 362 250 Z" fill="#2A1E24" stroke="#140A28" strokeWidth={4} transform={`rotate(${Math.sin(frame * 0.05) * 5} 350 220)`} />
-		<text x={350} y={420} textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize={40} fill="#FFF3D6">
+		<text x={350} y={420} textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize={30} fill="#FFF3D6">
 			SQUID BEAK + WAX, LAYER AFTER LAYER
 		</text>
 	</svg>
@@ -709,12 +708,12 @@ export const Grey: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const aim = frame > odd ? -0.55 : 0;
 	const tip = frame > odd ? -0.1 : 0.2;
 	const poke = frame > lump + 6 && frame < found + 20;
-	const light = gutLight(torchHand(pos, turn), frame > odd ? amber : beamSpot(pos, turn, aim, tip, 3), 1, '#E87A6A');
+	const light = gutLight(torchHand(pos, turn), frame > odd ? [amber[0] - 0.5, amber[1], amber[2] + 0.5] : beamSpot(pos, turn, aim, tip, 3), 0.7, '#E87A6A');
 	const near = (
 		<group>
 			<Hero3D position={pos} turn={turn} scuba walk={walk < 1 ? frame * 0.04 : undefined} armR={TORCH_ARM} reachR={70} armL={poke ? [40, 50] : [12, 8]} reachL={poke ? 80 + Math.sin(frame * 0.5) * 8 : 0} face={frame > found ? 'happy' : frame > odd ? 'shocked' : 'neutral'} look={frame > odd ? [-0.5, 0.1] : [0, 0]} />
 			<HandTorch pos={pos} turn={turn} aim={aim} tip={tip} beam={3.5} />
-			<Ambergris3D at={amber} s={0.32} rot={[0.3, 0.6, 0]} />
+			<Ambergris3D at={amber} s={0.2} rot={[0.3, 0.6, 0]} />
 		</group>
 	);
 	const far = (
@@ -755,16 +754,16 @@ export const Grey: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<AbsoluteFill>
 						<Vignette amount={0.45} />
 						<AirHud frame={frame} left={AIR.grey} />
-						<Label text="AMBERGRIS" x={diagram ? 520 : 960} y={930} size={70} frame={frame} at={found + 6} color={UI.yellow} />
+						<Label text="AMBERGRIS" x={diagram ? 520 : 960} y={865} size={70} frame={frame} at={found + 6} color={UI.yellow} />
 						{diagram ? (
 							<Panel frame={frame} at={when} x={1430} y={540} w={760} h={560} title={title}>
 								{frame < only - 4 ? <Layers frame={frame} n={lerp(0, 5, span(frame, coatsAt(l0), layer + 40))} /> : frame < perfume - 4 ? <OneIn100 frame={frame} at={only} /> : <Riches frame={frame} perfume={span(frame, perfume + 4, perfume + 14)} yemen={span(frame, yemen + 4, yemen + 14)} />}
 							</Panel>
 						) : null}
-						<Label text="≈ 1 IN 100 SPERM WHALES" x={1430} y={900} size={50} frame={frame} at={only + 20} until={perfume - 6} color={UI.yellow} />
-						<Label text="EXPENSIVE PERFUMES" x={1430} y={900} size={50} frame={frame} at={perfume + 14} until={yemen - 6} color={UI.cream} />
-						{frame >= yemen - 4 ? <Count from={0} to={127} x={1250} y={920} size={70} frame={frame} at={yemen + 20} dur={30} suffix=" KG" color={UI.cream} /> : null}
-						{frame >= sold - 4 ? <Label text="≈ $1.5 MILLION" x={1640} y={920} size={56} frame={frame} at={sold + 14} color={UI.green} /> : null}
+						<Label text="≈ 1 IN 100 SPERM WHALES" x={1430} y={880} size={50} frame={frame} at={only + 20} until={perfume - 6} color={UI.yellow} />
+						<Label text="EXPENSIVE PERFUMES" x={1430} y={880} size={50} frame={frame} at={perfume + 14} until={yemen - 6} color={UI.cream} />
+						{frame >= yemen - 4 ? <Count from={0} to={127} x={1250} y={876} size={70} frame={frame} at={yemen + 20} dur={30} suffix=" KG" color={UI.cream} /> : null}
+						{frame >= sold - 4 ? <Label text="≈ $1.5 MILLION" x={1640} y={876} size={56} frame={frame} at={sold + 14} color={UI.green} /> : null}
 					</AbsoluteFill>
 				)}
 			/>
@@ -812,8 +811,8 @@ export const Plan: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	);
 	const angles: Angle3[] = [
 		{at: [head[0], head[1] - 0.2, head[2]], dist: 2.4, yaw: 60, pitch: 4, fov: 38, dyaw: 6},
-		{at: [0.5, 1.4, 1], dist: 3.2, yaw: 20, pitch: 6, fov: 50, dyaw: -6},
-		{at: [0.5, 1.4, 1], dist: 3.2, yaw: 40, pitch: 6, fov: 50, dyaw: 6},
+		{at: [1.0, 1.4, 1.0], dist: 2.6, yaw: 105, pitch: 6, fov: 50, dyaw: -6},
+		{at: [1.0, 1.4, 1.2], dist: 2.6, yaw: 125, pitch: 6, fov: 50, dyaw: 6},
 		{at: [head[0], head[1] - 0.4, head[2]], dist: 2.2, yaw: 120, pitch: 10, fov: 44, dyaw: -6},
 		{at: [2.6, 1.2, 1.2], dist: 2.4, yaw: 20, pitch: 6, fov: 46, dyaw: 6},
 		withShake({at: [0.5, 1.8, 0.5], dist: 3.2, yaw: 300, pitch: 4, fov: 56}, frame, shudder + 4, 0.3, 1, 40),
@@ -837,8 +836,8 @@ export const Plan: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<AbsoluteFill>
 						<Vignette amount={0.45} />
 						<AirHud frame={frame} left={AIR.plan} />
-						<Label text="WHALES THROW UP MOST SQUID BEAKS" x={960} y={140} size={54} frame={frame} at={scientists + 10} until={grab - 6} color={UI.yellow} />
-						<Big text="RUMBLE…" x={960} y={860} size={120} frame={frame} at={rumble + 6} until={here - 4} color={UI.orange} rotate={-4} />
+						<Label text="WHALES THROW UP MOST SQUID BEAKS" x={960} y={202} size={54} frame={frame} at={scientists + 10} until={grab - 6} color={UI.yellow} />
+						<Big text="RUMBLE…" x={960} y={846} size={120} frame={frame} at={rumble + 6} until={here - 4} color={UI.orange} rotate={-4} />
 					</AbsoluteFill>
 				)}
 			/>

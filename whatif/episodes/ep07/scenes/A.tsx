@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {FONT} from '../../../brand/fonts';
-import {cue, lerp, shake, Sound, span, track, type ShotProps} from '../../../components/stage';
+import {cue, lerp, shake, Sound, span, type ShotProps} from '../../../components/stage';
 import {Bars, Big, Count, Label, UI} from '../../../components/ui';
 import {Ground, Splash3D} from '../../../three/giant3d';
 import {Hero3D} from '../../../three/Hero3D';
@@ -10,7 +10,6 @@ import {Heart3D, Stink3D} from '../../../three/inside3d';
 import {Boat3D, Bubbles3D, Fish3D, Krill3D, SoundRings3D, Squid3D, Underwater3D, UwCamera3D, Whale3D, whalePoint} from '../../../three/ocean3d';
 import {Bus3D, Herd3D} from '../../../three/sky3d';
 import {Scale3D} from '../../../three/grimoire3d';
-import type {Cam3} from '../../../three/Stage3D';
 import {Shot3, type Angle3} from '../../../three/shot3';
 import {T} from '../../../three/toon';
 import {beamSpot, BG, Forestomach, gutLight, HandTorch, LIGHT, P7, Panel, SeaSet, Swimmer, TORCH_ARM, torchHand, Vignette} from './kit';
@@ -95,7 +94,7 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<AbsoluteFill>
 						{frame < torch ? <AbsoluteFill style={{background: '#050003', opacity: 0.72}} /> : null}
 						<Vignette amount={frame < torch ? 0.9 : 0.45} />
-						<Label text="INSIDE A WHALE" x={960} y={930} size={60} frame={frame} at={inside + 8} until={how - 6} color={UI.yellow} />
+						<Label text="INSIDE A WHALE" x={960} y={873} size={60} frame={frame} at={inside + 8} until={how - 6} color={UI.yellow} />
 						<Big text="1 HOUR EARLIER…" x={960} y={540} size={120} frame={frame} at={back + 6} color={UI.cream} />
 						{rewind > 0.7 ? <AbsoluteFill style={{background: '#ffffff', opacity: span(frame, dur - 12, dur - 1)}} /> : null}
 					</AbsoluteFill>
@@ -123,7 +122,6 @@ export const Boat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const friend = cue(l0, 'Your best friend');
 	const held = cue(l0, 'You held it');
 	const slipped = cue(l0, 'Then it slipped');
-	const sank = cue(l0, 'and sank');
 	const mask = cue(l0, 'So you pulled');
 	const flipped = cue(l0, 'and flipped');
 	const cuts = [0, miles - 4, friend - 4, held - 4, slipped - 4, mask - 4, flipped - 4];
@@ -227,11 +225,11 @@ export const Under: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	);
 	const angles: Angle3[] = [
 		{at: [0, -1.6, 0.3], dist: 5, yaw: 30, pitch: -32, fov: 44, dyaw: 8},
-		{at: hero, dist: 4.2, yaw: 190, pitch: 28, fov: 42, dyaw: -8},
+		{at: [(hero[0] + camPos[0]) / 2, (hero[1] + camPos[1]) / 2, (hero[2] + camPos[2]) / 2], dist: 5.2, yaw: 100, pitch: 10, fov: 44, dyaw: -8},
 		{at: [camPos[0], camPos[1] + 0.6, camPos[2]], dist: 2.6, yaw: 25, pitch: -8, fov: 42, dyaw: 6},
 		{at: [hero[0], hero[1] + 2, hero[2]], dist: 10, yaw: 60, pitch: -38, fov: 46, dyaw: 6},
 		{at: [hero[0], hero[1] + 0.3, hero[2]], dist: 3, yaw: 30, pitch: -24, fov: 44, dyaw: 6},
-		{at: [hero[0] - 3, hero[1] + 3, hero[2]], dist: 30, yaw: 75, pitch: -24, fov: 44, dyaw: 4},
+		{at: [hero[0], hero[1] + 3.5, hero[2] + 1], dist: 26, yaw: 75, pitch: -18, fov: 46, dyaw: 4},
 	];
 	return (
 		<>
@@ -333,7 +331,7 @@ export const Blue: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		}
 	}
 	const angles: Angle3[] = [
-		{at: [(eye[0] + hero[0]) / 2, eye[1] + 0.2, (eye[2] + hero[2]) / 2], dist: 5.5, yaw: 150, pitch: 6, fov: 44, dyaw: 8},
+		{at: [eye[0] + 0.6, eye[1] + 0.3, eye[2] + 1.5], dist: 6.5, yaw: 18, pitch: 6, fov: 44, dyaw: 8},
 		{at: [wAt[0] + 2, wAt[1], wAt[2]], dist: 42, yaw: 170, pitch: -14, fov: 44, dyaw: 6},
 		{at: [wAt[0] + 6, wAt[1], wAt[2]], dist: 30, yaw: 120, pitch: -6, fov: 44, dyaw: -8},
 		{at: [0, 4, 0], dist: 46, yaw: 90, pitch: 8, fov: 40, dyaw: 6},
@@ -356,10 +354,10 @@ export const Blue: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				blur={0}
 				overlay={() => (
 					<AbsoluteFill>
-						<Label text="BLUE WHALE" x={960} y={140} size={60} frame={frame} at={8} until={biggest - 6} color={UI.cyan} />
-						<Label text="BIGGEST ANIMAL EVER KNOWN" x={960} y={140} size={56} frame={frame} at={biggest + 6} until={grow - 6} color={UI.yellow} />
-						{frame < heart - 4 ? <Count from={0} to={30} x={960} y={150} size={120} frame={frame} at={grow + 4} dur={30} prefix="≈ " suffix=" M" color={UI.yellow} /> : null}
-						<Label text="= 3 BUSES" x={960} y={950} size={60} frame={frame} at={buses + 10} until={heart - 6} color={UI.cream} />
+						<Label text="BLUE WHALE" x={960} y={207} size={60} frame={frame} at={8} until={biggest - 6} color={UI.cyan} />
+						<Label text="BIGGEST ANIMAL EVER KNOWN" x={960} y={204} size={56} frame={frame} at={biggest + 6} until={grow - 6} color={UI.yellow} />
+						{frame < heart - 4 ? <Count from={0} to={30} x={960} y={234} size={120} frame={frame} at={grow + 4} dur={30} prefix="≈ " suffix=" M" color={UI.yellow} /> : null}
+						<Label text="= 3 BUSES" x={960} y={873} size={60} frame={frame} at={buses + 10} until={heart - 6} color={UI.cream} />
 						{frame >= heart - 4 && frame < tongue - 4 ? <Label text="HEART ≈ 180 KG" x={1460} y={300} size={60} frame={frame} at={heart + 8} until={tongue - 6} color={UI.red} /> : null}
 						<Label text="TONGUE ≈ 2.7 TONNES" x={560} y={250} size={54} frame={frame} at={tongue + 10} color={UI.cream} />
 						<Label text="≈ AN ELEPHANT" x={1380} y={250} size={54} frame={frame} at={tongue + 22} color={UI.cream} />
@@ -440,20 +438,20 @@ export const Throat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		<group>
 			<Whale3D kind="blue" at={wAt} rot={rot} len={25} frame={frame} swim={0.6} jaw={jaw} pouch={pouch} />
 			<Krill3D at={cloud} frame={frame} r={4} n={900} suck={mouth} p={span(frame, krill - 10, millions + 26, (v) => v)} />
-			<Swimmer at={hero} yaw={-110} pitch={20} frame={frame} kick={0.4} armL={holdPlate ? [30, 80] : [80, 150]} armR={holdPlate ? [30, 80] : [80, 150]} reachL={holdPlate ? 80 : 30} reachR={holdPlate ? 80 : 30} face={frame < notAfter ? 'scared' : holdPlate ? 'happy' : 'shocked'} headUp={10} />
-			{holdPlate ? <Plate at={handAt([hero[0], hero[1] - 0.85, hero[2]], (-110 * Math.PI) / 180, [30, 80], 80, 1).map((v, i) => (i === 0 ? v - 0.12 : i === 1 ? v + 0.18 : v)) as V3} rot={[0, (-110 * Math.PI) / 180, 0]} /> : null}
+			<Swimmer at={hero} yaw={holdPlate ? 60 : -110} pitch={20} frame={frame} kick={0.4} armL={holdPlate ? [30, 80] : [80, 150]} armR={holdPlate ? [30, 80] : [80, 150]} reachL={holdPlate ? 80 : 30} reachR={holdPlate ? 80 : 30} face={frame < notAfter ? 'scared' : holdPlate ? 'happy' : 'shocked'} headUp={10} />
+			{holdPlate ? <Plate at={[hero[0] + Math.sin((60 * Math.PI) / 180) * 0.42, hero[1] + 0.05, hero[2] + Math.cos((60 * Math.PI) / 180) * 0.42]} rot={[0, (60 * Math.PI) / 180, 0]} /> : null}
 			<Bubbles3D at={[hero[0], hero[1] + 0.5, hero[2]]} frame={frame} n={8} rise={1.4} />
 		</group>
 	);
 	const angles: Angle3[] = [
 		{at: [2, -5.5, -2], dist: 26, yaw: 30, pitch: 4, fov: 44, dyaw: 6},
 		{at: [hero[0], hero[1] + 0.4, hero[2]], dist: 2.6, yaw: -70, pitch: 4, fov: 40, dyaw: -8},
-		{at: [3, -6, -2], dist: 30, yaw: 95, pitch: 4, fov: 44, dyaw: 6},
+		{at: [2, -6, -4], dist: 34, yaw: 70, pitch: 4, fov: 44, dyaw: 6},
 		{at: cloud, dist: 9, yaw: 30, pitch: 10, fov: 44, dyaw: -10},
 		{at: [0, -8, -6], dist: 30, yaw: 120, pitch: -8, fov: 44, dyaw: 8},
-		{at: [hero[0] - 1.5, hero[1] + 0.2, hero[2]], dist: 5.5, yaw: -40, pitch: 4, fov: 44, dyaw: 6},
-		{at: [hero[0] - 0.5, hero[1] + 0.4, hero[2]], dist: 3.2, yaw: -60, pitch: 4, fov: 40, dyaw: -6},
-		{at: [hero[0] - 1.5, hero[1] + 0.2, hero[2]], dist: 6, yaw: -30, pitch: 4, fov: 44, dyaw: 6},
+		{at: [hero[0] - 1.6, hero[1] + 0.3, hero[2] - 0.6], dist: 6.5, yaw: 58, pitch: 4, fov: 44, dyaw: 6},
+		{at: [hero[0] - 1.0, hero[1] + 0.4, hero[2] - 0.4], dist: 4.2, yaw: 50, pitch: 4, fov: 40, dyaw: -6},
+		{at: [hero[0] - 1.8, hero[1] + 0.3, hero[2] - 0.6], dist: 7, yaw: 64, pitch: 4, fov: 44, dyaw: 6},
 	];
 	return (
 		<>
@@ -472,7 +470,7 @@ export const Throat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<AbsoluteFill>
 						<Label text="KRILL" x={760} y={860} size={56} frame={frame} at={krill + 6} until={millions + 20} color={UI.cream} />
 						{diagram ? (
-							<Panel frame={frame} at={surprising} x={1450} y={560} w={760} h={600} title="CAN'T SWALLOW YOU">
+							<Panel frame={frame} at={surprising} x={480} y={560} w={760} h={600} title="CAN'T SWALLOW YOU">
 								<ThroatDiagram frame={frame} at={surprising} blue={span(frame, couldnt + 4, couldnt + 12)} hump={span(frame, hump + 4, hump + 12)} />
 							</Panel>
 						) : null}
@@ -512,7 +510,8 @@ export const Click: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		<group>
 			<Swimmer at={hero} pitch={15} frame={frame} kick={0.3} armL={frame > chest && frame < rings + 30 ? [20, 120] : [40, 50]} reachL={frame > chest && frame < rings + 30 ? 70 : 20} armR={[40, 50]} reachR={20} face={frame > out ? 'shocked' : 'scared'} headUp={0} look={frame > rings ? [0, 0] : [Math.sin(frame * 0.05) * 0.6, 0]} />
 			<Bubbles3D at={[hero[0], hero[1] + 0.5, hero[2] + 0.2]} frame={frame} n={8} rise={1.6} />
-			<SoundRings3D at={head} frame={frame} starts={clicks} speed={0.6} life={120} />
+			<SoundRings3D at={[0, -6.5, -24]} frame={frame} starts={clicks.filter((c) => c < out)} speed={0.6} life={70} tube={0.1} />
+			<SoundRings3D at={head} frame={frame} starts={clicks.filter((c) => c >= out)} speed={0.6} life={90} tube={0.1} />
 			<Whale3D kind="sperm" at={wAt} len={16} frame={frame} swim={0.5} jaw={frame > jaw ? 0.25 * span(frame, jaw, jaw + 20) : 0} />
 		</group>
 	);
@@ -544,7 +543,7 @@ export const Click: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						{[k1, k2, k3].map((k, i) => (
 							<Big key={i} text="CLICK" x={480 + i * 480} y={220 + (i % 2) * 80} size={110} frame={frame} at={k} until={k + 22} color={UI.cyan} rotate={i % 2 ? 6 : -6} />
 						))}
-						<Label text="SPERM WHALE" x={960} y={930} size={70} frame={frame} at={sperm + 4} color={UI.yellow} />
+						<Label text="SPERM WHALE" x={960} y={865} size={70} frame={frame} at={sperm + 4} color={UI.yellow} />
 					</AbsoluteFill>
 				)}
 			/>
@@ -597,10 +596,10 @@ export const Echo: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const cuts = [0, sends - 4, fast - 4, longer - 4, sound - 4, dolphins - 4];
 	const part = frame < fast - 4 ? 0 : frame < longer - 4 ? 1 : 2;
 	const rot: V3 = [0, Math.PI / 2, 0];
-	const wAt: V3 = [-14, 0, 0];
-	const nose = whalePoint(wAt, rot, 16, 1.0);
-	const dist = [16, 7, 24][part];
-	const squidAt: V3 = [nose[0] + dist + 1.2, 0.3, 0];
+	const wAt: V3 = [-13, 3, 0];
+	const nose = whalePoint(wAt, rot, 12, 1.0);
+	const dist = [12, 5, 18][part];
+	const squidAt: V3 = [nose[0] + dist + 1.0, 3.2, 0];
 	const speed = 0.35;
 	const start = [sends + 4, fast + 6, longer + 6][part];
 	const back = start + dist / speed;
@@ -608,19 +607,19 @@ export const Echo: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const echoBack = back + dist / speed;
 	const near = (
 		<group>
-			<Whale3D kind="sperm" at={wAt} rot={rot} len={16} frame={frame} swim={0.4} />
+			<Whale3D kind="sperm" at={wAt} rot={rot} len={12} frame={frame} swim={0.4} />
 			<Squid3D at={squidAt} rot={[0, -Math.PI / 2, 0]} len={2.4} frame={frame} color={hit ? '#FF8A6A' : '#D0503A'} />
-			<SoundRings3D at={nose} frame={frame} starts={[start]} speed={speed} life={dist / speed + 4} yaw={Math.PI / 2} color="#9FF0FF" tube={0.08} />
-			<SoundRings3D at={squidAt} frame={frame} starts={[back]} speed={speed} life={dist / speed + 2} yaw={Math.PI / 2} color="#FFD84A" tube={0.08} />
+			<SoundRings3D at={nose} frame={frame} starts={[start]} speed={speed} life={dist / speed + 4} color="#9FF0FF" tube={0.1} />
+			<SoundRings3D at={squidAt} frame={frame} starts={[back]} speed={speed} life={dist / speed + 2} color="#FFD84A" tube={0.1} />
 		</group>
 	);
 	const angles: Angle3[] = [
-		{at: [-4, 0, 0], dist: 34, yaw: 0, pitch: 4, fov: 42, dyaw: 4},
-		{at: [-2, 0, 0], dist: 34, yaw: 0, pitch: 4, fov: 42, dyaw: -4},
-		{at: [-5, 0, 0], dist: 28, yaw: 0, pitch: 4, fov: 42, dyaw: 4},
-		{at: [0, 0, 0], dist: 40, yaw: 0, pitch: 4, fov: 42, dyaw: -4},
-		{at: [-6, 0, 0], dist: 36, yaw: -14, pitch: 4, fov: 42, dyaw: 4},
-		{at: [-6, 0, 0], dist: 36, yaw: 14, pitch: 4, fov: 42, dyaw: -4},
+		{at: [-3, 3, 0], dist: 28, yaw: 0, pitch: 6, fov: 42, dyaw: 4},
+		{at: [-3, 3, 0], dist: 27, yaw: 6, pitch: 6, fov: 42, dyaw: -4},
+		{at: [-5, 3, 0], dist: 22, yaw: -6, pitch: 6, fov: 42, dyaw: 4},
+		{at: [0, 3, 0], dist: 32, yaw: 0, pitch: 6, fov: 42, dyaw: -4},
+		{at: [-4, 3, 0], dist: 30, yaw: -14, pitch: 6, fov: 42, dyaw: 4},
+		{at: [-4, 3, 0], dist: 30, yaw: 14, pitch: 6, fov: 42, dyaw: -4},
 	];
 	const elapsed = frame >= start ? Math.min(frame, echoBack) - start : 0;
 	return (
@@ -631,21 +630,21 @@ export const Echo: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={cuts}
 				angles={angles}
-				light={LIGHT.deep}
-				bg={BG.deep}
-				far={<Underwater3D frame={frame} surface={14} center={[0, 0, 0]} rays={0.4} />}
+				light={LIGHT.ocean}
+				bg={BG.ocean}
+				far={<SeaStudio />}
 				near={near}
 				blur={0}
 				overlay={() => (
 					<AbsoluteFill>
-						<Label text="ECHOLOCATION" x={960} y={130} size={64} frame={frame} at={6} until={fast - 6} color={UI.cyan} />
+						<Label text="ECHOLOCATION" x={960} y={210} size={64} frame={frame} at={6} until={fast - 6} color={UI.cyan} />
 						{frame < sound - 4 && frame >= start ? (
 							<div style={{position: 'absolute', left: 660, top: 880, width: 600, height: 60, borderRadius: 30, background: UI.box, border: `3px solid ${UI.edge}`, overflow: 'hidden'}}>
 								<div style={{width: `${Math.min(100, (elapsed / (2 * 24 / speed)) * 100)}%`, height: '100%', background: frame >= echoBack ? UI.yellow : UI.cyan}} />
 							</div>
 						) : null}
-						<Label text="FAST ECHO = CLOSE" x={960} y={130} size={64} frame={frame} at={fast + 30} until={longer - 6} color={UI.green} />
-						<Label text="SLOW ECHO = FAR" x={960} y={130} size={64} frame={frame} at={longer + 60} until={sound - 6} color={UI.orange} />
+						<Label text="FAST ECHO = CLOSE" x={960} y={210} size={64} frame={frame} at={fast + 30} until={longer - 6} color={UI.green} />
+						<Label text="SLOW ECHO = FAR" x={960} y={210} size={64} frame={frame} at={longer + 60} until={sound - 6} color={UI.orange} />
 						{frame >= sound - 4 && frame < dolphins - 4 ? (
 							<Bars
 								x={360}
@@ -670,11 +669,10 @@ export const Echo: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			/>
 			{[0, 1, 2].map((i) => {
 				const s0 = [sends + 4, fast + 6, longer + 6][i];
-				const d0 = [16, 7, 24][i];
 				return (
 					<React.Fragment key={i}>
 						<Sound name="tick" at={s0} volume={0.5} />
-						<Sound name="tick" at={s0 + (2 * d0) / speed} volume={0.3} />
+						<Sound name="tick" at={s0 + (2 * [12, 5, 18][i]) / speed} volume={0.3} />
 					</React.Fragment>
 				);
 			})}
@@ -725,7 +723,7 @@ export const Sperm: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		near = (
 			<group>
 				<Whale3D kind="sperm" at={wAt} rot={rot} len={16} frame={frame} swim={0.3} jaw={jaw} />
-				<SoundRings3D at={nose} frame={frame} starts={clicks} speed={0.45} life={60} yaw={yaw} />
+				<SoundRings3D at={nose} frame={frame} starts={clicks} speed={0.45} life={60} tube={0.1} />
 				{frame >= hunt - 4 && frame < ninety - 4 && suck < 0.97 ? <Squid3D at={squidAt} rot={[0, -Math.PI / 2, 0]} len={lerp(4, 1.5, suck)} frame={frame} /> : null}
 				{frame >= ninety - 4 ? <Hero3D position={[nose[0] + 3, 0, nose[2] + 1.5]} turn={-1.9} scuba mask={0} face="scared" /> : null}
 			</group>
@@ -750,23 +748,23 @@ export const Sperm: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={cuts}
 				angles={angles}
-				light={dark ? LIGHT.dark : LIGHT.ocean}
+				light={dark ? LIGHT.deep : LIGHT.ocean}
 				bg={dark ? BG.dark : BG.ocean}
-				far={dark ? <Underwater3D frame={frame} surface={30} center={[0, 4, 0]} rays={0} dark={0.8} /> : <SeaStudio />}
+				far={dark ? <Underwater3D frame={frame} surface={40} center={[0, 4, 0]} rays={0} dark={0.7} /> : <SeaStudio />}
 				near={near}
 				blur={0}
 				overlay={() => (
 					<AbsoluteFill>
-						<Label text="LOUDEST ANIMAL ON EARTH" x={960} y={140} size={60} frame={frame} at={loudest + 6} until={echoes - 6} color={UI.cyan} />
-						<Big text="≈ 230 DECIBELS" x={960} y={900} size={100} frame={frame} at={db + 10} until={echoes - 6} color={UI.yellow} />
-						<Label text="FINDS FOOD IN THE PITCH DARK" x={960} y={930} size={54} frame={frame} at={echoes + 10} until={brain - 6} color={UI.cream} />
+						<Label text="LOUDEST ANIMAL ON EARTH" x={960} y={207} size={60} frame={frame} at={loudest + 6} until={echoes - 6} color={UI.cyan} />
+						<Big text="≈ 230 DECIBELS" x={960} y={858} size={100} frame={frame} at={db + 10} until={echoes - 6} color={UI.yellow} />
+						<Label text="FINDS FOOD IN THE PITCH DARK" x={960} y={877} size={54} frame={frame} at={echoes + 10} until={brain - 6} color={UI.cream} />
 						<Label text="SPERM WHALE ≈ 8 KG" x={560} y={200} size={54} frame={frame} at={brain + 10} until={teeth - 6} color={UI.yellow} />
 						<Label text="YOU ≈ 1.3 KG" x={1400} y={300} size={54} frame={frame} at={brain + 24} until={teeth - 6} color={UI.cream} />
-						<Big text="5× HEAVIER" x={960} y={900} size={96} frame={frame} at={five + 8} until={teeth - 6} color={UI.orange} />
-						<Label text="TEETH ONLY IN THE LOWER JAW" x={960} y={140} size={56} frame={frame} at={teeth + 10} until={hunt - 6} color={UI.cream} />
-						<Label text="GIANT SQUID: SWALLOWED WHOLE" x={960} y={140} size={56} frame={frame} at={whole} until={ninety - 6} color={UI.orange} />
-						<Label text="1 OF ABOUT 90 KINDS OF WHALE" x={960} y={140} size={56} frame={frame} at={ninety + 6} until={only - 6} color={UI.cream} />
-						<Label text="THE ONLY THROAT BIG ENOUGH FOR YOU" x={960} y={140} size={56} frame={frame} at={only + 6} color={UI.red} />
+						<Big text="5× HEAVIER" x={960} y={860} size={96} frame={frame} at={five + 8} until={teeth - 6} color={UI.orange} />
+						<Label text="TEETH ONLY IN THE LOWER JAW" x={960} y={204} size={56} frame={frame} at={teeth + 10} until={hunt - 6} color={UI.cream} />
+						<Label text="GIANT SQUID: SWALLOWED WHOLE" x={960} y={204} size={56} frame={frame} at={whole} until={ninety - 6} color={UI.orange} />
+						<Label text="1 OF ABOUT 90 KINDS OF WHALE" x={960} y={204} size={56} frame={frame} at={ninety + 6} until={only - 6} color={UI.cream} />
+						<Label text="THE ONLY THROAT BIG ENOUGH FOR YOU" x={960} y={204} size={56} frame={frame} at={only + 6} color={UI.red} />
 					</AbsoluteFill>
 				)}
 			/>

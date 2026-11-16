@@ -38,8 +38,8 @@ const L = (sky: string, ground: string, ambient: number, sun: [number, number, n
 export const LIGHT: Record<string, Light3> = {
 	sea: L('#CFE8FF', '#3A7AB0', 1.35, [-8, 14, 9], '#FFF4E0', 2.8, '#FFE0A0', 1.4, ['#CFE8FF', 90, 260]),
 	under: L('#BFF0FF', '#103A60', 1.3, [4, 20, 6], '#E8FFFF', 2.4, '#7FE0FF', 1.4, ['#1E78B0', 8, 95]),
-	deep: L('#5A90C0', '#061830', 1.0, [4, 20, 6], '#A8D8FF', 1.4, '#3A80C0', 1.2, ['#0C3A66', 6, 60]),
-	dark: L('#3A6090', '#020A18', 0.8, [4, 20, 6], '#7FA8D8', 0.9, '#2A5A90', 1.0, ['#061E3A', 4, 42]),
+	deep: L('#7FB0E0', '#0C2A50', 1.3, [4, 20, 6], '#C8E8FF', 2.1, '#5AA0E0', 1.6, ['#0C3A66', 8, 80]),
+	dark: L('#5A80B0', '#061428', 1.05, [4, 20, 6], '#A8C8F0', 1.4, '#3A70B0', 1.3, ['#061E3A', 6, 60]),
 	studio: L('#D8D0FF', '#3A2E80', 1.35, [4, 9, 8], '#FFFFFF', 2.4, '#FF8AD8', 1.8),
 	ocean: L('#BFE8FF', '#2A4A8A', 1.35, [4, 12, 8], '#FFFFFF', 2.4, '#7FE0FF', 1.8, ['#2A5AA0', 40, 160]),
 	home: L('#FFE6C8', '#6A6A8A', 1.35, [8, 12, 9], '#FFF0D8', 2.7, '#9FD0FF', 1.5),
@@ -195,7 +195,7 @@ export const AirHud: React.FC<{frame: number; left: number; at?: number}> = ({fr
 	const mm = Math.floor(secs / 60);
 	const ss = secs % 60;
 	return (
-		<div style={{position: 'absolute', right: 60, top: 60, opacity: p, display: 'flex', alignItems: 'center', gap: 16, background: 'rgba(14,8,34,0.86)', border: '3px solid rgba(255,255,255,0.18)', borderRadius: 30, padding: '12px 26px', fontFamily: FONT, fontWeight: 700, fontSize: 46, color: '#FFD84A'}}>
+		<div style={{position: 'absolute', right: 60, top: 162, opacity: p, display: 'flex', alignItems: 'center', gap: 16, background: 'rgba(14,8,34,0.86)', border: '3px solid rgba(255,255,255,0.18)', borderRadius: 30, padding: '12px 26px', fontFamily: FONT, fontWeight: 700, fontSize: 46, color: '#FFD84A'}}>
 			<div style={{width: 24, height: 46, borderRadius: 12, background: '#FFD23A', border: '4px solid #140A28'}} />
 			AIR {mm}:{String(ss).padStart(2, '0')}
 		</div>

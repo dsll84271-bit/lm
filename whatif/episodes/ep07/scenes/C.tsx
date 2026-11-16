@@ -3,17 +3,16 @@ import * as THREE from 'three';
 import {AbsoluteFill} from 'remotion';
 import {FONT} from '../../../brand/fonts';
 import {cue, lerp, shake, Sound, span, type ShotProps} from '../../../components/stage';
-import {Big, Count, Label, UI} from '../../../components/ui';
-import {Ground, Splash3D} from '../../../three/giant3d';
+import {Big, Label, UI} from '../../../components/ui';
+import {Splash3D} from '../../../three/giant3d';
 import {Hero3D} from '../../../three/Hero3D';
-import {Smoke} from '../../../three/grimoire3d';
 import {Ambergris3D, Beaks3D, Gut3D, Slime3D, Stink3D} from '../../../three/inside3d';
 import {Many, rnd, type Copy} from '../../../three/many';
-import {Boat3D, Bubbles3D, Fish3D, Kayak3D, Krill3D, Squid3D, Underwater3D, UwCamera3D, Whale3D, whalePoint} from '../../../three/ocean3d';
+import {Boat3D, Bubbles3D, Fish3D, Kayak3D, Squid3D, Underwater3D, UwCamera3D, Whale3D, whalePoint} from '../../../three/ocean3d';
 import {Desk3, Room3, Shelf3} from '../../../three/sets3d';
 import {Mountains3D, Sea3D} from '../../../three/sky3d';
 import {Shot3, type Angle3} from '../../../three/shot3';
-import {Glow, T} from '../../../three/toon';
+import {T} from '../../../three/toon';
 import {Bedroom} from '../../ep05/scenes/A';
 import {BG, gutLight, HeldAmber, LIGHT, P7, Panel, SeaSet, Swimmer, Vignette} from './kit';
 import {handAt, headAt, type V3} from './util';
@@ -40,9 +39,9 @@ const Spout3D: React.FC<{at: V3; dir: V3; t: number; n?: number; h?: number}> = 
 		const s = u * h;
 		const spread = 0.15 + u * 0.9;
 		const p: V3 = [at[0] + d.x * s + (rnd(i * 3.1) - 0.5) * spread, at[1] + d.y * s + (rnd(i * 5.3) - 0.5) * spread - u * u * 1.2, at[2] + d.z * s + (rnd(i * 7.7) - 0.5) * spread];
-		items.push({p, s: (0.12 + rnd(i * 2.2) * 0.18) * life * (1 - u * 0.4)});
+		items.push({p, s: (0.22 + rnd(i * 2.2) * 0.3) * life * (0.6 + u * 0.6)});
 	}
-	return <Many kind={`spout${n}`} geom={() => new THREE.SphereGeometry(1, 10, 8)} items={items} color="#F4FBFF" outline={0.15} opacity={0.85} shadow={false} />;
+	return <Many kind={`spout${n}`} geom={() => new THREE.SphereGeometry(1, 10, 8)} items={items} color="#FFFFFF" outline={0.1} glow opacity={0.9} shadow={false} />;
 };
 
 /** Pink goo blobs flying with you. */
@@ -78,7 +77,7 @@ export const Out: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const boatAt: V3 = [0, 0, 0];
 	const heroTop: V3 = [-3.2, -0.95, -5.6];
 	const surfaceT = span(frame, comes, comes + 40);
-	const whaleTop: V3 = [-10.5, lerp(-5, -0.9, surfaceT), -3];
+	const whaleTop: V3 = [-10.7, lerp(-5, -0.9, surfaceT), -13.3];
 	const whaleRot: V3 = [lerp(-0.3, 0.02, surfaceT), 0.55, 0];
 	const bh = whalePoint(whaleTop, whaleRot, 16, 0.955, 0.045, 0.11);
 	const spoutDir = new THREE.Vector3(0.55, 1.0, 0.75).applyEuler(new THREE.Euler(0, whaleRot[1], 0));
@@ -130,10 +129,7 @@ export const Out: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			<group>
 				<Swimmer at={hero} pitch={-10} frame={frame} kick={1.6} armL={[150, 165]} armR={[150, 165]} face="determined" headUp={0} />
 				<Bubbles3D at={[hero[0], hero[1] + 0.6, hero[2] + 0.2]} frame={frame} n={10} rise={1.6} />
-				<group position={[2, -0.6, -1]} rotation={[0, 0, 0]}>
-					<T shape={{kind: 'box', w: 2.6, h: 1.0, d: 8}} color="#F4F4F8" position={[0, 0, 0]} outline={0.04} />
-					<T shape={{kind: 'box', w: 2.4, h: 0.3, d: 7.6}} color="#C8403A" position={[0, -0.6, 0]} outline={0.03} />
-				</group>
+				<Boat3D at={[2.5, 0, -1]} frame={frame} />
 			</group>
 		);
 		angle = [{at: [0.5, hero[1] + 1.5, 0], dist: 7, yaw: 40, pitch: -40, fov: 46, dyaw: 8}];
@@ -186,8 +182,8 @@ export const Out: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<AbsoluteFill>
 						{part === 'tube' ? <Vignette amount={0.4} /> : null}
 						<Big text="WHOOSH!" x={960} y={300} size={150} frame={frame} at={4} until={teeth - 8} color={UI.cream} rotate={-6} />
-						<Label text="BLOWHOLE ON THE LEFT" x={960} y={140} size={56} frame={frame} at={blowhole + 6} until={straight - 6} color={UI.cyan} />
-						<Label text="SPOUT: FORWARDS & TO THE LEFT" x={960} y={930} size={52} frame={frame} at={blowhole + 40} until={straight - 6} color={UI.cream} />
+						<Label text="BLOWHOLE ON THE LEFT" x={960} y={204} size={56} frame={frame} at={blowhole + 6} until={straight - 6} color={UI.cyan} />
+						<Label text="SPOUT: FORWARDS & TO THE LEFT" x={960} y={879} size={52} frame={frame} at={blowhole + 40} until={straight - 6} color={UI.cream} />
 					</AbsoluteFill>
 				)}
 			/>
@@ -227,13 +223,13 @@ export const Deck: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const showCam = frame > oneHand - 4;
 	const rh = handAt(hero, 0.2, [30, 70], 50, 1);
 	const mask = headAt(hero);
-	const goo: Copy[] = [...Array(16)].map((_, i) => ({p: [hero[0] + (rnd(i * 2.1) - 0.5) * 0.55, hero[1] + 0.3 + rnd(i * 3.3) * 1.3, hero[2] + 0.22 + rnd(i * 4.4) * 0.08], s: 0.06 + rnd(i * 5.5) * 0.06}));
+	const goo: Copy[] = [...Array(12)].map((_, i) => ({p: [hero[0] + (rnd(i * 2.1) - 0.5) * 0.5, hero[1] + 0.35 + rnd(i * 3.3) * 1.2, hero[2] + 0.27 + rnd(i * 4.4) * 0.05], s: 0.025 + rnd(i * 5.5) * 0.03}));
 	const passengers = (
 		<group>
 			<Hero3D who={P7.friend} position={DECK_FRIEND} turn={fTurn} armL={pull ? [60, 80] : frame > backAt ? [40, 150] : [12, 8]} armR={pull ? [60, 80] : frame > backAt ? [40, 150] : [12, 8]} reachL={pull ? 70 : frame > backAt ? 50 : 0} reachR={pull ? 70 : frame > backAt ? 50 : 0} face={frame > backAt ? 'shocked' : frame > looks ? 'neutral' : 'happy'} />
 			<Hero3D position={hero} turn={0.2} scuba armR={showCam ? [30, 70] : [12, 8]} reachR={showCam ? 50 : 0} armL={frame > other - 4 ? [30, 100] : [12, 8]} reachL={frame > other - 4 ? 60 : 0} face={frame > slime ? 'happy' : 'determined'} />
 			{haul > 0.9 ? <Many kind="deckgoo" geom={() => new THREE.SphereGeometry(1, 10, 8)} items={goo} color="#F2A0B8" outline={0.2} shadow={false} /> : null}
-			{haul > 0.9 ? <Beaks3D at={[mask[0] + 0.1, mask[1] + 0.05, mask[2] + 0.35]} r={0.001} n={1} y={0} s={1.4} seed={11} /> : null}
+			{haul > 0.9 ? <Beaks3D at={[mask[0] + 0.12, mask[1] + 0.06, mask[2] + 0.33]} r={0.001} n={1} y={0} s={0.8} seed={11} /> : null}
 			{showCam ? <UwCamera3D at={[rh[0], rh[1] + 0.08, rh[2]]} rot={[0, 0.2, 0]} s={0.9} /> : null}
 			{frame > other - 4 ? <HeldAmber pos={hero} turn={0.2} s={0.24} /> : null}
 		</group>
@@ -250,7 +246,7 @@ export const Deck: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [0.4, 1.4, -3.4], dist: 5, yaw: 140, pitch: 10, fov: 42, dyaw: 6},
 		{at: [0, 1.8, -3.0], dist: 3.4, yaw: 30, pitch: 6, fov: 38, dyaw: -6},
 		{at: [mask[0], mask[1], mask[2]], dist: 1.3, yaw: 15, pitch: 4, fov: 32, dyaw: 6},
-		{at: [rh[0], rh[1], rh[2]], dist: 1.5, yaw: 40, pitch: 10, fov: 36, dyaw: -6},
+		{at: [rh[0], rh[1], rh[2]], dist: 1.6, yaw: -30, pitch: 10, fov: 36, dyaw: -6},
 		{at: [0, 1.6, -3.0], dist: 2.6, yaw: -20, pitch: 6, fov: 38, dyaw: 6},
 		{at: [0.5, 1.8, -2.6], dist: 3.6, yaw: 70, pitch: 6, fov: 40, dyaw: -4},
 		{at: [-4, 1.5, -5], dist: 14, yaw: 70, pitch: 6, fov: 44, dyaw: 4},
@@ -270,6 +266,17 @@ export const Deck: React.FC<ShotProps> = ({frame, dur, lines}) => {
 };
 
 // ---------------------------------------------------------------- pump
+
+/** A spreading brown cloud of whale poop (full of iron and nitrogen for the plankton). */
+const PoopCloud: React.FC<{at: V3; frame: number; t: number}> = ({at, frame, t}) => {
+	const items: Copy[] = [];
+	for (let i = 0; i < 60; i++) {
+		const a = rnd(i * 1.9) * Math.PI * 2;
+		const d = Math.sqrt(rnd(i * 3.7)) * (0.6 + t * 4.5);
+		items.push({p: [at[0] + Math.cos(a) * d - t * 1.5, at[1] + (rnd(i * 5.1) - 0.3) * (0.4 + t * 2.4) + Math.sin(frame * 0.03 + i) * 0.1, at[2] + Math.sin(a) * d * 0.6], s: (0.25 + rnd(i * 2.3) * 0.35) * (0.5 + t * 0.8), c: rnd(i * 7.7) > 0.5 ? '#9A7A4A' : '#7A5A34'});
+	}
+	return <Many kind="poop60" geom={() => new THREE.SphereGeometry(1, 12, 9)} items={items} outline={0.08} opacity={0.85} shadow={false} />;
+};
 
 export const Pump: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const [l0] = lines;
@@ -318,7 +325,7 @@ export const Pump: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			<group>
 				<Whale3D kind="sperm" at={wAt} rot={wRot} len={16} frame={frame} swim={0.5} />
 				{deep ? <Squid3D at={[12, -30, 1]} rot={[0, -Math.PI / 2, 0]} len={3} frame={frame} /> : null}
-				{frame > poop + 10 ? <Smoke at={[tail[0] - 1, tail[1], tail[2]]} frame={frame} amount={span(frame, poop + 10, poop + 30)} r={2.4} n={14} rise={2} color="#8A6A3A" seed={5} /> : null}
+				{frame > poop + 10 ? <PoopCloud at={[tail[0] - 1, tail[1], tail[2]]} frame={frame} t={span(frame, poop + 10, poop + 70, (v) => v)} /> : null}
 				{phyto.length ? <Many kind={`phyto${phyto.length}`} geom={() => new THREE.SphereGeometry(1, 8, 6)} items={phyto} color="#7CF2A0" outline={0} glow shadow={false} /> : null}
 				{frame > half ? <Bubbles3D at={[tail[0] + 2, -4, 0]} frame={frame} n={30} rise={3.6} r={0.12} spread={10} every={60} /> : null}
 				{deep ? null : <Fish3D at={[-6, -3, -3]} frame={frame} n={20} r={2} s={0.3} />}
@@ -350,12 +357,12 @@ export const Pump: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				blur={0}
 				overlay={() => (
 					<AbsoluteFill>
-						<Label text="FEEDS DEEP DOWN" x={960} y={140} size={56} frame={frame} at={feed + 6} until={poop - 6} color={UI.cyan} />
-						<Label text="POOPS NEAR THE SURFACE" x={960} y={140} size={56} frame={frame} at={poop + 10} until={feeds - 6} color={UI.orange} />
-						<Label text="PHYTOPLANKTON" x={960} y={140} size={60} frame={frame} at={feeds + 20} until={half - 6} color={UI.green} />
-						<Label text="≈ HALF THE OXYGEN ON EARTH" x={960} y={140} size={56} frame={frame} at={half + 10} until={pumpC - 6} color={UI.green} />
-						<Big text="THE WHALE PUMP" x={960} y={880} size={110} frame={frame} at={pumpC + 6} until={breathe - 6} color={UI.yellow} />
-						<Label text="WHALES HELP YOU BREATHE" x={960} y={930} size={56} frame={frame} at={breathe + 10} color={UI.cream} />
+						<Label text="FEEDS DEEP DOWN" x={960} y={204} size={56} frame={frame} at={feed + 6} until={poop - 6} color={UI.cyan} />
+						<Label text="POOPS NEAR THE SURFACE" x={960} y={204} size={56} frame={frame} at={poop + 10} until={feeds - 6} color={UI.orange} />
+						<Label text="PHYTOPLANKTON" x={960} y={207} size={60} frame={frame} at={feeds + 20} until={half - 6} color={UI.green} />
+						<Label text="≈ HALF THE OXYGEN ON EARTH" x={960} y={204} size={56} frame={frame} at={half + 10} until={pumpC - 6} color={UI.green} />
+						<Big text="THE WHALE PUMP" x={960} y={852} size={110} frame={frame} at={pumpC + 6} until={breathe - 6} color={UI.yellow} />
+						<Label text="WHALES HELP YOU BREATHE" x={960} y={876} size={56} frame={frame} at={breathe + 10} color={UI.cream} />
 					</AbsoluteFill>
 				)}
 			/>
@@ -444,7 +451,7 @@ export const Myth: React.FC<ShotProps> = ({frame, dur, lines}) => {
 								</div>
 							))}
 						</Paper>
-						{frame > wife - 30 && frame < wife - 6 ? <Label text="NO JAMES BARTLEY" x={960} y={950} size={60} frame={frame} at={wife - 30} until={wife - 8} color={UI.red} /> : null}
+						{frame > wife - 30 && frame < wife - 6 ? <Label text="NO JAMES BARTLEY" x={960} y={873} size={60} frame={frame} at={wife - 30} until={wife - 8} color={UI.red} /> : null}
 						<Paper frame={frame} at={wife} rot={-1} w={1100} h={420}>
 							<div style={{fontSize: 58, fontStyle: 'italic', padding: '60px 70px 20px', lineHeight: 1.2, textAlign: 'center'}}>“There is not one word of truth in the whale story.”</div>
 							<div style={{fontSize: 34, textAlign: 'center'}}>— the captain’s wife</div>
@@ -581,7 +588,7 @@ export const Real: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				</group>
 			</group>
 		);
-		angle = frame >= dad - 4 ? {at: [5, 1.2, 4], dist: 4, yaw: -70, pitch: 6, fov: 40, dyaw: 6} : {at: [2, 1.2, 1.5], dist: 16, yaw: 150, pitch: 6, fov: 42, dyaw: -4};
+		angle = frame >= dad - 4 ? {at: [5, 1.2, 4], dist: 4, yaw: -70, pitch: 6, fov: 40, dyaw: 6} : {at: [1.8, 1.0, 1.2], dist: 9.5, yaw: 145, pitch: 7, fov: 42, dyaw: -4};
 	}
 	const angles = cuts.map((_, i) => ({...angle, yaw: (angle.yaw ?? 0) + [0, 20, -18, 12, -10][i % 5]}));
 	const sec = part === 'dark' ? Math.min(30, Math.round(((frame - (thirty - 4)) / (surfaced - thirty)) * 30)) : 0;
@@ -600,21 +607,21 @@ export const Real: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				blur={0}
 				overlay={() => (
 					<AbsoluteFill>
-						<Label text="TRUE STORIES" x={960} y={140} size={60} frame={frame} at={6} until={y2021 - 6} color={UI.yellow} />
-						<Label text="2021 · CAPE COD, USA · A HUMPBACK" x={960} y={140} size={52} frame={frame} at={y2021 + 4} until={thirty - 6} color={UI.cream} />
-						{part === 'dark' ? <Big text={`${sec} SECONDS`} x={960} y={880} size={100} frame={frame} at={thirty} color={UI.yellow} /> : null}
+						<Label text="TRUE STORIES" x={960} y={207} size={60} frame={frame} at={6} until={y2021 - 6} color={UI.yellow} />
+						<Label text="2021 · CAPE COD, USA · A HUMPBACK" x={960} y={201} size={52} frame={frame} at={y2021 + 4} until={thirty - 6} color={UI.cream} />
+						{part === 'dark' ? <Big text={`${sec} SECONDS`} x={960} y={858} size={100} frame={frame} at={thirty} color={UI.yellow} /> : null}
 						{part === 'dark' ? <Vignette amount={0.7} /> : null}
-						<Label text="BRUISED · NOTHING BROKEN" x={960} y={930} size={56} frame={frame} at={bruised + 6} until={y2025 - 6} color={UI.green} />
-						<Label text="2025 · CHILE · A KAYAKER" x={960} y={140} size={56} frame={frame} at={y2025 + 6} until={letGo - 6} color={UI.cream} />
-						<Label text="LET GO AFTER A COUPLE OF SECONDS" x={960} y={140} size={52} frame={frame} at={letGo + 10} until={dad - 6} color={UI.green} />
+						<Label text="BRUISED · NOTHING BROKEN" x={960} y={876} size={56} frame={frame} at={bruised + 6} until={y2025 - 6} color={UI.green} />
+						<Label text="2025 · CHILE · A KAYAKER" x={960} y={204} size={56} frame={frame} at={y2025 + 6} until={letGo - 6} color={UI.cream} />
+						<Label text="LET GO AFTER A COUPLE OF SECONDS" x={960} y={201} size={52} frame={frame} at={letGo + 10} until={dad - 6} color={UI.green} />
 						{frame >= dad - 4 && frame < both - 4 ? (
-							<div style={{position: 'absolute', left: 80, top: 80, display: 'flex', alignItems: 'center', gap: 14, fontFamily: FONT, fontWeight: 700, fontSize: 48, color: '#fff', opacity: (Math.floor(frame / 15) % 2) * 0.4 + 0.6}}>
+							<div style={{position: 'absolute', left: 80, top: 166, display: 'flex', alignItems: 'center', gap: 14, fontFamily: FONT, fontWeight: 700, fontSize: 48, color: '#fff', opacity: (Math.floor(frame / 15) % 2) * 0.4 + 0.6}}>
 								<div style={{width: 34, height: 34, borderRadius: 17, background: '#FF3A3A'}} />
 								REC
 							</div>
 						) : null}
-						<Label text="NOT HUNTING ANYONE" x={960} y={140} size={56} frame={frame} at={both + 6} until={lunch - 6} color={UI.cream} />
-						<Label text="JUST IN THE WAY OF ITS LUNCH" x={960} y={140} size={56} frame={frame} at={lunch + 6} color={UI.yellow} />
+						<Label text="NOT HUNTING ANYONE" x={960} y={204} size={56} frame={frame} at={both + 6} until={lunch - 6} color={UI.cream} />
+						<Label text="JUST IN THE WAY OF ITS LUNCH" x={960} y={204} size={56} frame={frame} at={lunch + 6} color={UI.yellow} />
 					</AbsoluteFill>
 				)}
 			/>
@@ -693,7 +700,7 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<Desk3 at={desk} w={1.6} />
 				<Ambergris3D at={[lump[0], lump[1] + 0.18, lump[2]]} s={0.24} fresh={1} />
 				<Stink3D at={[lump[0], lump[1] + 0.25, lump[2]]} frame={frame} n={3} h={1.1} />
-				<Hero3D position={[0, 0, -1.4]} turn={0.7} face={pinch ? 'sad' : 'happy'} armL={pinch ? [40, 160] : [12, 8]} reachL={pinch ? 40 : 0} />
+				<Hero3D position={[0, 0, -1.4]} turn={0.7} face={pinch ? 'sad' : 'happy'} armL={pinch ? [60, 80] : [12, 8]} reachL={pinch ? 50 + Math.sin(frame * 0.5) * 18 : 0} />
 				{part === 'camera' ? <UwCamera3D at={[0.4, 1.1, -1.0]} rot={[0, 0.7, 0]} s={0.9} /> : null}
 			</group>
 		);
@@ -752,7 +759,7 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				blur={0}
 				overlay={() => (
 					<AbsoluteFill>
-						<Big text="IT STINKS" x={960} y={220} size={130} frame={frame} at={stinks + 2} until={fresh - 6} color={UI.green} rotate={-5} />
+						<Big text="IT STINKS" x={960} y={240} size={130} frame={frame} at={stinks + 2} until={fresh - 6} color={UI.green} rotate={-5} />
 						{frame >= fresh - 4 && frame < mum - 4 ? (
 							<Panel frame={frame} at={fresh} until={mum - 8} x={1400} y={540} w={820} h={520} title="FRESH vs AGED AMBERGRIS">
 								<svg viewBox="0 0 800 440" width={800} height={440} style={{position: 'absolute', left: 10, top: 10}}>
@@ -784,9 +791,9 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 								</svg>
 							</Panel>
 						) : null}
-						<Label text="SEE YOU IN 10 YEARS" x={960} y={930} size={64} frame={frame} at={ten + 4} until={camQ - 6} color={UI.yellow} />
+						<Label text="SEE YOU IN 10 YEARS" x={960} y={870} size={64} frame={frame} at={ten + 4} until={camQ - 6} color={UI.yellow} />
 						{part === 'camera' ? <LastPhoto frame={frame} at={photo} /> : null}
-						<Label text="WHY DOES IT SMELL OF SQUID?" x={960} y={140} size={56} frame={frame} at={friendQ + 10} color={UI.cream} />
+						<Label text="WHY DOES IT SMELL OF SQUID?" x={960} y={204} size={56} frame={frame} at={friendQ + 10} color={UI.cream} />
 					</AbsoluteFill>
 				)}
 			/>
@@ -808,9 +815,9 @@ export const Outro: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const comments = cue(l0, 'Tell me');
 	const next = cue(l0, 'And next time');
 	const cuts = [0, animal - 4, comments - 4, next - 4];
-	const diveT = span(frame, 10, animal + 60, (v) => v);
-	const wAt: V3 = [-14, lerp(-3.5, -11, diveT), -16];
-	const wRot: V3 = [lerp(0.35, 1.35, diveT), 0.6, 0];
+	const diveT = span(frame, 10, animal + 70, (v) => v);
+	const wAt: V3 = [-14, lerp(-1.2, -9.5, diveT), -16];
+	const wRot: V3 = [lerp(0.3, 1.45, span(frame, 10, animal, (v) => v)), 0.6, 0];
 	const drop = span(frame, next + 14, next + 30, (v) => v * v);
 	const fh = handAt([0.9, 0.85, -2.2], -2.4, [30, 70], 60, 1);
 	const camAt: V3 = [fh[0] - drop * 0.8, lerp(fh[1] + 0.05, -0.2, drop), fh[2] - drop * 1.2];
@@ -828,7 +835,7 @@ export const Outro: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	);
 	const angles: Angle3[] = [
 		{at: [-5, 2, -7], dist: 16, yaw: 60, pitch: 6, fov: 44, dyaw: 6},
-		{at: [-8, 3, -10], dist: 18, yaw: 40, pitch: 6, fov: 44, dyaw: -6},
+		{at: [0.2, 1.9, -2.4], dist: 4.2, yaw: 200, pitch: 6, fov: 40, dyaw: -6},
 		{at: [0, 2, -2.4], dist: 5.5, yaw: 120, pitch: 8, fov: 40, dyaw: 6},
 		{at: [0.4, 1.6, -2.8], dist: 4.6, yaw: 150, pitch: 10, fov: 40, dyaw: -6},
 	];
@@ -847,11 +854,11 @@ export const Outro: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				blur={0}
 				overlay={() => (
 					<AbsoluteFill>
-						<Big text="WOULD YOU?" x={960} y={200} size={150} frame={frame} at={8} until={animal - 6} color={UI.yellow} />
-						<Label text="WOULD YOU DIVE BACK IN?" x={960} y={900} size={60} frame={frame} at={20} until={animal - 6} color={UI.cream} />
-						<Label text="ONE DAY AS ANY OCEAN ANIMAL?" x={960} y={160} size={60} frame={frame} at={animal + 6} until={comments - 6} color={UI.cyan} />
-						<Label text="TELL ME IN THE COMMENTS" x={960} y={160} size={60} frame={frame} at={comments + 4} until={next - 6} color={UI.yellow} />
-						<Big text="…MAYBE JUST LET IT GO" x={960} y={180} size={96} frame={frame} at={next + 34} color={UI.cream} />
+						<Big text="WOULD YOU?" x={960} y={252} size={150} frame={frame} at={8} until={animal - 6} color={UI.yellow} />
+						<Label text="WOULD YOU DIVE BACK IN?" x={960} y={873} size={60} frame={frame} at={20} until={animal - 6} color={UI.cream} />
+						<Label text="ONE DAY AS ANY OCEAN ANIMAL?" x={960} y={207} size={60} frame={frame} at={animal + 6} until={comments - 6} color={UI.cyan} />
+						<Label text="TELL ME IN THE COMMENTS" x={960} y={207} size={60} frame={frame} at={comments + 4} until={next - 6} color={UI.yellow} />
+						<Big text="…MAYBE JUST LET IT GO" x={960} y={219} size={96} frame={frame} at={next + 34} color={UI.cream} />
 					</AbsoluteFill>
 				)}
 			/>
