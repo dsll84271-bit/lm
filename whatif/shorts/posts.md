@@ -62,6 +62,22 @@ One caption per clip, for TikTok, YouTube Shorts and Instagram Reels.
 
 ---
 
+## Episode 8: What If You Woke Up 100 Metres Tall?
+
+**ep08-wake-up.mp4** (50 s)
+> You wake up 100 metres tall. Your bed is stuck to your back and your house is round your ankle 😳 #whatif #giant #animation #science #hypothetical
+
+**ep08-eiffel.mp4** (42 s)
+> Grow 60× taller and you'd weigh as much as the Eiffel Tower. Real bones would snap 🦴 #whatif #giant #science #physics #animation
+
+**ep08-voice.mp4** (30 s)
+> At 100 m tall your voice would be too deep for human ears, like an elephant's rumble 🐘 #whatif #giant #elephants #science #animation
+
+**ep08-bridge.mp4** (73 s)
+> The school bus is stuck on a collapsing bridge… and only a giant can save it 🌧️🚌 #whatif #giant #rescue #animation #story
+
+---
+
 ## Tips
 
 - **Best times to post:** after school and in the early evening (about 4–8 pm local time).

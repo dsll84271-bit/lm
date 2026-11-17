@@ -250,6 +250,46 @@
     "2 PEOPLE WHO ENDED UP",
     "INSIDE A WHALE'S MOUTH"
    ]
+  },
+  {
+   "id": "ep08-wake-up",
+   "ep": "08",
+   "start": 0.0,
+   "end": 50.5,
+   "hook": [
+    "WHAT IF YOU WOKE UP",
+    "100 METRES TALL?"
+   ]
+  },
+  {
+   "id": "ep08-eiffel",
+   "ep": "08",
+   "start": 50.5,
+   "end": 93.0,
+   "hook": [
+    "YOU'D WEIGH AS MUCH",
+    "AS THE EIFFEL TOWER"
+   ]
+  },
+  {
+   "id": "ep08-voice",
+   "ep": "08",
+   "start": 133.0,
+   "end": 162.6,
+   "hook": [
+    "AT 100 M TALL, NOBODY",
+    "COULD HEAR YOU"
+   ]
+  },
+  {
+   "id": "ep08-bridge",
+   "ep": "08",
+   "start": 351.0,
+   "end": 424.2,
+   "hook": [
+    "A GIANT VS A",
+    "COLLAPSING BRIDGE"
+   ]
   }
  ]
 }
