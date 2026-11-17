@@ -10,6 +10,7 @@ import {TestAnt} from '../three/TestAnt';
 import {TestFly} from '../three/TestFly';
 import {TestGrim} from '../three/TestGrim';
 import {TestSea} from '../three/TestSea';
+import {TestTall} from '../three/TestTall';
 import {EP01_FRAMES, Episode01} from '../episodes/ep01/Episode';
 import {EP02_FRAMES, Episode02} from '../episodes/ep02/Episode';
 import {EP03_FRAMES, Episode03} from '../episodes/ep03/Episode';
@@ -17,6 +18,7 @@ import {EP04_FRAMES, Episode04} from '../episodes/ep04/Episode';
 import {EP05_FRAMES, Episode05} from '../episodes/ep05/Episode';
 import {EP06_FRAMES, Episode06} from '../episodes/ep06/Episode';
 import {EP07_FRAMES, Episode07} from '../episodes/ep07/Episode';
+import {EP08_FRAMES, Episode08} from '../episodes/ep08/Episode';
 
 export const Root: React.FC = () => (
 	<>
@@ -27,6 +29,7 @@ export const Root: React.FC = () => (
 		<Composition id="Ep05" component={Episode05} width={1920} height={1080} fps={30} durationInFrames={EP05_FRAMES} />
 		<Composition id="Ep06" component={Episode06} width={1920} height={1080} fps={30} durationInFrames={EP06_FRAMES} />
 		<Composition id="Ep07" component={Episode07} width={1920} height={1080} fps={30} durationInFrames={EP07_FRAMES} />
+		<Composition id="Ep08" component={Episode08} width={1920} height={1080} fps={30} durationInFrames={EP08_FRAMES} />
 		<Still id="HeroSheet" component={HeroSheet} width={1920} height={1080} />
 		<Still id="TestThumb" component={TestThumb} width={1920} height={1080} />
 		<Still id="Test3D" component={Test3D} width={1920} height={1080} />
@@ -34,6 +37,7 @@ export const Root: React.FC = () => (
 		<Composition id="TestFly" component={TestFly} width={1920} height={1080} fps={30} durationInFrames={80} />
 		<Composition id="TestGrim" component={TestGrim} width={1920} height={1080} fps={30} durationInFrames={60} />
 		<Composition id="TestSea" component={TestSea} width={1920} height={1080} fps={30} durationInFrames={100} />
+		<Composition id="TestTall" component={TestTall} width={1920} height={1080} fps={30} durationInFrames={80} />
 		<Composition id="TestAnt" component={TestAnt} width={1920} height={1080} fps={30} durationInFrames={80} />
 		<Composition id="Test3D2" component={Test3D2} width={1920} height={1080} fps={30} durationInFrames={300} />
 	</>
