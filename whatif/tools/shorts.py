@@ -261,8 +261,8 @@ def render(clip, ass_path, out):
         y = FG_CY - fh // 2
         f.append(f"[s{i}]trim={t0:.3f}:{t1:.3f},setpts=PTS-STARTPTS,split[p{i}][q{i}]")
         # Background: the same picture, blown up, blurred and darkened.
-        f.append(f"[p{i}]crop=452:{ACTIVE_H}:734:0,scale=270:480,gblur=sigma=10,scale={W}:{H},"
-                 f"eq=brightness=-0.14:saturation=1.15[bg{i}]")
+        f.append(f"[p{i}]crop=452:{ACTIVE_H}:734:0,scale=270:480,gblur=sigma=26,scale={W}:{H},"
+                 f"eq=brightness=-0.24:saturation=1.1[bg{i}]")
         f.append(f"[q{i}]crop={cw}:{ACTIVE_H}:{x}:0,scale={W}:{fh}[fg{i}]")
         f.append(f"[bg{i}][fg{i}]overlay=0:{y}[v{i}]")
     f.append("".join(f"[v{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=0[cat]")
