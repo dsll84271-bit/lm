@@ -10,7 +10,7 @@ import {Bird3D, Bus3D, Car3D, SchoolTop3D} from '../../../three/sky3d';
 import {Shot3, type Angle3} from '../../../three/shot3';
 import {T} from '../../../three/toon';
 import {AnkleHouse, Balance3D, Bed8, BigBen3D, Bridge3D, Eiffel3D, Elephant3D, House3D, Pants3D, Redwood3D, Ruler3D, Washing3D, Water8} from '../../../three/tall3d';
-import {BG, bigLight, Giant, GIANT, HomeSet, housesIn, K, KIDS, LIGHT, lookFrom, P8, Panel, RainOver, smallLight, Vignette, YOU} from './kit';
+import {BG, bigLight, Giant, GIANT, HomeSet, housesIn, K, KIDS, LIGHT, leanHand, lookFrom, P8, Panel, RainOver, smallLight, Vignette, YOU} from './kit';
 import {handAt, headAt, type V3} from './util';
 
 // Part A: you wake up a hundred metres tall, Mum's toast, how tall that is,
@@ -113,9 +113,12 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 // ---------------------------------------------------------------- mum
 
 const CROUCH: V3 = [0, 0, -30];
-const LOW_HAND = handAt(CROUCH, 0, [10, 10], 0, 1, true, GIANT);
-const MUM: V3 = [LOW_HAND[0] + 1.5, 0, LOW_HAND[2] + 1.1];
+const LEAN = 24;
+const LOW_HAND = leanHand(CROUCH, 0, [5, 5], 0, 1, LEAN);
+const MUM: V3 = [LOW_HAND[0] + 6, 0, LOW_HAND[2] + 3];
 const MUM_TURN = Math.atan2(LOW_HAND[0] - MUM[0], LOW_HAND[2] - MUM[2]);
+const MUM_DIR: [number, number] = [Math.sin(MUM_TURN), Math.cos(MUM_TURN)];
+const MUM_FRONT: V3 = [MUM[0] + MUM_DIR[0] * 1.3, 1.4, MUM[2] + MUM_DIR[1] * 1.3];
 
 export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const [l0] = lines;
@@ -126,33 +129,39 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const inside = cue(l0, 'She just goes');
 	const cuts = [0, holds - 4, pinch - 4, crumb - 4, word - 4, inside - 4];
 	const up = span(frame, holds, holds + 18) * (1 - span(frame, word + 10, word + 30));
-	const raise = span(frame, crumb - 30, crumb + 6);
-	const armR: [number, number] = [lerp(10, 70, raise), lerp(10, 140, raise)];
-	const hand = handAt(CROUCH, 0, armR, 60 * raise, 1, true, GIANT);
-	const taken = frame > pinch + 14;
 	const mumArm: [number, number] = [lerp(30, 168, up), lerp(70, 10, up)];
-	const walk = span(frame, inside + 6, inside + 80, (v) => v);
-	const mumNow: V3 = [MUM[0] + walk * 2, 0, MUM[2] + walk * 10];
 	const mh = handAt(MUM, MUM_TURN, mumArm, 60, 1);
 	const mh2 = handAt(MUM, MUM_TURN, mumArm, 60, -1);
 	const plateAt: V3 = [(mh[0] + mh2[0]) / 2, (mh[1] + mh2[1]) / 2 + 0.05, (mh[2] + mh2[2]) / 2];
-	const toast: V3 = taken ? [hand[0] + 1.2, hand[1] - 0.075 * K, hand[2] + 1.2] : [plateAt[0], plateAt[1] + 0.04, plateAt[2]];
+	// Your hand comes to the plate, pinches, then goes up to your mouth.
+	const toPlate = 0;
+	const raise = span(frame, pinch + 18, crumb + 4);
+	const lean = lerp(LEAN, 6, raise);
+	const armR: [number, number] = [lerp(5, 70, raise), lerp(5, 140, raise)];
+	let hand = leanHand(CROUCH, 0, armR, 60 * raise, 1, lean);
+	if (toPlate > 0) {
+		hand = [lerp(hand[0], plateAt[0] - 3.2, toPlate), lerp(hand[1], plateAt[1] + 0.4, toPlate), lerp(hand[2], plateAt[2] - 1.2, toPlate)];
+	}
+	const taken = frame > pinch + 6;
+	const walk = span(frame, inside + 6, inside + 80, (v) => v);
+	const mumNow: V3 = [MUM[0] + walk * 10, 0, MUM[2] + walk * 1];
+	const toast: V3 = taken ? [hand[0] + 5.8, hand[1], hand[2] + 0.6] : [plateAt[0], plateAt[1] + 0.04, plateAt[2]];
 	const near = (
 		<group>
-			<Giant at={CROUCH} sit face={frame > crumb ? 'smug' : 'happy'} armR={armR} reachR={60 * raise} armL={[14, 20]} look={frame > crumb ? [0.3, 0.2] : [0.5, -0.8]} />
-			<Hero3D who={P8.mum} position={mumNow} turn={frame > inside + 4 ? 0.2 : MUM_TURN} armR={frame > inside ? [12, 10] : mumArm} reachR={60} armL={frame > inside ? [12, 10] : mumArm} reachL={60} face={frame > word ? 'neutral' : 'shocked'} look={[0, 0.8]} walk={frame > inside + 4 ? frame / 6 : undefined} />
+			<Giant at={CROUCH} sit lean={lean} face={frame > crumb ? 'smug' : 'happy'} armR={armR} reachR={60 * raise} armL={[14, 20]} look={frame > crumb ? [0.3, 0.2] : [0.5, -0.8]} />
+			<Hero3D who={P8.mum} position={mumNow} turn={frame > inside + 4 ? Math.PI / 2 : MUM_TURN} armR={frame > inside ? [12, 10] : mumArm} reachR={60} armL={frame > inside ? [12, 10] : mumArm} reachL={60} face={frame > word ? 'neutral' : 'shocked'} look={[0, 0.8]} walk={frame > inside + 4 ? frame / 6 : undefined} />
 			{frame < inside ? <T shape={{kind: 'cyl', r: 0.17, h: 0.03}} color="#FFFFFF" position={plateAt} outline={0.01} /> : null}
-			{frame < crumb + 40 ? <T shape={{kind: 'box', w: 0.14, h: 0.025, d: 0.14}} color="#E8A85A" position={toast} outline={0.008} /> : null}
-			<House3D at={[MUM[0] + 3, 0, MUM[2] + 15]} yaw={Math.PI} seed={4} />
+			{frame < crumb + 60 ? <T shape={{kind: 'box', w: 0.16, h: 0.03, d: 0.16}} color="#E8A85A" position={toast} outline={0.01} /> : null}
+			<House3D at={[MUM[0] + 15, 0, MUM[2] + 1]} yaw={-Math.PI / 2} seed={4} />
 		</group>
 	);
 	const angles: Angle3[] = [
-		lookFrom([MUM[0] + 7, 1.2, MUM[2] + 9], [CROUCH[0] + 6, 34, CROUCH[2] + 4], 64, {dyaw: 3}),
-		lookFrom([MUM[0] - 0.2, 1.2, MUM[2] - 2.6], [MUM[0], 1.9, MUM[2]], 46, {dyaw: 4}),
-		lookFrom([MUM[0] + 5, 2.2, MUM[2] + 5], [LOW_HAND[0], 2.6, LOW_HAND[2]], 46, {dyaw: -4}),
-		lookFrom([toast[0] + 2.2, toast[1] - 0.3, toast[2] + 2.2], toast, 40),
-		lookFrom([MUM[0] - 0.4, 1.45, MUM[2] - 2.4], [MUM[0], 1.45, MUM[2]], 36),
-		lookFrom([MUM[0] + 14, 4, MUM[2] + 6], [MUM[0] + 2, 1.2, MUM[2] + 8], 46, {dyaw: 4}),
+		lookFrom([MUM[0] + 4.6, 1.5, MUM[2] + 6.4], [MUM[0] - 3.5, 4.2, MUM[2] - 3.5], 64, {dyaw: 2}),
+		lookFrom([MUM[0] + 3.2, 1.5, MUM[2] + 4.6], [MUM[0] - 3, 3.2, MUM[2] - 3], 58),
+		lookFrom([MUM[0] + 3.2, 1.5, MUM[2] + 4.6], [MUM[0] - 3, 3.2, MUM[2] - 3], 58),
+		lookFrom([MUM[0] + 14, 2, MUM[2] + 20], [MUM[0] - 10, 22, MUM[2] - 8], 60),
+		lookFrom(MUM_FRONT, [MUM[0], 1.45, MUM[2]], 50),
+		lookFrom([MUM[0] + 4, 3, MUM[2] + 14], [MUM[0] + 8, 1.2, MUM[2] + 1], 50, {dyaw: 4}),
 	];
 	return (
 		<>
@@ -167,7 +176,21 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				far={<HomeSet skip={housesIn(-40, 40)} />}
 				near={near}
 				blur={0}
-				overlay={() => <Label text="ONE SLICE OF TOAST" x={960} y={860} size={56} frame={frame} at={crumb + 6} until={word} color={UI.yellow} />}
+				overlay={() => (
+					<AbsoluteFill>
+						<Panel frame={frame} at={crumb - 2} until={word - 4} x={1400} y={470} w={620} h={440} title="ACTUAL SIZE">
+							<svg viewBox="0 0 620 376" width={620} height={376}>
+								<rect width={620} height={376} fill="#CFEFFF" />
+								<path d="M-40 420 Q60 120 330 150 Q560 180 600 420 Z" fill="#FF8A3D" stroke="#140A28" strokeWidth={10} />
+								<path d="M200 230 Q300 200 400 240" fill="none" stroke="#E86A2A" strokeWidth={8} strokeLinecap="round" />
+								<rect x={318} y={134} width={14} height={11} rx={2} fill="#E8A85A" stroke="#140A28" strokeWidth={3} />
+								<line x1={360} y1={90} x2={334} y2={128} stroke="#FFD84A" strokeWidth={6} strokeLinecap="round" />
+								<text x={366} y={86} fontFamily={FONT} fontWeight={700} fontSize={34} fill="#140A28">TOAST</text>
+							</svg>
+						</Panel>
+						<Label text="ONE SLICE OF TOAST" x={960} y={860} size={56} frame={frame} at={crumb + 6} until={word} color={UI.yellow} />
+					</AbsoluteFill>
+				)}
 			/>
 			<Sound name="squeak" at={pinch + 8} volume={0.25} />
 			<Sound name="steps" at={inside + 6} volume={0.3} />
@@ -263,7 +286,7 @@ export const Step: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [0, 30, -30], dist: 200, yaw: 20, pitch: 10, fov: 38, ...BIGCAM},
 		{at: [0, 50, -20], dist: 240, yaw: 90, pitch: 6, fov: 38, dyaw: 6, ...BIGCAM},
 		{at: [0.15 * K, 8, 4], dist: 40, yaw: 100, pitch: 4, fov: 50, ...BIGCAM},
-		withShake({at: [0.15 * K, 3, 16], dist: 26, yaw: 100, pitch: 8, fov: 50, ...BIGCAM}, frame, cracks + 4, 0.6, 1, 16),
+		withShake(lookFrom([70, 2.0, 2], [0.15 * K, 7, 16], 50), frame, cracks + 4, 0.6, 1, 16),
 	];
 	return (
 		<>
@@ -437,7 +460,7 @@ export const Sneeze: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [STAND_HEAD[0], STAND_HEAD[1], STAND_HEAD[2]], dist: 70, yaw: 5, pitch: 2, fov: 36, ddist: -14, ...BIGCAM},
 		withShake({at: [0, 30, 0], dist: 260, yaw: 70, pitch: 10, fov: 40, ...BIGCAM}, frame, choo, 3, 1, 16),
 		lookFrom([10, 2, 70], [30, 22, 24], 52, {dyaw: 6}),
-		{at: [jonesAt[0], 1.6, jonesAt[2]], dist: 7, yaw: -40, pitch: -6, fov: 44, ...BIGCAM},
+		lookFrom([jonesAt[0] + 3, 1.2, jonesAt[2] - 6], [jonesAt[0], 2.2, jonesAt[2]], 50),
 	];
 	return (
 		<>
@@ -486,8 +509,9 @@ export const Sneeze: React.FC<ShotProps> = ({frame, dur, lines}) => {
 
 // ---------------------------------------------------------------- school
 
-const SCHOOL: V3 = [180, 0, -60];
-const carAtFor = (x: number): V3 => [x + 14, 0, SCHOOL[2] + 40 + 34];
+const SCHOOL: V3 = [180, 0, -110];
+// You walk along behind the houses (z = -40); a car keeps pace on the street (z = -3).
+const carAtFor = (x: number): V3 => [x + 14, 0, -3.1];
 
 /** The classroom from inside, with your eye in the window. */
 const WIN = {x: 0, y: 1.9, w: 3.4, h: 2.0, z: -4.5};
@@ -515,6 +539,9 @@ const Classroom: React.FC<{frame: number; mug: number; stare: number}> = ({frame
 			<T shape={{kind: 'box', w: W, h: 0.1, d: 10}} color={look.floor} position={[0, -0.05, 0]} outline={0} />
 			<T shape={{kind: 'box', w: W, h: 0.1, d: 10}} color="#FFF3D6" position={[0, H, 0]} outline={0} />
 			{[-1, 1].map((sx) => <T key={sx} shape={{kind: 'box', w: 0.2, h: H, d: 10}} color={look.wall} position={[sx * W / 2, H / 2, 0]} outline={0} />)}
+			<T shape={{kind: 'box', w: W, h: H, d: 0.2}} color={look.wall} position={[0, H / 2, 5]} outline={0} />
+			<T shape={{kind: 'box', w: 1.1, h: 2.2, d: 0.1}} color="#C98A5A" position={[3.8, 1.1, 4.88]} outline={0.01} />
+			{[-4, -2.4, -0.8].map((x, i) => <T key={i} shape={{kind: 'box', w: 1.1, h: 0.8, d: 0.04}} color={['#7F5AF0', '#3AB87A', '#E8453C'][i]} position={[x, 2.2, 4.88]} outline={0.01} />)}
 			{/* back wall with a hole for the window */}
 			{[-1, 1].map((sx) => <T key={sx} shape={{kind: 'box', w: wl, h: H, d: 0.2}} color={look.wall} position={[sx * (WIN.w / 2 + wl / 2), H / 2, WIN.z]} outline={0} />)}
 			<T shape={{kind: 'box', w: WIN.w, h: WIN.y - WIN.h / 2, d: 0.2}} color={look.wall} position={[0, (WIN.y - WIN.h / 2) / 2, WIN.z]} outline={0} />
@@ -551,7 +578,7 @@ export const School: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const x = lerp(-60, SCHOOL[0] - 40, walkT);
 	const inside = frame >= eye - 4;
 	const sit = frame > crouch + 10;
-	const pos: V3 = [sit ? SCHOOL[0] - 40 : x, 0, SCHOOL[2] + 40];
+	const pos: V3 = [sit ? SCHOOL[0] - 40 : x, 0, sit ? SCHOOL[2] + 50 : -40];
 	const angles: Angle3[] = [
 		{at: [x, 50, pos[2]], dist: 320, yaw: 160, pitch: 10, fov: 40, ...BIGCAM},
 		{at: [x, 20, pos[2]], dist: 110, yaw: 120, pitch: 6, fov: 40, ...BIGCAM},
@@ -575,9 +602,8 @@ export const School: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				far={
 					inside ? null : (
 						<group>
-							<HomeSet skip={housesIn(-100, 100, [1])} />
+							<HomeSet townClear={260} />
 							<SchoolTop3D at={[SCHOOL[0], SCHOOL[2]]} block={60} />
-							<T shape={{kind: 'box', w: 400, h: 0.08, d: 9}} color="#55597A" position={[60, 0.02, pos[2] + 34]} outline={0} />
 						</group>
 					)
 				}
@@ -624,7 +650,7 @@ export const Voice: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			const t = ((frame * 0.012 + i * 0.25) % 1);
 			return (
 				<mesh key={i} position={base} rotation={[-Math.PI / 2, 0, 0]}>
-					<ringGeometry args={[t * scale, t * scale + scale * 0.015, 64]} />
+					<ringGeometry args={[t * scale, t * scale + Math.max(0.3, scale * 0.035), 64]} />
 					<meshBasicMaterial color="#FFD84A" transparent opacity={0.8 * (1 - t)} />
 				</mesh>
 			);
@@ -632,10 +658,10 @@ export const Voice: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const angles: Angle3[] = [
 		{at: [0, 1.6, 0], dist: 5.5, yaw: 0, pitch: 2, fov: 50, roll: shakeK * 40},
 		{at: [0, 1.0, 1.5], dist: 5, yaw: 180, pitch: 6, fov: 50, roll: shakeK * 40},
-		{at: [0, 1.2, 0], dist: 4.5, yaw: 200, pitch: 2, fov: 50},
+		{at: [0, 1.0, 1.5], dist: 5, yaw: 170, pitch: 6, fov: 50},
 		{at: [0, 1.9, -1], dist: 6.5, yaw: 0, pitch: 4, fov: 50},
 		{at: [0, 2.2, 0], dist: 14, yaw: 30, pitch: 8, fov: 40, dyaw: 6},
-		{at: [0, 1, 0], dist: 70, yaw: 20, pitch: 30, fov: 40, ddist: 60, near: 0.5, far: 3000},
+		{at: [0, 1, 0], dist: 30, yaw: 20, pitch: 30, fov: 44, ddist: 34, near: 0.5, far: 3000},
 	];
 	return (
 		<>
@@ -653,7 +679,7 @@ export const Voice: React.FC<ShotProps> = ({frame, dur, lines}) => {
 						<group>
 							<Elephant3D at={[0, 0, 0]} yaw={0.4} rumble={Math.sin(frame * 0.6)} />
 							<Elephant3D at={[-9, 0, -6]} yaw={0.9} s={0.8} />
-							{rings([0, 0.2, 0], frame > carry ? 120 : 24)}
+							{rings([0, 0.4, 0], frame > carry ? 80 : 24)}
 						</group>
 					) : (
 						<Classroom frame={frame} mug={1} stare={1} />

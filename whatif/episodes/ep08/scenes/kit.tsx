@@ -8,7 +8,7 @@ import {Town3D} from '../../../three/sky3d';
 import type {Angle3} from '../../../three/shot3';
 import type {Light3} from '../../../three/Stage3D';
 import {Street8} from '../../../three/tall3d';
-import type {V3} from './util';
+import {handAt, type V3} from './util';
 
 // Shared looks for Episode 8: who's in it, how each place is lit (the giant's
 // world in metres, the street at people height, the studio, evening, the
@@ -200,4 +200,29 @@ export const lookFrom = (from: V3, to: V3, fov = 40, extra: Partial<Angle3> = {}
 	const dz = from[2] - to[2];
 	const dist = Math.hypot(dx, dy, dz);
 	return {at: to, dist, yaw: (Math.atan2(dx, dz) * 180) / Math.PI, pitch: (Math.asin(dy / dist) * 180) / Math.PI, fov, dyaw: 0, ddist: 0, near: 0.3, far: 5000, ...extra};
+};
+
+/**
+ * Where your hand is when you lean forward `lean` degrees (Hero3D's lean tips
+ * the upper body forward round the hips). Same arms as handAt; sitting by default.
+ */
+export const leanHand = (pos: V3, turn: number, arm: [number, number], reach: number, side: 1 | -1, lean: number, sit = true): V3 => {
+	const l = handAt([0, 0, 0], 0, arm, reach, side, sit, 1.7);
+	const pivot = sit ? -0.36 : 0;
+	const t = (lean * Math.PI) / 180;
+	const ry = l[1] - pivot;
+	const y2 = ry * Math.cos(t) - l[2] * Math.sin(t);
+	const z2 = ry * Math.sin(t) + l[2] * Math.cos(t);
+	const x = l[0];
+	return [pos[0] + K * (x * Math.cos(turn) + z2 * Math.sin(turn)), pos[1] + K * (y2 + pivot), pos[2] + K * (-x * Math.sin(turn) + z2 * Math.cos(turn))];
+};
+
+/** The middle of your head when leaning forward `lean` degrees. */
+export const leanHead = (pos: V3, turn: number, lean: number, sit = true): V3 => {
+	const pivot = sit ? -0.36 : 0;
+	const t = (lean * Math.PI) / 180;
+	const ry = 1.36 + (sit ? 0 : 0);
+	const y2 = ry * Math.cos(t);
+	const z2 = ry * Math.sin(t);
+	return [pos[0] + K * z2 * Math.sin(turn), pos[1] + K * (y2 + pivot), pos[2] + K * z2 * Math.cos(turn)];
 };

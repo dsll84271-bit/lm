@@ -9,14 +9,14 @@ import {Car3D, Fields3D, SchoolTop3D, Town3D} from '../../../three/sky3d';
 import {Shot3, type Angle3} from '../../../three/shot3';
 import {Glow, T} from '../../../three/toon';
 import {Billboard3D, Cat8, Drone3D, Elephant3D, Giraffe3D, Goal8, Kite3D, Lorry3D, Oak3D, PizzaPile, Stadium3D, Trays3D, Van3D, Water8} from '../../../three/tall3d';
-import {BG, bigLight, Giant, GIANT, HomeSet, housesIn, K, KIDS, LIGHT, lookFrom, P8, Panel, smallLight} from './kit';
+import {BG, bigLight, Giant, GIANT, HomeSet, housesIn, K, KIDS, LIGHT, leanHand, lookFrom, P8, Panel, smallLight} from './kit';
 import {handAt, headAt, type V3} from './util';
 
 // Part B: on the news, the shoulder ride, the view, the head rush, lunch,
 // how much you'd eat, the scientists, overheating, being useful, and the
 // footsteps that shake the town.
 
-const BIGCAM = {near: 0.5, far: 6000};
+const BIGCAM = {near: 0.5, far: 9000};
 const Studio: React.FC = () => <Ground color="#3A2E80" size={3000} lines={{every: 20, color: '#4A3E98', along: 'z'}} />;
 const SmallStudio: React.FC = () => <Ground color="#3A2E80" size={200} lines={{every: 2, color: '#4A3E98', along: 'z'}} />;
 
@@ -115,27 +115,30 @@ export const Friend: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const quiet = cue(l0, 'and for once');
 	const cuts = [0, climbs - 4, lift - 4, hood - 4, quiet - 4];
 	const up = span(frame, lift + 4, hood - 6);
-	const armR: [number, number] = [lerp(10, 92, up), lerp(10, 150, up)];
-	const hand = handAt(CR, 0, armR, lerp(0, 40, up), 1, true, GIANT);
+	const lean = lerp(26, 0, up);
+	const armR: [number, number] = [lerp(5, 92, up), lerp(5, 150, up)];
+	const hand = leanHand(CR, 0, armR, lerp(0, 40, up), 1, lean);
+	const ground = leanHand(CR, 0, [5, 5], 0, 1, 26);
 	const run = span(frame, 0, climbs + 10, (v) => v);
-	const start: V3 = [hand[0] + 40, 0, hand[2] + 50];
+	const start: V3 = [ground[0] + 30, 0, ground[2] + 60];
 	const onHand = frame > climbs + 10;
 	const shoulder: V3 = [CR[0] + 0.3 * K, (1.06 - 0.36) * K + 0.6, CR[2] - 0.02 * K];
 	const atShoulder = frame > hood - 6;
-	const friend: V3 = atShoulder ? shoulder : onHand ? [hand[0], hand[1] + 0.05 * K, hand[2]] : [lerp(start[0], hand[0] + 4, run), 0, lerp(start[2], hand[2] + 4, run)];
-	const fTurn = onHand ? -Math.PI / 2 : Math.atan2(hand[0] - start[0], hand[2] - start[2]);
+	const palm: V3 = [hand[0] + 0.02 * K, hand[1] + 0.1 * K, hand[2] + 0.02 * K];
+	const friend: V3 = atShoulder ? shoulder : onHand ? palm : [lerp(start[0], ground[0] + 5, run), 0, lerp(start[2], ground[2] + 6, run)];
+	const fTurn = onHand ? -Math.PI / 2 : Math.atan2(ground[0] - start[0], ground[2] - start[2]);
 	const near = (
 		<group>
-			<Giant at={CR} sit face="happy" armR={atShoulder ? [10, 10] : armR} reachR={atShoulder ? 0 : lerp(0, 40, up)} armL={[14, 18]} look={atShoulder ? [0.8, 0] : [0.4, -0.6]} />
-			<Hero3D who={P8.friend} position={friend} turn={atShoulder ? 0 : fTurn} run={!onHand} walk={!onHand ? frame / 4 : undefined} sit={atShoulder} face="happy" armL={atShoulder ? [150, 120] : [20, 20]} armR={atShoulder ? [150, 120] : [20, 20]} reachL={atShoulder ? 40 : 0} reachR={atShoulder ? 40 : 0} />
+			<Giant at={CR} sit lean={atShoulder ? 0 : lean} face="happy" armR={atShoulder ? [10, 10] : armR} reachR={atShoulder ? 0 : lerp(0, 40, up)} armL={[14, 18]} look={atShoulder ? [0.8, 0] : [0.4, -0.6]} />
+			<Hero3D who={P8.friend} position={friend} turn={atShoulder ? 0 : fTurn} run={!onHand} walk={!onHand ? frame / 4 : undefined} sit={atShoulder} face="happy" armL={atShoulder ? [150, 120] : onHand ? [120, 60] : [20, 20]} armR={atShoulder ? [150, 120] : onHand ? [120, 60] : [20, 20]} reachL={atShoulder ? 40 : 0} reachR={atShoulder ? 40 : 0} />
 		</group>
 	);
 	const angles: Angle3[] = [
-		lookFrom([start[0] - 10, 2.5, start[2] + 14], [hand[0], 12, hand[2]], 52, {dyaw: 4}),
-		lookFrom([hand[0] + 9, hand[1] + 2, hand[2] + 9], [hand[0], hand[1] + 1, hand[2]], 44),
-		lookFrom([CR[0] + 60, 30, CR[2] + 90], [CR[0] + 10, 32, CR[2]], 44, {dyaw: 3}),
-		lookFrom([shoulder[0] + 4, shoulder[1] + 1.2, shoulder[2] + 5], [shoulder[0], shoulder[1] + 0.8, shoulder[2]], 40),
-		lookFrom([shoulder[0] + 14, shoulder[1] + 3, shoulder[2] + 22], [shoulder[0] - 6, shoulder[1] + 2, shoulder[2]], 40, {dyaw: 3}),
+		lookFrom([start[0] + 5, 1.5, start[2] + 9], [ground[0], 9, ground[2]], 58, {dyaw: 3}),
+		{at: [CR[0] + 14, 18, CR[2] + 10], dist: 150, yaw: 50, pitch: 8, fov: 40, ...BIGCAM},
+		lookFrom([CR[0] + 70, 24, CR[2] + 110], [CR[0] + 12, 30, CR[2]], 46, {dyaw: 3}),
+		lookFrom([shoulder[0] + 14, shoulder[1] + 4, shoulder[2] + 20], [shoulder[0], shoulder[1] + 0.9, shoulder[2]], 16),
+		lookFrom([shoulder[0] + 20, shoulder[1] + 2, shoulder[2] + 30], [shoulder[0] - 2, shoulder[1] + 1.4, shoulder[2]], 20, {dyaw: 2}),
 	];
 	return (
 		<>
@@ -153,11 +156,11 @@ const FarLand: React.FC<{frame: number}> = ({frame}) => {
 	const towers = [];
 	for (let i = 0; i < 26; i++) {
 		const h = 40 + ((i * 37) % 9) * 14;
-		towers.push(<T key={i} shape={{kind: 'box', w: 30, h, d: 30}} color={i % 3 ? '#B8B8D8' : '#9A9AC8'} position={[-1400 + (i % 7) * 44 + (i % 2) * 10, h / 2, -2600 + Math.floor(i / 7) * 46]} outline={0.6} />);
+		towers.push(<T key={i} shape={{kind: 'box', w: 30, h, d: 30}} color={i % 3 ? '#B8B8D8' : '#9A9AC8'} position={[-700 + (i % 7) * 44 + (i % 2) * 10, h / 2, -1700 + Math.floor(i / 7) * 46]} outline={0.6} />);
 	}
 	return (
 		<group>
-			<Fields3D size={6000} seed={3} coast={-3800} />
+			<Fields3D size={7000} seed={3} coast={-2700} />
 			<Town3D size={900} seed={6} clear={[{at: [0, 0], r: 60}]} cars={false} />
 			{towers}
 			<Water8 at={[1300, 0.2, -1500]} w={60} d={3000} frame={frame} color="#3A7AC0" />
@@ -184,12 +187,12 @@ export const View: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	);
 	const angles: Angle3[] = [
 		{at: [0, 60, 0], dist: 260, yaw: 20, pitch: 6, fov: 38, ...BIGCAM},
-		lookFrom([head[0] + 30, head[1] + 14, head[2] + 44], [0, 30, -1500], 50, {dyaw: 0}),
-		lookFrom([head[0] + 30, head[1] + 14, head[2] + 44], [0, 0, -3000], 46, {dyaw: 0}),
-		lookFrom([head[0] + 20, head[1] + 10, head[2] + 30], [-1300, 60, -2600], 40),
-		lookFrom([head[0] + 20, head[1] + 10, head[2] + 30], [0, 0, -4200], 42),
+		lookFrom([head[0] + 46, head[1] + 8, head[2] + 18], [200, 30, -1500], 50),
+		lookFrom([head[0] + 46, head[1] + 8, head[2] + 18], [200, 0, -3000], 46),
+		lookFrom([head[0] + 40, head[1] + 8, head[2] + 14], [-600, 40, -1700], 40),
+		lookFrom([head[0] + 46, head[1] + 8, head[2] + 18], [300, 0, -3600], 42),
 	];
-	const light = {...bigLight([0, 0, 0], 'day', 160), fog: {color: '#D8ECFF', near: 900, far: 5600}};
+	const light = {...bigLight([0, 0, 0], 'day', 160), fog: {color: '#D8ECFF', near: 1200, far: 7000}};
 	return (
 		<>
 			<Shot3
@@ -263,7 +266,7 @@ export const Dizzy: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				far={studio ? <SmallStudio /> : <SchoolSet />}
 				near={near}
 				blur={0}
-				grade={swirl > 0 ? `hue-rotate(${swirl * 40}deg) blur(${swirl * 3}px)` : undefined}
+				grade={swirl > 0 ? `hue-rotate(${swirl * 12}deg) blur(${swirl * 3}px) saturate(${1 + swirl * 0.3})` : undefined}
 				overlay={() => (
 					<AbsoluteFill>
 						<Label text="HEART → BRAIN: A LONG CLIMB" x={960} y={860} size={52} frame={frame} at={climb + 8} until={giraffe - 4} color="#FF8A8A" />
@@ -360,7 +363,7 @@ export const Food: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					) : (
 						<group>
 							<Elephant3D at={[0, 0, 0]} yaw={0.6} trunk={0.5 + Math.sin(frame * 0.2) * 0.4} />
-							<Oak3D at={[3, 0, 3]} h={6} seed={2} />
+							<Oak3D at={[2.4, 0, -3.5]} h={6} seed={2} />
 						</group>
 					)
 				}
@@ -475,7 +478,7 @@ export const Heat: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	) : inWater ? (
 		<group>
 			<Giant at={[RES[0], lerp(-0.36 * K + 8, -0.36 * K - 10, sink), RES[2]]} sit face={frame > closed ? 'smug' : 'happy'} armL={[40, 30]} armR={[40, 30]} />
-			<Water8 at={[RES[0], 0.6, RES[2]]} r={240} frame={frame} color="#3A8AD0" />
+			<Water8 at={[RES[0], 1.3, RES[2]]} r={240} frame={frame} color="#3A8AD0" />
 			{[0, 1, 2].map((i) => {
 				const t = span(frame, sit + 20 + i * 8, sit + 120 + i * 8);
 				return t > 0 && t < 1 ? (
@@ -569,7 +572,7 @@ export const Useful: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				{scene === 'goal' ? <T shape={{kind: 'sphere', r: 0.3}} color="#FFFFFF" position={ballAt} outline={0.03} /> : null}
 			</group>
 		);
-		angles = [lookFrom([-40, 1.6, 40], [0, 12, 0], 56), lookFrom([-20, 1.0, 22], [0, 6, 0], 56), lookFrom([10, 1.2, -16], [-10, 4, 10], 56), {at: [0, 50, 0], dist: 260, yaw: 120, pitch: 8, fov: 38, ...BIGCAM}];
+		angles = [lookFrom([-40, 1.6, 40], [0, 12, 0], 56), lookFrom([-20, 1.0, 22], [0, 6, 0], 56), lookFrom([-70, 30, 70], [0, 20, 0], 46), {at: [0, 50, 0], dist: 260, yaw: 120, pitch: 8, fov: 38, ...BIGCAM}];
 	} else {
 		const held: V3 = [lerp(treeAt[0], rHand[0], t), lerp(scene === 'lorry' ? 0.5 : 18, rHand[1] - 3, t), lerp(treeAt[2], rHand[2], t)];
 		const arm: [number, number] = [lerp(10, 10, t), lerp(10, 40, t)];
@@ -584,7 +587,7 @@ export const Useful: React.FC<ShotProps> = ({frame, dur, lines}) => {
 			</group>
 		);
 		const look = scene === 'lorry' ? held : [treeAt[0], 12, treeAt[2]];
-		angles = [lookFrom([look[0] + 26, look[1] + 4, look[2] + 34], look as V3, 46)];
+		angles = [scene === 'lorry' ? lookFrom([look[0] + 26, look[1] + 4, look[2] + 34], look as V3, 46) : lookFrom([treeAt[0] + 48, 20, treeAt[2] - 14], [treeAt[0] - 10, 20, treeAt[2] - 2], 50)];
 	}
 	const which = scene === 'goal' ? (frame < goal - 4 ? 0 : frame < lets - 4 ? 1 : 2) : scene === 'walk' ? 3 : 0;
 	return (
@@ -644,8 +647,8 @@ export const Quake: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		</group>
 	);
 	const angles: Angle3[] = [
-		{at: [0, 1, 6], dist: 5, yaw: 20, pitch: 6, fov: 50, ...BIGCAM},
-		{at: [0, 1, 6], dist: 4, yaw: -30, pitch: 4, fov: 50, ...BIGCAM},
+		lookFrom([1.5, 1.1, 9.5], [walkX * 0.25, 40, -60], 60),
+		lookFrom([-1.5, 1.0, 8.5], [0, 0.9, 6], 44),
 		{at: [0, 1, 6], dist: 6, yaw: 40, pitch: 8, fov: 50, ...BIGCAM},
 		{at: [0, 1.2, 0], dist: 24, yaw: 20, pitch: 30, fov: 38, dyaw: 8},
 		{at: [0, 1.2, 0], dist: 20, yaw: -10, pitch: 24, fov: 38},

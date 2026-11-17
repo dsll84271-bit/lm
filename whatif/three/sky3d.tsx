@@ -513,11 +513,11 @@ export const Car3D: React.FC<{at: V3; yaw?: number; color?: string}> = ({at, yaw
 );
 
 /** A yellow school bus. */
-export const Bus3D: React.FC<{at: V3; yaw?: number}> = ({at, yaw = 0}) => (
+export const Bus3D: React.FC<{at: V3; yaw?: number; glass?: number}> = ({at, yaw = 0, glass = 1}) => (
 	<group position={at} rotation={[0, yaw, 0]}>
 		<T shape={{kind: 'box', w: 2.5, h: 2.6, d: 10}} color="#F2B83A" position={[0, 1.75, 0]} outline={0.05} />
 		<T shape={{kind: 'box', w: 2.5, h: 0.3, d: 10}} color="#2A2638" position={[0, 1.2, 0]} outline={0} />
-		{[...Array(6)].map((_, i) => [-1, 1].map((x) => <Glow key={`${i}${x}`} shape={{kind: 'box', w: 0.05, h: 0.8, d: 1.2}} color="#CFE6F5" position={[x * 1.26, 2.4, -3.8 + i * 1.45]} />))}
+		{[...Array(6)].map((_, i) => [-1, 1].map((x) => <Glow key={`${i}${x}`} shape={{kind: 'box', w: 0.05, h: 0.8, d: 1.2}} color="#CFE6F5" position={[x * 1.26, 2.4, -3.8 + i * 1.45]} opacity={glass} />))}
 		<Glow shape={{kind: 'box', w: 2.2, h: 1, d: 0.05}} color="#CFE6F5" position={[0, 2.3, 5.01]} />
 		{[-1, 1].map((x) => [-1, 1].map((z) => <T key={`${x}${z}`} shape={{kind: 'cyl', r: 0.5, h: 0.4}} color="#2A2638" position={[x * 1.15, 0.5, z * 3.4]} rotation={[0, 0, Math.PI / 2]} outline={0.02} />))}
 	</group>

@@ -84,7 +84,7 @@ export const Alone: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [0, 10, 0], dist: 330, yaw: 0, pitch: 18, fov: 40, ...BIGCAM},
 		lookFrom([fam[0] + 8, 2.4, fam[2] + 10], [fam[0], 1.2, fam[2]], 44),
 		{at: [tubHand[0], tubHand[1] + 4, tubHand[2]], dist: 70, yaw: 30, pitch: 4, fov: 40, ...BIGCAM},
-		lookFrom([earAt[0] + 10, earAt[1] + 2, earAt[2] + 16], [earAt[0] + 1.5, earAt[1] - 2, earAt[2] + 3], 40),
+		lookFrom([earAt[0] + 6, earAt[1] - 0.04 * K + 2, earAt[2] + 9], [earAt[0] + 1.5, earAt[1] - 0.04 * K + 0.8, earAt[2] + 3], 42),
 		lookFrom([fam[0] + 6, 1.8, fam[2] + 6], [fam[0] + 0.8, 1.4, fam[2] + 0.6], 40),
 	];
 	return (
@@ -200,7 +200,7 @@ const River: React.FC<{frame: number; flood?: number; crack?: number; drop?: num
 			</mesh>
 		))}
 		<Bridge3D at={[0, 0, 0]} crack={crack} drop={drop} fall={fall} />
-		{bus ? <Bus3D at={[-4, 9.1, 0]} yaw={Math.PI / 2} /> : null}
+		{bus ? <Bus3D at={[-4, 9.1, 0]} yaw={Math.PI / 2} glass={0.35} /> : null}
 		{car ? <group><Car3D at={[18, 9.1, 0]} yaw={Math.PI / 2} color="#E8453C" /><T shape={{kind: 'sphere', r: 0.28}} color="#A8703A" position={[16.8, 10.5, 0]} outline={0.02} /></group> : null}
 		<group position={[-220, 0, 0]}>
 			<Town3D size={300} seed={14} night lit />
@@ -237,7 +237,7 @@ export const Storm: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={cuts}
 				angles={angles}
-				light={valley ? smallLight([0, 0, 0], 'storm', 90) : bigLight([0, 0, 0], 'storm', 140)}
+				light={valley ? {...smallLight([0, 0, 0], 'storm', 90), fog: {color: '#4A5470', near: 140, far: 900}} : bigLight([0, 0, 0], 'storm', 140)}
 				bg={BG.storm}
 				far={valley ? <River frame={frame} flood={span(frame, flood, banks + 30)} crack={span(frame, crack, crack + 40)} /> : <FieldSet lit />}
 				near={near}
@@ -301,16 +301,16 @@ export const BridgeShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const drop = span(frame, stone + 6, go + 40, (v) => v);
 	const near = onBridge ? (
 		<group>
-			{[0, 1, 2, 3, 4].map((i) => <Hero3D key={i} who={KIDS[i]} position={[-6.6 + i * 1.45, 9.6, 0.6]} turn={Math.PI / 2 + 0.4} height={1.1} face="scared" lite />)}
+			{[0, 1, 2, 3, 4].map((i) => <Hero3D key={i} who={KIDS[i]} position={[-7.6 + i * 1.45, 9.6, 0.75]} turn={0.15} height={1.25} face="scared" armL={[150, 20]} reachL={40} lite />)}
 		</group>
 	) : (
 		<Giant at={[runX, 0, 0]} turn={Math.PI / 2} run walk={frame * 0.05} face="determined" tilt={slipT * 14} lean={slipT * 18} armL={[40 + slipT * 50, 60]} armR={[40 + slipT * 50, 60]} />
 	);
 	const angles: Angle3[] = [
 		{at: [runX, 40, 0], dist: 260, yaw: 150, pitch: 10, fov: 40, ...BIGCAM},
-		lookFrom([runX + 60, 6, 60], [runX, 20, 0], 52),
+		lookFrom([runX + 110, 12, 130], [runX, 30, 0], 50),
 		{at: [runX, 30, 0], dist: 200, yaw: 100, pitch: 10, fov: 40, ...BIGCAM},
-		lookFrom([-4, 11.5, 9], [-4, 10.4, 0], 46),
+		lookFrom([-4, 11.2, 7.5], [-4, 11.0, 0], 50),
 		lookFrom([6, 4, 26], [0, 6, 0], 46),
 		lookFrom([-14, 1.5, 20], [0, 6, 0], 46),
 		withShake(lookFrom([40, 18, 60], [0, 6, 0], 42), frame, go + 4),
@@ -323,7 +323,7 @@ export const BridgeShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				lines={lines}
 				cuts={cuts}
 				angles={angles}
-				light={onBridge ? smallLight([0, 0, 0], 'storm', 60) : bigLight([runX, 0, 0], 'storm', 140)}
+				light={onBridge ? {...smallLight([0, 0, 0], 'storm', 60), fog: {color: '#4A5470', near: 120, far: 800}} : bigLight([runX, 0, 0], 'storm', 140)}
 				bg={BG.storm}
 				far={onBridge ? <River frame={frame} crack={1} drop={drop} fall={span(frame, go + 10, dur + 30) * 0.15} /> : <RunTown frame={frame} />}
 				near={near}
@@ -371,8 +371,8 @@ export const Save: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const sit = frame < walk || frame > down;
 	const pos: V3 = [lerp(start[0], hill[0] - 10, carry), carry > 0 && carry < 1 ? 0 : frame > down ? hill[1] * 0.6 : 0, lerp(start[2], hill[2] - 0.45 * K, carry)];
 	const turn = carry > 0 && carry < 1 ? Math.PI / 2 - 0.3 : 0;
-	const arm: [number, number] = sit ? [12, lerp(30, 60, up)] : [20, 70];
-	const reach = sit ? lerp(70, 80, up) : 80;
+	const arm: [number, number] = sit ? [12, lerp(30, 60, up)] : [4, 14];
+	const reach = sit ? lerp(70, 80, up) : 86;
 	const hR = handAt(pos, turn, arm, reach, 1, sit, GIANT);
 	const hL = handAt(pos, turn, arm, reach, -1, sit, GIANT);
 	const mid: V3 = [(hR[0] + hL[0]) / 2, (hR[1] + hL[1]) / 2 + 1.2, (hR[2] + hL[2]) / 2];
@@ -385,7 +385,7 @@ export const Save: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const near = (
 		<group>
 			<Giant at={pos} turn={turn} sit={sit} walk={!sit ? frame * 0.035 : undefined} face={frame > fine ? 'happy' : 'determined'} armL={arm} armR={arm} reachL={reach} reachR={reach} look={[0, -0.5]} />
-			<Bus3D at={busAt} yaw={Math.PI / 2} />
+			<Bus3D at={busAt} yaw={placed || frame < 30 ? Math.PI / 2 : turn + Math.PI / 2} />
 			{placed && frame > doors ? [0, 1, 2, 3].map((i) => <Hero3D key={i} who={KIDS[i]} position={[busOnHill[0] - 2 + i * 1.3, busOnHill[1], busOnHill[2] + 2.6 + (i % 2)]} turn={0.3} height={1.2} face="happy" armR={[160, 10]} lite />) : null}
 			<Car3D at={carAt} yaw={Math.PI / 2} color="#E8453C" />
 			<T shape={{kind: 'sphere', r: 0.28}} color="#A8703A" position={[carAt[0] - 1.2, carAt[1] + 1.4, carAt[2]]} outline={0.02} />
@@ -394,13 +394,13 @@ export const Save: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const angles: Angle3[] = [
 		{at: [-4, 10, 0], dist: 150, yaw: 40, pitch: 8, fov: 40, ...BIGCAM},
 		lookFrom([mid[0] + 18, mid[1] + 2, mid[2] + 26], mid, 46),
-		{at: [pos[0], 40, pos[2]], dist: 260, yaw: 120, pitch: 10, fov: 40, ...BIGCAM},
-		lookFrom([busOnHill[0] + 20, busOnHill[1] + 4, busOnHill[2] + 26], busOnHill, 44),
+		{at: [pos[0], 45, pos[2]], dist: 230, yaw: 75, pitch: 8, fov: 40, ...BIGCAM},
+		lookFrom([busOnHill[0] + 60, busOnHill[1] + 14, busOnHill[2] + 70], [busOnHill[0] - 10, busOnHill[1] + 20, busOnHill[2] - 20], 46),
 		lookFrom([busOnHill[0] + 6, busOnHill[1] + 1.6, busOnHill[2] + 9], [busOnHill[0], busOnHill[1] + 1.4, busOnHill[2] + 1.5], 44),
 		lookFrom([30, 12, 18], [18, 10, 0], 44),
 		lookFrom([24, 10.5, 6], [18, 10, 0], 40),
-		{at: [pocketAt[0], pocketAt[1], pocketAt[2]], dist: 60, yaw: 30, pitch: 4, fov: 40, ...BIGCAM},
-		lookFrom([pocketAt[0] + 8, pocketAt[1] + 2, pocketAt[2] + 10], pocketAt, 40),
+		lookFrom([pocketAt[0] + 30, pocketAt[1] + 6, pocketAt[2] + 50], [pocketAt[0], pocketAt[1] + 4, pocketAt[2]], 44),
+		lookFrom([pocketAt[0] + 7, pocketAt[1] + 2.5, pocketAt[2] + 9], [carAt[0], carAt[1] + 1, carAt[2]], 40),
 	];
 	return (
 		<>
