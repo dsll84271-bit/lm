@@ -1,0 +1,71 @@
+# Short clips: captions to paste
+
+One caption per clip, for TikTok, YouTube Shorts and Instagram Reels.
+
+**Before you post:**
+- Link each Short to the full episode with YouTube's **Related video** option, which is set during upload.
+- TikTok and Instagram don't allow clickable links in captions, so put the channel link in your bio.
+- Post one or two a day rather than all 13 at once.
+
+---
+
+## Episode 2: What If You Could Read Minds?
+
+**ep02-read-minds.mp4** (57 s)
+> If you could read minds, a maths test gets VERY easy 🧠 Would you copy the answers? #whatif #readingminds #animation #science #hypothetical
+
+**ep02-quiz-show.mp4** (48 s)
+> Reading minds on a TV quiz show… then a detective calls 🕵️ Fun fact: lie detectors don't actually detect lies. #whatif #mindreading #animation #funfacts #science
+
+## Episode 3: What If You Were Invisible?
+
+**ep03-invisible-blind.mp4** (48 s)
+> A truly invisible person would be completely blind. Here's why 👀 #whatif #invisible #science #animation #didyouknow
+
+**ep03-still-seen.mp4** (62 s)
+> 3 things that could still find you if you were invisible 🐶🌧️🔥 #whatif #invisible #heatcamera #science #animation
+
+## Episode 4: What If You Shrank to the Size of an Ant?
+
+**ep04-ant-size.mp4** (68 s)
+> You wake up 3 mm tall. Your bed is a skyscraper… and falling off it doesn't hurt 🐜 #whatif #antman #science #animation #physics
+
+**ep04-ant-count.mp4** (50 s)
+> There are about 20 QUADRILLION ants on Earth. That's 2.5 million for every person 🐜 #whatif #ants #science #animation #didyouknow
+
+## Episode 5: What If You Could Fly?
+
+**ep05-fly.mp4** (55 s)
+> You wake up stuck to the ceiling… so you jump out of the window ✈️ #whatif #flying #animation #superpower #hypothetical
+
+**ep05-cloud-weight.mp4** (58 s)
+> A fluffy cloud weighs about 500 tonnes, as much as 100 elephants ☁️🐘 #whatif #clouds #science #animation #didyouknow
+
+## Episode 6: What If You Found a Five-Leaf Clover Grimoire?
+
+**ep06-grimoire.mp4** (59 s)
+> You find a 5-leaf clover… and a grimoire bursts out of the ground 📕🍀 #whatif #fiveleafclover #grimoire #anime #animation
+
+**ep06-lightning.mp4** (84 s)
+> Could an anti-magic sword stop lightning? ⚡ Plus the real rule: when thunder roars, go indoors. #whatif #lightning #science #anime #animation
+
+## Episode 7: What If You Were Swallowed by a Whale?
+
+**ep07-blue-whale.mp4** (49 s)
+> The biggest animal ever has a throat about the size of a dinner plate 🐋 #whatif #bluewhale #ocean #science #animation
+
+**ep07-ambergris.mp4** (33 s)
+> This lump from inside a sperm whale sold for about $1.5 MILLION 💰🐋 #whatif #ambergris #spermwhale #ocean #science
+
+**ep07-real-cases.mp4** (35 s)
+> Two people really ended up inside a whale's mouth, and both lived 🐋 #whatif #whale #truestory #ocean #animation
+
+---
+
+## Tips
+
+- **Best times to post:** after school and in the early evening (about 4–8 pm local time).
+- **Pin a comment on each clip:** "Full episode on my channel: Hypothetical You 🔗".
+- **Reply to comments with a video.** On TikTok, a video reply to a comment like "what about X?" is a quick extra post.
+- **Use the first second.** Every clip opens on a hook. If one does well, cut more from that episode.
+- **Sounds:** the clips already have music. If you add a trending sound, keep it very quiet under the narrator.

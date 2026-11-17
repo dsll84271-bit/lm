@@ -11,3 +11,4 @@ venv/
 client_secrets.json
 youtube_token.json
 .jarvis/
+whatif/shorts/captions/
