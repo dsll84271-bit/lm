@@ -55,7 +55,7 @@ const Lights: React.FC<{l: Light3; shadows: boolean}> = ({l, shadows}) => {
 		<>
 			<hemisphereLight args={[l.sky, l.ground, l.ambient ?? 1.1]} />
 			<primitive object={target} position={at} />
-			<directionalLight position={sun} color={l.sun.color} intensity={l.sun.intensity} castShadow={shadows} target={target} shadow-mapSize={l.shadow ? [2048, 2048] : [1024, 1024]} shadow-bias={-0.0006} shadow-normalBias={0.02}>
+			<directionalLight position={sun} color={l.sun.color} intensity={l.sun.intensity} castShadow={shadows} target={target} shadow-mapSize={[1024, 1024]} shadow-bias={-0.0006} shadow-normalBias={0.02}>
 				<orthographicCamera attach="shadow-camera" args={[-sz, sz, sz, -sz, 0.5, l.shadow?.far ?? 40]} />
 			</directionalLight>
 			{l.rim ? <directionalLight position={l.rim.from} color={l.rim.color} intensity={l.rim.intensity} target={target} /> : null}

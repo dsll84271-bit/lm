@@ -23,7 +23,7 @@ const SmallStudio: React.FC = () => <Ground color="#3A2E80" size={200} lines={{e
 /** The playground: the school, its yard, the field beside it. */
 const SchoolSet: React.FC = () => (
 	<group>
-		<Town3D size={1100} seed={5} clear={[{at: [0, 0], r: 150}]} />
+		<Town3D size={760} seed={5} clear={[{at: [0, 0], r: 150}]} />
 		<SchoolTop3D at={[0, -70]} block={60} />
 		<T shape={{kind: 'box', w: 260, h: 0.1, d: 180}} color="#7AC85A" position={[0, 0.03, 30]} outline={0} />
 		<Goal8 at={[-40, 0, 30]} yaw={Math.PI / 2} />
@@ -156,11 +156,11 @@ const FarLand: React.FC<{frame: number}> = ({frame}) => {
 	const towers = [];
 	for (let i = 0; i < 26; i++) {
 		const h = 40 + ((i * 37) % 9) * 14;
-		towers.push(<T key={i} shape={{kind: 'box', w: 30, h, d: 30}} color={i % 3 ? '#B8B8D8' : '#9A9AC8'} position={[-700 + (i % 7) * 44 + (i % 2) * 10, h / 2, -1700 + Math.floor(i / 7) * 46]} outline={0.6} />);
+		towers.push(<T key={i} shape={{kind: 'box', w: 30, h, d: 30}} color={i % 3 ? '#B8B8D8' : '#9A9AC8'} position={[-600 + (i % 7) * 44 + (i % 2) * 10, h / 2, -1350 + Math.floor(i / 7) * 46]} outline={0.6} />);
 	}
 	return (
 		<group>
-			<Fields3D size={7000} seed={3} coast={-2700} />
+			<Fields3D size={4400} seed={3} coast={-1900} />
 			<Town3D size={900} seed={6} clear={[{at: [0, 0], r: 60}]} cars={false} />
 			{towers}
 			<Water8 at={[1300, 0.2, -1500]} w={60} d={3000} frame={frame} color="#3A7AC0" />
@@ -189,10 +189,10 @@ export const View: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [0, 60, 0], dist: 260, yaw: 20, pitch: 6, fov: 38, ...BIGCAM},
 		lookFrom([head[0] + 46, head[1] + 8, head[2] + 18], [200, 30, -1500], 50),
 		lookFrom([head[0] + 46, head[1] + 8, head[2] + 18], [200, 0, -3000], 46),
-		lookFrom([head[0] + 40, head[1] + 8, head[2] + 14], [-600, 40, -1700], 40),
+		lookFrom([head[0] + 40, head[1] + 8, head[2] + 14], [-500, 40, -1350], 40),
 		lookFrom([head[0] + 46, head[1] + 8, head[2] + 18], [300, 0, -3600], 42),
 	];
-	const light = {...bigLight([0, 0, 0], 'day', 160), fog: {color: '#D8ECFF', near: 1200, far: 7000}};
+	const light = {...bigLight([0, 0, 0], 'day', 160), fog: {color: '#D8ECFF', near: 900, far: 4200}};
 	return (
 		<>
 			<Shot3
@@ -439,7 +439,7 @@ export const Measure: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				angles={angles}
 				light={smallLight([20, 0, 30], 'day', 60)}
 				bg={BG.day}
-				far={<group><Fields3D size={1400} seed={4} /><Town3D size={900} seed={7} clear={[{at: [0, 0], r: 220}]} cars={false} /></group>}
+				far={<group><Fields3D size={1400} seed={4} /><Town3D size={700} seed={7} clear={[{at: [0, 0], r: 220}]} cars={false} /></group>}
 				near={near}
 				blur={0}
 				overlay={() => (

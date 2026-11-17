@@ -49,7 +49,7 @@ export const bigLight = (at: V3 = [0, 0, 0], kind: 'day' | 'noon' | 'evening' | 
 	const sh = {size, far: 900, at};
 	switch (kind) {
 		case 'noon':
-			return L('#D8ECFF', '#5A7A6A', 1.35, [-90, 300, 120], '#FFF8E8', 2.9, '#FFE0B0', 1.3, ['#D8ECFF', 500, 2200], sh);
+			return L('#D8ECFF', '#5A7A6A', 1.35, [-90, 300, 120], '#FFF8E8', 2.9, '#FFE0B0', 1.3, ['#D8ECFF', 340, 1400], sh);
 		case 'evening':
 			return L('#FFC8A8', '#4A3A6A', 1.25, [-260, 120, -160], '#FFC080', 2.6, '#FF8AB8', 1.6, ['#F4B0A0', 400, 2000], sh);
 		case 'storm':
@@ -57,7 +57,7 @@ export const bigLight = (at: V3 = [0, 0, 0], kind: 'day' | 'noon' | 'evening' | 
 		case 'night':
 			return L('#5A6AB0', '#10142C', 1.0, [160, 240, -120], '#C8D8FF', 1.5, '#FFD9A0', 1.1, ['#1E2650', 400, 1800], sh);
 		default:
-			return L('#CFE6FF', '#5A7A6A', 1.3, [-140, 240, 170], '#FFF2DC', 2.8, '#FFD0A0', 1.3, ['#CFE6FF', 450, 2000], sh);
+			return L('#CFE6FF', '#5A7A6A', 1.3, [-140, 240, 170], '#FFF2DC', 2.8, '#FFD0A0', 1.3, ['#CFE6FF', 320, 1300], sh);
 	}
 };
 
@@ -114,7 +114,7 @@ export const LyingGiant: React.FC<{at: V3; yaw?: number; roll?: number} & Omit<H
 /** The home street: a long road of houses, and the whole town round it. */
 export const HomeSet: React.FC<{skip?: number[]; lit?: boolean; townClear?: number; seed?: number}> = ({skip = [], lit = false, townClear = 120, seed = 2}) => (
 	<group>
-		<Town3D size={1100} seed={seed} clear={[{at: [0, 0], r: townClear}]} night={lit} lit={lit} />
+		<Town3D size={760} seed={seed} clear={[{at: [0, 0], r: townClear}]} night={lit} lit={lit} />
 		<Street8 len={200} skip={skip} lit={lit} />
 	</group>
 );

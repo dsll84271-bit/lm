@@ -278,7 +278,7 @@ const withShake = (a: Angle3, frame: number, at: number, k = 0.4): Angle3 => {
 /** The dark town on the way: church, shops, the pavilion, flood water up to your ankles. */
 const RunTown: React.FC<{frame: number}> = ({frame}) => (
 	<group>
-		<Town3D size={900} seed={15} night lit clear={[{at: [0, 0], r: 80}]} />
+		<Town3D size={640} seed={15} night lit clear={[{at: [0, 0], r: 80}]} />
 		<Water8 at={[0, 0.6, 0]} frame={frame} w={2000} d={2000} color="#4A4A40" caps="#8A8A7A" flow={0.2} n={160} />
 		<Church3D at={[-40, 0, 20]} yaw={0.3} />
 		<Shops3D at={[30, 0, -30]} yaw={-0.4} lit n={5} />
