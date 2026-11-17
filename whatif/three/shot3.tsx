@@ -8,7 +8,7 @@ import {project, Stage3D, type Cam3, type Light3} from './Stage3D';
 // slowly during each cut, and 2D overlays (thoughts, labels) on top.
 
 /** A framing: look at `at` from `dist` away, turned `yaw` degrees and tilted `pitch` degrees, drifting by `dyaw`/`ddist` over the cut. */
-export type Angle3 = {at: [number, number, number]; dist: number; yaw?: number; pitch?: number; fov?: number; roll?: number; dyaw?: number; ddist?: number; dy?: number};
+export type Angle3 = {at: [number, number, number]; dist: number; yaw?: number; pitch?: number; fov?: number; roll?: number; dyaw?: number; ddist?: number; dy?: number; near?: number; far?: number};
 
 export const camOf = (a: Angle3, p: number): Cam3 => {
 	const e = Easing.inOut(Easing.quad)(p);
@@ -21,6 +21,8 @@ export const camOf = (a: Angle3, p: number): Cam3 => {
 		at,
 		fov: a.fov ?? 34,
 		roll: a.roll,
+		near: a.near,
+		far: a.far,
 	};
 };
 
