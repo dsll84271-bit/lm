@@ -32,7 +32,7 @@ const Studio: React.FC<{size?: number; every?: number}> = ({size = 3000, every =
 const SIT: V3 = [0, 0, 0];
 const SIT_HEAD = headAt(SIT, true, GIANT);
 const ANKLE: V3 = [0.14 * K, 0, 0.5 * K];
-const BEDAT: V3 = [0, 0.56 * K, -0.23 * K];
+const BEDAT: V3 = [0, 0.6 * K, -0.2 * K];
 const NOSE: V3 = [SIT_HEAD[0] + 0.02 * K, SIT_HEAD[1] - 0.02 * K, SIT_HEAD[2] + 0.31 * K];
 
 /** The night-time bridge, for the flash-forward. */
@@ -64,7 +64,7 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const near = teaser ? null : (
 		<group>
 			<Giant at={SIT} sit face={frame > first ? 'happy' : frame > pigeon + 20 ? 'shocked' : 'neutral'} look={frame > pigeon + 10 && frame < first ? [0, -0.6] : [0, 0]} armL={[24, 30]} armR={[24, 30]} blink={frame < 30 ? 0.8 : 0} />
-			<Bed8 at={BEDAT} rot={[-1.25, 0, 0.15]} />
+			<group position={BEDAT} rotation={[-1.5, 0, 0.25]} scale={2}><Bed8 at={[0, 0, 0]} /></group>
 			<AnkleHouse at={ANKLE} r={0.075 * K} />
 			<Bird3D kind="pigeon" at={pg} frame={frame} s={10} wing={land < 1 ? 'flap' : 'fold'} perch={land >= 1} yaw={Math.PI} />
 		</group>
@@ -113,8 +113,8 @@ export const Cold: React.FC<ShotProps> = ({frame, dur, lines}) => {
 // ---------------------------------------------------------------- mum
 
 const CROUCH: V3 = [0, 0, -30];
-const LOW_HAND = handAt(CROUCH, 0, [2, 2], 0, 1, true, GIANT);
-const MUM: V3 = [LOW_HAND[0] + 1.6, 0, LOW_HAND[2] + 1.4];
+const LOW_HAND = handAt(CROUCH, 0, [10, 10], 0, 1, true, GIANT);
+const MUM: V3 = [LOW_HAND[0] + 1.5, 0, LOW_HAND[2] + 1.1];
 const MUM_TURN = Math.atan2(LOW_HAND[0] - MUM[0], LOW_HAND[2] - MUM[2]);
 
 export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
@@ -127,7 +127,7 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const cuts = [0, holds - 4, pinch - 4, crumb - 4, word - 4, inside - 4];
 	const up = span(frame, holds, holds + 18) * (1 - span(frame, word + 10, word + 30));
 	const raise = span(frame, crumb - 30, crumb + 6);
-	const armR: [number, number] = [lerp(2, 70, raise), lerp(2, 140, raise)];
+	const armR: [number, number] = [lerp(10, 70, raise), lerp(10, 140, raise)];
 	const hand = handAt(CROUCH, 0, armR, 60 * raise, 1, true, GIANT);
 	const taken = frame > pinch + 14;
 	const mumArm: [number, number] = [lerp(30, 168, up), lerp(70, 10, up)];
@@ -136,7 +136,7 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const mh = handAt(MUM, MUM_TURN, mumArm, 60, 1);
 	const mh2 = handAt(MUM, MUM_TURN, mumArm, 60, -1);
 	const plateAt: V3 = [(mh[0] + mh2[0]) / 2, (mh[1] + mh2[1]) / 2 + 0.05, (mh[2] + mh2[2]) / 2];
-	const toast: V3 = taken ? [hand[0] - 0.05 * K * 0.12, hand[1] - 0.6, hand[2] + 0.4] : [plateAt[0], plateAt[1] + 0.04, plateAt[2]];
+	const toast: V3 = taken ? [hand[0] + 1.2, hand[1] - 0.075 * K, hand[2] + 1.2] : [plateAt[0], plateAt[1] + 0.04, plateAt[2]];
 	const near = (
 		<group>
 			<Giant at={CROUCH} sit face={frame > crumb ? 'smug' : 'happy'} armR={armR} reachR={60 * raise} armL={[14, 20]} look={frame > crumb ? [0.3, 0.2] : [0.5, -0.8]} />
@@ -147,11 +147,11 @@ export const Mum: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		</group>
 	);
 	const angles: Angle3[] = [
-		lookFrom([MUM[0] + 3, 1.6, MUM[2] + 7], [CROUCH[0] + 4, 46, CROUCH[2] + 6], 60, {dyaw: 3}),
-		lookFrom([MUM[0] - 1.6, 1.1, MUM[2] - 2.6], [MUM[0], 1.9, MUM[2]], 44, {dyaw: 4}),
+		lookFrom([MUM[0] + 7, 1.2, MUM[2] + 9], [CROUCH[0] + 6, 34, CROUCH[2] + 4], 64, {dyaw: 3}),
+		lookFrom([MUM[0] - 0.2, 1.2, MUM[2] - 2.6], [MUM[0], 1.9, MUM[2]], 46, {dyaw: 4}),
 		lookFrom([MUM[0] + 5, 2.2, MUM[2] + 5], [LOW_HAND[0], 2.6, LOW_HAND[2]], 46, {dyaw: -4}),
-		lookFrom([hand[0] + 6, hand[1] - 1, hand[2] + 14], [hand[0], hand[1] - 0.4, hand[2]], 30),
-		lookFrom([MUM[0] - 1.2, 1.4, MUM[2] - 2.2], [MUM[0], 1.45, MUM[2]], 36),
+		lookFrom([toast[0] + 2.2, toast[1] - 0.3, toast[2] + 2.2], toast, 40),
+		lookFrom([MUM[0] - 0.4, 1.45, MUM[2] - 2.4], [MUM[0], 1.45, MUM[2]], 36),
 		lookFrom([MUM[0] + 14, 4, MUM[2] + 6], [MUM[0] + 2, 1.2, MUM[2] + 8], 46, {dyaw: 4}),
 	];
 	return (
@@ -291,7 +291,7 @@ export const Weight: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const showE = frame > eiffel + 4;
 	const angles: Angle3[] = [
 		{at: [0, 5, 0], dist: 24, yaw: 0, pitch: 6, fov: 38, ddist: -2},
-		{at: [-6, 3.6, 0], dist: 10, yaw: 6, pitch: 6, fov: 38, dyaw: -6},
+		{at: [-5.6, 7, 0], dist: 9, yaw: 6, pitch: 6, fov: 38, dyaw: -6},
 		{at: [0, 5, 0], dist: 25, yaw: -6, pitch: 6, fov: 38, ddist: -2},
 	];
 	const left = <group scale={frame < eiffel ? [sx, 1, sz] : [1, 1, 1]}><Hero3D height={2.4} face={frame > heavy ? 'smug' : 'happy'} /></group>;
@@ -487,18 +487,29 @@ export const Sneeze: React.FC<ShotProps> = ({frame, dur, lines}) => {
 // ---------------------------------------------------------------- school
 
 const SCHOOL: V3 = [180, 0, -60];
+const carAtFor = (x: number): V3 => [x + 14, 0, SCHOOL[2] + 40 + 34];
 
 /** The classroom from inside, with your eye in the window. */
 const WIN = {x: 0, y: 1.9, w: 3.4, h: 2.0, z: -4.5};
-const EYE_DX = 0.12 * K;
-const EYE_DY = 0.03 * K;
+/** One of your eyes, seen from very close: orange skin, a white eye, a black pupil, a lid that blinks. */
+const BigEye: React.FC<{at: V3; frame: number; look?: [number, number]}> = ({at, frame, look = [0, 0]}) => {
+	const blink = (frame % 140) > 132 ? 1 - Math.abs((frame % 140) - 136) / 4 : 0;
+	return (
+		<group position={at}>
+			<T shape={{kind: 'sphere', r: 1, seg: 48}} color={YOU.head} position={[0, 0, -6]} scale={[22, 16, 6]} outline={0} />
+			<T shape={{kind: 'sphere', r: 1.6, seg: 48}} color="#FFFFFF" position={[0, 0, 0]} scale={[1, 1.2, 0.5]} outline={0.12} />
+			<T shape={{kind: 'sphere', r: 0.75, seg: 32}} color="#140A28" position={[look[0] * 1.4, look[1] * 1.4, 0.55]} scale={[1, 1.15, 0.4]} outline={0} />
+			<T shape={{kind: 'sphere', r: 0.22, seg: 16}} color="#FFFFFF" position={[look[0] * 1.4 + 0.3, look[1] * 1.4 + 0.4, 0.8]} outline={0} />
+			<T shape={{kind: 'box', w: 4, h: 4 * blink + 0.01, d: 1.4}} color={YOU.head} position={[0, 1.95 - 2 * blink, 0.2]} outline={0} />
+			<T shape={{kind: 'capsule', r: 0.22, len: 2.6}} color="#3A2A2A" position={[0, 2.6, 0.2]} rotation={[0, 0, Math.PI / 2 + 0.05]} outline={0} />
+		</group>
+	);
+};
 const Classroom: React.FC<{frame: number; mug: number; stare: number}> = ({frame, mug, stare}) => {
 	const look = ROOM3.classroom;
 	const W = 12;
 	const H = 4;
 	const wl = (W - WIN.w) / 2;
-	const R = 0.32 * K;
-	const headZ = WIN.z - Math.sqrt(Math.max(1, R * R - EYE_DX * EYE_DX - EYE_DY * EYE_DY)) - 0.6;
 	return (
 		<group>
 			<T shape={{kind: 'box', w: W, h: 0.1, d: 10}} color={look.floor} position={[0, -0.05, 0]} outline={0} />
@@ -519,8 +530,8 @@ const Classroom: React.FC<{frame: number; mug: number; stare: number}> = ({frame
 			)}
 			<Hero3D who={P8.teacher} position={[3.8, 0, -3.0]} turn={-0.9 + stare * -0.6} armR={[30 + mug * 10, 60 - mug * 50]} reachR={50} face={stare > 0.5 ? 'shocked' : 'neutral'} />
 			<T shape={{kind: 'cyl', r: 0.05, h: 0.1}} color="#E8453C" position={mug < 1 ? [4.05, 1.0 - mug * 0.95, -2.65] : [4.05, 0.05, -2.6]} rotation={mug < 1 ? [mug * 2, 0, 0] : [Math.PI / 2, 0.4, 0]} outline={0.008} />
-			{/* your face outside: one eye right behind the window */}
-			<Hero3D who={YOU} position={[WIN.x - EYE_DX, WIN.y - EYE_DY - 1.36 * K, headZ]} height={GIANT} face="happy" blink={Math.sin(frame * 0.05) > 0.97 ? 1 : 0} />
+			{/* your face outside: one huge eye right behind the window */}
+			<BigEye at={[WIN.x, WIN.y, WIN.z - 1.6]} frame={frame} look={[0.15 * Math.sin(frame * 0.03), -0.1]} />
 			<pointLight position={[0, 3.5, 0]} intensity={2} distance={14} color="#FFF3C4" />
 		</group>
 	);
@@ -545,13 +556,12 @@ export const School: React.FC<ShotProps> = ({frame, dur, lines}) => {
 		{at: [x, 50, pos[2]], dist: 320, yaw: 160, pitch: 10, fov: 40, ...BIGCAM},
 		{at: [x, 20, pos[2]], dist: 110, yaw: 120, pitch: 6, fov: 40, ...BIGCAM},
 		{at: [x, 10, pos[2]], dist: 170, yaw: 180, pitch: 8, fov: 40, ...BIGCAM},
-		{at: [x + 6, 8, pos[2] + 20], dist: 46, yaw: 75, pitch: 4, fov: 46, ...BIGCAM},
+		lookFrom([carAtFor(x)[0] + 30, 3, carAtFor(x)[2] + 4], [x, 14, pos[2]], 52),
 		{at: [SCHOOL[0] - 20, 30, SCHOOL[2] + 20], dist: 200, yaw: 140, pitch: 12, fov: 40, ...BIGCAM},
 		{at: [0, 1.9, -1], dist: 6.5, yaw: 0, pitch: 4, fov: 50},
 		{at: [0, 1.0, 1.5], dist: 5, yaw: 180, pitch: 6, fov: 50, dyaw: 6},
 		{at: [3.4, 1.2, -2.4], dist: 3, yaw: 230, pitch: 4, fov: 44},
 	];
-	const carAt: V3 = [x + 14, 0, pos[2] + 34];
 	return (
 		<>
 			<Shot3
@@ -577,7 +587,7 @@ export const School: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					) : (
 						<group>
 							<Giant at={pos} turn={sit ? Math.PI * 0.8 : Math.PI / 2} sit={sit} lean={sit ? 30 : 0} walk={sit ? undefined : frame * 0.045} face="happy" armL={[20, 20]} armR={[20, 20]} />
-							<Car3D at={carAt} yaw={Math.PI / 2} color="#E8453C" />
+							<Car3D at={carAtFor(x)} yaw={Math.PI / 2} color="#E8453C" />
 						</group>
 					)
 				}
