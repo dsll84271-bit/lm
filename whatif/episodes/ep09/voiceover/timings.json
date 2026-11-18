@@ -1,0 +1,420 @@
+{
+ "seconds": 480.369,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 20.606,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up on a beach in Miami, and there's a health bar floating in the corner of your eye. And every single person walking past is saying exactly the same thing. You're inside a video game.",
+     "start": 0.25,
+     "end": 11.591
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And in a few hours, the player comes back. When they do, this whole world gets switched off, with you in it. You need to get out before then.",
+     "start": 12.292,
+     "end": 19.806
+    }
+   ]
+  },
+  {
+   "id": "beach",
+   "start": 20.606,
+   "end": 37.899,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At least it's a nice place to be stuck. Behind the beach there's a row of hotels painted pink, and mint, and lemon yellow. That's real. Miami Beach has about nine hundred and sixty historic buildings in this style, called Art Deco, most of them built a hundred years ago.",
+     "start": 20.856,
+     "end": 37.499
+    }
+   ]
+  },
+  {
+   "id": "tuttle",
+   "start": 37.899,
+   "end": 53.295,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And Miami has a fun claim to fame. It's often called the only big American city ever founded by a woman. Julia Tuttle persuaded a railway boss to build his line all the way down here, and in eighteen ninety six, Miami became a city.",
+     "start": 38.149,
+     "end": 52.895
+    }
+   ]
+  },
+  {
+   "id": "map",
+   "start": 53.295,
+   "end": 66.765,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You look at the little round map in the corner, and zoom out, looking for your own street. Your house. Your school. They're not there. The map stops at the sea, and there's no road home. Whatever happens, you're not getting out by walking.",
+     "start": 53.545,
+     "end": 66.365
+    }
+   ]
+  },
+  {
+   "id": "npcs",
+   "start": 66.765,
+   "end": 81.691,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You walk up to a man in a sun hat, and ask him where you are. Nice day for it, he says. You ask him again. Nice day for it. You ask a jogger. Nice day for it. A seagull lands next to you, and you're genuinely worried it's going to say it too.",
+     "start": 67.015,
+     "end": 81.291
+    }
+   ]
+  },
+  {
+   "id": "npc",
+   "start": 81.691,
+   "end": 92.726,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "They're NPCs, non-player characters. The game moves them with a few simple rules, and gives them a handful of recorded lines. Walk. Say the line. Walk again.",
+     "start": 81.941,
+     "end": 92.326
+    }
+   ]
+  },
+  {
+   "id": "swim",
+   "start": 92.726,
+   "end": 108.605,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So you wade into the sea to think. At waist height, the water just stops. You're standing on top of it, like a glass floor. You stamp on it, and it goes clonk. You look down through it, and there's nothing underneath. No fish. No sand. Nobody built that part.",
+     "start": 92.976,
+     "end": 108.205
+    }
+   ]
+  },
+  {
+   "id": "popin",
+   "start": 108.605,
+   "end": 119.48,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you spin round really fast, and for a split second, there's nothing behind you. Just grey. Then the hotels pop back into place, as if they'd been waiting for you to look.",
+     "start": 108.855,
+     "end": 119.18
+    }
+   ]
+  },
+  {
+   "id": "culling",
+   "start": 119.48,
+   "end": 131.866,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That's real too. Games save work by only drawing what the camera can see. Everything outside your view is skipped, until you turn round and look at it. So right now, behind you, there's nothing there at all.",
+     "start": 119.73,
+     "end": 131.466
+    }
+   ]
+  },
+  {
+   "id": "triangles",
+   "start": 131.866,
+   "end": 146.025,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You walk over to a palm tree and poke it. Up close, it isn't round at all. It's made of flat triangles. So is the sand. So is your hand. Every 3D game world is built out of millions of flat little triangles.",
+     "start": 132.116,
+     "end": 145.625
+    }
+   ]
+  },
+  {
+   "id": "fps",
+   "start": 146.025,
+   "end": 160.764,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Every so often, the world stutters, like a flipbook. A seagull flaps in jerky little jumps. Games aren't really moving. They show you still pictures, very fast. Films usually use twenty four a second. Lots of games use sixty.",
+     "start": 146.275,
+     "end": 160.364
+    }
+   ]
+  },
+  {
+   "id": "sun",
+   "start": 160.764,
+   "end": 175.688,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then the sun goes zooming across the sky. In lots of games, days are much shorter than real ones. In GTA five, one minute of game time passes every two real seconds, so a whole day and night takes just forty eight minutes.",
+     "start": 161.014,
+     "end": 175.288
+    }
+   ]
+  },
+  {
+   "id": "traffic",
+   "start": 175.688,
+   "end": 190.445,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You step into the road, and every single car stops in a perfect line, and honks. And honks. And honks. Game cars follow invisible tracks laid along the roads, like a toy train set. Step on the track, and they wait for you forever.",
+     "start": 175.938,
+     "end": 190.045
+    }
+   ]
+  },
+  {
+   "id": "night",
+   "start": 190.445,
+   "end": 208.721,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Night falls in about a minute. And at exactly eight o'clock, every neon sign along the beach switches on at the same moment, and every single person on the street turns round, walks to a door, and disappears. Game characters run on timetables. At eight, it's bedtime, for everyone.",
+     "start": 190.695,
+     "end": 208.321
+    }
+   ]
+  },
+  {
+   "id": "mission",
+   "start": 208.721,
+   "end": 221.035,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then a glowing yellow marker appears down the road, and words slide across the sky. New mission. Deliver the pizza. You look at the pizza. You look at the scooter. Well, it might be a way out.",
+     "start": 208.971,
+     "end": 220.635
+    }
+   ]
+  },
+  {
+   "id": "jump",
+   "start": 221.035,
+   "end": 237.957,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "On the way to the scooter, you jump a hedge, a fence and a sun lounger in one go, and land perfectly. Game characters jump like superheroes. The real high jump world record is two point four five metres, set in nineteen ninety three. Nobody's beaten it since.",
+     "start": 221.285,
+     "end": 237.557
+    }
+   ]
+  },
+  {
+   "id": "crash",
+   "start": 237.957,
+   "end": 262.971,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You set off on the scooter, and very, very gently, you bump a parked car. It flips into the air and bursts into a giant fireball. Nobody nearby even blinks.",
+     "start": 238.207,
+     "end": 248.0
+    },
+    {
+     "who": "NARRATOR",
+     "text": "In real life, cars almost never explode in crashes. Fuel in a tank is a liquid, and to explode it needs to be a vapour, mixed with air, with a spark. That's very hard to get, which is why films have to use special effects.",
+     "start": 248.6,
+     "end": 262.571
+    }
+   ]
+  },
+  {
+   "id": "health",
+   "start": 262.971,
+   "end": 277.171,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You fall off and graze your knee, and your health bar drops to red. So you hide behind a wall, and wait. Five seconds later, it's full again. Real bodies are much slower. A broken arm usually takes six to eight weeks to heal.",
+     "start": 263.221,
+     "end": 276.771
+    }
+   ]
+  },
+  {
+   "id": "clip",
+   "start": 277.171,
+   "end": 288.963,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you try to squeeze past a hotel, and you walk halfway into the wall. Your arms snap out straight, like a letter T. You wiggle, and pop out the other side. Remember that. It'll be important.",
+     "start": 277.421,
+     "end": 288.663
+    }
+   ]
+  },
+  {
+   "id": "hitbox",
+   "start": 288.963,
+   "end": 301.973,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Games don't check every triangle when you bump into something. That would be too slow. They use simple invisible boxes, called hitboxes. And where two boxes don't quite meet, you can sometimes slip right through.",
+     "start": 289.213,
+     "end": 301.573
+    }
+   ]
+  },
+  {
+   "id": "shop",
+   "start": 301.973,
+   "end": 317.839,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You duck into a clothes shop to get off the street. You stand on a glowing circle, spin round once, and suddenly you're wearing a flamingo shirt. Spin again, and you're in a cowboy hat. You spin back into your hoodie. Some things about games, you could get used to.",
+     "start": 302.223,
+     "end": 317.439
+    }
+   ]
+  },
+  {
+   "id": "pizza",
+   "start": 317.839,
+   "end": 330.484,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You deliver the pizza. The woman at the door says nice day for it, and gold coins explode out of nowhere. Mission complete. Not even a thank you. Just coins. But nothing else happens. You're still here.",
+     "start": 318.089,
+     "end": 330.084
+    }
+   ]
+  },
+  {
+   "id": "save",
+   "start": 330.484,
+   "end": 344.402,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Next to the house, there's a glowing spinning icon hovering over the pavement. A save point. You step into it, and words appear in the sky. Saving. Do not switch off. You really, really hope nobody switches anything off.",
+     "start": 330.734,
+     "end": 344.002
+    }
+   ]
+  },
+  {
+   "id": "countdown",
+   "start": 344.402,
+   "end": 362.883,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then the sky darkens, and a giant timer appears above the city. Player returning in three minutes. Things start to go wrong. A palm tree flickers between day and night. A taxi drives past upside down. And far away, at the edge of the map, the world starts flickering, and turning grey.",
+     "start": 344.652,
+     "end": 362.183
+    }
+   ]
+  },
+  {
+   "id": "huge",
+   "start": 362.883,
+   "end": 378.37,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Open-world games like this are enormous. GTA five has sold over two hundred and thirty million copies. And the very first trailer for GTA six got ninety million YouTube views in a single day. That's a Guinness World Record.",
+     "start": 363.133,
+     "end": 377.97
+    }
+   ]
+  },
+  {
+   "id": "run",
+   "start": 378.37,
+   "end": 399.996,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So you run. Along the beach road, past the neon signs, with the world switching off behind you, block by block. The hotels go grey. The palm trees go grey. The man in the sun hat says nice day for it, and goes grey mid-sentence. You jump a fountain, and a lifeguard tower, and a very confused flamingo, and you head for the long bridge out over the bay.",
+     "start": 378.62,
+     "end": 399.696
+    }
+   ]
+  },
+  {
+   "id": "edge",
+   "start": 399.996,
+   "end": 420.719,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At the end of the bridge, out over the sea, you smack into something you can't see. An invisible wall. Every game world has an edge, because somebody had to stop building somewhere. You push. You kick it. You throw your shoulder at it. It won't let you through. Behind you, the bridge is going grey, one lamppost at a time. Thirty seconds left.",
+     "start": 400.246,
+     "end": 420.119
+    }
+   ]
+  },
+  {
+   "id": "through",
+   "start": 420.719,
+   "end": 435.262,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you remember the hotel wall. Where two invisible boxes don't quite meet, you can slip through. So you find the gap, push into it, and your arms snap out into a T. You wiggle. And you fall right through the bottom of the world.",
+     "start": 420.969,
+     "end": 434.262
+    }
+   ]
+  },
+  {
+   "id": "wake",
+   "start": 435.262,
+   "end": 452.349,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up in your own bed, with your heart pounding. Real sunlight. Real pillow. You check your hand. No triangles. It was a dream. Then your phone buzzes. It's release day. The new game you've been waiting for all year is finally out, and you've been saving up for months.",
+     "start": 435.512,
+     "end": 451.749
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 452.349,
+   "end": 467.675,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You switch it on, and press start. On the screen, a character wakes up on a beach, blinking in the sun. It has a round orange head, and a purple hoodie. It sits up. It turns round. And it looks straight out of the TV, right at you.",
+     "start": 452.599,
+     "end": 466.475
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 467.675,
+   "end": 480.369,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you want to wake up inside a video game? And which game would you pick, if you had to live in it for a day? Tell me in the comments. And if you'd rather be a hundred metres tall instead, that episode is right here.",
+     "start": 467.925,
+     "end": 480.369
+    }
+   ]
+  }
+ ]
+}
