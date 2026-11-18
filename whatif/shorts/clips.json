@@ -259,6 +259,18 @@
    "hook": [
     "WHAT IF YOU WOKE UP",
     "100 METRES TALL?"
+   ],
+   "crop": [
+    [
+     16.2,
+     1440,
+     1060
+    ],
+    [
+     33.4,
+     1500,
+     960
+    ]
    ]
   },
   {
@@ -269,6 +281,18 @@
    "hook": [
     "YOU'D WEIGH AS MUCH",
     "AS THE EIFFEL TOWER"
+   ],
+   "crop": [
+    [
+     63.4,
+     1600,
+     960
+    ],
+    [
+     75.7,
+     1440,
+     960
+    ]
    ]
   },
   {
