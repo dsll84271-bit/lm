@@ -120,16 +120,25 @@ export const Hotel3D: React.FC<{at: V3; w?: number; h?: number; d?: number; colo
 	const cols = Math.max(3, Math.round(w / 3.2));
 	const accent = PASTEL[(PASTEL.indexOf(color) + 2 + seed) % PASTEL.length];
 	const win = lit > 0 && grey < 0.5 ? '#FFD98A' : g('#7AC8E8');
-	const items: React.ReactNode[] = [];
+	// Windows and ledges are drawn as two batches (one draw call each), not one mesh apiece.
+	const ledges: Copy[] = [];
+	const wins: Copy[] = [];
 	for (let f = 0; f < floors; f++) {
 		const y = 2.6 + f * (h - 3) / floors;
-		items.push(<T key={`l${f}`} shape={{kind: 'box', w: w + 0.4, h: 0.18, d: 0.9}} color={g('#FFFFFF')} position={[0, y + 1.0, d / 2 + 0.4]} outline={0.02} />);
+		ledges.push({p: [0, y + 1.0, d / 2 + 0.4], s: [w + 0.4, 0.18, 0.9], c: g('#FFFFFF')});
 		for (let c = 0; c < cols; c++) {
 			const x = -w / 2 + (c + 0.5) * (w / cols);
 			if (Math.abs(x) < 1.8 && f < floors - 1) continue;
-			items.push(<Glow key={`w${f}${c}`} shape={{kind: 'box', w: (w / cols) * 0.55, h: 1.2, d: 0.06}} color={win} position={[x, y + 0.1, d / 2 + 0.04]} />);
+			wins.push({p: [x, y + 0.1, d / 2 + 0.04], s: [(w / cols) * 0.55, 1.2, 0.06], c: win});
 		}
 	}
+	const key = `${w.toFixed(1)}${h.toFixed(1)}${d}${floors}${cols}${win}${grey}`;
+	const items = (
+		<group>
+			<Many kind={`ledge${key}`} geom={box} items={ledges} outline={0.02} />
+			<Many kind={`win${key}`} geom={box} items={wins} outline={0} glow shadow={false} />
+		</group>
+	);
 	return (
 		<group position={at} rotation={[0, yaw, 0]}>
 			<T shape={{kind: 'box', w, h, d}} color={g(color)} position={[0, h / 2, 0]} outline={0.08} />

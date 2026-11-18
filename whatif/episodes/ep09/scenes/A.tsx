@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {FONT} from '../../../brand/fonts';
-import {cue, lerp, Sound, span, type ShotProps} from '../../../components/stage';
+import {cue, Finish, lerp, Sound, span, type ShotProps} from '../../../components/stage';
 import {Big, Label, UI} from '../../../components/ui';
 import {Ground} from '../../../three/giant3d';
 import {Hero3D, type Hero3DProps} from '../../../three/Hero3D';
@@ -164,6 +164,7 @@ export const Tuttle: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				</svg>
 				<Label text="THE ONLY BIG U.S. CITY FOUNDED BY A WOMAN (OFTEN SAID)" x={960} y={220} size={44} frame={frame} at={woman + 10} color={UI.cream} />
 				<Big text="JULIA TUTTLE" x={560} y={860} size={84} frame={frame} at={rail + 6} color="#E8453C" />
+				<Finish />
 			</AbsoluteFill>
 			<Sound name="chime" at={city + 4} volume={0.3} />
 		</>
@@ -177,7 +178,6 @@ export const MapShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 	const house = cue(l0, 'Your house');
 	const not = cue(l0, "They're not there");
 	const sea = cue(l0, 'The map stops');
-	const walking = cue(l0, 'Whatever happens');
 	const zoom = span(frame, 6, house + 10);
 	const search = (Math.sin(frame * 0.08) + 1) / 2;
 	return (
@@ -213,7 +213,7 @@ export const MapShot: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				<Label text="YOUR HOUSE?  YOUR SCHOOL?" x={960} y={180} size={52} frame={frame} at={house + 4} until={not} color={UI.cream} />
 				<Big text="NOT ON THE MAP" x={960} y={180} size={84} frame={frame} at={not + 4} until={sea + 30} color="#FF6A6A" />
 				<Label text="NO ROAD HOME" x={960} y={900} size={60} frame={frame} at={sea + 20} color={UI.yellow} />
-				{walking > 0 ? null : null}
+				<Finish />
 			</AbsoluteFill>
 			<Sound name="tick" at={house} volume={0.3} />
 			<Sound name="thud" at={not + 4} volume={0.3} />
@@ -537,6 +537,7 @@ export const Fps: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					<Label text="STILL PICTURES, VERY FAST" x={960} y={220} size={56} frame={frame} at={still + 6} until={films - 2} color={UI.yellow} />
 					<Label text="FILMS: 24 A SECOND" x={960} y={860} size={60} frame={frame} at={films + 6} until={sixty - 2} color={UI.cream} />
 					<Big text="MANY GAMES: 60 A SECOND" x={960} y={860} size={80} frame={frame} at={sixty + 6} color={UI.yellow} />
+					<Finish />
 				</AbsoluteFill>
 			) : (
 				<Shot3

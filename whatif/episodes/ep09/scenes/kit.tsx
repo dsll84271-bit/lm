@@ -143,8 +143,8 @@ export const HUD: React.FC<{frame: number; health?: number; map?: boolean; missi
 				</div>
 			) : null}
 			{mission && mp > 0 ? (
-				<div style={{position: 'absolute', left: 0, right: 0, top: 230, textAlign: 'center', opacity: mp, transform: `translateY(${(1 - mp) * -30}px)`}}>
-					<div style={{display: 'inline-block', fontFamily: FONT, fontWeight: 700, fontSize: 40, color: '#FFD84A', letterSpacing: 3, WebkitTextStroke: '2px #140A28'}}>{mission}</div>
+				<div style={{position: 'absolute', right: 70, top: clock ? 225 : 168, textAlign: 'right', opacity: mp, transform: `translateX(${(1 - mp) * 40}px)`}}>
+					<div style={{display: 'inline-block', fontFamily: FONT, fontWeight: 700, fontSize: 34, color: '#FFD84A', letterSpacing: 2, WebkitTextStroke: '2px #140A28'}}>{mission}</div>
 				</div>
 			) : null}
 		</AbsoluteFill>

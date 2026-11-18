@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {FONT} from '../../../brand/fonts';
-import {cue, lerp, shake, Sound, span, type ShotProps} from '../../../components/stage';
+import {cue, Finish, lerp, shake, Sound, span, type ShotProps} from '../../../components/stage';
 import {Big, Label, UI} from '../../../components/ui';
 import {Ground} from '../../../three/giant3d';
 import {Hero3D} from '../../../three/Hero3D';
@@ -110,6 +110,7 @@ export const Huge: React.FC<ShotProps> = ({frame, dur, lines}) => {
 					</div>
 					<Label text="GTA VI · FIRST TRAILER · DECEMBER 2023" x={960} y={170} size={44} frame={frame} at={trailer + 4} color={UI.cream} />
 					<Big text="GUINNESS WORLD RECORD" x={960} y={880} size={78} frame={frame} at={guinness + 4} color={UI.yellow} />
+					<Finish />
 				</AbsoluteFill>
 			) : (
 				<Shot3
@@ -264,7 +265,7 @@ export const Through: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				dur={dur}
 				lines={lines}
 				cuts={cuts}
-				angles={[lookFrom([BRIDGE[0] + 3, 5.6, WALL_Z - 5], [BRIDGE[0], 5, WALL_Z], 46), lookFrom([BRIDGE[0] + 5.6, 4.4, WALL_Z - 2], [BRIDGE[0] + 4.6, 4.2, WALL_Z], 44), lookFrom([BRIDGE[0] + 6, 5.2, WALL_Z - 3], [BRIDGE[0] + 4.6, 4.6, WALL_Z], 42), lookFrom([BRIDGE[0] + 4.6, fy - 6, WALL_Z + 1], [BRIDGE[0] + 4.6, fy + 4, WALL_Z], 60, {roll: frame * 0.6})]}
+				angles={[lookFrom([BRIDGE[0] + 1, 5.4, WALL_Z - 5.5], [BRIDGE[0] + 4.2, 4.6, WALL_Z], 46), lookFrom([BRIDGE[0] + 5.6, 4.4, WALL_Z - 2], [BRIDGE[0] + 4.6, 4.2, WALL_Z], 44), lookFrom([BRIDGE[0] + 6, 5.2, WALL_Z - 3], [BRIDGE[0] + 4.6, 4.6, WALL_Z], 42), lookFrom([BRIDGE[0] + 4.6, fy - 6, WALL_Z + 1], [BRIDGE[0] + 4.6, fy + 4, WALL_Z], 60, {roll: frame * 0.6})]}
 				light={falling ? light([BRIDGE[0], 0, WALL_Z], 'day', 40) : light([BRIDGE[0], 0, WALL_Z - 20], 'night', 40)}
 				bg={falling ? BG.void : BG.night}
 				far={
@@ -399,7 +400,7 @@ export const Twist: React.FC<ShotProps> = ({frame, dur, lines}) => {
 				dur={dur}
 				lines={lines}
 				cuts={cuts}
-				angles={[{at: [-1, 1, -0.4], dist: 4.6, yaw: 160, pitch: 8, fov: 44}, lookFrom([tvAt[0], 1.05, tvAt[2] - 2.2], [tvAt[0], 0.95, tvAt[2]], 40), lookFrom([tvAt[0], 1.0, tvAt[2] - 1.4], [tvAt[0], 0.85, tvAt[2]], 36), lookFrom([tvAt[0], 1.0, tvAt[2] - 1.2], [tvAt[0], 0.82, tvAt[2]], 32), lookFrom([tvAt[0], 0.95, tvAt[2] - 0.9], [tvAt[0], 0.82, tvAt[2]], 30, {ddist: -0.3})]}
+				angles={[{at: [-1, 1, -0.4], dist: 4.6, yaw: 160, pitch: 8, fov: 44}, lookFrom([tvAt[0] + 0.9, 1.35, tvAt[2] - 2.0], [tvAt[0], 0.95, tvAt[2]], 40), lookFrom([tvAt[0], 1.0, tvAt[2] - 1.4], [tvAt[0], 0.85, tvAt[2]], 36), lookFrom([tvAt[0], 1.0, tvAt[2] - 1.2], [tvAt[0], 0.82, tvAt[2]], 32), lookFrom([tvAt[0], 0.95, tvAt[2] - 0.9], [tvAt[0], 0.82, tvAt[2]], 30, {ddist: -0.3})]}
 				light={LIGHT.room}
 				bg={BG.room}
 				far={<Bedroom frame={frame} tv={tv} boxOn={false} />}
