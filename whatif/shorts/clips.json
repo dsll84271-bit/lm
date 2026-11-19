@@ -314,6 +314,121 @@
     "A GIANT VS A",
     "COLLAPSING BRIDGE"
    ]
+  },
+  {
+   "id": "ep09-wake-up",
+   "ep": "09",
+   "start": 0.0,
+   "end": 37.9,
+   "hook": [
+    "WHAT IF YOU WOKE UP",
+    "INSIDE A VIDEO GAME?"
+   ],
+   "crop": [
+    [
+     0.0,
+     1440,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "ep09-npcs",
+   "ep": "09",
+   "start": 66.8,
+   "end": 92.7,
+   "hook": [
+    "EVERYONE SAYS",
+    "THE SAME THING"
+   ],
+   "crop": [
+    [
+     66.8,
+     1440,
+     760
+    ],
+    [
+     81.7,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep09-vanishes",
+   "ep": "09",
+   "start": 108.6,
+   "end": 146.0,
+   "hook": [
+    "IN A GAME, THE WORLD",
+    "VANISHES BEHIND YOU"
+   ],
+   "crop": [
+    [
+     108.6,
+     1440,
+     760
+    ],
+    [
+     119.5,
+     1440,
+     960
+    ],
+    [
+     131.9,
+     1440,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "ep09-cars",
+   "ep": "09",
+   "start": 238.0,
+   "end": 277.2,
+   "hook": [
+    "REAL CARS DON'T",
+    "EXPLODE LIKE THIS"
+   ],
+   "crop": [
+    [
+     238.0,
+     1440,
+     760
+    ],
+    [
+     248.4,
+     1440,
+     960
+    ],
+    [
+     263.0,
+     1440,
+     760
+    ],
+    [
+     272.4,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep09-escape",
+   "ep": "09",
+   "start": 378.4,
+   "end": 435.3,
+   "hook": [
+    "ESCAPING A GAME BEFORE",
+    "IT SWITCHES OFF"
+   ],
+   "crop": [
+    [
+     378.4,
+     1440,
+     760
+    ]
+   ]
   }
  ]
 }

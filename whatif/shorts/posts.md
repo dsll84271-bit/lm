@@ -78,6 +78,25 @@ One caption per clip, for TikTok, YouTube Shorts and Instagram Reels.
 
 ---
 
+## Episode 9: What If You Woke Up Inside a Video Game?
+
+**ep09-wake-up.mp4** (38 s)
+> You wake up on a beach in Miami… with a health bar in the corner of your eye 🎮🌴 #whatif #gta6 #videogames #miami #animation
+
+**ep09-npcs.mp4** (26 s)
+> Inside a video game, everyone says the same thing. Here's why 🤖 #whatif #npc #videogames #gaming #animation
+
+**ep09-vanishes.mp4** (37 s)
+> In a game, the world behind you isn't really there 👀 #whatif #gamedev #videogames #science #animation
+
+**ep09-cars.mp4** (39 s)
+> In games, cars explode from a tiny bump. Real cars almost never do 🚗💥 #whatif #gta6 #cars #science #animation
+
+**ep09-escape.mp4** (57 s)
+> The player's coming back, the world is switching off, and there's an invisible wall at the edge of the map ⏳ #whatif #gta6 #videogames #glitch #animation
+
+---
+
 ## Tips
 
 - **Best times to post:** after school and in the early evening (about 4–8 pm local time).
