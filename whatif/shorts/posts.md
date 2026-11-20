@@ -97,6 +97,27 @@ One caption per clip, for TikTok, YouTube Shorts and Instagram Reels.
 
 ---
 
+## Documentary 1: Why GTA 6 Is Set in Florida
+
+These go on the documentary channel. Link each Short to the full video with YouTube's **Related video** option.
+
+**doc01-younger.mp4** (62 s)
+> GTA 6's Vice City feels ancient… but the real Miami is younger than the Eiffel Tower 🗼🌴 #gta6 #gtavi #miami #florida #history
+
+**doc01-pink.mp4** (69 s)
+> Why are Vice City's hotels pink? The real answer is a 1980s paint job 🎨 #gta6 #vicecity #artdeco #miami #history
+
+**doc01-grassrivers.mp4** (46 s)
+> GTA 6's swamp is called Grassrivers. Flip it around and you get the real name of the Everglades 🐊 #gta6 #gtavi #everglades #florida #eastereggs
+
+**doc01-florida-man.mp4** (58 s)
+> The real reason "Florida Man" headlines exist (it's not what you think) 📰 #floridaman #gta6 #florida #funfacts #history
+
+**doc01-vice.mp4** (42 s)
+> Vice City isn't really Miami. It's a memory of Miami 🌆 #gta6 #vicecity #miamivice #80s #gaming
+
+---
+
 ## Tips
 
 - **Best times to post:** after school and in the early evening (about 4–8 pm local time).
