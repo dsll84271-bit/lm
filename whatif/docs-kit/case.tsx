@@ -6,7 +6,7 @@ import React from 'react';
 import {AbsoluteFill, Audio, Easing, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Bg, C, clamp, Grain, img, Kicker, lerp, Stamp, Typed, useDrop, Vignette} from './kit';
 
-export const CHANNEL = 'BEHIND THE FICTION';
+export const CHANNEL = 'THE FICTION FILES';
 export const INTRO_FRAMES = 150;
 export const OUTRO_FRAMES = 300;
 
