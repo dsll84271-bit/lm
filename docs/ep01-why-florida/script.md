@@ -10,7 +10,7 @@
 
 | # | Chapter | Paras | Main visual styles |
 |---|---|---|---|
-| 0 | Cold open: the state that doesn't exist | 1–4 | Investigation board; the scrapbook title card "WHY FLORIDA?" |
+| 0 | Cold open + promise of 4 reveals | 1–4 | Investigation board; scrapbook title card "WHY FLORIDA?" |
 | 1 | The city a frost built (1894–1896) | 5–9 | Archival film: Flagler, Tuttle, the railroad; a map of the rail line pushing south |
 | 2 | The boom and the storm (1920s–1926) | 10–15 | Scrapbook: land-sale ads; archival film: the 1926 hurricane damage photo |
 | 3 | Painted pink (1930s–1979) | 16–21 | The Cavalier Hotel cut-out; before/after paint; the 1979 historic district map |
