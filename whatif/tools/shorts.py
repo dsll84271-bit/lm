@@ -28,7 +28,7 @@ import soundfile as sf
 
 ROOT = Path(__file__).resolve().parent.parent
 W, H = 1080, 1920
-ACTIVE_Y, ACTIVE_H = 138, 804  # the episodes are letterboxed: picture rows 138..942
+ACTIVE_Y_EP, ACTIVE_H_EP = 138, 804  # the 3D episodes are letterboxed: picture rows 138..942 (documentaries use the full frame)
 DEFAULT_CROP = 1440  # how much of the 1920-wide picture a vertical clip keeps (cut per shot in clips.json)
 FG_CY = 960  # centre line of the picture in the vertical frame
 CAP_Y = 1420  # caption centre
@@ -127,7 +127,24 @@ def time_line(text, a, b, audio, sr):
     return out
 
 
+DOCS = {"doc01": "docs/ep01-why-florida"}  # documentary narration folders (repo root)
+
+
+def doc_words(ep):
+    d = json.loads((ROOT / f"public/{ep}/vo/timings.json").read_text())
+    audio, sr = sf.read(ROOT / f"public/{ep}/vo/vo.wav", dtype="float32")
+    if audio.ndim > 1:
+        audio = audio.mean(axis=1)
+    paras = [x.strip() for x in (ROOT.parent / DOCS[ep] / "narration.txt").read_text().split("\n\n") if x.strip()]
+    words = []
+    for para, t in zip(paras, d["paras"]):
+        words += time_line(para, t["start"], t["end"], audio, sr)
+    return words
+
+
 def episode_words(ep):
+    if ep.startswith("doc"):
+        return doc_words(ep)
     d = json.loads((ROOT / f"episodes/ep{ep}/voiceover/timings.json").read_text())
     audio, sr = sf.read(ROOT / f"episodes/ep{ep}/voiceover/voiceover.wav", dtype="float32")
     if audio.ndim > 1:
@@ -251,7 +268,9 @@ def crop_segments(clip):
 def render(clip, ass_path, out):
     a, b = clip["start"], clip["end"]
     dur = b - a
-    src = ROOT / f"episodes/ep{clip['ep']}/renders/ep{clip['ep']}.mp4"
+    ep = clip["ep"]
+    src = ROOT / (f"renders/{ep}/{ep}.mp4" if ep.startswith("doc") else f"episodes/ep{ep}/renders/ep{ep}.mp4")
+    ACTIVE_Y, ACTIVE_H = (0, 1080) if ep.startswith("doc") else (ACTIVE_Y_EP, ACTIVE_H_EP)
     segs = crop_segments(clip)
     n = len(segs)
     f = [f"[0:v]crop=1920:{ACTIVE_H}:0:{ACTIVE_Y},setsar=1,split={n}" + "".join(f"[s{i}]" for i in range(n))]
