@@ -285,3 +285,71 @@ if __name__ == "__main__":
     deco()
     synth()
     ominous()
+
+
+# ---------------------------------------------------------------- signature stings (intro / outro)
+def typewriter_click(amp=0.35):
+    tt = t_(0.05)
+    x = hp_fast(rng.normal(0, 1, len(tt)), 2500) * np.exp(-tt * 140)
+    x += 0.4 * np.sin(2 * np.pi * 1900 * tt) * np.exp(-tt * 200)
+    return amp * x
+
+
+def stamp_hit(amp=0.9):
+    tt = t_(0.7)
+    body = np.sin(2 * np.pi * np.cumsum(70 + 60 * np.exp(-tt * 25)) / SR) * np.exp(-tt * 9)
+    slap = hp_fast(rng.normal(0, 1, len(tt)), 600) * np.exp(-tt * 45)
+    return amp * (0.9 * body + 0.5 * slap)
+
+
+def whoosh(d=0.8, amp=0.4):
+    tt = t_(d)
+    n = rng.normal(0, 1, len(tt))
+    env_ = np.sin(np.pi * tt / d) ** 2
+    lo = lp_fast(n, 900) * (1 - tt / d) + hp_fast(n, 3000) * (tt / d) * 0.6
+    return amp * lo * env_
+
+
+def boom(amp=0.9):
+    tt = t_(3.0)
+    x = np.sin(2 * np.pi * np.cumsum(38 + 30 * np.exp(-tt * 6)) / SR) * np.exp(-tt * 1.6)
+    x += 0.3 * lp_fast(rng.normal(0, 1, len(tt)), 200) * np.exp(-tt * 3)
+    return amp * x
+
+
+def sting_intro():
+    L = 5.0
+    m = np.zeros(int(L * SR))
+    place(m, whoosh(0.5, 0.35), 0.05)
+    place(m, stamp_hit(0.6), 0.45)  # folder lands
+    for k in range(14):  # typing "CASE FILE No. 002"
+        place(m, typewriter_click(0.28 + 0.06 * (k % 3)), 0.8 + k * 0.075 + (0.03 if k % 4 == 0 else 0))
+    place(m, stamp_hit(1.0), 1.75)  # OPEN stamp
+    place(m, boom(0.8), 1.75)
+    # a three-note signature motif (low, mid, high: "case... file... open")
+    for k, n in enumerate([45, 52, 57]):
+        place(m, pad([hz(n), hz(n + 7)], 1.6, 0.18, 1600, 0.02, 1.2), 2.1 + k * 0.38)
+        place(m, piano(hz(n + 12), 2.0, 0.22), 2.1 + k * 0.38)
+    place(m, whoosh(0.9, 0.45), 4.05)
+    m = reverb(m, 2.4, 0.3)
+    save("sting_intro", stereo(m, 0.3), 0.9)
+
+
+def sting_outro():
+    L = 10.0
+    m = np.zeros(int(L * SR))
+    place(m, pad([hz(45), hz(52), hz(57)], 9.5, 0.12, 900, 1.0, 2.5), 0.0)
+    for k in range(10):  # score meter ticking up
+        place(m, pluck(hz(69 + k), 0.4, 0.12, 2.0), 0.9 + k * 0.12)
+    place(m, stamp_hit(1.0), 4.0)  # CASE CLOSED
+    place(m, boom(0.9), 4.0)
+    for k, n in enumerate([57, 52, 45]):  # the motif, resolved downward
+        place(m, piano(hz(n + 12), 2.5, 0.22), 4.6 + k * 0.4)
+    place(m, whoosh(0.7, 0.3), 5.9)
+    m = reverb(m, 2.8, 0.32)
+    save("sting_outro", stereo(m, 0.3), 0.9)
+
+
+if __name__ == "__main__":
+    sting_intro()
+    sting_outro()
