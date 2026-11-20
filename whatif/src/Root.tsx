@@ -20,6 +20,8 @@ import {EP06_FRAMES, Episode06} from '../episodes/ep06/Episode';
 import {EP07_FRAMES, Episode07} from '../episodes/ep07/Episode';
 import {EP08_FRAMES, Episode08} from '../episodes/ep08/Episode';
 import {EP09_FRAMES, Episode09} from '../episodes/ep09/Episode';
+import {DOC01_FRAMES, Doc01} from '../episodes/doc01/Episode';
+import '../docs-kit/kit';
 
 export const Root: React.FC = () => (
 	<>
@@ -31,6 +33,7 @@ export const Root: React.FC = () => (
 		<Composition id="Ep06" component={Episode06} width={1920} height={1080} fps={30} durationInFrames={EP06_FRAMES} />
 		<Composition id="Ep07" component={Episode07} width={1920} height={1080} fps={30} durationInFrames={EP07_FRAMES} />
 		<Composition id="Ep08" component={Episode08} width={1920} height={1080} fps={30} durationInFrames={EP08_FRAMES} />
+		<Composition id="Doc01" component={Doc01} width={1920} height={1080} fps={30} durationInFrames={DOC01_FRAMES} />
 		<Composition id="Ep09" component={Episode09} width={1920} height={1080} fps={30} durationInFrames={EP09_FRAMES} />
 		<Still id="HeroSheet" component={HeroSheet} width={1920} height={1080} />
 		<Still id="TestThumb" component={TestThumb} width={1920} height={1080} />
