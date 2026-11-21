@@ -1,0 +1,452 @@
+{
+ "seconds": 486.811,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 16.031,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up, stretch, and something is very wrong. Your duvet goes on for miles, like a mountain range. Your pillow is a white cliff. And far above you, your alarm clock is ringing louder than a fire engine.",
+     "start": 0.25,
+     "end": 12.69
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Your room hasn't grown. You've shrunk.",
+     "start": 13.39,
+     "end": 15.431
+    }
+   ]
+  },
+  {
+   "id": "size",
+   "start": 16.031,
+   "end": 36.316,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You're about three millimetres tall now. The size of an ant. That's five hundred times smaller than you were yesterday.",
+     "start": 16.281,
+     "end": 22.677
+    },
+    {
+     "who": "NARRATOR",
+     "text": "So everything else feels five hundred times bigger. A single grain of rice would be as long as a car. Crossing your bedroom carpet is like walking two kilometres. And your bed is as tall as a skyscraper.",
+     "start": 23.377,
+     "end": 35.816
+    }
+   ]
+  },
+  {
+   "id": "fall",
+   "start": 36.316,
+   "end": 44.961,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You lean over the edge to look down, and slip. You fall the height of a skyscraper. You land. You bounce. You stand up. Not a scratch.",
+     "start": 36.566,
+     "end": 44.361
+    }
+   ]
+  },
+  {
+   "id": "haldane",
+   "start": 44.961,
+   "end": 67.525,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Small things don't get hurt by falls the way big things do. A hundred years ago, the scientist J.B.S. Haldane wrote that you could drop a mouse down a deep mine shaft, and at the bottom, it would get a slight shock and walk away.",
+     "start": 45.211,
+     "end": 58.572
+    },
+    {
+     "who": "NARRATOR",
+     "text": "When something shrinks, its weight drops much faster than the push of the air underneath it. So small things can never fall very fast at all.",
+     "start": 59.272,
+     "end": 67.025
+    }
+   ]
+  },
+  {
+   "id": "carpet",
+   "start": 67.525,
+   "end": 82.951,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The carpet is a jungle. Every fibre is as thick as a tree trunk. A ball of dust rolls past like tumbleweed. A toy brick you lost last summer is the size of a house. And somewhere out there, there's a sock as big as a circus tent.",
+     "start": 67.775,
+     "end": 82.451
+    }
+   ]
+  },
+  {
+   "id": "strong",
+   "start": 82.951,
+   "end": 92.854,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Under the bed, there's a cornflake as big as a bus. You give it a push, and it moves. You lift it, and it goes right up over your head. Your arms don't even shake.",
+     "start": 83.201,
+     "end": 92.354
+    }
+   ]
+  },
+  {
+   "id": "cube",
+   "start": 92.854,
+   "end": 120.955,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The reason is simple maths. How strong a muscle is depends on how thick it is. How heavy you are depends on all of you.",
+     "start": 93.104,
+     "end": 99.928
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Shrink five hundred times, and your muscles get two hundred and fifty thousand times weaker. But your weight drops a hundred and twenty five million times. So for your size, you're now five hundred times stronger.",
+     "start": 100.628,
+     "end": 112.924
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Galileo worked out the rule behind this, nearly four hundred years ago. Ants have the same advantage, and they use it.",
+     "start": 113.624,
+     "end": 120.455
+    }
+   ]
+  },
+  {
+   "id": "ant",
+   "start": 120.955,
+   "end": 136.182,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then something comes over the hill. Six legs. Two feelers. A head as big as yours. It's an ant, and next to you, it's the size of a pony.",
+     "start": 121.205,
+     "end": 129.567
+    },
+    {
+     "who": "NARRATOR",
+     "text": "It taps you with its feelers, sniffs you, and decides you're not food. You decide to call it Pip.",
+     "start": 130.267,
+     "end": 135.682
+    }
+   ]
+  },
+  {
+   "id": "count",
+   "start": 136.182,
+   "end": 157.238,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You're not alone down here. In twenty twenty two, scientists put together hundreds of studies from all over the world, and worked out that there are about twenty quadrillion ants on Earth. That's two and a half million for every person.",
+     "start": 136.432,
+     "end": 149.824
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Put them all on one giant scale, and they'd outweigh all the world's wild birds and wild mammals put together.",
+     "start": 150.524,
+     "end": 156.738
+    }
+   ]
+  },
+  {
+   "id": "neck",
+   "start": 157.238,
+   "end": 170.921,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Pip is strong too. In twenty fourteen, engineers at Ohio State University tested ants' necks, and found the joint could take a pull of up to about five thousand times the ant's own weight before it broke.",
+     "start": 157.488,
+     "end": 170.421
+    }
+   ]
+  },
+  {
+   "id": "ride",
+   "start": 170.921,
+   "end": 185.176,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So you climb on. Pip follows a trail you can't see, a path of scent left by other ants. Under your bedroom door, along the hall, and all the way to the kitchen. Lots of ants can barely see. They find their way mostly by smell.",
+     "start": 171.171,
+     "end": 184.676
+    }
+   ]
+  },
+  {
+   "id": "crumbs",
+   "start": 185.176,
+   "end": 195.216,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "On the kitchen floor, there's a crumb of toast as big as a sofa. Breakfast. You eat until you're full. Ten minutes later, you're starving again. And freezing.",
+     "start": 185.426,
+     "end": 194.716
+    }
+   ]
+  },
+  {
+   "id": "shrew",
+   "start": 195.216,
+   "end": 219.758,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Small warm bodies lose heat fast. The Etruscan shrew, one of the smallest mammals on Earth, weighs about two grams. Its heart has been clocked at over fifteen hundred beats a minute, and it has to eat almost all day just to keep going.",
+     "start": 195.466,
+     "end": 209.723
+    },
+    {
+     "who": "NARRATOR",
+     "text": "No warm blooded animal is anywhere near as small as an ant. Ants don't make their own heat. You do, and at this size, it pours straight out of you.",
+     "start": 210.423,
+     "end": 219.258
+    }
+   ]
+  },
+  {
+   "id": "mum",
+   "start": 219.758,
+   "end": 233.945,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then the floor shakes. Your mum's slipper lands right next to you, like a bus parking. Where is that child, she calls up the stairs. You shout up at her as loud as you can. She doesn't even look down. She steps right over you, twice.",
+     "start": 220.008,
+     "end": 233.445
+    }
+   ]
+  },
+  {
+   "id": "voice",
+   "start": 233.945,
+   "end": 257.051,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your voice box has shrunk five hundred times too. Smaller things vibrate faster, so your voice comes out far, far higher. Probably too high for human ears at all.",
+     "start": 234.195,
+     "end": 244.457
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Mice already do this. In two thousand and five, scientists in America found that male mice sing real songs, but so high pitched that we can't hear them without special microphones.",
+     "start": 245.157,
+     "end": 256.551
+    }
+   ]
+  },
+  {
+   "id": "cat",
+   "start": 257.051,
+   "end": 269.457,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Something else heard you, though. Two huge green eyes look down at you from the dark. The cat. A paw the size of a house swipes down, and you and Pip run, flat out, into the gap under the fridge.",
+     "start": 257.301,
+     "end": 268.957
+    }
+   ]
+  },
+  {
+   "id": "drop",
+   "start": 269.457,
+   "end": 286.423,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Under the fridge, there's a drop of water as big as a car. You're thirsty, so you reach in. Your arm sinks in, and the water won't let go. At your size, water is sticky. It grips you like glue.",
+     "start": 269.707,
+     "end": 281.555
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Pip grabs your hood in its jaws and pulls you out. You owe Pip one.",
+     "start": 282.255,
+     "end": 285.923
+    }
+   ]
+  },
+  {
+   "id": "strider",
+   "start": 286.423,
+   "end": 306.17,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That stickiness is called surface tension, and some insects use it. A water strider's legs are covered in tiny hairs that keep the water out. In two thousand and four, scientists in China found that one leg alone can hold up about fifteen times the insect's weight. So it doesn't sink. It stands on the water.",
+     "start": 286.673,
+     "end": 305.67
+    }
+   ]
+  },
+  {
+   "id": "seed",
+   "start": 306.17,
+   "end": 335.108,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Pip leads you out through the cat flap, into the garden, where the grass is a forest taller than any tree. A dandelion clock stands above it. You grab a single seed, and the wind lifts you away.",
+     "start": 306.42,
+     "end": 317.986
+    },
+    {
+     "who": "NARRATOR",
+     "text": "In twenty eighteen, scientists at the University of Edinburgh found that dandelion seeds fly in a way nobody had seen before. Air flowing through the fluffy bristles makes a ring of spinning air above the seed, which slows its fall like an invisible parachute.",
+     "start": 318.686,
+     "end": 334.608
+    }
+   ]
+  },
+  {
+   "id": "garden",
+   "start": 335.108,
+   "end": 349.225,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You float down beside Pip's home, a hill of earth with ants marching in and out. A ladybird trundles past like a little red car. Ants carry leaves, seeds, crumbs, and sometimes other ants. Life down here is busy.",
+     "start": 335.358,
+     "end": 348.825
+    }
+   ]
+  },
+  {
+   "id": "rain",
+   "start": 349.225,
+   "end": 373.922,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then it rains. Every raindrop is bigger than you, and every one hits the ground like a giant water balloon.",
+     "start": 349.475,
+     "end": 355.48
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Mosquitoes get hit by raindrops that can weigh fifty times more than they do, and they survive. In twenty twelve, scientists at Georgia Tech found out how. A mosquito is so light that the drop barely slows down. It carries the mosquito for a moment, and the mosquito slips off the side.",
+     "start": 356.18,
+     "end": 373.422
+    }
+   ]
+  },
+  {
+   "id": "flood",
+   "start": 373.922,
+   "end": 393.937,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But the rain doesn't stop. A puddle creeps towards the nest, and Pip is caught inside a drop, kicking and stuck, just like you were.",
+     "start": 374.172,
+     "end": 381.864
+    },
+    {
+     "who": "NARRATOR",
+     "text": "For your size, you're five hundred times stronger. So you grab a twig as thick as a tree trunk, jam it into the drop, and heave. The water stretches, and lets go. Pip tumbles out.",
+     "start": 382.564,
+     "end": 393.437
+    }
+   ]
+  },
+  {
+   "id": "raft",
+   "start": 393.937,
+   "end": 418.69,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The flood reaches the nest, and the ants do something amazing. They grab each other's legs and jaws, and link together into a living raft. Pip pulls you on board.",
+     "start": 394.187,
+     "end": 403.871
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Real fire ants do exactly this. In twenty eleven, scientists at Georgia Tech showed that the rafts are waterproof. Air trapped between their bodies keeps them afloat for days, or even weeks, until the flood goes down.",
+     "start": 404.571,
+     "end": 418.09
+    }
+   ]
+  },
+  {
+   "id": "night",
+   "start": 418.69,
+   "end": 439.201,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That night, you drift under the stars on a raft made of ants. The stars look exactly the same as always. They're so far away that shrinking doesn't change them at all. Not one of them could do this alone. Together, they can. You miss your bed. You miss your mum. But squeezed in between thousands of ants, for the first time all day, you're warm.",
+     "start": 418.94,
+     "end": 438.601
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "start": 439.201,
+   "end": 458.997,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up in your own bed, normal size, with mud on your pyjamas. You have no idea how you got back. Your mum says you must have been sleepwalking.",
+     "start": 439.451,
+     "end": 448.11
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Before school, you leave a crumb of toast on the windowsill. By lunchtime, a line of ants has carried it away. The last one stops, and waves its feelers at you.",
+     "start": 448.81,
+     "end": 458.397
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 458.997,
+   "end": 472.53,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The next morning, there's a tiny squeak from the kitchen table. You lean in close. It's your mum, three millimetres tall, standing next to a cornflake and waving both arms.",
+     "start": 459.247,
+     "end": 469.363
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Looks like it runs in the family.",
+     "start": 470.063,
+     "end": 471.73
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 472.53,
+   "end": 486.811,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you want to be the size of an ant for a day? And what would you do first? Ride an ant, or fly on a dandelion seed? Tell us in the comments. And if you want more what ifs, subscribe. See you in the next one.",
+     "start": 472.78,
+     "end": 485.811
+    }
+   ]
+  }
+ ]
+}

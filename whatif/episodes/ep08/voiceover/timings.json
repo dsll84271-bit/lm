@@ -1,0 +1,399 @@
+{
+ "seconds": 483.816,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 16.212,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You wake up a hundred metres tall. Your bed is stuck to your back, like a stamp. What's left of your house is wrapped round your ankle. And a pigeon has just landed on your nose.",
+     "start": 0.25,
+     "end": 10.005
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And by tonight, a whole bus full of kids is going to need you. But first, breakfast.",
+     "start": 10.705,
+     "end": 15.412
+    }
+   ]
+  },
+  {
+   "id": "mum",
+   "start": 16.212,
+   "end": 33.444,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your mum is standing on the front path in her dressing gown, holding a plate of toast, staring up at you. She holds it up as high as she can. You pinch it between your finger and thumb. It's the size of a crumb. She doesn't say a word. She just goes back inside, and makes more toast.",
+     "start": 16.462,
+     "end": 32.944
+    }
+   ]
+  },
+  {
+   "id": "tall",
+   "start": 33.444,
+   "end": 50.465,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "How tall is a hundred metres? Taller than Big Ben's tower in London. About sixty times taller than you were yesterday. The tallest tree on Earth, a redwood in California called Hyperion, is about a hundred and sixteen metres. So at least something is still taller than you.",
+     "start": 33.694,
+     "end": 50.165
+    }
+   ]
+  },
+  {
+   "id": "step",
+   "start": 50.465,
+   "end": 63.41,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You shake your foot, and the house falls off your ankle like a cardboard box. Sorry, Mum. You step over the street, very, very carefully. Your trainer comes down on the road, and the tarmac cracks like a biscuit.",
+     "start": 50.715,
+     "end": 63.01
+    }
+   ]
+  },
+  {
+   "id": "weight",
+   "start": 63.41,
+   "end": 75.689,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That's because you're heavy. Very heavy. When something grows sixty times taller, it also gets sixty times wider, and sixty times thicker. So now, you weigh about as much as the Eiffel Tower.",
+     "start": 63.66,
+     "end": 75.389
+    }
+   ]
+  },
+  {
+   "id": "bones",
+   "start": 75.689,
+   "end": 92.95,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "A hundred years ago, the scientist J.B.S. Haldane worked out that a real giant, just ten times taller than a person, would snap its thigh bones with every step. You're sixty times taller. So in our story, whatever made you grow made your bones super strong too. Lucky.",
+     "start": 75.939,
+     "end": 92.55
+    }
+   ]
+  },
+  {
+   "id": "sneeze",
+   "start": 92.95,
+   "end": 111.339,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then your nose starts to tickle. You take a deep breath, and your lungs now hold about as much air as a whole house. Ah. Ah. Choo. Every washing line in the street empties at once, and twenty pairs of pants float down over the town like little parachutes. Mr Jones from number twelve catches his.",
+     "start": 93.2,
+     "end": 110.939
+    }
+   ]
+  },
+  {
+   "id": "school",
+   "start": 111.339,
+   "end": 133.021,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "School is only three steps away. Long legs swing slowly, like a giant pendulum, but each of your steps is about forty metres long. So you stroll along as fast as a car drives through town.",
+     "start": 111.589,
+     "end": 123.97
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You crouch down, and peer in through the classroom window. Your whole eye fills it. Thirty kids stare back at you. Your teacher drops her mug.",
+     "start": 124.67,
+     "end": 132.721
+    }
+   ]
+  },
+  {
+   "id": "voice",
+   "start": 133.021,
+   "end": 149.932,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You say hello, and every window in the school rattles. But nobody hears a word. Your voice is so deep now that it's mostly below what human ears can hear. Elephants do this. They talk in deep rumbles that are too low for us, and that can carry for up to ten kilometres.",
+     "start": 133.271,
+     "end": 149.532
+    }
+   ]
+  },
+  {
+   "id": "news",
+   "start": 149.932,
+   "end": 162.616,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "By ten o'clock, you're on every news channel in the country. Your best friend sends you a photo of yourself, on telly, picking your nose. You were not picking your nose. You were scratching it. Nobody believes you.",
+     "start": 150.182,
+     "end": 162.216
+    }
+   ]
+  },
+  {
+   "id": "friend",
+   "start": 162.616,
+   "end": 176.878,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then your best friend sprints out across the playground, climbs onto your hand, and asks for a ride. So you lift them, very slowly, up onto your shoulder. They grab your hood with both hands, and for once, neither of you says anything at all.",
+     "start": 162.866,
+     "end": 176.478
+    }
+   ]
+  },
+  {
+   "id": "view",
+   "start": 176.878,
+   "end": 189.018,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You stand up, and you both look around. When you were normal size, the horizon was less than five kilometres away. Now, it's about thirty five. You can see the next city. You can see the sea.",
+     "start": 177.128,
+     "end": 188.718
+    }
+   ]
+  },
+  {
+   "id": "dizzy",
+   "start": 189.018,
+   "end": 204.058,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And then everything spins. You stood up too fast. Your blood has a long way to climb to reach your brain. Giraffes have this problem with just a couple of metres of neck. Their blood pressure is about twice yours, just to push blood up to their heads.",
+     "start": 189.268,
+     "end": 203.658
+    }
+   ]
+  },
+  {
+   "id": "lunch",
+   "start": 204.058,
+   "end": 217.544,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "By lunchtime, you're starving. The dinner ladies wheel every single tray out onto the field. You tip the whole lot into your hand, and eat it in one bite. Your stomach rumbles so loudly that a car alarm goes off.",
+     "start": 204.308,
+     "end": 217.244
+    }
+   ]
+  },
+  {
+   "id": "food",
+   "start": 217.544,
+   "end": 231.813,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Big bodies burn food more slowly for their size, but you'd still need around ten thousand times more food than yesterday. Elephants spend up to sixteen hours a day eating. And you're more than a thousand times heavier than an elephant.",
+     "start": 217.794,
+     "end": 231.413
+    }
+   ]
+  },
+  {
+   "id": "measure",
+   "start": 231.813,
+   "end": 250.587,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "In the afternoon, a team of scientists turns up. They fly a drone past your nose to measure you. A hundred metres, exactly. Then they ask, very politely, for a sample of your hair. You give them one. It's as thick as a pencil lead and as long as a car, and it takes six of them to carry it back to the van.",
+     "start": 232.063,
+     "end": 250.187
+    }
+   ]
+  },
+  {
+   "id": "heat",
+   "start": 250.587,
+   "end": 271.794,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you start to cook. A big body makes a lot of heat, and has hardly any skin, for its size, to let it out. Elephants cool down by pumping warm blood into their thin ears, and flapping them like fans. You don't have ears like that. So you go and sit in the reservoir, like a bath. The reservoir is closed for the rest of the week. Nobody will say why.",
+     "start": 250.837,
+     "end": 271.394
+    }
+   ]
+  },
+  {
+   "id": "useful",
+   "start": 271.794,
+   "end": 293.421,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At break, the whole school plays football between your feet. You're the goal. You let in forty seven goals, because you're not allowed to move.",
+     "start": 272.044,
+     "end": 279.599
+    },
+    {
+     "who": "NARRATOR",
+     "text": "On the way home, you try to be useful. You pick a kite out of the top of an oak tree. You lift a lorry out of a ditch, like a toy. You rescue a cat from a tree, and set it down on the grass. It climbs straight back up again.",
+     "start": 280.299,
+     "end": 293.021
+    }
+   ]
+  },
+  {
+   "id": "quake",
+   "start": 293.421,
+   "end": 311.18,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Walking home, every footstep sets off car alarms, and the scientists at the university think it's an earthquake. Ground shaking is measured like that. In twenty twenty three, two Taylor Swift concerts in Seattle shook the ground as much as a magnitude two point three earthquake.",
+     "start": 293.671,
+     "end": 310.78
+    }
+   ]
+  },
+  {
+   "id": "alone",
+   "start": 311.18,
+   "end": 332.979,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "By evening, you're not allowed back into town. You sit in a field, with police tape all around you and helicopters buzzing round your head like flies. You can't go home. You can't sleep in a bed. When you lie down, your feet are in the next village. Your mum brings you soup, in a bathtub. You drink it in one sip. Your little brother asks if he can sleep in your ear. Mum says no.",
+     "start": 311.43,
+     "end": 332.579
+    }
+   ]
+  },
+  {
+   "id": "wadlow",
+   "start": 332.979,
+   "end": 350.986,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Being tall has real costs. The tallest person ever recorded, Robert Wadlow, was two point seven two metres tall. He needed leg braces just to walk. In nineteen forty, a brace rubbed a blister on his ankle, it got infected, and he died. He was only twenty two.",
+     "start": 333.229,
+     "end": 349.986
+    }
+   ]
+  },
+  {
+   "id": "storm",
+   "start": 350.986,
+   "end": 370.804,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then the storm comes. To you, the rain feels like a fine mist on your face. To the town below, it's the worst flood in fifty years. The river bursts its banks, and your mum's phone starts buzzing. The school bus, on its way back from a trip, is stuck in the middle of the old bridge. And the bridge is starting to crack.",
+     "start": 351.236,
+     "end": 370.204
+    }
+   ]
+  },
+  {
+   "id": "bridge",
+   "start": 370.804,
+   "end": 394.59,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You run, and the flood only comes up to your ankles. You step over the church, and the shops, and the cricket pavilion, one by one, in the dark. Your foot slips in the mud, and you nearly sit down on the supermarket.",
+     "start": 371.054,
+     "end": 383.375
+    },
+    {
+     "who": "NARRATOR",
+     "text": "On the bridge, the kids are pressed against the bus windows. A stone breaks off and drops into the river. Then another. Then the whole middle of the bridge starts to go.",
+     "start": 384.075,
+     "end": 393.79
+    }
+   ]
+  },
+  {
+   "id": "save",
+   "start": 394.59,
+   "end": 424.248,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You slide both hands under the bus, just as the bridge falls away. You lift it, slowly, perfectly level, like you're carrying a birthday cake. You walk it up the hill, and put it down on the grass, as gently as you can. The doors hiss open. Everybody's fine.",
+     "start": 394.84,
+     "end": 410.397
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Then you hear barking. A little car is still on what's left of the bridge, with a dog in the back window. You've only got two hands. So you pick up the car, and pop it in your hoodie pocket. The dog seems to enjoy it.",
+     "start": 411.097,
+     "end": 423.448
+    }
+   ]
+  },
+  {
+   "id": "cheer",
+   "start": 424.248,
+   "end": 443.908,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The rain stops. The kids are cheering, and the whole town comes out with torches and phones, all pointing up at you. The bus driver shakes your little finger with both hands. Your mum gives you two thumbs up. You lie back in the wet field, and watch the stars come out. Being big is hard. But tonight, it was worth it.",
+     "start": 424.498,
+     "end": 442.908
+    }
+   ]
+  },
+  {
+   "id": "shrink",
+   "start": 443.908,
+   "end": 457.511,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Somewhere in the night, you start to shrink. Down, and down, until you're back to normal. Phew. But you don't stop. The grass grows into a forest, then into skyscrapers. A ladybird rolls past like a car.",
+     "start": 444.158,
+     "end": 456.911
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 457.511,
+   "end": 472.682,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then something comes over the hill. Six legs. Two feelers. It taps you on the head, and waves. It's Pip, the ant who saved you the last time you shrank. Pip lowers its head, so you can climb on. Looks like you've been here before.",
+     "start": 457.761,
+     "end": 471.482
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 472.682,
+   "end": 483.816,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you rather be a hundred metres tall, or the size of an ant? Tell me in the comments. And if you missed what happened the last time you shrank, that episode is right here. Pip says hi.",
+     "start": 472.932,
+     "end": 483.816
+    }
+   ]
+  }
+ ]
+}

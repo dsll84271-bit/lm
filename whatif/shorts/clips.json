@@ -1,0 +1,519 @@
+{
+ "_doc": "Vertical clips cut from the finished episodes. start/end are seconds in the episode (shot boundaries from timings.json). hook: two lines, the second in yellow. crop: optional list of [from_second_in_episode, width, centre_x] to change how much of the 1920-wide picture is kept (default 1440, centred); cx shifts the centre.",
+ "clips": [
+  {
+   "id": "ep02-read-minds",
+   "ep": "02",
+   "start": 142.5,
+   "end": 199.5,
+   "hook": [
+    "WHAT IF YOU COULD",
+    "READ MINDS?"
+   ],
+   "crop": [
+    [
+     168.1,
+     1440,
+     1200
+    ]
+   ]
+  },
+  {
+   "id": "ep02-quiz-show",
+   "ep": "02",
+   "start": 266.6,
+   "end": 314.1,
+   "hook": [
+    "READING MINDS ON",
+    "A TV QUIZ SHOW"
+   ],
+   "crop": [
+    [
+     266.6,
+     1920,
+     960
+    ],
+    [
+     287.8,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep03-invisible-blind",
+   "ep": "03",
+   "start": 15,
+   "end": 63,
+   "hook": [
+    "AN INVISIBLE PERSON",
+    "WOULD BE BLIND"
+   ],
+   "crop": [
+    [
+     24,
+     1440,
+     720
+    ],
+    [
+     34.5,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep03-still-seen",
+   "ep": "03",
+   "start": 188.3,
+   "end": 250.4,
+   "hook": [
+    "3 THINGS THAT CAN",
+    "SEE INVISIBLE YOU"
+   ],
+   "crop": [
+    [
+     210.1,
+     1440,
+     720
+    ],
+    [
+     223,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep04-ant-size",
+   "ep": "04",
+   "start": 0,
+   "end": 67.5,
+   "hook": [
+    "WHAT IF YOU SHRANK",
+    "TO THE SIZE OF AN ANT?"
+   ],
+   "crop": [
+    [
+     0,
+     1440,
+     720
+    ],
+    [
+     16,
+     1440,
+     1000
+    ],
+    [
+     36.3,
+     1440,
+     960
+    ],
+    [
+     45,
+     1440,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "ep04-ant-count",
+   "ep": "04",
+   "start": 121,
+   "end": 170.9,
+   "hook": [
+    "20 QUADRILLION ANTS",
+    "LIVE ON EARTH"
+   ],
+   "crop": [
+    [
+     121,
+     1920,
+     960
+    ],
+    [
+     136.2,
+     1440,
+     960
+    ],
+    [
+     150.4,
+     1920,
+     960
+    ],
+    [
+     157.2,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep05-fly",
+   "ep": "05",
+   "start": 0,
+   "end": 54.6,
+   "hook": [
+    "WHAT IF YOU",
+    "COULD FLY?"
+   ],
+   "crop": [
+    [
+     33.6,
+     1440,
+     880
+    ]
+   ]
+  },
+  {
+   "id": "ep05-cloud-weight",
+   "ep": "05",
+   "start": 187.4,
+   "end": 245.3,
+   "hook": [
+    "A CLOUD WEIGHS AS",
+    "MUCH AS 100 ELEPHANTS"
+   ]
+  },
+  {
+   "id": "ep06-grimoire",
+   "ep": "06",
+   "start": 0,
+   "end": 59.3,
+   "hook": [
+    "WHAT IF YOU FOUND A",
+    "5-LEAF GRIMOIRE?"
+   ]
+  },
+  {
+   "id": "ep06-lightning",
+   "ep": "06",
+   "start": 292.1,
+   "end": 375.8,
+   "hook": [
+    "COULD A SWORD",
+    "STOP LIGHTNING?"
+   ],
+   "crop": [
+    [
+     326.7,
+     1440,
+     1160
+    ],
+    [
+     344.4,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep07-blue-whale",
+   "ep": "07",
+   "start": 36.4,
+   "end": 85.1,
+   "hook": [
+    "WHY A BLUE WHALE",
+    "CAN'T SWALLOW YOU"
+   ],
+   "crop": [
+    [
+     64.3,
+     1440,
+     800
+    ]
+   ]
+  },
+  {
+   "id": "ep07-ambergris",
+   "ep": "07",
+   "start": 271.5,
+   "end": 304.8,
+   "hook": [
+    "THIS WHALE LUMP IS",
+    "WORTH $1.5 MILLION"
+   ],
+   "crop": [
+    [
+     271.5,
+     1600,
+     1110
+    ]
+   ]
+  },
+  {
+   "id": "ep07-real-cases",
+   "ep": "07",
+   "start": 400,
+   "end": 435,
+   "hook": [
+    "2 PEOPLE WHO ENDED UP",
+    "INSIDE A WHALE'S MOUTH"
+   ]
+  },
+  {
+   "id": "ep08-wake-up",
+   "ep": "08",
+   "start": 0,
+   "end": 50.5,
+   "hook": [
+    "WHAT IF YOU WOKE UP",
+    "100 METRES TALL?"
+   ],
+   "crop": [
+    [
+     16.2,
+     1440,
+     1060
+    ],
+    [
+     33.4,
+     1500,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep08-eiffel",
+   "ep": "08",
+   "start": 50.5,
+   "end": 93,
+   "hook": [
+    "YOU'D WEIGH AS MUCH",
+    "AS THE EIFFEL TOWER"
+   ],
+   "crop": [
+    [
+     63.4,
+     1600,
+     960
+    ],
+    [
+     75.7,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep08-voice",
+   "ep": "08",
+   "start": 133,
+   "end": 162.6,
+   "hook": [
+    "AT 100 M TALL, NOBODY",
+    "COULD HEAR YOU"
+   ]
+  },
+  {
+   "id": "ep08-bridge",
+   "ep": "08",
+   "start": 351,
+   "end": 424.2,
+   "hook": [
+    "A GIANT VS A",
+    "COLLAPSING BRIDGE"
+   ]
+  },
+  {
+   "id": "ep09-wake-up",
+   "ep": "09",
+   "start": 0,
+   "end": 37.9,
+   "hook": [
+    "WHAT IF YOU WOKE UP",
+    "INSIDE A VIDEO GAME?"
+   ],
+   "crop": [
+    [
+     0,
+     1440,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "ep09-npcs",
+   "ep": "09",
+   "start": 66.8,
+   "end": 92.7,
+   "hook": [
+    "EVERYONE SAYS",
+    "THE SAME THING"
+   ],
+   "crop": [
+    [
+     66.8,
+     1440,
+     760
+    ],
+    [
+     81.7,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep09-vanishes",
+   "ep": "09",
+   "start": 108.6,
+   "end": 146,
+   "hook": [
+    "IN A GAME, THE WORLD",
+    "VANISHES BEHIND YOU"
+   ],
+   "crop": [
+    [
+     108.6,
+     1440,
+     760
+    ],
+    [
+     119.5,
+     1440,
+     960
+    ],
+    [
+     131.9,
+     1440,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "ep09-cars",
+   "ep": "09",
+   "start": 238,
+   "end": 277.2,
+   "hook": [
+    "REAL CARS DON'T",
+    "EXPLODE LIKE THIS"
+   ],
+   "crop": [
+    [
+     238,
+     1440,
+     760
+    ],
+    [
+     248.4,
+     1440,
+     960
+    ],
+    [
+     263,
+     1440,
+     760
+    ],
+    [
+     272.4,
+     1440,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "ep09-escape",
+   "ep": "09",
+   "start": 378.4,
+   "end": 435.3,
+   "hook": [
+    "ESCAPING A GAME BEFORE",
+    "IT SWITCHES OFF"
+   ],
+   "crop": [
+    [
+     378.4,
+     1440,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "doc01-younger",
+   "ep": "doc01",
+   "start": 45.22,
+   "end": 107.39,
+   "hook": [
+    "MIAMI IS YOUNGER THAN",
+    "THE EIFFEL TOWER"
+   ],
+   "crop": [
+    [
+     45.22,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "doc01-pink",
+   "ep": "doc01",
+   "start": 188.09,
+   "end": 257.25,
+   "hook": [
+    "WHY VICE CITY",
+    "IS PINK"
+   ],
+   "crop": [
+    [
+     188.09,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "doc01-grassrivers",
+   "ep": "doc01",
+   "start": 289.9,
+   "end": 335.49,
+   "hook": [
+    "GTA 6'S SWAMP NAME",
+    "IS A HIDDEN CLUE"
+   ],
+   "crop": [
+    [
+     289.9,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "doc01-florida-man",
+   "ep": "doc01",
+   "start": 335.54,
+   "end": 393.81,
+   "hook": [
+    "WHY FLORIDA MAN",
+    "REALLY EXISTS"
+   ],
+   "crop": [
+    [
+     335.54,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "doc01-vice",
+   "ep": "doc01",
+   "start": 443.18,
+   "end": 484.77,
+   "hook": [
+    "WHERE VICE CITY",
+    "REALLY CAME FROM"
+   ],
+   "crop": [
+    [
+     443.18,
+     1920,
+     960
+    ]
+   ]
+  }
+ ]
+}
