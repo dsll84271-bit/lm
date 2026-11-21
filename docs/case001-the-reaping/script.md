@@ -1,4 +1,4 @@
-# Case File 002: The Reaping (The Hunger Games)
+# Case File 001: The Reaping (first video on The Fiction Files) (The Hunger Games)
 
 **Title (agreed):** "Sunrise on the Reaping Is Based on Something Real"
 **Hook in 3 seconds:** a real lottery, live on TV, deciding who goes to war.
