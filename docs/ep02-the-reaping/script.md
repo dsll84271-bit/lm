@@ -1,9 +1,9 @@
 # Case File 002: The Reaping (The Hunger Games)
 
-**Working title:** "The Real Reaping Happened on Live TV" (alternatives: "America Held a Real Hunger Games Reaping in 1969" / "The Hunger Games Reaping Is Based on Something Real")
+**Title (agreed):** "Sunrise on the Reaping Is Based on Something Real"
 **Hook in 3 seconds:** a real lottery, live on TV, deciding who goes to war.
 **Why this angle:** Sunrise on the Reaping opened 20 Nov 2026. Rome and Minotaur angles already have ~10 copycat videos in the last 3 weeks; no video connects the 1969 draft lottery to the reaping (checked 21 Nov 2026). Standalone draft-lottery videos get 200–300k views.
-**Narration:** your own voice. `narration.txt` (about 1,280 words, about 10 minutes with pauses).
+**Narration:** your own voice. `narration.txt` (v2, about 1,450 words, about 11 minutes with pauses).
 
 ## Sources (all checked 21 Nov 2026)
 - 1969 draft lottery (1 Dec 1969, 366 capsules, men born 1944–50, Pirnie drew 14 Sept first, CBS live): [Selective Service System](https://sss.gov/history-and-records/vietnam-lotteries), [CBS News](https://www.cbsnews.com/news/almanac-the-1969-draft-lottery-vietnam-war)
@@ -12,5 +12,9 @@
 - Her father (Air Force officer, military historian, a year in Vietnam when she was six; battlefields; Year of the Jungle): [Britannica](https://britannica.com/biography/Suzanne-Collins), [Scholastic interview](https://www.suzannecollinsbooks.com/year_of_the_jungle_invasion__scholastic_war_stories_for_young_readers_interview_w.htm), [Christian Science Monitor](https://proof.csmonitor.com/Books/chapter-and-verse/2013/1120/Hunger-Games-author-Suzanne-Collins-in-rare-interview-muses-on-war-and-the-cycle-of-violence)
 - Panem = panem et circenses (Juvenal, Satire 10): [GradeSaver](https://www.gradesaver.com/mockingjay/study-guide/panem-et-circenses), [Wikipedia: Bread and circuses](https://EN.wikipedia.com/wiki/Bread_and_circuses)
 - Sunrise on the Reaping and Hume ("the easiness with which the many are governed by the few", implicit submission, propaganda): [Wikiwand: Sunrise on the Reaping](https://www.wikiwand.com/en/articles/Sunrise_on_the_Reaping), [LitCharts](https://www.litcharts.com/lit/sunrise-on-the-reaping)
+
+- Nixon's "silent majority" speech (3 Nov 1969) and the Moratorium march on Washington (15 Nov 1969, estimates 250k–500k; "hundreds of thousands" used): [Wikipedia: Moratorium to End the War in Vietnam](https://www.wikipedia.com/wiki/Moratorium_Day), [Columbia University exhibit](https://exhibitions.library.columbia.edu/exhibits/show/global-revolutions/student_movement/end-the-war)
+
+**Engagement:** on-screen board of all 366 dates with their 1969 numbers (from the Selective Service list), so viewers can find their birthday and comment their number.
 
 **Care points (kept in the script):** Collins never said the draft lottery inspired the reaping; the script says so and presents it as a parallel.
