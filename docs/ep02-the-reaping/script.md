@@ -3,7 +3,7 @@
 **Working title:** "The Real Reaping Happened on Live TV" (alternatives: "America Held a Real Hunger Games Reaping in 1969" / "The Hunger Games Reaping Is Based on Something Real")
 **Hook in 3 seconds:** a real lottery, live on TV, deciding who goes to war.
 **Why this angle:** Sunrise on the Reaping opened 20 Nov 2026. Rome and Minotaur angles already have ~10 copycat videos in the last 3 weeks; no video connects the 1969 draft lottery to the reaping (checked 21 Nov 2026). Standalone draft-lottery videos get 200–300k views.
-**Narration:** your own voice. `narration.txt` (about 1,600 words, about 12 minutes).
+**Narration:** your own voice. `narration.txt` (about 1,280 words, about 10 minutes with pauses).
 
 ## Sources (all checked 21 Nov 2026)
 - 1969 draft lottery (1 Dec 1969, 366 capsules, men born 1944–50, Pirnie drew 14 Sept first, CBS live): [Selective Service System](https://sss.gov/history-and-records/vietnam-lotteries), [CBS News](https://www.cbsnews.com/news/almanac-the-1969-draft-lottery-vietnam-war)
