@@ -3,7 +3,7 @@
 **Title (agreed):** "Sunrise on the Reaping Is Based on Something Real"
 **Hook in 3 seconds:** a real lottery, live on TV, deciding who goes to war.
 **Why this angle:** Sunrise on the Reaping opened 20 Nov 2026. Rome and Minotaur angles already have ~10 copycat videos in the last 3 weeks; no video connects the 1969 draft lottery to the reaping (checked 21 Nov 2026). Standalone draft-lottery videos get 200–300k views.
-**Narration:** your own voice. `narration.txt` (v2, about 1,450 words, about 11 minutes with pauses).
+**Narration:** your own voice. `narration.txt` (v2, about 1,250 words, about 10 minutes with pauses).
 
 ## Sources (all checked 21 Nov 2026)
 - 1969 draft lottery (1 Dec 1969, 366 capsules, men born 1944–50, Pirnie drew 14 Sept first, CBS live): [Selective Service System](https://sss.gov/history-and-records/vietnam-lotteries), [CBS News](https://www.cbsnews.com/news/almanac-the-1969-draft-lottery-vietnam-war)
