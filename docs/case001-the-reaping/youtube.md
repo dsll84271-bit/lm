@@ -16,19 +16,19 @@ Backup titles (to A/B test with YouTube's "Test & compare" later):
 
 In 1969, America drew birthdays from a container, live on television, to decide which young men would go to war. Here's the real-world case behind Sunrise on the Reaping: the 1969 draft lottery, why it was rigged by accident, the father Suzanne Collins waited for, and the philosopher behind the new book.
 
-Find your birthday on the board at 3:09 and tell me your 1969 number in the comments.
+Find your birthday on the board at 3:00 and tell me your 1969 number in the comments.
 
 **Chapters**
 0:00 The reaping
-0:36 Case File 001
-0:47 The fiction: Panem
-1:58 1969: the real reaping
-3:09 Find your birthday
-3:33 Rigged by accident
-4:20 Personal: a father at war
-5:10 The philosopher
-5:59 Autumn 1969: the silent majority
-6:42 The verdict
+0:34 Case File 001
+0:45 The fiction: Panem
+1:52 1969: the real reaping
+3:00 Find your birthday
+3:26 Rigged by accident
+4:08 Personal: a father at war
+4:55 The philosopher
+5:42 Autumn 1969: the silent majority
+6:21 The verdict
 
 Suzanne Collins has never said the 1969 lottery inspired the reaping. This video compares the two; it does not claim one caused the other.
 
@@ -66,7 +66,7 @@ Tips:
 
 ## Pinned comment
 
-What was your 1969 number? Find your birthday on the board at 3:09 👇 And which story should the Detective investigate after Scrooge?
+What was your 1969 number? Find your birthday on the board at 3:00 👇 And which story should the Detective investigate after Scrooge?
 
 ## First 24 hours
 - Post one Short the same day (I'll cut them from the finished video) and link it to this video.
