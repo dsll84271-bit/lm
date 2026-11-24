@@ -301,7 +301,7 @@ export const S12: React.FC<ShotProps> = ({d, cue}) => {
 				<Img src={staticFile('case001/map/pacific.jpg')} style={{position: 'absolute', inset: 0, width: 1920, height: 1080, transform: mapBoil}} />
 				<Ink id="s12r" d={arc} at={40} dur={22} dash len={2600} arrow={[sx + 18, sy - 14, ang]} />
 				<TitleCard fig={1} title="1969" sub="America is at war in Vietnam" at={4} />
-				<Tag id="s12p" text="Part 2 · The real reaping" x={1440} y={60} rot={2} at={10} size={30} />
+				<Tag id="s12p" text="Part 2 · The real reaping" x={1240} y={60} rot={2} at={10} size={30} />
 				<Sfx n="slap0" at={4} />
 				<Sfx n="slap1" at={10} />
 				<Sfx n="marker_l" at={40} />
