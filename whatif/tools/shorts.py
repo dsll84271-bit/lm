@@ -127,7 +127,7 @@ def time_line(text, a, b, audio, sr):
     return out
 
 
-DOCS = {"doc01": "docs/ep01-why-florida"}  # documentary narration folders (repo root)
+DOCS = {"doc01": "docs/ep01-why-florida", "case001": "docs/case001-the-reaping"}  # documentary narration folders (repo root)
 
 
 def doc_words(ep):
@@ -143,7 +143,7 @@ def doc_words(ep):
 
 
 def episode_words(ep):
-    if ep.startswith("doc"):
+    if ep in DOCS:
         return doc_words(ep)
     d = json.loads((ROOT / f"episodes/ep{ep}/voiceover/timings.json").read_text())
     audio, sr = sf.read(ROOT / f"episodes/ep{ep}/voiceover/voiceover.wav", dtype="float32")
@@ -203,8 +203,9 @@ def write_ass(clip, words, path):
     hook_txt = f"{{\\c{WHITE}}}{hook[0]}\\N{{\\c{YELLOW}}}{hook[1]}"
     ev.append(("Hook", 0.0, dur - END_CARD, f"{{\\fad(0,200)}}{hook_txt}"))
     ev.append(("Hook", dur - END_CARD, dur + 1,
-               f"{{\\fad(200,0)\\fs{hs}}}FULL EPISODE\\N{{\\c{YELLOW}}}ON YOUTUBE"))
-    ev.append(("Small", dur - END_CARD, dur + 1, "{\\fad(200,0)}Hypothetical You"))
+               (f"{{\\fad(200,0)\\fs{hs}}}FULL CASE FILE\\N{{\\c{YELLOW}}}ON YOUTUBE" if clip["ep"].startswith("case") else f"{{\\fad(200,0)\\fs{hs}}}FULL EPISODE\\N{{\\c{YELLOW}}}ON YOUTUBE")))
+    channel = "Fiction Files · @FictionFilesHQ" if clip["ep"].startswith("case") else "Hypothetical You"
+    ev.append(("Small", dur - END_CARD, dur + 1, "{\\fad(200,0)}" + channel))
 
     cards = chunks(inside)
     for ci, card in enumerate(cards):
@@ -269,8 +270,8 @@ def render(clip, ass_path, out):
     a, b = clip["start"], clip["end"]
     dur = b - a
     ep = clip["ep"]
-    src = ROOT / (f"renders/{ep}/{ep}.mp4" if ep.startswith("doc") else f"episodes/ep{ep}/renders/ep{ep}.mp4")
-    ACTIVE_Y, ACTIVE_H = (0, 1080) if ep.startswith("doc") else (ACTIVE_Y_EP, ACTIVE_H_EP)
+    src = ROOT / (f"renders/{ep}/{ep}.mp4" if ep in DOCS else f"episodes/ep{ep}/renders/ep{ep}.mp4")
+    ACTIVE_Y, ACTIVE_H = (0, 1080) if ep in DOCS else (ACTIVE_Y_EP, ACTIVE_H_EP)
     segs = crop_segments(clip)
     n = len(segs)
     f = [f"[0:v]crop=1920:{ACTIVE_H}:0:{ACTIVE_Y},setsar=1,split={n}" + "".join(f"[s{i}]" for i in range(n))]

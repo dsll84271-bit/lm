@@ -514,6 +514,74 @@
      960
     ]
    ]
+  },
+  {
+   "id": "case001-real-reaping",
+   "ep": "case001",
+   "start": 118.89,
+   "end": 172.14,
+   "hook": [
+    "AMERICA HELD A",
+    "REAL REAPING"
+   ],
+   "crop": [
+    [
+     118.89,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case001-rigged",
+   "ep": "case001",
+   "start": 216.37,
+   "end": 260.28,
+   "hook": [
+    "THE 1969 LOTTERY",
+    "WAS RIGGED"
+   ],
+   "crop": [
+    [
+     216.37,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case001-your-number",
+   "ep": "case001",
+   "start": 166.32,
+   "end": 200.31,
+   "hook": [
+    "WHAT WAS YOUR",
+    "1969 NUMBER?"
+   ],
+   "crop": [
+    [
+     166.32,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case001-father",
+   "ep": "case001",
+   "start": 263.53,
+   "end": 310.27,
+   "hook": [
+    "THE HUNGER GAMES",
+    "AUTHOR'S FATHER"
+   ],
+   "crop": [
+    [
+     263.53,
+     1920,
+     960
+    ]
+   ]
   }
  ]
 }
