@@ -22,6 +22,7 @@ NUM = {"1894": "eighteen ninety four", "1896": "eighteen ninety six", "1920s": "
        "1983": "nineteen eighty three", "1984": "nineteen eighty four", "2002": "two thousand two", "1900": "nineteen hundred",
        "2020": "twenty twenty", "2014": "twenty fourteen", "2060": "twenty sixty", "2050": "twenty fifty", "372": "three hundred seventy two",
        "800": "eight hundred", "6": "six", "18th": "eighteenth"}
+NUM.update(cfg.get("num", {}))  # per-episode spoken forms of numbers
 
 
 def norm(s):

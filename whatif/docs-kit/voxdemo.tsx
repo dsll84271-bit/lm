@@ -3,6 +3,7 @@ import React from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile} from 'remotion';
 import {EngravedMap, MAP_PTS, toScreen, useMapCam} from './vmap';
 import {Cutout, Ink, MarkerNote, PaperFinish, Ransom, Tag, TitleCard} from './vox';
+import {TV} from './tv';
 
 export const VOX_DEMO_FRAMES = 300;
 
@@ -63,3 +64,12 @@ export const VoxDemo: React.FC = () => {
 		</AbsoluteFill>
 	);
 };
+
+/** Check of the 1960s TV set with a trailer clip. */
+export const TvDemo: React.FC = () => (
+	<AbsoluteFill style={{background: '#EFEBE3'}}>
+		<TV src="case001/film/trailer_bowl.mp4" x={960} y={520} w={1150} rot={-1.5} on={4} />
+		<Tag id="tvtag" text="Panem, the reaping (film, 2026)" x={1180} y={930} rot={1.5} at={10} size={24} />
+		<PaperFinish />
+	</AbsoluteFill>
+);
