@@ -2,6 +2,7 @@
 
 usage: python detective_vo.py narration.txt out_dir [paragraph numbers to (re)do]
 Needs torch (CPU) and qwen-tts; about 6 s of compute per second of speech on 4 CPU cores.
+"""
 import re, sys, time, torch, soundfile as sf
 from pathlib import Path
 from qwen_tts import Qwen3TTSModel
