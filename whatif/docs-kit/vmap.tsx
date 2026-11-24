@@ -171,3 +171,8 @@ export const EngravedMap: React.FC<{
 		</div>
 	);
 };
+
+/** A still of the map (no labels or compass) to use as a fast background plate. */
+export const MapPlate: React.FC<{x: number; y: number; w: number; feature?: 'vietnam' | 'usa'}> = ({x, y, w, feature}) => (
+	<EngravedMap cam={{x, y, w}} feature={feature} sweepAt={-100} labels={[]} compass={false} id="plate" />
+);

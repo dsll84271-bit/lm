@@ -3,10 +3,12 @@
  * scanlines, glow and glass glare, so low-resolution clips read as a broadcast.
  */
 import React from 'react';
-import {AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Img, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
 
 export const TV: React.FC<{
-	src: string; // path under public/
+	src?: string; // video path under public/
+	image?: string; // or a still image path under public/ (slowly pushed in)
+	children?: React.ReactNode; // or anything else drawn on the screen
 	startFrom?: number; // frames into the clip
 	x?: number;
 	y?: number;
@@ -14,7 +16,7 @@ export const TV: React.FC<{
 	rot?: number;
 	on?: number; // frame the picture switches on
 	grade?: 'colour' | 'warm' | 'mono';
-}> = ({src, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
+}> = ({src, image, children, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
 	const frame = useCurrentFrame();
 	const h = w * 0.78;
 	const sw = w * 0.7,
@@ -52,7 +54,9 @@ export const TV: React.FC<{
 			<div style={{position: 'absolute', left: w * 0.08, top: h * 0.08 + w * 0.03, width: sw, height: sh, borderRadius: `${w * 0.06}px / ${w * 0.07}px`, overflow: 'hidden', background: '#0b0d0c'}}>
 				{t >= 0 && (
 					<div style={{position: 'absolute', inset: 0, transform: `scaleY(${open < 1 ? Math.max(0.01, open) : 1})`, filter: `${filter} brightness(${flick})`}}>
-						<OffthreadVideo src={staticFile(src)} startFrom={startFrom} muted style={{width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.06)'}} />
+						{src && <OffthreadVideo src={staticFile(src)} startFrom={startFrom} muted style={{width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.06)'}} />}
+						{image && <Img src={staticFile(image)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${1.06 + t * 0.0006})`}} />}
+						{children}
 					</div>
 				)}
 				{t >= 0 && open < 1 && <div style={{position: 'absolute', left: 0, right: 0, top: '50%', height: 3, background: '#fff', boxShadow: '0 0 20px #fff'}} />}

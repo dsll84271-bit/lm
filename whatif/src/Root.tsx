@@ -24,6 +24,7 @@ import {DOC01_FRAMES, Doc01} from '../episodes/doc01/Episode';
 import '../docs-kit/kit';
 import {CaseClosed, CaseIntro, INTRO_FRAMES, OUTRO_FRAMES} from '../docs-kit/case';
 import {TvDemo, VOX_DEMO_FRAMES, VoxDemo} from '../docs-kit/voxdemo';
+import {MapPlate} from '../docs-kit/vmap';
 
 export const Root: React.FC = () => (
 	<>
@@ -37,6 +38,7 @@ export const Root: React.FC = () => (
 		<Composition id="Ep08" component={Episode08} width={1920} height={1080} fps={30} durationInFrames={EP08_FRAMES} />
 		<Composition id="CaseIntroDemo" component={() => <CaseIntro caseNo={2} title="ARRAKIS" photo="everglades_highsm.jpg" />} width={1920} height={1080} fps={30} durationInFrames={INTRO_FRAMES} />
 		<Composition id="CaseClosedDemo" component={() => <CaseClosed score={7} question="How real is Leonida?" next="COULD ARRAKIS EXIST?" nextPhoto="egrets_highsm.jpg" />} width={1920} height={1080} fps={30} durationInFrames={OUTRO_FRAMES} />
+		<Still id="MapPlate" component={MapPlate as React.FC} width={1920} height={1080} defaultProps={{x: 3600, y: 1330, w: 3900}} />
 		<Composition id="TvDemo" component={TvDemo} width={1920} height={1080} fps={30} durationInFrames={80} />
 		<Composition id="VoxDemo" component={VoxDemo} width={1920} height={1080} fps={30} durationInFrames={VOX_DEMO_FRAMES} />
 		<Composition id="Doc01" component={Doc01} width={1920} height={1080} fps={30} durationInFrames={DOC01_FRAMES} />

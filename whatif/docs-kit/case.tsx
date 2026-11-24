@@ -79,11 +79,20 @@ export const CaseIntro: React.FC<{caseNo: number; title: string; photo?: string}
 };
 
 /** 10-second closer: the Reality Score, CASE CLOSED, and the next case. */
-export const CaseClosed: React.FC<{score: number; question: string; next: string; nextPhoto?: string}> = ({score, question, next, nextPhoto}) => {
+export const CaseClosed: React.FC<{score: number; question: string; next: string; nextPhoto?: string; scoreAt?: number; closedAt?: number; nextAt?: number; sting?: boolean}> = ({
+	score,
+	question,
+	next,
+	nextPhoto,
+	scoreAt = 27,
+	closedAt = 120,
+	nextAt = 175,
+	sting = true,
+}) => {
 	const frame = useCurrentFrame();
-	const fill = lerp(frame, 27, 27 + score * 4, 0, score, Easing.linear);
-	const closed = 120;
-	const nextIn = useDrop(175, 14);
+	const fill = lerp(frame, scoreAt, scoreAt + score * 4, 0, score, Easing.linear);
+	const closed = closedAt;
+	const nextIn = useDrop(nextAt, 14);
 	return (
 		<AbsoluteFill style={{background: '#0B0F14', overflow: 'hidden'}}>
 			<Bg kind="navy" />
@@ -94,7 +103,7 @@ export const CaseClosed: React.FC<{score: number; question: string; next: string
 				</Kicker>
 				<div style={{fontFamily: 'Playfair', fontStyle: 'italic', fontWeight: 700, fontSize: 64, color: C.cream, marginTop: 14}}>{question}</div>
 			</div>
-			<div style={{position: 'absolute', left: 0, right: 0, top: 330, textAlign: 'center', transform: `translateY(${lerp(frame, 150, 175, 0, -60)}px) scale(${lerp(frame, 150, 175, 1, 0.62)})`, opacity: lerp(frame, 150, 175, 1, 0.9)}}>
+			<div style={{position: 'absolute', left: 0, right: 0, top: 330, textAlign: 'center', transform: `translateY(${lerp(frame, nextAt - 25, nextAt, 0, -60)}px) scale(${lerp(frame, nextAt - 25, nextAt, 1, 0.62)})`, opacity: lerp(frame, nextAt - 25, nextAt, 1, 0.9)}}>
 				<div style={{fontFamily: 'Elite', fontSize: 30, letterSpacing: 8, color: '#C9D3DE'}}>REALITY SCORE</div>
 				<div style={{fontFamily: 'Bebas', fontSize: 260, lineHeight: 1, color: C.yellow, textShadow: '0 0 40px rgba(242,194,0,.35)'}}>
 					{Math.round(fill)}
@@ -106,10 +115,10 @@ export const CaseClosed: React.FC<{score: number; question: string; next: string
 					))}
 				</div>
 			</div>
-			<div style={{position: 'absolute', left: 0, top: 0, opacity: lerp(frame, 150, 175, 1, 0)}}>
+			<div style={{position: 'absolute', left: 0, top: 0, opacity: lerp(frame, nextAt - 25, nextAt, 1, 0)}}>
 				<Stamp text="CASE CLOSED" x={960} y={560} at={closed} size={190} rot={-8} onDark />
 			</div>
-			{frame >= 175 && (
+			{frame >= nextAt && (
 				<div style={{position: 'absolute', left: 560, top: 660, width: 800, display: 'flex', gap: 30, alignItems: 'center', transform: `translateY(${(1 - nextIn) * 200}px)`, opacity: nextIn}}>
 					{nextPhoto && <div style={{width: 260, height: 180, border: '8px solid #F7F2E6', background: `url(${img(nextPhoto)}) center/cover`, flex: 'none', boxShadow: '0 10px 20px rgba(0,0,0,.5)'}} />}
 					<div>
@@ -119,10 +128,10 @@ export const CaseClosed: React.FC<{score: number; question: string; next: string
 					</div>
 				</div>
 			)}
-			<Wordmark at={175} y={980} size={34} />
+			<Wordmark at={nextAt} y={980} size={34} />
 			<Vignette strength={0.5} />
 			<Grain opacity={0.2} />
-			<Audio src={staticFile('doc01/music/sting_outro.wav')} volume={0.9} />
+			{sting && <Audio src={staticFile('doc01/music/sting_outro.wav')} volume={0.9} />}
 		</AbsoluteFill>
 	);
 };

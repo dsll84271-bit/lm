@@ -42,7 +42,8 @@ export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as co
 export const lerp = (f: number, a: number, b: number, from: number, to: number, e = ease) =>
 	interpolate(f, [a, b], [from, to], {...clamp, easing: e});
 const asset = (p: string) => staticFile(`doc01/${p}`);
-export const img = (n: string) => asset(`img/${n}`);
+/** An image: a bare name is from doc01/img, a path with a slash is under public/. */
+export const img = (n: string) => (n.includes('/') ? staticFile(n) : asset(`img/${n}`));
 
 // a soft settle used for things dropping onto the desk
 export const useDrop = (at: number, damping = 14) => {
