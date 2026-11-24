@@ -27,7 +27,7 @@ const Wordmark: React.FC<{at: number; y?: number; size?: number}> = ({at, y = 90
 };
 
 /** 5-second opener: a case folder lands on the desk, gets typed and stamped OPEN. */
-export const CaseIntro: React.FC<{caseNo: number; title: string; photo?: string}> = ({caseNo, title, photo}) => {
+export const CaseIntro: React.FC<{caseNo: number; title: string; photo?: string; stingVol?: number}> = ({caseNo, title, photo, stingVol = 0.9}) => {
 	const frame = useCurrentFrame();
 	const drop = useDrop(10, 13);
 	const push = interpolate(frame, [0, 150], [1.0, 1.12], {...clamp, easing: Easing.bezier(0.3, 0, 0.6, 1)});
@@ -73,7 +73,7 @@ export const CaseIntro: React.FC<{caseNo: number; title: string; photo?: string}
 			</AbsoluteFill>
 			<AbsoluteFill style={{background: '#FFF6E0', opacity: flash}} />
 			<Grain opacity={0.2} />
-			<Audio src={staticFile('doc01/music/sting_intro.wav')} volume={0.9} />
+			<Audio src={staticFile('doc01/music/sting_intro.wav')} volume={stingVol} />
 		</AbsoluteFill>
 	);
 };
