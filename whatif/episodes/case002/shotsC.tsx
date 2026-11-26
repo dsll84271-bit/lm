@@ -2,7 +2,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile} from 'remotion';
 import {CaseClosed} from '../../docs-kit/case';
-import {Cutout, Ink, MarkerNote, Ransom, Tag, TitleCard} from '../../docs-kit/vox';
+import {Cutout, Ink, InkX, MarkerNote, Ransom, Tag, TitleCard} from '../../docs-kit/vox';
 import {Board, Book, Chapter, Gravestone, I, Pic, Quote, Sfx, Snow} from './parts';
 import type {ShotProps} from './timeline';
 

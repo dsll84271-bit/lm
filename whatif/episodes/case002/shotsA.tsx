@@ -57,10 +57,10 @@ export const S02: React.FC<ShotProps> = ({cue}) => {
 // 3 · the moorhen, the wig, the servant
 export const S03: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Card n={1} text="Ate a bird a rat had dragged out of a river" x={110} y={220} at={cue('ate')} id="s3a" rot={-2.5} />
-		<Card n={2} text="Wore a wig he found lying in the road" x={700} y={260} at={cue('wore')} id="s3b" rot={1.5} />
-		<Card n={3} text="His servant was found dead in his house" x={1290} y={220} at={cue('servant')} id="s3c" rot={-1.5} />
-		<Ransom id="s3d" text="2 DAYS" x={1380} y={640} size={110} rot={4} at={cue('two')} />
+		<Card n={1} text="Ate a bird a rat had dragged out of a river" x={110} y={330} at={cue('ate')} id="s3a" rot={-2.5} />
+		<Card n={2} text="Wore a wig he found lying in the road" x={700} y={370} at={cue('wore')} id="s3b" rot={1.5} />
+		<Card n={3} text="His servant was found dead in his house" x={1290} y={330} at={cue('servant')} id="s3c" rot={-1.5} />
+		<Ransom id="s3d" text="2 DAYS" x={1380} y={760} size={110} rot={4} at={cue('two')} />
 		<Sfx n="slap0" at={cue('ate')} />
 		<Sfx n="slap1" at={cue('wore')} />
 		<Sfx n="slap2" at={cue('servant')} />
@@ -151,12 +151,12 @@ export const S07: React.FC<ShotProps> = ({cue}) => (
 		<Cutout id="s7a" src={I('scrooge_cratchit_1843')} w={560} h={710} x={120} y={170} rot={-2} at={2} />
 		<Tag id="s7b" text="Scrooge and Bob Cratchit · John Leech, 1843" x={140} y={910} rot={1} at={6} size={20} />
 		<MarkerNote id="s7c" text="a fire like one coal" x={820} y={170} at={cue('coal') - 6} size={58} rot={-3} />
-		<Quote id="s7d" text="If they would rather die, they had better do it, and decrease the surplus population." source="Scrooge, A Christmas Carol" x={780} y={380} w={1000} size={50} at={cue('rather') - 4} />
+		<Quote id="s7d" text="If they would rather die, they had better do it, and decrease the surplus population." source="Scrooge, A Christmas Carol" x={780} y={380} w={1000} size={50} at={cue('asked') - 4} cps={2.2} />
 		<Highlighter2 at={cue('surplus')} />
 		<Sfx n="slap0" at={2} />
 		<Sfx n="marker_l" at={cue('coal') - 6} />
-		<Sfx n="slap1" at={cue('rather') - 4} />
-		<Sfx n="type1" at={cue('rather')} v={0.3} />
+		<Sfx n="slap1" at={cue('asked') - 4} />
+		<Sfx n="type1" at={cue('asked')} v={0.3} />
 	</Board>
 );
 const Highlighter2: React.FC<{at: number}> = ({at}) => {
@@ -169,7 +169,7 @@ const Highlighter2: React.FC<{at: number}> = ({at}) => {
 // 8 · three ghosts: past, present, future
 export const S08: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Cutout id="s8a" src={I('marley_plate')} w={460} h={600} x={130} y={200} rot={-3} at={cue('past')} pos="50% 55%" />
+		<Cutout id="s8a" src={I('fezziwig_1843')} w={460} h={600} x={130} y={200} rot={-3} at={cue('past')} />
 		<Cutout id="s8b" src={I('third_plate')} w={460} h={600} x={730} y={160} rot={1.5} at={cue('present')} pos="50% 45%" />
 		<Cutout id="s8c" src={I('last_spirit_1843')} w={460} h={600} x={1330} y={200} rot={-1.5} at={cue('future')} />
 		<Tag id="s8d" text="Past" x={180} y={860} rot={-2} at={cue('past') + 4} size={40} />
@@ -256,7 +256,7 @@ export const S12: React.FC<ShotProps> = ({cue}) => (
 const Tick: React.FC<{label: string; at: number; y: number; id: string}> = ({label, at, y, id}) => (
 	<>
 		<Ink id={`${id}k`} d={`M 300 ${y + 34} L 328 ${y + 64} L 380 ${y + 6}`} at={at} dur={5} width={8} len={120} />
-		<MarkerNote id={id} text={label} x={420} y={y} at={at + 2} size={60} rot={0} />
+		<MarkerNote id={id} text={label} x={420} y={y} at={at + 2} size={52} rot={0} />
 	</>
 );
 
@@ -264,6 +264,7 @@ const Tick: React.FC<{label: string; at: number; y: number; id: string}> = ({lab
 export const S13: React.FC<ShotProps> = ({cue}) => (
 	<Board>
 		<Tag id="s13t" text="How the richest MP lived" x={300} y={120} rot={-2} at={0} size={36} />
+		<Cutout id="s13c" src={I('elwes_b')} w={320} h={500} x={1560} y={360} rot={3} at={4} pos="50% 25%" />
 		<Tick id="t1" label="walked home in the rain, not a coach" at={cue('walk')} y={260} />
 		<Tick id="t2" label="sat in wet clothes, not by a fire" at={cue('sit')} y={420} />
 		<Tick id="t3" label="ate rotting food, not fresh meat" at={cue('ate')} y={580} />

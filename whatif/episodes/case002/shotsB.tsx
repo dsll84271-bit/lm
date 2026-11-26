@@ -157,7 +157,7 @@ export const S26: React.FC<ShotProps> = ({cue}) => (
 export const S27: React.FC<ShotProps> = ({cue}) => (
 	<Board>
 		<Book id="s27a" title="Lives and Anecdotes of Misers" sub="F. S. Merryweather, 1850" x={260} y={200} at={cue('lives') - 10} w={620} rot={-3} />
-		<Tag id="s27b" text="Read aloud in Dickens's Our Mutual Friend, 1865" x={980} y={300} rot={2} at={cue('novels')} size={28} />
+		<Tag id="s27b" text="Read aloud in Our Mutual Friend, 1865" x={980} y={300} rot={2} at={cue('novels')} size={26} />
 		<MarkerNote id="s27c" text={'"John Elwes…\nDaniel Dancer…"'} x={1000} y={460} at={cue('lives')} size={64} rot={-2} />
 		<Sfx n="slap0" at={cue('lives') - 10} />
 		<Sfx n="slap1" at={cue('novels')} />
@@ -173,7 +173,7 @@ export const S29: React.FC<ShotProps> = ({cue}) => (
 	<Board dark>
 		<Gravestone x={650} y={160} at={0} misread={cue('read') - 4} />
 		<Tag id="s29a" text="Canongate Kirkyard, Edinburgh (the story)" x={120} y={90} rot={-2} at={4} size={26} />
-		<MarkerNote id="s29b" text="meal man = corn merchant" x={100} y={420} at={cue('corn') - 4} size={46} rot={-3} color="#F1EDE4" />
+		<MarkerNote id="s29b" text={'meal man =\ncorn merchant'} x={100} y={420} at={cue('corn') - 4} size={46} rot={-3} color="#F1EDE4" />
 		<MarkerNote id="s29c" text={'…read in the\nfading light as'} x={1300} y={480} at={cue('fading') - 4} size={50} rot={3} color="#F1EDE4" />
 		<Snow n={70} opacity={0.6} />
 		<Sfx n="marker_l" at={cue('corn') - 4} />

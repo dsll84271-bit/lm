@@ -43,7 +43,7 @@ export const Quote: React.FC<{
 	cps?: number;
 	dark?: boolean;
 	end?: number;
-}> = ({text, source, x, y, w = 900, at, id, size = 54, rot = -1.5, cps = 1.6, dark, end}) => {
+}> = ({text, source, x, y, w = 900, at, id, size = 54, rot = -1.5, cps = 2.2, dark, end}) => {
 	const f2 = useTwos();
 	const n = Math.max(0, Math.floor((f2 - at - 4) * cps));
 	return (
