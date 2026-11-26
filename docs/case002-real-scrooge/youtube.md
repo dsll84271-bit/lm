@@ -59,7 +59,16 @@ This video is not affiliated with or endorsed by Paramount Pictures.
 
 ebenezer, ebenezer scrooge, real ebenezer scrooge, a christmas carol, scrooge real life, who was scrooge based on, john elwes, jemmy wood, daniel dancer, charles dickens, johnny depp scrooge, christmas carol true story, christmas history, fiction files
 
-## Thumbnail prompt (paste into ChatGPT)
+## Thumbnail prompt v2: Scrooge front and centre (paste into ChatGPT)
+
+> A YouTube thumbnail, 16:9, 1280×720. Dramatic, high-contrast, painterly Victorian-illustration style, like a hand-coloured 1843 engraving brought to life. LEFT TWO-THIRDS: a big, tight close-up of Ebenezer Scrooge from A Christmas Carol, filling the frame from the shoulders up. He is a gaunt, bony old man in a white nightcap and a dark dressing gown, with a sharp hooked nose, thin pinched lips, deep frown lines and a cold, suspicious glare straight at the viewer. His face is lit from below by a single candle, warm orange against deep blue-black shadows, with a few gold coins glinting in his bony fingers. RIGHT THIRD: a smaller, torn-paper cut-out in black-and-white engraving style of a scruffier, even meaner-looking 18th-century miser in a tattered coat and a crooked wig, holding a dead bird by the leg, with a small yellow paper tag reading "THE REAL ONE". Across the bottom, overlapping both, huge ransom-note letters cut from black, cream and mustard-yellow (#EDBD2E) paper: "EVEN WORSE". Light falling snow, a dark vignette, paper texture. Must read clearly at phone size. The character is drawn as an original illustration, not any actor. No movie logos, no film stills, no other text.
+
+Tips:
+- If Scrooge comes out too friendly, ask: "make him colder and meaner, narrower eyes, deeper shadows".
+- If ChatGPT adds extra words, ask it to remove everything except "EVEN WORSE" and "THE REAL ONE".
+- Test it against v1 below with YouTube's "Test & compare".
+
+## Thumbnail prompt v1 (paste into ChatGPT)
 
 > A YouTube thumbnail, 16:9, 1280×720, in a bold paper-collage style on dark, snowy night paper. LEFT half, labelled with a small yellow paper tag "THE FICTION": a classic hand-coloured Victorian engraving-style illustration of an old miser in a nightcap and dressing gown, counting coins by a single candle. RIGHT half, labelled with a small yellow paper tag "THE REAL ONE": a black-and-white 18th-century engraving-style cut-out of a gaunt old gentleman in a tattered coat and a scruffy wig, holding a dead bird by the leg, with a rat at his feet. Across the centre, overlapping both halves, huge ransom-note letters cut from black, cream and mustard-yellow (#EDBD2E) paper: "EVEN WORSE". Light falling snow. High contrast, readable at small size. No real actors, no movie logos, no film stills, no other text.
 
