@@ -28,6 +28,7 @@ SOURCES
 - Ebenezer (2026), Paramount, opening weekend: US box office reports, 16 Nov 2026
 
 IMAGES (public domain): John Leech's original illustrations for A Christmas Carol (1843) · portraits of John Elwes, Daniel Dancer, Thomas Malthus and Jemmy Wood (Wikimedia Commons) · Charles Dickens, 1867, J. Gurney & Son (Library of Congress) · Fred Barnard, Dickens at the Blacking Warehouse · engraving from the 1842 Children's Employment Commission report.
+Short clips from the official Ebenezer trailers (Paramount Pictures) are used for commentary and comparison.
 Narration voice: Qwen3-TTS (Apache 2.0). Original music composed for this channel, including a new arrangement of the traditional carol "God Rest Ye Merry, Gentlemen".
 
 This video is not affiliated with or endorsed by Paramount Pictures.
