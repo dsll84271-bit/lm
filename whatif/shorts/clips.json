@@ -582,6 +582,74 @@
      960
     ]
    ]
+  },
+  {
+   "id": "case002-moorhen",
+   "ep": "case002",
+   "start": 128.69,
+   "end": 165.62,
+   "hook": [
+    "THE REAL SCROOGE",
+    "ATE A RAT'S LEFTOVERS"
+   ],
+   "crop": [
+    [
+     128.69,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case002-housekeeper",
+   "ep": "case002",
+   "start": 173.7,
+   "end": 213.37,
+   "hook": [
+    "HIS SERVANT DIED",
+    "IN HIS HOUSE"
+   ],
+   "crop": [
+    [
+     173.7,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case002-gravestone",
+   "ep": "case002",
+   "start": 264.59,
+   "end": 293.97,
+   "hook": [
+    "DID A GRAVESTONE",
+    "NAME SCROOGE?"
+   ],
+   "crop": [
+    [
+     264.59,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case002-dickens",
+   "ep": "case002",
+   "start": 375.68,
+   "end": 412.77,
+   "hook": [
+    "DICKENS WAS 12",
+    "IN A FACTORY"
+   ],
+   "crop": [
+    [
+     375.68,
+     1920,
+     960
+    ]
+   ]
   }
  ]
 }
