@@ -22,6 +22,7 @@ import {EP08_FRAMES, Episode08} from '../episodes/ep08/Episode';
 import {EP09_FRAMES, Episode09} from '../episodes/ep09/Episode';
 import {DOC01_FRAMES, Doc01} from '../episodes/doc01/Episode';
 import {CASE001_FRAMES, Case001} from '../episodes/case001/Episode';
+import {CASE002_FRAMES, Case002} from '../episodes/case002/Episode';
 import '../docs-kit/kit';
 import {CaseClosed, CaseIntro, INTRO_FRAMES, OUTRO_FRAMES} from '../docs-kit/case';
 import {TvDemo, VOX_DEMO_FRAMES, VoxDemo} from '../docs-kit/voxdemo';
@@ -42,6 +43,7 @@ export const Root: React.FC = () => (
 		<Still id="MapPlate" component={MapPlate as React.FC} width={1920} height={1080} defaultProps={{x: 3600, y: 1330, w: 3900}} />
 		<Composition id="TvDemo" component={TvDemo} width={1920} height={1080} fps={30} durationInFrames={80} />
 		<Composition id="VoxDemo" component={VoxDemo} width={1920} height={1080} fps={30} durationInFrames={VOX_DEMO_FRAMES} />
+		<Composition id="Case002" component={Case002} width={1920} height={1080} fps={30} durationInFrames={CASE002_FRAMES} />
 		<Composition id="Case001" component={Case001} width={1920} height={1080} fps={30} durationInFrames={CASE001_FRAMES} />
 		<Composition id="Doc01" component={Doc01} width={1920} height={1080} fps={30} durationInFrames={DOC01_FRAMES} />
 		<Composition id="Ep09" component={Episode09} width={1920} height={1080} fps={30} durationInFrames={EP09_FRAMES} />
