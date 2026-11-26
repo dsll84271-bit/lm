@@ -16,7 +16,8 @@ export const TV: React.FC<{
 	rot?: number;
 	on?: number; // frame the picture switches on
 	grade?: 'colour' | 'warm' | 'mono';
-}> = ({src, image, children, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
+	rate?: number; // playback speed of the clip
+}> = ({src, image, children, rate = 1, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
 	const frame = useCurrentFrame();
 	const h = w * 0.78;
 	const sw = w * 0.7,
@@ -54,7 +55,7 @@ export const TV: React.FC<{
 			<div style={{position: 'absolute', left: w * 0.08, top: h * 0.08 + w * 0.03, width: sw, height: sh, borderRadius: `${w * 0.06}px / ${w * 0.07}px`, overflow: 'hidden', background: '#0b0d0c'}}>
 				{t >= 0 && (
 					<div style={{position: 'absolute', inset: 0, transform: `scaleY(${open < 1 ? Math.max(0.01, open) : 1})`, filter: `${filter} brightness(${flick})`}}>
-						{src && <OffthreadVideo src={staticFile(src)} startFrom={startFrom} muted style={{width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.06)'}} />}
+						{src && <OffthreadVideo src={staticFile(src)} startFrom={startFrom} playbackRate={rate} muted style={{width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.06)'}} />}
 						{image && <Img src={staticFile(image)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${1.06 + t * 0.0006})`}} />}
 						{children}
 					</div>

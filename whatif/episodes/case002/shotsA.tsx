@@ -2,6 +2,7 @@
 import React from 'react';
 import {AbsoluteFill, Sequence, useCurrentFrame} from 'remotion';
 import {CaseIntro} from '../../docs-kit/case';
+import {TV} from '../../docs-kit/tv';
 import {lerp} from '../../docs-kit/kit';
 import {Cutout, Ink, InkX, MarkerNote, Piece, Ransom, Tag, TitleCard, useTwos, V} from '../../docs-kit/vox';
 import {Board, Candle, Chapter, I, Quote, Sfx, Snow} from './parts';
@@ -20,11 +21,15 @@ const Card: React.FC<{text: string; x: number; y: number; at: number; id: string
 export const S01: React.FC<ShotProps> = ({cue}) => (
 	<Board>
 		<Tag id="s1a" text="Now in cinemas · Ebenezer (2026)" x={150} y={120} rot={-2} at={2} size={34} />
-		<Cutout id="s1b" src={I('marley_plate')} w={620} h={760} x={1120} y={150} rot={2.5} at={cue('meanest') - 4} pos="50% 55%" />
-		<Tag id="s1c" text="Scrooge, as first drawn in 1843" x={1170} y={940} rot={-1} at={cue('meanest') + 4} size={22} />
+		{useCurrentFrame() < cue('candle') - 8 ? (
+			<TV src="case002/film/eb_street.mp4" x={1400} y={500} w={860} rot={1.5} on={2} grade="colour" rate={0.6} />
+		) : (
+			<TV src="case002/film/eb_candle.mp4" x={1400} y={500} w={860} rot={1.5} on={cue('candle') - 8} grade="colour" rate={0.6} />
+		)}
+		<Tag id="s1c" text="Johnny Depp as Scrooge · Ebenezer (Paramount, 2026)" x={1080} y={900} rot={-1} at={8} size={20} />
 		<Ransom id="s1d" text="MEANEST" x={140} y={330} size={130} rot={-3} at={cue('meanest')} />
 		<MarkerNote id="s1e" text={'would rather sit\nin the dark than\npay for a candle'} x={160} y={600} at={cue('dark') - 6} size={56} rot={-2} />
-		<Candle x={900} y={980} at={cue('candle') - 8} outAt={cue('candle') + 26} id="s1f" />
+		<Candle x={700} y={1000} at={cue('candle') - 8} outAt={cue('candle') + 26} id="s1f" />
 		<Sfx n="slap0" at={2} />
 		<Sfx n="slap1" at={cue('meanest') - 4} />
 		<Sfx n="slap2" at={cue('meanest')} />
@@ -57,6 +62,8 @@ export const S02: React.FC<ShotProps> = ({cue}) => {
 // 3 · the moorhen, the wig, the servant
 export const S03: React.FC<ShotProps> = ({cue}) => (
 	<Board>
+		<Tag id="s3t" text="The real Scrooges: the evidence" x={660} y={150} rot={-1.5} at={0} size={34} />
+		<Sfx n="slap0" at={0} />
 		<Card n={1} text="Ate a bird a rat had dragged out of a river" x={110} y={330} at={cue('ate')} id="s3a" rot={-2.5} />
 		<Card n={2} text="Wore a wig he found lying in the road" x={700} y={370} at={cue('wore')} id="s3b" rot={1.5} />
 		<Card n={3} text="His servant was found dead in his house" x={1290} y={330} at={cue('servant')} id="s3c" rot={-1.5} />
@@ -148,10 +155,10 @@ export const S06: React.FC<ShotProps> = ({cue}) => {
 // 7 · counting money, Bob Cratchit's one coal, "decrease the surplus population"
 export const S07: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Cutout id="s7a" src={I('scrooge_cratchit_1843')} w={560} h={710} x={120} y={170} rot={-2} at={2} />
-		<Tag id="s7b" text="Scrooge and Bob Cratchit · John Leech, 1843" x={140} y={910} rot={1} at={6} size={20} />
-		<MarkerNote id="s7c" text="a fire like one coal" x={820} y={170} at={cue('coal') - 6} size={58} rot={-3} />
-		<Quote id="s7d" text="If they would rather die, they had better do it, and decrease the surplus population." source="Scrooge, A Christmas Carol" x={780} y={380} w={1000} size={50} at={cue('asked') - 4} cps={2.2} />
+		<TV src="case002/film/eb_desk.mp4" x={440} y={500} w={780} rot={-1.5} on={2} grade="colour" rate={0.6} />
+		<Tag id="s7b" text="Counting money · Ebenezer (2026)" x={160} y={880} rot={1} at={6} size={20} />
+		<MarkerNote id="s7c" text="a fire like one coal" x={900} y={170} at={cue('coal') - 6} size={58} rot={-3} />
+		<Quote id="s7d" text="If they would rather die, they had better do it, and decrease the surplus population." source="Scrooge, A Christmas Carol" x={880} y={380} w={940} size={48} at={cue('asked') - 4} cps={2.2} />
 		<Highlighter2 at={cue('surplus')} />
 		<Sfx n="slap0" at={2} />
 		<Sfx n="marker_l" at={cue('coal') - 6} />
@@ -163,12 +170,13 @@ const Highlighter2: React.FC<{at: number}> = ({at}) => {
 	const f2 = useTwos();
 	if (f2 < at) return null;
 	const p = Math.min(1, (f2 - at) / 10);
-	return <div style={{position: 'absolute', left: 830, top: 545, width: 560 * p, height: 40, background: V.yellow, mixBlendMode: 'multiply', opacity: 0.85, transform: 'rotate(-1.5deg)'}} />;
+	return <div style={{position: 'absolute', left: 925, top: 540, width: 500 * p, height: 40, background: V.yellow, mixBlendMode: 'multiply', opacity: 0.85, transform: 'rotate(-1.5deg)'}} />;
 };
 
 // 8 · three ghosts: past, present, future
 export const S08: React.FC<ShotProps> = ({cue}) => (
 	<Board>
+		<MarkerNote id="s8m" text="three ghosts…" x={620} y={420} at={0} size={110} rot={-3} end={cue('past')} />
 		<Cutout id="s8a" src={I('fezziwig_1843')} w={460} h={600} x={130} y={200} rot={-3} at={cue('past')} />
 		<Cutout id="s8b" src={I('third_plate')} w={460} h={600} x={730} y={160} rot={1.5} at={cue('present')} pos="50% 45%" />
 		<Cutout id="s8c" src={I('last_spirit_1843')} w={460} h={600} x={1330} y={200} rot={-1.5} at={cue('future')} />
@@ -237,6 +245,7 @@ export const S11: React.FC<ShotProps> = ({cue}) => (
 // 12 · his friend Edward Topham wrote it all down
 export const S12: React.FC<ShotProps> = ({cue}) => (
 	<Board>
+		<Cutout id="s12c" src={I('elwes_1801')} w={300} h={400} x={120} y={300} rot={-3} at={0} pos="50% 40%" />
 		<Piece id="s12a" x={560} y={170} rot={-2} at={cue('topham') - 6}>
 			<div style={{width: 760, background: '#E9DFC6', border: `3px double ${V.ink}`, padding: '46px 40px', textAlign: 'center', boxShadow: '6px 9px 16px rgba(29,28,32,.35)', color: V.ink}}>
 				<div style={{fontFamily: 'Caslon', fontSize: 30, letterSpacing: 6}}>THE</div>
@@ -278,11 +287,12 @@ export const S13: React.FC<ShotProps> = ({cue}) => (
 // 14 · the moorhen a rat dragged from the river; the fish inside a fish
 export const S14: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Quote id="s14a" text="He dined upon the remaining part of a moor-hen, which had been brought out of the river by a rat!" source="Edward Topham, 1790" x={180} y={140} w={1300} size={62} at={cue('moorhen') - 20} />
+		<Tag id="s14t" text="Exhibit 1: dinner" x={1380} y={90} rot={2} at={0} size={30} />
+		<Quote id="s14a" text="He dined upon the remaining part of a moor-hen, which had been brought out of the river by a rat!" source="Edward Topham, 1790" x={180} y={140} w={1300} size={62} at={4} cps={1.4} />
 		<Ransom id="s14b" text="A RAT" x={1320} y={560} size={130} rot={5} at={cue('rat')} />
 		<MarkerNote id="s14c" text={'and once, a fish found\nhalf-digested inside a bigger fish'} x={260} y={720} at={cue('fish') - 6} size={52} rot={-2} />
-		<Sfx n="slap0" at={cue('moorhen') - 20} />
-		<Sfx n="type2" at={cue('moorhen') - 16} v={0.3} />
+		<Sfx n="slap0" at={4} />
+		<Sfx n="type2" at={8} v={0.3} />
 		<Sfx n="slap1" at={cue('rat')} />
 		<Sfx n="marker_l" at={cue('fish') - 6} />
 	</Board>
@@ -291,11 +301,12 @@ export const S14: React.FC<ShotProps> = ({cue}) => (
 // 15 · the beggar's wig from a rut in a lane
 export const S15: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Quote id="s15a" text="he wore a wig for above a fortnight, which I saw him pick up out of a rut in a lane" source="Edward Topham, 1790" x={160} y={140} w={1150} size={58} at={cue('wig') - 10} />
+		<Tag id="s15t" text="Exhibit 2: the wig" x={1380} y={60} rot={2} at={0} size={30} />
+		<Quote id="s15a" text="he wore a wig for above a fortnight, which I saw him pick up out of a rut in a lane" source="Edward Topham, 1790" x={160} y={140} w={1150} size={58} at={4} cps={1.4} />
 		<Cutout id="s15b" src={I('elwes_b')} w={380} h={560} x={1420} y={260} rot={3} at={cue('beggar\'s') - 6} pos="50% 20%" />
 		<MarkerNote id="s15c" text="a beggar's old wig" x={260} y={640} at={cue('beggar\'s')} size={60} rot={-3} />
 		<Ransom id="s15d" text="2 WEEKS" x={300} y={790} size={110} rot={-2} at={cue('weeks') - 6} />
-		<Sfx n="slap0" at={cue('wig') - 10} />
+		<Sfx n="slap0" at={4} />
 		<Sfx n="slap1" at={cue('beggar\'s') - 6} />
 		<Sfx n="marker_l" at={cue('beggar\'s')} />
 		<Sfx n="slap2" at={cue('weeks') - 6} />

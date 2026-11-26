@@ -1,7 +1,8 @@
 /** Case File 002, paragraphs 32–47: the 1843 report, the sledge hammer, Dickens at twelve, and the verdict. */
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile} from 'remotion';
+import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {CaseClosed} from '../../docs-kit/case';
+import {TV} from '../../docs-kit/tv';
 import {Cutout, Ink, InkX, MarkerNote, Ransom, Tag, TitleCard} from '../../docs-kit/vox';
 import {Board, Book, Chapter, Gravestone, I, Pic, Quote, Sfx, Snow} from './parts';
 import type {ShotProps} from './timeline';
@@ -135,14 +136,15 @@ export const S42: React.FC<ShotProps> = ({cue}) => (
 		<Tag id="s42b" text="Scrooge, changed · Leech, 1843" x={160} y={850} rot={1} at={4} size={20} />
 		<Ransom id="s42c" text="6 WEEKS" x={760} y={170} size={120} rot={-2} at={cue('six') - 4} />
 		<TitleCardLike at={cue('nineteenth') - 6} />
-		<MarkerNote id="s42e" text="still retold: Ebenezer (2026)" x={780} y={760} at={cue('johnny') - 8} size={56} rot={-2} />
+		{useCurrentFrame() >= cue('johnny') - 12 && <TV src="case002/film/eb_walk.mp4" x={1440} y={650} w={640} rot={2} on={cue('johnny') - 12} grade="colour" rate={0.6} />}
+		<MarkerNote id="s42e" text="still retold: Ebenezer (2026)" x={150} y={930} at={cue('johnny') - 8} size={52} rot={-2} />
 		<Sfx n="slap0" at={0} />
 		<Sfx n="slap1" at={cue('six') - 4} />
 		<Sfx n="slap2" at={cue('nineteenth') - 6} />
 		<Sfx n="marker_l" at={cue('johnny') - 8} />
 	</Board>
 );
-const TitleCardLike: React.FC<{at: number}> = ({at}) => <Tag id="s42d" text="Published 19 December 1843" x={800} y={470} rot={1.5} at={at} size={44} />;
+const TitleCardLike: React.FC<{at: number}> = ({at}) => <Tag id="s42d" text="Published 19 December 1843" x={760} y={380} rot={1.5} at={at} size={40} />;
 
 // 43 · so, let's look at the evidence
 export const S43: React.FC<ShotProps> = () => (

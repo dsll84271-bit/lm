@@ -34,7 +34,8 @@ export const S18: React.FC<ShotProps> = ({cue}) => (
 // 19 · the nephew forces the door and finds Elwes close to death
 export const S19: React.FC<ShotProps> = ({cue}) => (
 	<AbsoluteFill style={{background: '#17161A'}}>
-		<Cutout id="s19a" src={I('elwes_b')} w={420} h={600} x={1330} y={220} rot={3} at={cue('old') - 4} pos="50% 30%" />
+		<Cutout id="s19a" src={I('elwes_b')} w={420} h={600} x={1330} y={220} rot={3} at={0} pos="50% 30%" />
+		<Tag id="s19t" text="The old woman: his housekeeper" x={170} y={90} rot={-1.5} at={2} size={30} />
 		<MarkerNote id="s19b" text="an empty house" x={180} y={200} at={cue('empty')} size={64} rot={-2} color="#F1EDE4" />
 		<MarkerNote id="s19c" text="the door forced open" x={180} y={360} at={cue('forced')} size={64} rot={2} color="#F1EDE4" />
 		<MarkerNote id="s19d" text="close to death" x={180} y={520} at={cue('close')} size={78} rot={-2} color="#EDBD2E" />
@@ -48,6 +49,7 @@ export const S19: React.FC<ShotProps> = ({cue}) => (
 // 20 · the housekeeper, dead about two days
 export const S20: React.FC<ShotProps> = ({cue}) => (
 	<AbsoluteFill style={{background: '#0F0E11'}}>
+		<MarkerNote id="s20m" text="they searched the attic…" x={300} y={120} at={0} size={56} rot={-2} color="#F1EDE4" />
 		<Quote id="s20a" text="stretched out lifeless on a rug upon the floor. To all appearances she had been dead about two days." source="Edward Topham, 1790" x={260} y={260} w={1400} size={60} at={cue('found') - 6} dark />
 		<Snow n={40} opacity={0.3} />
 		<Sfx n="type0" at={cue('found') - 2} v={0.25} />
@@ -156,6 +158,8 @@ export const S26: React.FC<ShotProps> = ({cue}) => (
 // 27 · Dickens owned these stories: Lives and Anecdotes of Misers
 export const S27: React.FC<ShotProps> = ({cue}) => (
 	<Board>
+		<Cutout id="s27d" src={I('dickens_1867')} w={280} h={390} x={1560} y={640} rot={3} at={0} pos="50% 30%" />
+		<MarkerNote id="s27e" text="Dickens owned these stories" x={980} y={140} at={0} size={50} rot={-2} />
 		<Book id="s27a" title="Lives and Anecdotes of Misers" sub="F. S. Merryweather, 1850" x={260} y={200} at={cue('lives') - 10} w={620} rot={-3} />
 		<Tag id="s27b" text="Read aloud in Our Mutual Friend, 1865" x={980} y={300} rot={2} at={cue('novels')} size={26} />
 		<MarkerNote id="s27c" text={'"John Elwes…\nDaniel Dancer…"'} x={1000} y={460} at={cue('lives')} size={64} rot={-2} />
