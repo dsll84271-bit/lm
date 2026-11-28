@@ -1,0 +1,309 @@
+{
+ "seconds": 481.809,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 17.773,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "It's dark. It's wet. And it smells like a fish that died a hundred years ago. You click on your torch, and the walls are pink, and slimy, and they're moving. Something huge is thumping all around you, like a drum. You are inside a whale.",
+     "start": 0.25,
+     "end": 14.283
+    },
+    {
+     "who": "NARRATOR",
+     "text": "How did you get here? Let's go back an hour.",
+     "start": 14.983,
+     "end": 17.273
+    }
+   ]
+  },
+  {
+   "id": "boat",
+   "start": 17.773,
+   "end": 36.393,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "An hour ago, you were on a little dive boat, miles out at sea, on the best holiday ever. Your best friend had just handed you their brand new underwater camera. You held it for about three seconds. Then it slipped out of your fingers, and sank. So you pulled down your mask, and flipped backwards into the water after it.",
+     "start": 18.023,
+     "end": 35.993
+    }
+   ]
+  },
+  {
+   "id": "under",
+   "start": 36.393,
+   "end": 46.9,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Down you go, chasing that little camera as it tumbles through the blue. Then, all of a sudden, everything goes dark. Something is passing over your head. Something enormous.",
+     "start": 36.643,
+     "end": 46.5
+    }
+   ]
+  },
+  {
+   "id": "blue",
+   "start": 46.9,
+   "end": 64.308,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "It's a blue whale. The biggest animal known to have ever lived, bigger than any dinosaur. It can grow to around thirty metres long, about as long as three buses parked end to end. Its heart alone weighs about a hundred and eighty kilograms. And its tongue can weigh as much as an elephant.",
+     "start": 47.15,
+     "end": 63.908
+    }
+   ]
+  },
+  {
+   "id": "throat",
+   "start": 64.308,
+   "end": 85.104,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "It opens its mouth, and you think, this is it. But it's not after you. It's after a cloud of krill, tiny shrimp-like animals, millions of them. And here's the surprising part. For a whale that big, its throat is tiny. It's only about as wide as a dinner plate. A blue whale couldn't swallow you, even if it wanted to. Neither could a humpback.",
+     "start": 64.558,
+     "end": 84.704
+    }
+   ]
+  },
+  {
+   "id": "click",
+   "start": 85.104,
+   "end": 102.623,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But then, you hear something. Click. Click. Click. You can feel it in your chest. Rings of sound are bouncing off you, and something out there is listening to the echoes. Out of the dark comes a different whale, with a giant square head, and a thin lower jaw, full of teeth. A sperm whale.",
+     "start": 85.354,
+     "end": 102.223
+    }
+   ]
+  },
+  {
+   "id": "echo",
+   "start": 102.623,
+   "end": 123.508,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That clicking is called echolocation. The whale sends out a click, and listens for the echo. If the echo comes back fast, the thing is close. If it takes longer, it's further away. And sound travels more than four times faster in water than it does in air, so the echoes come back quickly. Dolphins use exactly the same trick. So do bats.",
+     "start": 102.873,
+     "end": 123.108
+    }
+   ]
+  },
+  {
+   "id": "sperm",
+   "start": 123.508,
+   "end": 149.606,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Sperm whales are amazing. Their clicks are the loudest sound made by any animal, around two hundred and thirty decibels, and they use the echoes to find food in the pitch dark. They have the biggest brain of any animal on Earth, more than five times heavier than yours. Their big teeth are only in their lower jaw. And they hunt giant squid, and swallow them whole. Out of about ninety kinds of whale, the sperm whale is the only one with a throat big enough to swallow a person.",
+     "start": 123.758,
+     "end": 149.206
+    }
+   ]
+  },
+  {
+   "id": "gulp",
+   "start": 149.606,
+   "end": 167.689,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Now, in real life, a sperm whale would almost certainly never do this. You are not a squid. But this whale is having a very strange day. It swings round, drops open its jaw, and sucks you in, along with your friend's camera. Snap. Darkness. And down the slimy tunnel you go.",
+     "start": 149.856,
+     "end": 167.189
+    }
+   ]
+  },
+  {
+   "id": "beaks",
+   "start": 167.689,
+   "end": 191.682,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Which brings us back to now. A sperm whale's stomach has several chambers, and you've landed in the first one. There's no acid in here. It's a big squeezing bag of muscle, that crushes and churns whatever comes in. And the floor is covered in squid beaks. Squid have hard, sharp beaks that a whale can't digest, and whalers found up to fourteen thousand of them in a single stomach. Oh, and there's your camera.",
+     "start": 167.939,
+     "end": 191.282
+    }
+   ]
+  },
+  {
+   "id": "air",
+   "start": 191.682,
+   "end": 214.006,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The next problem is air. There isn't any. A whale's stomach has no oxygen in it at all. Most people can hold their breath for about a minute. The world record is over twenty four minutes, but that was after breathing pure oxygen first. Luckily, you've got a scuba tank. Near the surface, a tank like yours lasts about an hour. So, you've got one hour to get out of a whale.",
+     "start": 191.932,
+     "end": 213.606
+    }
+   ]
+  },
+  {
+   "id": "dive",
+   "start": 214.006,
+   "end": 250.331,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then the whole floor tips forward. Uh oh. The whale is diving. Sperm whales often dive one or two kilometres down, and stay there for over an hour. The deepest one ever measured went about two and a quarter kilometres. Down there, the water presses with over two hundred times the pressure you feel at the surface. Luckily for you, this whale has just eaten. It turns back up.",
+     "start": 214.256,
+     "end": 236.05
+    },
+    {
+     "who": "NARRATOR",
+     "text": "So how does a whale survive down there? Its lungs fold flat, and it carries its oxygen in its muscles instead, packed into a protein called myoglobin. There's so much of it, that sperm whale meat is almost black.",
+     "start": 236.75,
+     "end": 249.931
+    }
+   ]
+  },
+  {
+   "id": "acid",
+   "start": 250.331,
+   "end": 271.522,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You squeeze through a tight ring of muscle into the next chamber, and it's even worse. This is where the acid is. Your gloves start to fizz. In cartoons, stomach acid melts things in seconds. In real life it's slower, and it takes hours to digest a meal. But your skin would start to sting and burn, and you do not want to stay for those hours.",
+     "start": 250.581,
+     "end": 271.122
+    }
+   ]
+  },
+  {
+   "id": "grey",
+   "start": 271.522,
+   "end": 304.807,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Deeper in, your torch lands on something odd. A big, grey, waxy lump. You've just found ambergris. When a squid beak slips further down the whale's gut, the whale coats it in a waxy, fatty stuff, layer after layer, until it becomes a lump like this. Only about one in a hundred sperm whales ever makes it. And it's used in some of the most expensive perfumes in the world. In twenty twenty one, fishermen in Yemen found a hundred and twenty seven kilograms of it inside a dead sperm whale, and sold it for about one and a half million dollars.",
+     "start": 271.772,
+     "end": 304.407
+    }
+   ]
+  },
+  {
+   "id": "plan",
+   "start": 304.807,
+   "end": 324.721,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Time to get out. And there's one exit whales use all the time. Scientists think sperm whales throw up most of their squid beaks, instead of passing them all the way through. So you grab the ambergris, scoop up an armful of beaks, and start prodding the stomach wall. The walls shudder. A rumble starts, somewhere deep down. Here it comes.",
+     "start": 305.057,
+     "end": 324.421
+    }
+   ]
+  },
+  {
+   "id": "out",
+   "start": 324.721,
+   "end": 343.44,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Whoosh. You're blasted back up the tunnel, out between the teeth, and into the bright blue water. You kick for the surface, and pop up right next to the boat. Then the whale comes up beside you, and breathes out. A sperm whale's blowhole is on the left side of its head, so its spout shoots forwards and to the left. Straight over you.",
+     "start": 324.971,
+     "end": 343.04
+    }
+   ]
+  },
+  {
+   "id": "deck",
+   "start": 343.44,
+   "end": 359.663,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your friend hauls you up onto the deck. You're covered in slime, and there's a squid beak stuck to your mask. But in one hand, you've got the camera. And in the other, a lump of ambergris the size of a football. Your friend looks at you. Then at the whale. Then back at you.",
+     "start": 343.69,
+     "end": 359.263
+    }
+   ]
+  },
+  {
+   "id": "pump",
+   "start": 359.663,
+   "end": 378.642,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And whales do more than make perfume. They feed deep down, and then poop near the surface, bringing nutrients up with them. That feeds tiny ocean plants called phytoplankton. And phytoplankton make around half of the oxygen on our planet. Scientists call it the whale pump. So in a way, whales help you breathe.",
+     "start": 359.913,
+     "end": 378.242
+    }
+   ]
+  },
+  {
+   "id": "myth",
+   "start": 378.642,
+   "end": 399.994,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So has anyone ever really been swallowed by a whale? In eighteen ninety one, a famous story said a sailor called James Bartley was swallowed by a sperm whale, and found alive inside it the next day. But when historians checked, there was no James Bartley on the ship's crew list. The captain's wife said there wasn't one word of truth in it. It was a hoax.",
+     "start": 378.892,
+     "end": 399.594
+    }
+   ]
+  },
+  {
+   "id": "real",
+   "start": 399.994,
+   "end": 434.993,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But two people really have ended up inside a whale's mouth. In twenty twenty one, a lobster diver called Michael Packard was scooped up by a humpback off Cape Cod. He spent about thirty seconds in the dark, still breathing through his scuba gear, until the whale surfaced and spat him out. He was bruised, but nothing was broken. And in twenty twenty five, a humpback in Chile gulped up a kayaker called Adri\u00e1n Simancas, and let him go a couple of seconds later. His dad filmed the whole thing. Both times, the whale wasn't hunting anyone. They were just in the way of its lunch.",
+     "start": 400.244,
+     "end": 434.493
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 434.993,
+   "end": 467.339,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You take the ambergris home. And here's what nobody tells you about fresh ambergris. It stinks. Fresh from a whale, it's dark and soft, and it smells like, well, whale poo. It only turns pale and sweet after years of floating in the sun and the sea. That's when it's worth the most. Your mum makes you keep it in the shed. For the next ten years.",
+     "start": 435.243,
+     "end": 454.828
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And the camera? It recorded everything. Including one last photo, from inside the whale's mouth, looking out between its teeth. Your friend still wants to know why their camera smells of squid.",
+     "start": 455.528,
+     "end": 466.739
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 467.339,
+   "end": 481.809,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you dive back in, knowing what's down there? And if you could spend one day as any animal in the ocean, which one would you be? Tell me in the comments. And next time you drop something in the sea, maybe just let it go.",
+     "start": 467.589,
+     "end": 480.609
+    }
+   ]
+  }
+ ]
+}

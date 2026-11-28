@@ -1,0 +1,327 @@
+{
+ "seconds": 484.484,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 21.956,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You've been crawling around the park for an hour, looking for a four-leaf clover. Three leaves. Three leaves. Three leaves. And then you find one with five.",
+     "start": 0.25,
+     "end": 9.343
+    },
+    {
+     "who": "NARRATOR",
+     "text": "The second you pick it, the ground starts to shake. A book pushes its way up out of the grass. It's black, it's old, and it's pouring out dark smoke. And on the cover, there's a five-leaf clover.",
+     "start": 10.043,
+     "end": 21.356
+    }
+   ]
+  },
+  {
+   "id": "book",
+   "start": 21.956,
+   "end": 59.287,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "It floats right up to your face and flips itself open. Page after page after page, all of them blank. Then ink spreads across one page, and draws a sword. You touch it, and a real sword slides out of the paper. It's black, it's chipped, and it's nearly as tall as you are. It hits the ground so hard that the grass cracks.",
+     "start": 22.206,
+     "end": 42.019
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You try to pick it up. It doesn't move. You pull with both hands, you lean back, you put your foot against the handle and heave. Nothing. The book just floats there beside you, flapping its cover, almost like it's laughing. And somehow, you just know. It chose you. It isn't going anywhere.",
+     "start": 42.719,
+     "end": 58.787
+    }
+   ]
+  },
+  {
+   "id": "clover",
+   "start": 59.287,
+   "end": 76.472,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Five-leaf clovers are real, by the way. A white clover leaf normally has three little leaflets. Pick thousands of them, and you might find one with four. Most counts say it's somewhere around one in five thousand to one in ten thousand. And five leaves is rarer still.",
+     "start": 59.537,
+     "end": 76.072
+    }
+   ]
+  },
+  {
+   "id": "gene",
+   "start": 76.472,
+   "end": 95.919,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "In twenty ten, a team at the University of Georgia found the genes behind the extra leaves. But genes aren't the whole story. A clover with those genes can still grow just three leaves, depending on where it grows, and how warm, wet or sunny it is. So the luck is partly in the plant, and partly in the weather.",
+     "start": 76.722,
+     "end": 95.519
+    }
+   ]
+  },
+  {
+   "id": "record",
+   "start": 95.919,
+   "end": 107.03,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And if you think five is a lot, a man in Japan called Yoshiharu Watanabe grew a clover with sixty three leaves. It's in the Guinness World Records, from twenty twenty four.",
+     "start": 96.169,
+     "end": 106.63
+    }
+   ]
+  },
+  {
+   "id": "luck",
+   "start": 107.03,
+   "end": 135.839,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, does a clover make you lucky? A psychologist called Richard Wiseman studied people who said they were lucky, and people who said they weren't. He gave them a newspaper, and asked them to count the photos inside. But on page two, in huge letters, it said: stop counting, there are forty three photographs in this newspaper. The lucky people usually spotted it in seconds. The unlucky people were so busy counting, they often missed it.",
+     "start": 107.28,
+     "end": 131.641
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Luck, it turns out, is partly just noticing things.",
+     "start": 132.341,
+     "end": 135.339
+    }
+   ]
+  },
+  {
+   "id": "heavy",
+   "start": 135.839,
+   "end": 158.979,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You drag the sword home. It leaves a groove all the way up the path. Here's the thing about swords in films and comics. Real ones were surprisingly light. Most medieval longswords weighed around one to one and a half kilograms, about as much as a bag of sugar. But a solid slab of steel the size of yours would weigh about thirty kilograms. That's like swinging a whole nine year old.",
+     "start": 136.089,
+     "end": 158.479
+    }
+   ]
+  },
+  {
+   "id": "train",
+   "start": 158.979,
+   "end": 175.865,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So you train. Every morning, before school. Push ups. Squats. Sprints around the park, with the sword strapped to your back. On day one, you can just about lift the tip. By day ten, you can lift it to your knees. And by day thirty, you can swing it right over your head.",
+     "start": 159.229,
+     "end": 175.465
+    }
+   ]
+  },
+  {
+   "id": "muscles",
+   "start": 175.865,
+   "end": 200.826,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And this part is real. When you start lifting heavy things, you get stronger surprisingly fast. But at first, it's not because your muscles are bigger. In nineteen seventy nine, two scientists, Toshio Moritani and Herbert de Vries, found that in the first few weeks, most of the gain comes from your brain and nerves learning to use the muscle you already have. The muscle itself grows later. And it rebuilds while you rest, not while you lift.",
+     "start": 176.115,
+     "end": 200.326
+    }
+   ]
+  },
+  {
+   "id": "power",
+   "start": 200.826,
+   "end": 218.761,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then, one night, you notice something strange. When the blade gets close to your desk fan, the fan stops. When it gets close to your phone, the music cuts out. When it touches your lamp, the light goes out. You pull the sword away, and everything comes back. The sword doesn't cut things. It cancels them.",
+     "start": 201.076,
+     "end": 218.261
+    }
+   ]
+  },
+  {
+   "id": "noise",
+   "start": 218.761,
+   "end": 245.806,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The next day, the school band is practising next door, and it is loud. You lift the sword, just a little, and the whole room goes silent.",
+     "start": 219.011,
+     "end": 226.845
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Cancelling sound is actually real. Sound is a wave, and if you make the exact opposite wave at the same moment, the two cancel out. That's how noise cancelling headphones work. A German physicist patented the idea back in the nineteen thirties, decades before the headphones existed.",
+     "start": 227.545,
+     "end": 245.306
+    }
+   ]
+  },
+  {
+   "id": "anti",
+   "start": 245.806,
+   "end": 272.22,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your book's power, it seems, is anti. And anti is real too. In nineteen twenty eight, a physicist called Paul Dirac worked out that every particle should have an opposite twin, a mirror version with the opposite charge. Four years later, Carl Anderson photographed one, the anti electron, streaking through his cloud chamber. Today we call it a positron. And when a particle meets its anti twin, they both vanish in a flash of pure energy.",
+     "start": 246.056,
+     "end": 271.82
+    }
+   ]
+  },
+  {
+   "id": "banana",
+   "start": 272.22,
+   "end": 292.142,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "There's even some in your fruit bowl. Bananas are full of potassium, and a tiny bit of that potassium is radioactive. So an ordinary banana gives off a positron about once every seventy five minutes. Hospitals use positrons too, in pet scanners, to see what's happening inside people's bodies.",
+     "start": 272.47,
+     "end": 291.642
+    }
+   ]
+  },
+  {
+   "id": "storm",
+   "start": 292.142,
+   "end": 306.168,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then comes Saturday. Your friends have a big football match on the school field, and you've come to watch, with the sword on your back. Halfway through, the sky goes dark. Thunder rumbles across the field. And nobody stops playing.",
+     "start": 292.392,
+     "end": 305.768
+    }
+   ]
+  },
+  {
+   "id": "count",
+   "start": 306.168,
+   "end": 326.652,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "There's a flash over the hills, and you start counting. One. Two. Three. Four. Five. Six. Then the thunder hits. That's a real trick. Light reaches you almost instantly, but sound only travels about a kilometre every three seconds. So six seconds means the storm is about two kilometres away. And it's getting closer.",
+     "start": 306.418,
+     "end": 326.252
+    }
+   ]
+  },
+  {
+   "id": "thunder",
+   "start": 326.652,
+   "end": 344.381,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That's a real mistake. A bolt of lightning heats the air around it to nearly thirty thousand degrees, about five times hotter than the surface of the sun. And it can strike up to sixteen kilometres away from the storm. The real rule is simple. When thunder roars, go indoors.",
+     "start": 326.902,
+     "end": 343.981
+    }
+   ]
+  },
+  {
+   "id": "strike",
+   "start": 344.381,
+   "end": 375.823,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You shout at everyone to get inside, and they start running. Then the sky flashes, and a bolt of lightning comes straight down towards your best friend. You don't even think. You jump, and swing the sword up over your head, exactly the way you've practised a thousand times. The lightning hits the blade, and just stops. It's gone. Cancelled.",
+     "start": 344.631,
+     "end": 364.046
+    },
+    {
+     "who": "NARRATOR",
+     "text": "For a second, there's no sound at all. Then the rain pours down, and everyone is staring at you. Your best friend is standing there, completely fine, with their hair sticking straight up.",
+     "start": 364.746,
+     "end": 375.223
+    }
+   ]
+  },
+  {
+   "id": "odds",
+   "start": 375.823,
+   "end": 394.922,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Getting struck by lightning is rare, but it's not as rare as you'd think. In the United States, the odds of being hit in any one year are about one in a million. But over a whole lifetime, it's about one in fifteen thousand. That's why the safest plan is never to rely on luck, or on a magic sword.",
+     "start": 376.073,
+     "end": 394.422
+    }
+   ]
+  },
+  {
+   "id": "faraday",
+   "start": 394.922,
+   "end": 427.341,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "In real life, nobody has an anti magic sword. But we do have something almost as good. A passenger plane gets hit by lightning roughly once a year. The electricity runs along the metal skin and out again, and the people inside are safe. It's called a Faraday cage, after Michael Faraday, who built a room covered in metal foil in eighteen thirty six, blasted the outside with sparks, and showed there was no charge inside. Cars work the same way. It's the metal body that protects you, not the rubber tyres.",
+     "start": 395.172,
+     "end": 426.841
+    }
+   ]
+  },
+  {
+   "id": "after",
+   "start": 427.341,
+   "end": 443.104,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That night, you can't even lift your arms. The sword sinks back into its page, and the book curls up at the end of your bed like a cat. You fall asleep before your head even touches the pillow. Which, as it happens, is exactly when your muscles do their growing.",
+     "start": 427.591,
+     "end": 442.604
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 443.104,
+   "end": 466.22,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The next morning, the doorbell rings. On the doorstep is a little old lady, with glasses on a chain, and a library card in her hand. The book hides behind your back. She reaches past you, opens its cover, and taps a stamp inside. Clover Lane Library. Due back, the third of March, sixteen twenty six.",
+     "start": 443.354,
+     "end": 461.533
+    },
+    {
+     "who": "NARRATOR",
+     "text": "That's four hundred years overdue. And she's brought a calculator.",
+     "start": 462.233,
+     "end": 465.62
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 466.22,
+   "end": 484.484,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you want a five-leaf grimoire, even if it came with a sword you can barely lift, and the biggest library fine in history? And if your book could have any power at all, what would it be? Tell me in the comments. And if you ever find a five-leaf clover of your own, maybe check under it first.",
+     "start": 466.47,
+     "end": 483.284
+    }
+   ]
+  }
+ ]
+}

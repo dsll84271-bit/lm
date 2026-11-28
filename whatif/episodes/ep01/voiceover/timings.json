@@ -1,0 +1,544 @@
+{
+ "seconds": 540.806,
+ "shots": [
+  {
+   "id": "cold",
+   "start": 0.0,
+   "end": 5.352,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You're late. The bus doors are closing. You snap your fingers, and the whole world stops.",
+     "start": 0.25,
+     "end": 4.952
+    }
+   ]
+  },
+  {
+   "id": "frozen",
+   "start": 5.352,
+   "end": 15.803,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The rain hangs in the air like glass beads. A pigeon freezes in mid-flap. Nobody moves but you.",
+     "start": 5.602,
+     "end": 11.829
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Then everything goes black. And you can't breathe.",
+     "start": 12.729,
+     "end": 15.203
+    }
+   ]
+  },
+  {
+   "id": "black",
+   "start": 15.803,
+   "end": 34.74,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You see because light is always pouring into your eyes, about three hundred thousand kilometres every second. Stop time, and the light stops too. And the air? Air flows into your lungs because its molecules are always zooming around, about five hundred metres a second. Freeze them, and they just sit there.",
+     "start": 16.053,
+     "end": 34.34
+    }
+   ]
+  },
+  {
+   "id": "gasp",
+   "start": 34.74,
+   "end": 47.775,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You snap your fingers again. You're on your knees, gasping, soaked. The bus is gone.",
+     "start": 34.99,
+     "end": 39.58
+    },
+    {
+     "who": "NARRATOR",
+     "text": "So you practise. And on the third night, you find the trick. Don't stop time. Slow it down. A thousand times.",
+     "start": 40.38,
+     "end": 46.975
+    }
+   ]
+  },
+  {
+   "id": "rules",
+   "start": 47.775,
+   "end": 59.987,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Now the air still moves, just slowly, so you can breathe. Somehow, light still gets through, so you can see. Don't ask how. Physicists would have a lot of questions. But everything around you crawls.",
+     "start": 48.025,
+     "end": 59.587
+    }
+   ]
+  },
+  {
+   "id": "tests",
+   "start": 59.987,
+   "end": 84.598,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "First, you test it. You knock your phone off the desk. Snap. A phone falling from a desk takes about half a second to hit the floor. In slow time, that's about seven and a half minutes. You walk round it. You look at it from underneath. You make a sandwich. Then you come back and catch it.",
+     "start": 60.237,
+     "end": 77.16
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You do it again. And again. By midnight, you've caught it two hundred times, and it has never once touched the floor.",
+     "start": 77.86,
+     "end": 84.098
+    }
+   ]
+  },
+  {
+   "id": "egg",
+   "start": 84.598,
+   "end": 101.789,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then you get hungry. Bad idea. In slow time, everything cooks slowly too. A boiled egg takes about ten minutes. Slowed a thousand times, that's nearly a week. The bubbles in the pan just sit there, like little glass marbles. You snap back and eat cereal instead.",
+     "start": 84.848,
+     "end": 101.289
+    }
+   ]
+  },
+  {
+   "id": "bus",
+   "start": 101.789,
+   "end": 111.858,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Next morning, the bus doors start to close. Snap. To you, those doors now take eight whole minutes to shut. You stroll on, sit down, and snap back.",
+     "start": 102.039,
+     "end": 111.358
+    }
+   ]
+  },
+  {
+   "id": "test",
+   "start": 111.858,
+   "end": 123.69,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Maths test tomorrow? A thirty minute lunch break becomes about three weeks of your time. You read the whole textbook. Twice. You score a hundred. Your teacher checks your sleeves for notes.",
+     "start": 112.108,
+     "end": 123.19
+    }
+   ]
+  },
+  {
+   "id": "dodge",
+   "start": 123.69,
+   "end": 135.295,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Dodgeball. A ball comes at your face at fifteen metres a second. To you, it's drifting at one and a half centimetres a second. You just step out of the way. Every throw. Every game.",
+     "start": 123.94,
+     "end": 134.795
+    }
+   ]
+  },
+  {
+   "id": "penalty",
+   "start": 135.295,
+   "end": 154.26,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then football. Your friends put you in goal for a joke. A hard penalty flies at about thirty metres a second. To you, that's three centimetres a second. You take your time, lean across, and pick it out of the air like an apple off a tree. Ten penalties. Ten saves. The striker sits down on the grass.",
+     "start": 135.545,
+     "end": 153.76
+    }
+   ]
+  },
+  {
+   "id": "rps",
+   "start": 154.26,
+   "end": 170.19,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "There's a rock, paper, scissors tournament at school. Most people's hands give them away about a quarter of a second before they finish. For you, that's four whole minutes to watch their fingers move. You win fifty games in a row. They ban you from the next one.",
+     "start": 154.51,
+     "end": 169.69
+    }
+   ]
+  },
+  {
+   "id": "fly",
+   "start": 170.19,
+   "end": 191.421,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Some older kids bet you five pounds you can't catch a fly. A housefly beats its wings about two hundred times a second. In slow time, it's one flap every five seconds, like a tiny helicopter that's run out of fuel. You walk up, take it gently between two fingers, snap back, and let it go out of the window. Five pounds. Each.",
+     "start": 170.44,
+     "end": 190.921
+    }
+   ]
+  },
+  {
+   "id": "highfive",
+   "start": 191.421,
+   "end": 210.413,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then your friend goes for a high five. You're still in slow time, and you swing your hand like normal.",
+     "start": 191.671,
+     "end": 196.956
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Big mistake. To you, that's two metres a second. To the real world, it's two thousand. Six times the speed of sound. The air can't get out of the way. It slams into your palm and heats up like a meteor.",
+     "start": 197.656,
+     "end": 209.813
+    }
+   ]
+  },
+  {
+   "id": "careful",
+   "start": 210.413,
+   "end": 217.345,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your hand is blistered for a week. From then on, in slow time, you move like a sloth. Gently. Always.",
+     "start": 210.663,
+     "end": 216.845
+    }
+   ]
+  },
+  {
+   "id": "teleport",
+   "start": 217.345,
+   "end": 233.152,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "There's another problem. To everyone else, you teleport. One second you're next to them, the next you're across the room holding a cookie. Your friend drops his fork. You start leaving one second gaps, walking very normally, and pretending you were there all along.",
+     "start": 217.595,
+     "end": 232.652
+    }
+   ]
+  },
+  {
+   "id": "games",
+   "start": 233.152,
+   "end": 246.16,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Video games. Most people react in about a quarter of a second. You get about four minutes to think about every single move. One month later, you're number one on the whole leaderboard. Half the chat thinks you're hacking.",
+     "start": 233.402,
+     "end": 245.66
+    }
+   ]
+  },
+  {
+   "id": "magic",
+   "start": 246.16,
+   "end": 263.16,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then the high street. You set up a little table and do card tricks. The card someone picked ends up in their own back pocket. Their phone ends up in their friend's hand. Nobody sees you move. In one Saturday afternoon, the hat fills up with nearly two hundred pounds in coins.",
+     "start": 246.41,
+     "end": 262.66
+    }
+   ]
+  },
+  {
+   "id": "race",
+   "start": 263.16,
+   "end": 281.379,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Sports day. A hundred metre race. You can't run in slow time, so you shuffle. One centimetre a second. But to the real world, that's ten metres a second. Usain Bolt speed.",
+     "start": 263.41,
+     "end": 274.528
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You cross the line in about ten seconds. For you, that race took nearly three hours of shuffling.",
+     "start": 275.228,
+     "end": 280.779
+    }
+   ]
+  },
+  {
+   "id": "quiet",
+   "start": 281.379,
+   "end": 309.29,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Sometimes, you go into slow time just to look. Rain drifts down at about a snail's pace. A hummingbird beats its wings about fifty times a second. In slow time, it's one lazy flap every twenty seconds.",
+     "start": 281.629,
+     "end": 295.089
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And it's silent. A voice vibrates about two hundred times a second. Slow it down a thousand times, and it's far too low for any ear to hear. Your friends' voices just roll past you, as invisible waves.",
+     "start": 295.789,
+     "end": 308.69
+    }
+   ]
+  },
+  {
+   "id": "lightning",
+   "start": 309.29,
+   "end": 325.915,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "One night there's a storm. A lightning flash usually lasts about a fifth of a second. It flickers, several times, faster than you can see. In slow time, you sit on the roof and watch one bolt crawl across the sky, branch by branch, for over three minutes.",
+     "start": 309.54,
+     "end": 325.315
+    }
+   ]
+  },
+  {
+   "id": "famous",
+   "start": 325.915,
+   "end": 362.149,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Somebody films you catching a falling phone from across the room. Then a glass. Then a toddler's ice cream. The clip hits fifty million views.",
+     "start": 326.165,
+     "end": 334.756
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Then a morning TV show. The host drops a ball, a cup, a whole tray of cutlery, and you catch every piece before it lands. The studio audience screams.",
+     "start": 335.456,
+     "end": 345.033
+    },
+    {
+     "who": "NARRATOR",
+     "text": "A university calls. Their scientists have already done something like this with a camera. In two thousand and eleven, a team at MIT filmed a pulse of light crossing a bottle, at about a trillion frames a second. They want to know how your eyes do it without one.",
+     "start": 345.733,
+     "end": 361.549
+    }
+   ]
+  },
+  {
+   "id": "cost",
+   "start": 362.149,
+   "end": 377.463,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But there's a cost nobody sees. Every minute you spend in slow time, you live about sixteen hours. Fifteen minutes a day, and you're living an extra ten days, every day.",
+     "start": 362.399,
+     "end": 372.734
+    },
+    {
+     "who": "NARRATOR",
+     "text": "After a year, your friends are a year older. You're more like eleven.",
+     "start": 373.434,
+     "end": 376.863
+    }
+   ]
+  },
+  {
+   "id": "sleep",
+   "start": 377.463,
+   "end": 393.741,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And you still get tired. People need about eight hours of sleep for every day they're awake. So that three week lunch break you used to study? You had to sleep about twenty one times in it. On the classroom floor. While the rest of your class sat frozen, mid-sandwich.",
+     "start": 377.713,
+     "end": 393.141
+    }
+   ]
+  },
+  {
+   "id": "lonely",
+   "start": 393.741,
+   "end": 403.98,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And it's lonely. Weeks of your life where nobody moves, and nobody talks. You catch yourself in a shop window. You look older than you should. You're fourteen.",
+     "start": 393.991,
+     "end": 403.18
+    }
+   ]
+  },
+  {
+   "id": "drift",
+   "start": 403.98,
+   "end": 416.041,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You forget things your friends said, because for you it was weeks ago. You miss jokes. At your best friend's birthday, you've lived through a whole extra summer since the last one. He's the same. You're not.",
+     "start": 404.23,
+     "end": 415.441
+    }
+   ]
+  },
+  {
+   "id": "doctor",
+   "start": 416.041,
+   "end": 427.905,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At a check-up, the doctor frowns at your chart. Your height, your teeth, your bones. Everything says you're older than the date on your birth certificate. She checks it twice. You don't tell her why.",
+     "start": 416.291,
+     "end": 427.305
+    }
+   ]
+  },
+  {
+   "id": "street",
+   "start": 427.905,
+   "end": 438.886,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then one afternoon, a little kid chases a ball into the road. A car is coming, about fifty kilometres an hour. Fifteen metres away. In about one second, it hits him.",
+     "start": 428.155,
+     "end": 438.586
+    }
+   ]
+  },
+  {
+   "id": "snap",
+   "start": 438.886,
+   "end": 449.514,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Snap. The car is still moving, but now it's crawling, about one and a half centimetres a second. You've got around eighteen minutes of your time. And you're twenty metres away.",
+     "start": 439.136,
+     "end": 449.114
+    }
+   ]
+  },
+  {
+   "id": "driver",
+   "start": 449.514,
+   "end": 459.553,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You look at the driver. He's looking down at his phone. He hasn't even seen the kid yet. The kid is mid-step, one hand stretched out for the ball. He has no idea.",
+     "start": 449.764,
+     "end": 459.153
+    }
+   ]
+  },
+  {
+   "id": "dash",
+   "start": 459.553,
+   "end": 472.417,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Every part of you wants to sprint. But you remember the high five. Run in slow time, and the air would burn you up before you got there. So you walk. Slowly. Carefully. Every step a few centimetres.",
+     "start": 459.803,
+     "end": 472.017
+    }
+   ]
+  },
+  {
+   "id": "reach",
+   "start": 472.417,
+   "end": 497.934,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "You get there with three minutes to spare. You reach for him, and freeze. If you yank him out at your speed, to him it's like being hit by a car anyway.",
+     "start": 472.667,
+     "end": 480.889
+    },
+    {
+     "who": "NARRATOR",
+     "text": "So you push. One millimetre a second. For sixteen minutes. Your arms burn. The bumper creeps closer.",
+     "start": 481.589,
+     "end": 487.734
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Five minutes. Ten. The bumper is a hand's width away now. Your arms are shaking. You can't speed up, and you can't stop. Fourteen minutes. Fifteen.",
+     "start": 488.434,
+     "end": 497.334
+    }
+   ]
+  },
+  {
+   "id": "miss",
+   "start": 497.934,
+   "end": 512.879,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Snap. Brakes screech. The car stops right where he was standing. The kid is sitting on the pavement, confused, without a scratch. All he felt was a gentle push.",
+     "start": 498.184,
+     "end": 507.726
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Nobody saw you move. To everyone else, you were just standing there.",
+     "start": 508.426,
+     "end": 511.879
+    }
+   ]
+  },
+  {
+   "id": "twist",
+   "start": 512.879,
+   "end": 531.02,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That night, you slip into slow time, just to watch the rain. Everything stops. The drops hang in the air.",
+     "start": 513.129,
+     "end": 519.395
+    },
+    {
+     "who": "NARRATOR",
+     "text": "And across the street, somebody else is still moving. They turn, and look straight at you.",
+     "start": 520.295,
+     "end": 525.02
+    },
+    {
+     "who": "NARRATOR",
+     "text": "They smile. They lift one hand. And they snap their fingers.",
+     "start": 526.02,
+     "end": 529.42
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 531.02,
+   "end": 540.806,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, would you want to control time? Tell us in the comments. And if you'd have saved that kid too, subscribe for more what ifs.",
+     "start": 531.27,
+     "end": 538.306
+    }
+   ]
+  }
+ ]
+}

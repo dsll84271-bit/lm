@@ -1,0 +1,823 @@
+{
+ "seconds": 499.29,
+ "shots": [
+  {
+   "id": "open",
+   "start": 0.0,
+   "end": 6.679,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "This is Dex. You probably can't see him. He's on the pillow.",
+     "start": 0.35,
+     "end": 3.792
+    },
+    {
+     "who": "NARRATOR",
+     "text": "No. Smaller than that.",
+     "start": 4.692,
+     "end": 6.079
+    }
+   ]
+  },
+  {
+   "id": "pillow",
+   "start": 6.679,
+   "end": 9.879,
+   "lines": []
+  },
+  {
+   "id": "intro",
+   "start": 9.879,
+   "end": 16.695,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Every morning, Dex wakes up with a brand new superpower.",
+     "start": 10.229,
+     "end": 13.511
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Today, it's shrinking.",
+     "start": 14.011,
+     "end": 15.295
+    }
+   ]
+  },
+  {
+   "id": "ruler",
+   "start": 16.695,
+   "end": 28.822,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Overnight, Dex has shrunk to about one centimetre tall. That's about the size of a ladybird, smaller than a sugar cube, and around a hundred and forty times shorter than he was yesterday.",
+     "start": 17.045,
+     "end": 28.222
+    }
+   ]
+  },
+  {
+   "id": "hoodie",
+   "start": 28.822,
+   "end": 40.852,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The power shrinks whatever he was wearing when it arrived. Luckily, that's his favourite hoodie.",
+     "start": 29.172,
+     "end": 34.296
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Anything he picks up after that stays its normal size. So a pencil is now a tree trunk.",
+     "start": 34.796,
+     "end": 40.052
+    }
+   ]
+  },
+  {
+   "id": "ride",
+   "start": 40.852,
+   "end": 42.851,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Ride anything.",
+     "start": 41.202,
+     "end": 42.151
+    }
+   ]
+  },
+  {
+   "id": "hide",
+   "start": 42.851,
+   "end": 44.817,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Hide anywhere.",
+     "start": 43.201,
+     "end": 44.117
+    }
+   ]
+  },
+  {
+   "id": "door",
+   "start": 44.817,
+   "end": 48.063,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Walk under doors. It sounds amazing.",
+     "start": 45.167,
+     "end": 47.463
+    }
+   ]
+  },
+  {
+   "id": "badnews",
+   "start": 48.063,
+   "end": 54.881,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But real physics has some bad news, starting with this. A tiny body gets cold. Fast.",
+     "start": 48.413,
+     "end": 54.081
+    }
+   ]
+  },
+  {
+   "id": "heat",
+   "start": 54.881,
+   "end": 60.688,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your body is always making heat, and it's always losing it, mostly through your skin.",
+     "start": 55.231,
+     "end": 60.188
+    }
+   ]
+  },
+  {
+   "id": "cubes",
+   "start": 60.688,
+   "end": 73.271,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Here's the problem. Take a block and cut it into eight smaller blocks. It's the same amount of stuff, but now there's twice as much outside surface. Keep cutting, and the surface keeps growing.",
+     "start": 61.038,
+     "end": 72.671
+    }
+   ]
+  },
+  {
+   "id": "skin",
+   "start": 73.271,
+   "end": 82.478,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Shrink Dex a hundred and forty times, and for every gram of Dex, there's about a hundred and forty times more skin for heat to escape through.",
+     "start": 73.621,
+     "end": 81.878
+    }
+   ]
+  },
+  {
+   "id": "shrew",
+   "start": 82.478,
+   "end": 98.271,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That's why the smallest animals have to run like little furnaces. The Etruscan shrew is one of the smallest mammals on Earth. It weighs about two grams, and its heart can beat over a thousand times a minute. Yours beats about seventy.",
+     "start": 82.828,
+     "end": 97.671
+    }
+   ]
+  },
+  {
+   "id": "freezing",
+   "start": 98.271,
+   "end": 105.227,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Dex is much smaller than that shrew. So, sitting on his pillow in the cool morning air, he's freezing.",
+     "start": 98.621,
+     "end": 104.627
+    }
+   ]
+  },
+  {
+   "id": "rule1",
+   "start": 105.227,
+   "end": 108.76,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Rule one. Small means cold.",
+     "start": 105.577,
+     "end": 107.36
+    }
+   ]
+  },
+  {
+   "id": "breakfast",
+   "start": 108.76,
+   "end": 111.408,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Next problem. Breakfast.",
+     "start": 109.11,
+     "end": 110.908
+    }
+   ]
+  },
+  {
+   "id": "fuel",
+   "start": 111.408,
+   "end": 125.864,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "To stay warm, a tiny body has to burn fuel all day long. Shrews eat roughly their own body weight in food every day, and they need to eat every few hours. Without food, some can starve in less than a day.",
+     "start": 111.758,
+     "end": 125.264
+    }
+   ]
+  },
+  {
+   "id": "crumb",
+   "start": 125.864,
+   "end": 136.692,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Luckily, Dex doesn't need much. One crumb of toast is a proper meal. But it's not breakfast and done. It's breakfast, and a snack, and a snack, and a snack.",
+     "start": 126.214,
+     "end": 136.092
+    }
+   ]
+  },
+  {
+   "id": "journey",
+   "start": 136.692,
+   "end": 151.649,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The problem is getting there. The kitchen is at the other end of the house. For Dex, that's like walking about two kilometres.",
+     "start": 137.042,
+     "end": 144.021
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Each of his steps is about four millimetres long. Even walking briskly, the trip would take him around half an hour.",
+     "start": 144.521,
+     "end": 151.049
+    }
+   ]
+  },
+  {
+   "id": "rule2",
+   "start": 151.649,
+   "end": 155.182,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Rule two. Eat all the time.",
+     "start": 151.999,
+     "end": 153.782
+    }
+   ]
+  },
+  {
+   "id": "fall",
+   "start": 155.182,
+   "end": 162.72,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then Dex finds a shortcut. He just steps off the edge of the bed.",
+     "start": 155.532,
+     "end": 159.32
+    }
+   ]
+  },
+  {
+   "id": "fallwhy",
+   "start": 162.72,
+   "end": 177.979,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And he's fine. When you fall, the air pushes back against you. For something big and heavy, that barely matters. For something tiny and light, the air slows you right down. An ant can fall from almost any height and simply walk away.",
+     "start": 163.07,
+     "end": 177.379
+    }
+   ]
+  },
+  {
+   "id": "haldane",
+   "start": 177.979,
+   "end": 187.206,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "A scientist called J. B. S. Haldane wrote about this in nineteen twenty-six, in a famous essay called On Being the Right Size.",
+     "start": 178.329,
+     "end": 186.706
+    }
+   ]
+  },
+  {
+   "id": "mouse",
+   "start": 187.206,
+   "end": 194.643,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "He said you could drop a mouse down a deep mine shaft, and at the bottom, it would get a slight shock, and walk away.",
+     "start": 187.556,
+     "end": 193.843
+    }
+   ]
+  },
+  {
+   "id": "rule3",
+   "start": 194.643,
+   "end": 198.322,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Rule three. Falling is fine.",
+     "start": 194.993,
+     "end": 196.922
+    }
+   ]
+  },
+  {
+   "id": "strong",
+   "start": 198.322,
+   "end": 210.798,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Something else gets easier too. How strong a muscle is depends on how thick it is. But how heavy you are depends on your whole body. When you shrink, your weight drops much faster than your strength.",
+     "start": 198.672,
+     "end": 210.198
+    }
+   ]
+  },
+  {
+   "id": "cornflake",
+   "start": 210.798,
+   "end": 225.64,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That's how an ant can carry things much heavier than itself. And it's how Dex can carry a cornflake bigger than he is, right over his head.",
+     "start": 211.148,
+     "end": 219.247
+    },
+    {
+     "who": "NARRATOR",
+     "text": "A cornflake weighs a few times more than Dex does. For a body this small, that's easy.",
+     "start": 219.747,
+     "end": 224.84
+    }
+   ]
+  },
+  {
+   "id": "mum",
+   "start": 225.64,
+   "end": 231.8,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then Mum comes in. Dex shouts as loud as he can.",
+     "start": 225.99,
+     "end": 229.218
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Nothing.",
+     "start": 230.318,
+     "end": 231.0
+    }
+   ]
+  },
+  {
+   "id": "folds",
+   "start": 231.8,
+   "end": 245.79,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Your voice comes from two small folds in your throat that vibrate as air rushes past. Smaller, lighter folds vibrate faster, which makes a higher sound. That's why children's voices are higher than adults'.",
+     "start": 232.15,
+     "end": 245.19
+    }
+   ]
+  },
+  {
+   "id": "pitch",
+   "start": 245.79,
+   "end": 257.327,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Shrink those folds as much as Dex has been shrunk, and his voice could end up so high it goes right past the top of human hearing, at around twenty thousand vibrations a second.",
+     "start": 246.14,
+     "end": 256.727
+    }
+   ]
+  },
+  {
+   "id": "mice",
+   "start": 257.327,
+   "end": 270.538,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Mice already do something like this. Lots of their squeaks are ultrasound, far too high for us to hear. And even if Mum could hear the pitch, lungs smaller than a sesame seed don't push out much sound.",
+     "start": 257.677,
+     "end": 269.938
+    }
+   ]
+  },
+  {
+   "id": "stomp",
+   "start": 270.538,
+   "end": 274.867,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "And then, there are Mum's feet.",
+     "start": 270.888,
+     "end": 272.467
+    }
+   ]
+  },
+  {
+   "id": "rule4",
+   "start": 274.867,
+   "end": 278.566,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Rule four. Nobody can hear you.",
+     "start": 275.217,
+     "end": 277.166
+    }
+   ]
+  },
+  {
+   "id": "biscuit",
+   "start": 278.566,
+   "end": 285.202,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Somebody notices him, though. Biscuit, the dog from down the road, has come round to visit.",
+     "start": 278.916,
+     "end": 284.402
+    }
+   ]
+  },
+  {
+   "id": "dogsize",
+   "start": 285.202,
+   "end": 297.839,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "To a one centimetre boy, Biscuit is enormous. If you scaled Biscuit up by the same amount Dex has shrunk, he'd stand about seventy metres tall. That's taller than a twenty storey building.",
+     "start": 285.552,
+     "end": 297.239
+    }
+   ]
+  },
+  {
+   "id": "sniff",
+   "start": 297.839,
+   "end": 313.049,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Biscuit sniffs. To Dex, it sounds like a jet engine and feels like a hurricane. Yesterday's rule still stands. Dogs know.",
+     "start": 298.189,
+     "end": 306.253
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Biscuit just wants to say hello. Biscuit always wants to say hello. Dex runs.",
+     "start": 307.153,
+     "end": 312.249
+    }
+   ]
+  },
+  {
+   "id": "milk",
+   "start": 313.049,
+   "end": 323.058,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "On the kitchen table, there's one last problem. A drop of spilt milk. Dex is thirsty, so he reaches in for a sip.",
+     "start": 313.399,
+     "end": 320.855
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Big mistake.",
+     "start": 321.655,
+     "end": 322.658
+    }
+   ]
+  },
+  {
+   "id": "tension",
+   "start": 323.058,
+   "end": 332.49,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The surface of a liquid pulls itself tight, like a stretchy skin. It's called surface tension. You barely notice it, because you're big and heavy.",
+     "start": 323.408,
+     "end": 332.09
+    }
+   ]
+  },
+  {
+   "id": "skater",
+   "start": 332.49,
+   "end": 343.806,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But for a tiny body, surface tension is strong. It's how pond skaters can stand on water. And it's why a small insect that touches a water drop can get stuck in it.",
+     "start": 332.84,
+     "end": 343.006
+    }
+   ]
+  },
+  {
+   "id": "cliff",
+   "start": 343.806,
+   "end": 351.809,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Haldane wrote about this too. He said that for an insect, going for a drink is as dangerous as leaning out over a cliff.",
+     "start": 344.156,
+     "end": 351.209
+    }
+   ]
+  },
+  {
+   "id": "rule5",
+   "start": 351.809,
+   "end": 355.732,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Rule five. Stay away from drinks.",
+     "start": 352.159,
+     "end": 354.332
+    }
+   ]
+  },
+  {
+   "id": "found",
+   "start": 355.732,
+   "end": 360.252,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "In the end, Mum finds him. With a magnifying glass.",
+     "start": 356.082,
+     "end": 359.252
+    }
+   ]
+  },
+  {
+   "id": "evening",
+   "start": 360.252,
+   "end": 370.948,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "That evening, Dex rides to the corner shop in Mum's coat pocket.",
+     "start": 360.602,
+     "end": 364.261
+    },
+    {
+     "who": "NARRATOR",
+     "text": "It's a bumpy ride. Every one of Mum's steps lifts him about as high as a two storey house.",
+     "start": 364.761,
+     "end": 370.148
+    }
+   ]
+  },
+  {
+   "id": "shop",
+   "start": 370.948,
+   "end": 380.626,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "At the counter, Mrs Patel, who runs the shop, is close to tears. Her wedding ring has slipped off her finger and rolled under the big drinks fridge.",
+     "start": 371.298,
+     "end": 380.026
+    }
+   ]
+  },
+  {
+   "id": "gap",
+   "start": 380.626,
+   "end": 388.208,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The gap is far too small for a hand. Even a broom won't reach.",
+     "start": 380.976,
+     "end": 384.775
+    },
+    {
+     "who": "NARRATOR",
+     "text": "But it isn't too small for Dex.",
+     "start": 385.675,
+     "end": 387.408
+    }
+   ]
+  },
+  {
+   "id": "under",
+   "start": 388.208,
+   "end": 400.801,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Under the fridge, it's dark and dusty. The dust bunnies are the size of sheep. A single grain of sugar is as big as a tennis ball. Somewhere in the corner, a spider watches him go by.",
+     "start": 388.558,
+     "end": 400.201
+    }
+   ]
+  },
+  {
+   "id": "puddle",
+   "start": 400.801,
+   "end": 406.183,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "There's a puddle from the fridge. Rule five. Dex goes the long way round.",
+     "start": 401.151,
+     "end": 405.583
+    }
+   ]
+  },
+  {
+   "id": "warm",
+   "start": 406.183,
+   "end": 412.786,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "The motor at the back of the fridge gives off warm air, so for the first time today, Dex isn't cold.",
+     "start": 406.533,
+     "end": 412.186
+    }
+   ]
+  },
+  {
+   "id": "ring",
+   "start": 412.786,
+   "end": 419.323,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Then he finds it. The ring is shining in the dust like a golden doorway, taller than he is.",
+     "start": 413.136,
+     "end": 418.523
+    }
+   ]
+  },
+  {
+   "id": "heavy",
+   "start": 419.323,
+   "end": 432.652,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "He tries to lift it. A ring like this weighs about three grams. Dex weighs about a hundredth of a gram. For him, that's like you trying to lift an elephant. Even for his size, that's far too much.",
+     "start": 419.673,
+     "end": 431.852
+    }
+   ]
+  },
+  {
+   "id": "wheel",
+   "start": 432.652,
+   "end": 440.006,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "But a ring is round. Stand it on its edge, and it's a wheel. You don't have to lift a wheel. You just have to roll it.",
+     "start": 433.002,
+     "end": 439.406
+    }
+   ]
+  },
+  {
+   "id": "roll",
+   "start": 440.006,
+   "end": 448.403,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So Dex pushes. Slowly, the ring rolls through the dust, round the puddle, past the spider, and out into the light.",
+     "start": 440.356,
+     "end": 447.403
+    }
+   ]
+  },
+  {
+   "id": "return",
+   "start": 448.403,
+   "end": 457.5,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Mrs Patel can't believe it. Her ring rolls out from under the fridge, all by itself.",
+     "start": 448.753,
+     "end": 454.078
+    },
+    {
+     "who": "NARRATOR",
+     "text": "Well. Almost all by itself.",
+     "start": 454.978,
+     "end": 456.7
+    }
+   ]
+  },
+  {
+   "id": "thanks",
+   "start": 457.5,
+   "end": 463.826,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Dex shouts, you're welcome. She can't hear a word. Rule four. But she smiles anyway.",
+     "start": 457.85,
+     "end": 462.826
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "start": 463.826,
+   "end": 472.807,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "On the way home, safe and warm in Mum's pocket, Dex falls fast asleep. Being one centimetre tall is exhausting.",
+     "start": 464.176,
+     "end": 471.607
+    }
+   ]
+  },
+  {
+   "id": "score",
+   "start": 472.807,
+   "end": 490.158,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "So, is shrinking a good superpower?",
+     "start": 473.157,
+     "end": 475.198
+    },
+    {
+     "who": "NARRATOR",
+     "text": "You can fall from anywhere, carry things bigger than you, and squeeze through gaps nobody else can.",
+     "start": 475.698,
+     "end": 481.211
+    },
+    {
+     "who": "NARRATOR",
+     "text": "But you're always cold, always hungry, nobody can hear you, the dog is a skyscraper, and one drop of milk could trap you.",
+     "start": 481.711,
+     "end": 489.158
+    }
+   ]
+  },
+  {
+   "id": "next",
+   "start": 490.158,
+   "end": 499.29,
+   "lines": [
+    {
+     "who": "NARRATOR",
+     "text": "Tomorrow, Dex wakes up with a brand new superpower.",
+     "start": 490.508,
+     "end": 493.557
+    },
+    {
+     "who": "NARRATOR",
+     "text": "What should it be? Tell us in the comments.",
+     "start": 494.057,
+     "end": 496.29
+    }
+   ]
+  }
+ ]
+}
