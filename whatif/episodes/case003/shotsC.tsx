@@ -40,7 +40,9 @@ export const S35: React.FC<ShotProps> = ({d}) => (
 // 36 · 1965: nine in ten murders solved. 2021: less than half.
 export const S36: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Tag id="s36t" text="U.S. murders solved" x={110} y={100} rot={-2} at={cue('good')} size={34} />
+		<Ransom id="s36r" text="HOW LONG?" x={1100} y={60} size={90} rot={3} at={cue('how')} />
+		<Sfx n="slap2" at={cue('how')} />
+		<Tag id="s36t" text="U.S. murders solved" x={110} y={100} rot={-2} at={cue('start')} size={34} />
 		<div style={{position: 'absolute', left: 120, top: 250, fontFamily: 'Anton', fontSize: 110, color: V.ink, opacity: useTwos() >= cue('nineteen') ? 1 : 0}}>1965</div>
 		<TenDots lit={9} at={cue('nineteen') + 4} x={460} y={240} size={86} />
 		<MarkerNote id="s36a" text="9 in 10" x={1640} y={270} at={cue('ten')} size={70} color={TEAL} rot={-4} />
@@ -88,7 +90,7 @@ const PCT = ['50%', '25%', '12.5%', '6.3%', '3.1%', '1.6%', '0.8%', '0.4%', '0.2
 // 38 · a coin flip, again and again: ten in a row is less than one in a thousand
 export const S38: React.FC<ShotProps> = ({cue}) => {
 	const f2 = useTwos();
-	const first = cue('coin');
+	const first = cue('odds');
 	const again = cue('again');
 	const step = Math.max(4, Math.min(8, Math.floor((cue('thousand') - again) / 10)));
 	const at = (i: number) => (i === 0 ? first : again + (i - 1) * step);
@@ -121,7 +123,7 @@ export const S39: React.FC<ShotProps> = ({cue}) => {
 	return (
 		<Board>
 			{files.map(([n, x, y, r], i) => (
-				<Piece key={n} id={`s39${i}`} x={x} y={y} rot={r} at={cue('dots') - 16 + i * 4}>
+				<Piece key={n} id={`s39${i}`} x={x} y={y} rot={r} at={cue('killers') + i * 10}>
 					<div style={{width: 330, height: 220, background: 'linear-gradient(160deg,#D9B77A,#C79F5E)', borderRadius: 6, boxShadow: '5px 8px 12px rgba(0,0,0,.3)', padding: 20, boxSizing: 'border-box'}}>
 						<div style={{background: '#F4ECD8', fontFamily: 'Elite', fontSize: 24, padding: '8px 12px', color: V.ink}}>{n}</div>
 						<div style={{fontFamily: 'Elite', fontSize: 22, marginTop: 14, color: '#4a3820'}}>UNSOLVED · 1 CASE</div>
@@ -136,7 +138,10 @@ export const S39: React.FC<ShotProps> = ({cue}) => {
 			<Credit text="Term coined by criminologist Steven Egger, 1984" x={120} y={1000} id="s39cr" at={cue('linkage') + 10} />
 			{useCurrentFrame() >= cue('depends') - 16 && <Clip n="r2_board" x={1480} y={420} w={700} rot={2} on={cue('depends') - 10} rate={0.5} />}
 			<MarkerNote id="s39m" text="dexter depends on it" x={1430} y={750} at={cue('depends')} size={50} rot={-3} color={TEAL} />
-			<Sfx n="slap0" at={cue('dots') - 16} />
+			<Sfx n="slap0" at={cue('killers')} />
+			<Coin id="s39c" x={1300} y={130} at={cue('course')} size={130} />
+			<InkX x={1365} y={195} at={cue('flips')} id="s39cx" />
+			<Sfx n="scribble" at={cue('flips')} />
 			<Sfx n="scribble" at={cue('dots') + 14} />
 			<Sfx n="slap1" at={cue('linkage')} />
 			<Sfx n="marker_s" at={cue('depends')} />
@@ -204,11 +209,11 @@ const Tree: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
 // 41 · April 2018: the Golden State Killer, caught through a family tree
 export const S41: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<TitleCard fig={6} title="The Golden State Killer" sub="Caught April 2018, Sacramento" at={cue('golden') - 4} id="s41t" />
+		<TitleCard fig={6} title="The Golden State Killer" sub="Caught April 2018, Sacramento" at={cue('april')} id="s41t" />
 		<Ransom id="s41r" text="DECADES LATER" x={110} y={640} size={80} rot={-3} at={cue('decades')} />
 		<MarkerNote id="s41m" text="public genealogy website" x={120} y={860} at={cue('genealogy')} size={50} rot={-2} color={TEAL} />
 		<Tree at={cue('dna') - 4} x={1400} y={200} />
-		<Sfx n="slap0" at={cue('golden') - 4} />
+		<Sfx n="slap0" at={cue('april')} />
 		<Sfx n="slap1" at={cue('decades')} />
 		<Sfx n="marker_s" at={cue('genealogy')} />
 		<S n="pin" at={cue('tree')} />
@@ -285,7 +290,7 @@ export const S45: React.FC<ShotProps> = ({d, cue}) => (
 // 46 · the real vigilantes: Drum and Mullen
 export const S46: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Tag id="s46t" text="Real vigilantes · Washington State" x={110} y={100} rot={-2} at={cue('washington')} size={32} />
+		<Tag id="s46t" text="Real vigilantes · Washington State" x={110} y={100} rot={-2} at={cue('real')} size={32} />
 		{[
 			['PATRICK DRUM · 2012', 'Sentenced to life without parole', 'within three months', cue('patrick'), 140, -2],
 			['MICHAEL MULLEN · 2005', 'Died in prison', 'less than two years later', cue('michael'), 980, 2],
@@ -298,8 +303,10 @@ export const S46: React.FC<ShotProps> = ({cue}) => (
 				</div>
 			</Piece>
 		))}
+		<MarkerNote id="s46w" text="real people who went after criminals" x={300} y={480} at={cue('people')} end={cue('patrick')} size={64} rot={-2} color={TEAL} />
+		<Sfx n="marker_l" at={cue('people')} />
 		<MarkerNote id="s46m" text="neither came close to dexter" x={420} y={720} at={cue('neither')} size={60} rot={-2} />
-		<Sfx n="slap0" at={cue('washington')} />
+		<Sfx n="slap0" at={cue('real')} />
 		<Sfx n="slap1" at={cue('patrick')} />
 		<Sfx n="slap2" at={cue('michael')} />
 		<Sfx n="marker_l" at={cue('neither')} />

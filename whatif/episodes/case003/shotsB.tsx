@@ -63,7 +63,7 @@ const DropDiagram: React.FC<{x: number; y: number; at: number}> = ({x, y, at}) =
 // 18 · MacDonell, 1971: Flight Characteristics and Stain Patterns of Human Blood
 export const S18: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Piece id="s18doc" x={110} y={120} rot={-2} at={cue('nineteen')}>
+		<Piece id="s18doc" x={110} y={120} rot={-2} at={cue('analysis')}>
 			<div style={{width: 640, background: '#F6F3EA', padding: '50px 54px', boxShadow: '8px 12px 22px rgba(29,28,32,.32)', textAlign: 'center', fontFamily: 'Elite', color: V.ink}}>
 				<div style={{fontSize: 20, letterSpacing: 3}}>U.S. DEPARTMENT OF JUSTICE · LEAA</div>
 				<div style={{fontSize: 18, letterSpacing: 2, marginTop: 6, color: '#5d5a55'}}>PR 71-4 · NOVEMBER 1971</div>
@@ -77,7 +77,7 @@ export const S18: React.FC<ShotProps> = ({cue}) => (
 		<Cutout id="s18p" src={I('fbi_lab')} w={560} h={380} x={1160} y={560} rot={2} at={cue('police')} />
 		<Caption text="A real crime lab, 1976" x={1180} y={960} at={cue('police') + 4} id="s18c" size={20} />
 		<Tag id="s18t" text="Corning, New York" x={250} y={890} rot={-2} at={cue('corning')} size={28} />
-		<Sfx n="slap0" at={cue('nineteen')} />
+		<Sfx n="slap0" at={cue('analysis')} />
 		<Sfx n="marker_s" at={cue('flight') + 4} />
 		<Sfx n="scribble" at={cue('worked') - 4} />
 		<Sfx n="slap1" at={cue('corning')} />
@@ -88,6 +88,8 @@ export const S18: React.FC<ShotProps> = ({cue}) => (
 // 19 · 2009: the National Academy of Sciences — "enormous"; "more subjective than scientific"
 export const S19: React.FC<ShotProps> = ({cue}) => (
 	<Board>
+		{useCurrentFrame() < cue('general') - 2 && <Clip n="r1_close" x={1530} y={330} w={560} rot={2} on={cue('dexter') - 6} rate={0.5} />}
+		<MarkerNote id="s19m" text="a regular part of murder trials" x={1180} y={660} at={cue('regular')} end={cue('general') - 2} size={46} rot={-2} color={TEAL} />
 		<Tag id="s19t" text="National Academy of Sciences · 2009" x={110} y={100} rot={-2} at={cue('national')} size={32} />
 		<Pleading
 			id="s19q"
@@ -108,6 +110,7 @@ export const S19: React.FC<ShotProps> = ({cue}) => (
 		<Sfx n="type0" at={cue('uncertainties') - 4} v={0.3} />
 		<Sfx n="marker_s" at={cue('enormous')} />
 		<Sfx n="slap1" at={cue('general') - 2} />
+		<Sfx n="marker_s" at={cue('regular')} />
 	</Board>
 );
 
@@ -118,6 +121,14 @@ export const S20: React.FC<ShotProps> = ({cue}) => {
 	return (
 		<Board>
 			<Tag id="s20t" text="NIJ-funded study · 2021" x={110} y={100} rot={-2} at={cue('twenty')} size={32} />
+			<Piece id="s20doc" x={760} y={180} rot={2} at={cue('study')} end={cue('patterns') + 4}>
+				<div style={{width: 760, background: '#F6F3EA', padding: '46px 54px', boxShadow: '8px 12px 22px rgba(29,28,32,.32)', textAlign: 'center', fontFamily: 'Elite', color: V.ink}}>
+					<div style={{fontSize: 20, letterSpacing: 3}}>FORENSIC SCIENCE INTERNATIONAL · 2021</div>
+					<div style={{fontFamily: 'Caslon', fontSize: 50, lineHeight: 1.12, margin: '38px 0'}}>Accuracy and Reproducibility of Conclusions by Forensic Bloodstain Pattern Analysts</div>
+					<div style={{fontSize: 20, letterSpacing: 2, color: '#5d5a55'}}>FUNDED BY THE NATIONAL INSTITUTE OF JUSTICE</div>
+				</div>
+			</Piece>
+			<Sfx n="slap2" at={cue('study')} />
 			<CountUp id="s20a" to={75} at={cue('seventy')} dur={18} x={120} y={200} size={170} comma={false} />
 			<div style={{position: 'absolute', left: 130, top: 380, fontFamily: 'Elite', fontSize: 32, letterSpacing: 3, color: V.ink, opacity: f2 >= cue('analysts') ? 1 : 0}}>WORKING ANALYSTS</div>
 			<CountUp id="s20b" to={192} at={cue('hundred')} dur={18} x={120} y={470} size={170} comma={false} />
@@ -184,7 +195,7 @@ export const S23: React.FC<ShotProps> = ({cue}) => (
 			x={110}
 			y={120}
 			w={1000}
-			at={cue('commission') - 4}
+			at={cue('more')}
 			head="Texas Forensic Science Commission"
 			lines={['The bloodstain testimony was', 'not accurate or', 'scientifically supported.']}
 			hl={[1, 2]}
@@ -202,7 +213,9 @@ export const S23: React.FC<ShotProps> = ({cue}) => (
 		</Piece>
 		<Ransom id="s23r" text="33 YEARS" x={160} y={740} size={140} rot={-3} at={cue('thirty', 1)} />
 		<Stamp text="CONVICTION STANDS" x={1440} y={880} at={cue('stands')} size={84} rot={-6} color={HOUSE_RED} />
-		<Sfx n="type1" at={cue('commission') - 4} v={0.3} />
+		<Sfx n="type1" at={cue('more')} v={0.3} />
+		{useCurrentFrame() < cue('conclusions') - 4 && <Stamp text="CONVICTED" x={1500} y={110} at={cue('convicted')} size={70} rot={-5} color={HOUSE_RED} />}
+		<S n="stamp" at={cue('convicted')} v={0.5} />
 		<Sfx n="slap0" at={cue('conclusions') - 4} />
 		<Sfx n="slap1" at={cue('parole')} />
 		<Sfx n="slap2" at={cue('thirty', 1)} />
@@ -289,11 +302,11 @@ const Logbook: React.FC<{at: number; forgedAt: number}> = ({at, forgedAt}) => {
 // 28 · Annie Dookhan, Boston, 2012: results for drugs never tested; forged signatures
 export const S28: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<TitleCard fig={4} title="Annie Dookhan" sub="State drug lab, Boston, 2012" at={cue('annie')} id="s28t" />
+		<TitleCard fig={4} title="Annie Dookhan" sub="State drug lab, Boston, 2012" at={cue('twelve')} id="s28t" />
 		<Cutout id="s28p" src={I('ma_statehouse')} w={560} h={420} x={110} y={470} rot={-2} at={cue('boston')} />
 		<Caption text="Boston, Massachusetts · C. M. Highsmith, LoC" x={130} y={900} at={cue('boston') + 4} id="s28c" size={18} />
 		<Logbook at={cue('positive') - 6} forgedAt={cue('forged')} />
-		<Sfx n="slap0" at={cue('annie')} />
+		<Sfx n="slap0" at={cue('twelve')} />
 		<Sfx n="slap1" at={cue('boston')} />
 		<Sfx n="type0" at={cue('positive') - 6} v={0.3} />
 		<S n="stamp" at={cue('forged')} v={0.6} />
@@ -339,7 +352,7 @@ export const S29: React.FC<ShotProps> = ({cue}) => (
 		<Tag id="s29t" text="Massachusetts · April 2017" x={110} y={100} rot={-2} at={cue('april')} size={32} />
 		<CountUp id="s29n" to={21587} at={cue('twenty', 1)} dur={34} x={110} y={210} size={220} />
 		<div style={{position: 'absolute', left: 120, top: 460, fontFamily: 'Elite', fontSize: 40, letterSpacing: 4, color: V.ink, opacity: lerp(useCurrentFrame(), cue('once') - 6, cue('once'), 0, 1)}}>CASES THROWN OUT · ALL AT ONCE</div>
-		<Folders at={cue('doubt') - 10} />
+		<Folders at={cue('every')} />
 		<QuoteCard text="the largest dismissal of wrongful convictions in American history" source="ACLU of Massachusetts" x={110} y={600} w={820} at={cue('campaigners')} id="s29q" size={42} accent={AMBER} />
 		<Sfx n="slap0" at={cue('april')} />
 		<Sfx n="slap1" at={cue('campaigners')} />
@@ -349,14 +362,14 @@ export const S29: React.FC<ShotProps> = ({cue}) => (
 // 30 · Sonja Farak, Amherst: more than 24,000 drug charges dismissed
 export const S30: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Ransom id="s30a" text="AGAIN" x={1200} y={150} size={120} rot={4} at={cue('again')} />
+		<Ransom id="s30a" text="AGAIN" x={1200} y={150} size={120} rot={4} at={cue('happened')} />
 		<SlidePiece id="s30s" label={'EVIDENCE\nDRUGS'} x={110} y={470} at={cue('drugs')} rot={-4} w={460} />
 		<MarkerNote id="s30n" text="secretly using them" x={130} y={650} at={cue('secretly')} size={46} rot={-3} />
 		<TitleCard fig={5} title="Sonja Farak" sub="State drug lab, Amherst, Massachusetts" at={cue('sonja')} id="s30t" />
 		<CountUp id="s30n" to={24075} at={cue('twenty')} dur={30} x={760} y={430} size={200} />
 		<div style={{position: 'absolute', left: 770, top: 660, fontFamily: 'Elite', fontSize: 38, letterSpacing: 4, color: V.ink, opacity: lerp(useCurrentFrame(), cue('dismissed') - 6, cue('dismissed'), 0, 1)}}>DRUG CHARGES DISMISSED</div>
 		<Tag id="s30s" text="16,449 cases · Special Master's report, 2019" x={770} y={760} rot={-1} at={cue('dismissed') + 6} size={24} />
-		<Sfx n="slap2" at={cue('again')} />
+		<Sfx n="slap2" at={cue('happened')} />
 		<S n="slide" at={cue('drugs')} v={0.5} />
 		<Sfx n="slap0" at={cue('sonja')} />
 		<Sfx n="slap1" at={cue('dismissed') + 6} />
@@ -369,10 +382,12 @@ export const S31: React.FC<ShotProps> = ({cue}) => {
 	const X = (y: number) => 260 + ((y - 2006) / (2014 - 2006)) * 1400;
 	return (
 		<Board>
+			<Ransom id="s31r" text="THE RULES" x={1150} y={330} size={100} rot={-3} at={cue('rules')} />
+			<Sfx n="slap2" at={cue('rules')} />
 			<IconCard k="gavel" label="Hand it over" sub="anything that damages your own witness" x={150} y={110} at={cue('prosecutors')} id="s31a" rot={-2} accent={AMBER} />
 			<IconCard k="gavel" label="Take the stand" sub="since 2009: the analyst can be cross-examined" x={620} y={130} at={cue('analyst')} id="s31b" rot={2} />
 			<Tag id="s31c" text="Melendez-Diaz v. Massachusetts (2009)" x={1100} y={200} rot={1} at={cue('analyst') + 6} size={24} />
-			<div style={{position: 'absolute', left: X(2006.75), top: 760, width: (X(2013.72) - X(2006.75)) * lerp(frame, cue('middle') - 20, cue('middle'), 0, 1), height: 70, background: V.ink, color: '#F3EEE3', fontFamily: 'Bebas', fontSize: 40, paddingLeft: 20, display: 'flex', alignItems: 'center', overflow: 'hidden', whiteSpace: 'nowrap'}}>
+			<div style={{position: 'absolute', left: X(2006.75), top: 760, width: (X(2013.72) - X(2006.75)) * lerp(frame, cue('middle') - 20, cue('middle'), 0, 1), height: 70, background: V.ink, color: '#F3EEE3', fontFamily: 'Bebas', fontSize: 40, paddingLeft: 20, opacity: frame >= cue('middle') - 20 ? 1 : 0, display: 'flex', alignItems: 'center', overflow: 'hidden', whiteSpace: 'nowrap'}}>
 				DEXTER · 2006–2013
 			</div>
 			{frame >= cue('middle') && <div style={{position: 'absolute', left: X(2009.48) - 3, top: 700, width: 6, height: 190, background: TEAL}} />}
@@ -390,10 +405,14 @@ export const S32: React.FC<ShotProps> = ({cue}) => {
 	const every = cue('every');
 	return (
 		<Board dark>
+			<MarkerNote id="s32v" text="the real version" x={620} y={300} at={cue('picture')} size={58} color="#F2D59A" rot={-3} />
+			<Ransom id="s32e" text="EXPOSED" x={560} y={430} size={150} rot={-2} at={cue('exposed')} />
+			<Sfx n="marker_s" at={cue('picture')} />
+			<Sfx n="slap1" at={cue('exposed')} />
 			{Array.from({length: 24}).map((_, i) => {
 				const col = i % 6,
 					row = Math.floor(i / 6);
-				const at = every + i;
+				const at = i === 0 ? cue('one') : every + i;
 				const re = f2 >= cue('microscope') + (i % 6) * 2;
 				return (
 					<div key={i} style={{position: 'absolute', left: 140 + col * 280, top: 120 + row * 190, opacity: f2 >= at ? 1 : 0, transform: `rotate(${((i * 29) % 9) - 4}deg)`}}>

@@ -65,8 +65,8 @@ export const S03: React.FC<ShotProps> = ({cue}) => {
 	];
 	return (
 		<Board>
-			<Cutout id="s3p" src={I('courtroom')} w={620} h={440} x={1180} y={420} rot={2.5} at={cue('courtroom') - 4} />
-			<Caption text="A real courtroom: Tallahassee, Florida" x={1190} y={900} at={cue('courtroom')} id="s3cap" size={20} />
+			<Cutout id="s3p" src={I('courtroom')} w={620} h={440} x={1180} y={420} rot={2.5} at={cue('question')} />
+			<Caption text="A real courtroom: Tallahassee, Florida" x={1190} y={900} at={cue('question') + 6} id="s3cap" size={20} />
 			{lines.map(([t, at], i) => {
 				const n = Math.max(0, Math.floor((f2 - at) * 1.25));
 				return (
@@ -79,7 +79,7 @@ export const S03: React.FC<ShotProps> = ({cue}) => {
 			<Ink id="s3u" d="M 110 735 C 400 722, 700 744, 1000 728" at={cue('last')} color={TEAL} width={9} />
 			<Sfx n="type0" at={cue('what')} v={0.3} />
 			<Sfx n="type1" at={cue('evidence')} v={0.3} />
-			<Sfx n="slap0" at={cue('courtroom') - 4} />
+			<Sfx n="slap0" at={cue('question')} />
 			<S n="riser" at={cue('how') - 50} v={0.35} />
 		</Board>
 	);
@@ -89,12 +89,12 @@ export const S03: React.FC<ShotProps> = ({cue}) => {
 export const S04: React.FC<ShotProps> = ({cue}) => (
 	<Board>
 		<Tag id="s4t" text="In real life" x={110} y={120} rot={-2} at={0} size={34} />
-		<CountUp id="s4n" to={21000} at={cue('twenty')} dur={26} x={110} y={250} size={210} suffix="+" />
+		<CountUp id="s4n" to={21000} at={cue('life')} dur={cue('cases') - cue('life')} x={110} y={250} size={210} suffix="+" />
 		<div style={{position: 'absolute', left: 120, top: 480, fontFamily: 'Elite', fontSize: 40, letterSpacing: 4, color: V.ink, opacity: lerp(useCurrentFrame(), cue('cases'), cue('cases') + 6, 0, 1)}}>CASES THROWN OUT</div>
 		<MarkerNote id="s4m" text="because of one chemist" x={130} y={560} at={cue('chemist')} size={52} rot={-2} />
 		<IconCard k="tree" label="A family tree" sub="caught a killer" x={1180} y={200} at={cue('family')} id="s4c" rot={2} />
 		<Ransom id="s4r" text="40+ YEARS" x={1060} y={760} size={110} rot={-3} at={cue('forty')} />
-		<Sfx n="slap0" at={cue('twenty')} />
+		<Sfx n="slap0" at={cue('life')} />
 		<Sfx n="marker_l" at={cue('chemist')} />
 		<Sfx n="slap1" at={cue('family')} />
 		<Sfx n="slap2" at={cue('forty')} />
@@ -222,12 +222,12 @@ export const S11: React.FC<ShotProps> = ({d, cue}) => (
 // 12 · Frye (1923): generally accepted?
 export const S12: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<TitleCard fig={1} title="The Frye test" sub="Frye v. United States, 1923" at={cue('frye')} id="s12t" />
+		<TitleCard fig={1} title="The Frye test" sub="Frye v. United States, 1923" at={cue('older')} id="s12t" />
 		<Cutout id="s12p" src={I('polygraph')} w={380} h={540} x={1430} y={160} rot={3} at={cue('lie') - 4} pos="50% 40%" />
 		<Caption text="A polygraph, 1976" x={1450} y={730} at={cue('lie')} id="s12c" size={20} />
 		<MarkerNote id="s12m" text="it began with an early lie detector" x={120} y={420} at={cue('lie')} size={44} rot={-2} />
 		<Pleading id="s12q" x={140} y={560} w={1150} at={cue('asks')} head="The Frye question" lines={['Is this method generally accepted', 'by the experts in its own field?']} hl={[0]} hlAt={cue('generally')} size={40} />
-		<Sfx n="slap0" at={cue('frye')} />
+		<Sfx n="slap0" at={cue('older')} />
 		<Sfx n="slap1" at={cue('lie') - 4} />
 		<Sfx n="type1" at={cue('asks')} v={0.3} />
 		<Sfx n="marker_s" at={cue('generally')} />
@@ -237,7 +237,7 @@ export const S12: React.FC<ShotProps> = ({cue}) => (
 // 13 · Daubert (1993): tested? peer reviewed? error rate?
 export const S13: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<TitleCard fig={2} title="The Daubert test" sub="U.S. Supreme Court, 1993" at={cue('daubert')} id="s13t" />
+		<TitleCard fig={2} title="The Daubert test" sub="U.S. Supreme Court, 1993" at={cue('newer')} id="s13t" />
 		<Cutout id="s13p" src={I('us_supreme')} w={700} h={520} x={1100} y={110} rot={2} at={cue('supreme') - 4} />
 		<Caption text="U.S. Supreme Court · Carol M. Highsmith, LoC" x={1120} y={660} at={cue('supreme')} id="s13c" size={18} />
 		<MarkerNote id="s13g" text="the judge = gatekeeper" x={120} y={420} at={cue('gatekeeper')} size={50} rot={-2} color={AMBER} />
@@ -245,7 +245,7 @@ export const S13: React.FC<ShotProps> = ({cue}) => (
 		<MarkerNote id="s13b" text="☐ peer reviewed?" x={160} y={660} at={cue('peer')} size={60} />
 		<MarkerNote id="s13c2" text="☐ error rate?" x={160} y={760} at={cue('error')} size={60} />
 		<InkCircle x={330} y={800} r={60} at={cue('rate') + 6} id="s13o" />
-		<Sfx n="slap0" at={cue('daubert')} />
+		<Sfx n="slap0" at={cue('newer')} />
 		<Sfx n="slap1" at={cue('supreme') - 4} />
 		<Sfx n="marker_s" at={cue('tested')} />
 		<Sfx n="marker_s" at={cue('peer')} />
@@ -267,14 +267,14 @@ const YearCard: React.FC<{y: string; who: string; yes: boolean; x: number; at: n
 // 14 · Florida couldn't make up its mind: 2013, 2017, 2018, 2019
 export const S14: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<Cutout id="s14p" src={I('fl_supreme')} w={560} h={360} x={110} y={110} rot={-2} at={cue('florida') - 4} />
+		<Cutout id="s14p" src={I('fl_supreme')} w={560} h={360} x={110} y={110} rot={-2} at={cue('twist')} />
 		<Caption text="Florida Supreme Court, Tallahassee" x={130} y={490} at={cue('florida')} id="s14c" size={20} />
 		<MarkerNote id="s14m" text="couldn't make up its mind" x={780} y={200} at={cue('mind')} size={64} rot={-3} />
 		<YearCard y="2013" who="STATE LEGISLATURE" yes x={110} at={cue('thirteen')} id="s14a" rot={-3} />
 		<YearCard y="2017" who="FLORIDA SUPREME COURT" yes={false} x={540} at={cue('seventeen')} id="s14b" rot={2} />
 		<YearCard y="2018" who="SUPREME COURT, AGAIN" yes={false} x={970} at={cue('eighteen')} id="s14c3" rot={-2} />
 		<YearCard y="2019" who="SUPREME COURT CHANGES ITS MIND" yes x={1400} at={cue('nineteen')} id="s14d" rot={3} />
-		<Sfx n="slap0" at={cue('florida') - 4} />
+		<Sfx n="slap0" at={cue('twist')} />
 		<Sfx n="marker_l" at={cue('mind')} />
 		<Sfx n="slap1" at={cue('thirteen')} />
 		<Sfx n="slap2" at={cue('seventeen')} />
