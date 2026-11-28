@@ -68,6 +68,12 @@ dexter, dexter resurrection, dexter resurrection season 2, dexter morgan, blood 
 
 > A YouTube thumbnail, 16:9, 1280×720, in a bold paper-collage style. Background: a sheet of legal pleading paper (numbered left margin, two thin red rules) on a dark teal-black desk. CENTRE-LEFT: a vintage 1960s wooden television set; on its screen, a dramatic silhouette of a man in a dark long-sleeved shirt standing at the end of a bright clinical hallway (no recognisable face, no actor). RIGHT: a judge's wooden gavel coming down onto a clean glass microscope slide with a white label typed "EXHIBIT B". Across the top, huge ransom-note letters cut from black, cream and mustard-yellow (#EDBD2E) paper: "ON TRIAL". A big teal (#1FA4A0) rubber stamp at an angle across the bottom right: "ADMISSIBLE?". High contrast, readable at small size. No blood, no weapons, no real people's faces, no logos, no other text.
 
+### Version 2: with your own Dexter screenshot
+
+Grab your own screenshot of Dexter from the official trailer and upload it to ChatGPT with this prompt:
+
+> Use my uploaded screenshot as the main subject, unchanged: do not redraw, alter or regenerate the person in it. Cut him out and place him on the LEFT half of a 16:9, 1280×720 YouTube thumbnail, large, from the chest up, looking toward the right. Background: dark teal-black (#0B1418) with a faint sheet of legal pleading paper (numbered left margin, thin red rules) behind him. Add a thin teal (#1FA4A0) rim light around his outline. RIGHT half: a wooden judge's gavel striking a clean glass microscope slide. Across the top right, huge ransom-note letters cut from black, cream and mustard-yellow (#EDBD2E) paper: "ON TRIAL". Bottom right: a teal rubber stamp at an angle, "INADMISSIBLE?". High contrast, readable at phone size. No blood, no weapons, no logos, no other text.
+
 Tips:
 - If ChatGPT adds words, ask it to remove everything except "ON TRIAL" and "ADMISSIBLE?".
 - Keep it blood-free: YouTube's ad review looks at the thumbnail on its own.
