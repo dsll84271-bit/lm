@@ -15,7 +15,7 @@ const Badge: React.FC<{label: string}> = ({label}) => <SlidePiece id="exb" label
 /** A typed quotation on a clean card, with its source. */
 const QuoteCard: React.FC<{text: string; source: string; x: number; y: number; w?: number; at: number; id: string; size?: number; rot?: number; accent?: string}> = ({text, source, x, y, w = 900, at, id, size = 52, rot = -1.2, accent = TEAL}) => {
 	const f2 = useTwos();
-	const n = Math.max(0, Math.floor((f2 - at - 4) * 1.6));
+	const n = Math.max(0, Math.floor((f2 - at - 4) * 2.6));
 	return (
 		<Piece id={id} x={x} y={y} rot={rot} at={at}>
 			<div style={{width: w, background: '#FBF8EF', padding: '34px 44px 28px', boxShadow: '6px 9px 16px rgba(29,28,32,.32)', borderLeft: `14px solid ${accent}`}}>
@@ -43,7 +43,7 @@ const DropDiagram: React.FC<{x: number; y: number; at: number}> = ({x, y, at}) =
 	if (f2 < at) return null;
 	const p = Math.min(1, (f2 - at) / 16);
 	return (
-		<svg width={620} height={360} style={{position: 'absolute', left: x, top: y, overflow: 'visible'}}>
+		<svg width={620} height={360} style={{position: 'absolute', left: x, top: y, overflow: 'visible', transform: 'scale(1.35)', transformOrigin: '0 0'}}>
 			<line x1={20} y1={300} x2={600} y2={300} stroke={V.ink} strokeWidth={3} />
 			<line x1={120} y1={40} x2={120 + 220 * p} y2={40 + 260 * p} stroke={TEAL} strokeWidth={5} strokeDasharray="14 10" />
 			{p >= 1 && <ellipse cx={360} cy={300} rx={70} ry={22} fill="none" stroke={V.ink} strokeWidth={5} />}
@@ -75,7 +75,7 @@ export const S18: React.FC<ShotProps> = ({cue}) => (
 			</div>
 		</Piece>
 		<Ink id="s18u" d="M 230 520 C 400 512, 560 526, 690 516" at={cue('flight') + 4} color={AMBER} width={8} />
-		<DropDiagram x={1000} y={130} at={cue('worked') - 4} />
+		<DropDiagram x={960} y={60} at={cue('worked') - 4} />
 		<Cutout id="s18p" src={I('fbi_lab')} w={560} h={380} x={1160} y={560} rot={2} at={cue('police')} />
 		<Caption text="A real crime lab, 1976" x={1180} y={960} at={cue('police') + 4} id="s18c" size={20} />
 		<Tag id="s18t" text="Corning, New York" x={250} y={890} rot={-2} at={cue('corning')} size={28} />
@@ -125,7 +125,7 @@ export const S20: React.FC<ShotProps> = ({cue}) => {
 			<CountUp id="s20b" to={192} at={cue('hundred')} dur={18} x={120} y={470} size={170} comma={false} />
 			<div style={{position: 'absolute', left: 130, top: 650, fontFamily: 'Elite', fontSize: 32, letterSpacing: 3, color: V.ink, opacity: f2 >= cue('patterns') ? 1 : 0}}>PATTERNS, CAUSE ALREADY KNOWN</div>
 			{Array.from({length: 9}).map((_, i) => {
-				const at = cue('nine') - 18 + i * 2;
+				const at = cue('patterns') + 4 + i * 3;
 				const bad = i === 6;
 				return (
 					<div key={i} style={{position: 'absolute', left: 900 + (i % 3) * 330, top: 170 + Math.floor(i / 3) * 230, opacity: f2 >= at ? 1 : 0}}>
@@ -137,7 +137,7 @@ export const S20: React.FC<ShotProps> = ({cue}) => {
 			<Ransom id="s20r" text="11.2% WRONG" x={940} y={880} size={90} rot={-2} at={wrongAt + 4} />
 			<Sfx n="slap0" at={cue('seventy')} />
 			<Sfx n="slap1" at={cue('hundred')} />
-			<S n="slide" at={cue('nine') - 18} v={0.4} />
+			<S n="slide" at={cue('patterns') + 4} v={0.4} />
 			<Sfx n="scribble" at={wrongAt} />
 		</Board>
 	);
@@ -187,7 +187,7 @@ export const S23: React.FC<ShotProps> = ({cue}) => (
 			y={120}
 			w={1000}
 			at={cue('commission') - 4}
-			head="Texas Forensic Science Commission · 2018"
+			head="Texas Forensic Science Commission"
 			lines={['The bloodstain testimony was', 'not accurate or', 'scientifically supported.']}
 			hl={[1, 2]}
 			hlAt={cue('accurate') + 4}
@@ -353,12 +353,15 @@ export const S29: React.FC<ShotProps> = ({cue}) => (
 // 30 · Sonja Farak, Amherst: more than 24,000 drug charges dismissed
 export const S30: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<MarkerNote id="s30m" text="then it happened again." x={110} y={110} at={cue('again') - 6} size={56} rot={-2} />
+		<Ransom id="s30a" text="AGAIN" x={1200} y={150} size={120} rot={4} at={cue('again')} />
+		<SlidePiece id="s30s" label={'EVIDENCE\nDRUGS'} x={110} y={470} at={cue('drugs')} rot={-4} w={460} />
+		<MarkerNote id="s30n" text="secretly using them" x={130} y={650} at={cue('secretly')} size={46} rot={-3} />
 		<TitleCard fig={5} title="Sonja Farak" sub="State drug lab, Amherst, Massachusetts" at={cue('sonja')} id="s30t" />
 		<CountUp id="s30n" to={24075} at={cue('twenty')} dur={30} x={760} y={430} size={200} />
 		<div style={{position: 'absolute', left: 770, top: 660, fontFamily: 'Elite', fontSize: 38, letterSpacing: 4, color: V.ink, opacity: lerp(useCurrentFrame(), cue('dismissed') - 6, cue('dismissed'), 0, 1)}}>DRUG CHARGES DISMISSED</div>
 		<Tag id="s30s" text="16,449 cases · Special Master's report, 2019" x={770} y={760} rot={-1} at={cue('dismissed') + 6} size={24} />
-		<Sfx n="marker_s" at={cue('again') - 6} />
+		<Sfx n="slap2" at={cue('again')} />
+		<S n="slide" at={cue('drugs')} v={0.5} />
 		<Sfx n="slap0" at={cue('sonja')} />
 		<Sfx n="slap1" at={cue('dismissed') + 6} />
 	</Board>

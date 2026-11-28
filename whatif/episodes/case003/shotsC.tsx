@@ -135,7 +135,7 @@ export const S39: React.FC<ShotProps> = ({cue}) => {
 			<InkX x={436} y={495} at={cue('dots') + 18} id="s39x2" />
 			<Ransom id="s39r" text="LINKAGE BLINDNESS" x={110} y={850} size={96} rot={-2} at={cue('linkage')} />
 			<Credit text="Term coined by criminologist Steven Egger, 1984" x={120} y={1000} id="s39cr" at={cue('linkage') + 10} />
-			<Clip n="r2_board" x={1480} y={420} w={700} rot={2} on={cue('depends') - 10} rate={0.5} />
+			{useCurrentFrame() >= cue('depends') - 16 && <Clip n="r2_board" x={1480} y={420} w={700} rot={2} on={cue('depends') - 10} rate={0.5} />}
 			<Credit text={CR_RES} x={1240} y={720} id="s39cr2" at={cue('depends')} />
 			<MarkerNote id="s39m" text="dexter depends on it" x={1250} y={800} at={cue('depends')} size={50} rot={-3} color={TEAL} />
 			<Sfx n="slap0" at={cue('dots') - 16} />
@@ -149,6 +149,7 @@ export const S39: React.FC<ShotProps> = ({cue}) => {
 // 40 · not a detective's hunch: one piece of data
 export const S40: React.FC<ShotProps> = ({cue}) => (
 	<Board>
+		<Tag id="s40t" text="How long-running killers get caught" x={110} y={100} rot={-2} at={0} size={32} />
 		<Piece id="s40a" x={150} y={240} rot={-3} at={cue('hunch') - 6}>
 			<div style={{width: 620, background: '#FBF8EF', padding: '40px 40px', boxShadow: '6px 9px 16px rgba(29,28,32,.3)', textAlign: 'center'}}>
 				<div style={{fontFamily: 'Bebas', fontSize: 80, color: V.ink, lineHeight: 1}}>A DETECTIVE'S HUNCH</div>
@@ -193,7 +194,7 @@ const Tree: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
 				const t = at + (i++) * 4;
 				const hit = row === 3;
 				return f2 >= t ? (
-					<div key={k} style={{position: 'absolute', left: dx - 90, top: row * 150, width: 180, height: 70, background: hit ? TEAL : '#FBF8EF', border: `3px solid ${V.ink}`, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Elite', fontSize: 22, color: hit ? '#fff' : V.ink, boxShadow: '4px 6px 10px rgba(0,0,0,.25)'}}>
+					<div key={k} style={{position: 'absolute', left: dx * 0.8 - 90, top: row * 150, width: 180, height: 70, background: hit ? TEAL : '#FBF8EF', border: `3px solid ${V.ink}`, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Elite', fontSize: 22, color: hit ? '#fff' : V.ink, boxShadow: '4px 6px 10px rgba(0,0,0,.25)'}}>
 						{row === 0 ? 'CRIME-SCENE DNA' : hit ? 'MATCH' : 'RELATIVE'}
 					</div>
 				) : null;
@@ -206,9 +207,9 @@ const Tree: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
 export const S41: React.FC<ShotProps> = ({cue}) => (
 	<Board>
 		<TitleCard fig={6} title="The Golden State Killer" sub="Caught April 2018, Sacramento" at={cue('golden') - 4} id="s41t" />
-		<Ransom id="s41r" text="DECADES LATER" x={110} y={500} size={96} rot={-3} at={cue('decades')} />
+		<Ransom id="s41r" text="DECADES LATER" x={110} y={500} size={80} rot={-3} at={cue('decades')} />
 		<MarkerNote id="s41m" text="public genealogy website" x={120} y={720} at={cue('genealogy')} size={50} rot={-2} color={TEAL} />
-		<Tree at={cue('dna') - 4} x={1260} y={170} />
+		<Tree at={cue('dna') - 4} x={1400} y={200} />
 		<Sfx n="slap0" at={cue('golden') - 4} />
 		<Sfx n="slap1" at={cue('decades')} />
 		<Sfx n="marker_s" at={cue('genealogy')} />
@@ -247,11 +248,11 @@ export const S43: React.FC<ShotProps> = ({cue}) => (
 		<TitleCard fig={8} title="Israel Keyes" sub="Arrested March 2012, Texas" at={cue('israel') - 4} id="s43t" />
 		<MarkerNote id="s43m" text="careful. travelled the country." x={120} y={470} at={cue('careful')} size={50} rot={-2} />
 		<Ransom id="s43r" text="WITHIN WEEKS" x={110} y={640} size={100} rot={-3} at={cue('weeks')} />
-		<IconCard k="card" label="A bank card" sub="a victim's card was used" x={1240} y={240} at={cue('bank')} id="s43c" rot={3} />
+		<IconCard k="card" label="A bank card" sub="a victim's card was used" x={1240} y={240} at={cue('caught')} id="s43c" rot={3} />
 		<Sfx n="slap0" at={cue('israel') - 4} />
 		<Sfx n="marker_s" at={cue('careful')} />
 		<Sfx n="slap1" at={cue('weeks')} />
-		<Sfx n="slap2" at={cue('bank')} />
+		<Sfx n="slap2" at={cue('caught')} />
 	</Board>
 );
 

@@ -187,7 +187,7 @@ export const CaseBrief: React.FC<{t: CaseTheme; qs: string[]; ats: number[]; x?:
  * Every act opens on an Exhibit card. The letter slaps down in ransom paper,
  * the title types on and the case's own badge (children) sits beside it.
  */
-export const ExhibitCard: React.FC<{t: CaseTheme; letter: string; title: string; d: number; children?: React.ReactNode; bg?: React.ReactNode}> = ({t, letter, title, d, children, bg}) => {
+export const ExhibitCard: React.FC<{t: CaseTheme; letter: string; title: string; d: number; children?: React.ReactNode; bg?: React.ReactNode; of?: string}> = ({t, letter, title, d, children, bg, of = 'ABCD'}) => {
 	const frame = useCurrentFrame();
 	const f2 = useTwos();
 	const boil = useBoil(`ex${letter}`);
@@ -226,6 +226,16 @@ export const ExhibitCard: React.FC<{t: CaseTheme; letter: string; title: string;
 						<span style={{opacity: 0}}>{title.slice(n)}</span>
 					</div>
 					<div style={{width: 900 * u, height: 18, background: t.accent, mixBlendMode: 'multiply', marginTop: 14, transform: 'rotate(-0.8deg)'}} />
+				</div>
+				<div style={{position: 'absolute', left: 240, right: 240, top: 900, borderTop: `3px solid ${V.ink}`, paddingTop: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+					<div style={{fontFamily: 'Elite', fontSize: 28, letterSpacing: 6, color: '#5d5a55'}}>CASE FILE {caseNo(t)} · {t.title}</div>
+					<div style={{display: 'flex', gap: 14}}>
+						{of.split('').map((l) => (
+							<div key={l} style={{width: 64, height: 40, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Bebas', fontSize: 30, background: l === letter ? t.accent : l < letter ? '#2b2a27' : 'transparent', color: l <= letter ? '#fff' : '#8b8780', border: `2px solid ${l <= letter ? 'transparent' : '#b9b4aa'}`, boxShadow: l === letter ? `0 0 16px ${t.accent}` : undefined}}>
+								{l}
+							</div>
+						))}
+					</div>
 				</div>
 				{children}
 			</AbsoluteFill>

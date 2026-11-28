@@ -110,7 +110,7 @@ export const Slide: React.FC<{label: string; w?: number; glow?: number; dim?: bo
 			}}
 		>
 			<div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: w * 0.34, background: dim ? '#5b6366' : '#F1F0EA', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-				<div style={{fontFamily: 'Elite', fontSize: w * 0.06, lineHeight: 1.1, color: '#2b2a27', textAlign: 'center', padding: 4, whiteSpace: 'pre'}}>{label}</div>
+				<div style={{fontFamily: 'Elite', fontSize: w * 0.078, lineHeight: 1.05, color: '#2b2a27', textAlign: 'center', padding: 4, whiteSpace: 'pre'}}>{label}</div>
 			</div>
 			<div style={{position: 'absolute', left: w * 0.34, top: 0, right: 0, bottom: 0, background: 'linear-gradient(115deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,.3) 100%)'}} />
 			{glow > 0 && <div style={{position: 'absolute', left: w * 0.34, top: 0, right: 0, bottom: 0, background: TEAL, opacity: 0.35 * glow}} />}

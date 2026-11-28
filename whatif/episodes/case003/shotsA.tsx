@@ -42,7 +42,7 @@ export const S02: React.FC<ShotProps> = ({cue}) => (
 	<Board dark>
 		<Clip n="r1_wake" x={760} y={500} w={1080} rot={-1} on={0} rate={0.55} />
 		<Credit text={CR_RES} x={330} y={960} id="s2cr" dark />
-		<Tag id="s2a" text="Dexter: Resurrection · Season 2" x={1330} y={230} rot={2} at={cue('resurrection')} size={28} />
+		<Tag id="s2a" text="Resurrection · Season 2" x={1330} y={230} rot={2} at={cue('resurrection')} size={26} />
 		<Piece id="s2b" x={1380} y={330} rot={-2} at={cue('friday')}>
 			<div style={{width: 420, background: '#FBF8EF', boxShadow: '6px 9px 16px rgba(0,0,0,.4)'}}>
 				<div style={{background: TEAL, color: '#fff', fontFamily: 'Bebas', fontSize: 44, padding: '6px 20px', letterSpacing: 4}}>EVERY FRIDAY</div>
@@ -112,7 +112,7 @@ export const S05: React.FC<ShotProps> = ({d, cue}) => <Ident t={T} d={d} welcome
 // 6 · the case brief: three questions
 export const S06: React.FC<ShotProps> = ({cue}) => (
 	<Board>
-		<SlidePiece id="s6s1" label={'CASE 003\nBRIEF'} x={120} y={120} at={0} rot={-8} w={300} />
+		<SlidePiece id="s6s1" label={'CASE 003\nBRIEF'} x={110} y={90} at={0} rot={-6} w={440} />
 		<CaseBrief t={T} qs={['Would his science get into court?', 'What if the man in the lab is the criminal?', 'How long would he really survive?']} ats={[cue('one'), cue('two'), cue('three', 1)]} x={380} y={250} />
 		<S n="pin" at={2} />
 		<Sfx n="type0" at={cue('one')} v={0.3} />
