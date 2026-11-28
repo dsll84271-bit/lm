@@ -17,7 +17,8 @@ export const TV: React.FC<{
 	on?: number; // frame the picture switches on
 	grade?: 'colour' | 'warm' | 'mono';
 	rate?: number; // playback speed of the clip
-}> = ({src, image, children, rate = 1, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
+	tint?: string; // a colour washed over the picture (the case accent)
+}> = ({src, image, children, rate = 1, tint, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
 	const frame = useCurrentFrame();
 	const h = w * 0.78;
 	const sw = w * 0.7,
@@ -60,6 +61,7 @@ export const TV: React.FC<{
 						{children}
 					</div>
 				)}
+				{tint && t >= 0 && <AbsoluteFill style={{background: tint, mixBlendMode: 'soft-light', opacity: 0.55}} />}
 				{t >= 0 && open < 1 && <div style={{position: 'absolute', left: 0, right: 0, top: '50%', height: 3, background: '#fff', boxShadow: '0 0 20px #fff'}} />}
 				{/* scanlines */}
 				<AbsoluteFill style={{background: 'repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 2px, transparent 2px 4px)', mixBlendMode: 'multiply'}} />
