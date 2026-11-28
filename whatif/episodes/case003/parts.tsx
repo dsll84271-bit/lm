@@ -9,6 +9,7 @@ import {clamp, lerp} from '../../docs-kit/kit';
 import type {CaseTheme} from '../../docs-kit/series';
 import {HOUSE_RED} from '../../docs-kit/series';
 import {TV} from '../../docs-kit/tv';
+import LEN from '../../public/case003/film/durations.json';
 import {PaperFinish, Piece, slap, useBoil, useTwos, V} from '../../docs-kit/vox';
 
 export {Sfx, sec} from '../case001/parts';
@@ -32,7 +33,7 @@ export const Board: React.FC<{children?: React.ReactNode; dark?: boolean; tone?:
 
 /** A clip from the trailers, silent, on the 1960s TV, tinted teal. */
 export const Clip: React.FC<{n: string; x?: number; y?: number; w?: number; rot?: number; on?: number; rate?: number; from?: number; mono?: boolean}> = ({n, x = 1340, y = 520, w = 820, rot = 1.5, on = 2, rate = 0.75, from = 0, mono}) => (
-	<TV src={F(n)} x={x} y={y} w={w} rot={rot} on={on} grade={mono ? 'mono' : 'colour'} rate={rate} startFrom={from} tint={mono ? undefined : TEAL} />
+	<TV src={F(n)} x={x} y={y} w={w} rot={rot} on={on} grade={mono ? 'mono' : 'colour'} rate={rate} startFrom={from} tint={mono ? undefined : TEAL} len={(LEN as Record<string, number>)[n]} />
 );
 
 /** Small typed credit under a clip. */
@@ -109,11 +110,11 @@ export const Slide: React.FC<{label: string; w?: number; glow?: number; dim?: bo
 				overflow: 'hidden',
 			}}
 		>
-			<div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: w * 0.34, background: dim ? '#5b6366' : '#F1F0EA', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-				<div style={{fontFamily: 'Elite', fontSize: w * 0.078, lineHeight: 1.05, color: '#2b2a27', textAlign: 'center', padding: 4, whiteSpace: 'pre'}}>{label}</div>
+			<div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: w * 0.46, background: dim ? '#5b6366' : '#F1F0EA', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+				<div style={{fontFamily: 'Elite', fontSize: Math.min(w * 0.075, (w * 0.42) / (Math.max(...label.split('\n').map((l) => l.length)) * 0.62)), lineHeight: 1.1, color: '#2b2a27', textAlign: 'center', padding: 4, whiteSpace: 'pre'}}>{label}</div>
 			</div>
-			<div style={{position: 'absolute', left: w * 0.34, top: 0, right: 0, bottom: 0, background: 'linear-gradient(115deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,.3) 100%)'}} />
-			{glow > 0 && <div style={{position: 'absolute', left: w * 0.34, top: 0, right: 0, bottom: 0, background: TEAL, opacity: 0.35 * glow}} />}
+			<div style={{position: 'absolute', left: w * 0.46, top: 0, right: 0, bottom: 0, background: 'linear-gradient(115deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,.3) 100%)'}} />
+			{glow > 0 && <div style={{position: 'absolute', left: w * 0.46, top: 0, right: 0, bottom: 0, background: TEAL, opacity: 0.35 * glow}} />}
 		</div>
 	);
 };

@@ -1,0 +1,20 @@
+{
+ "eo_boat": 1.042,
+ "eo_hall": 1.333,
+ "eo_slide": 0.75,
+ "eo_suit": 1.208,
+ "r1_close": 3.042,
+ "r1_hall": 2.542,
+ "r1_nyc": 2.042,
+ "r1_paper": 1.708,
+ "r1_wake": 7.0,
+ "r2_aerial": 0.875,
+ "r2_board": 0.958,
+ "r2_city": 2.042,
+ "r2_close": 2.5,
+ "r2_cop": 4.042,
+ "r2_news": 1.458,
+ "r2_office": 3.5,
+ "r2_police": 0.958,
+ "r2_street": 2.0
+}

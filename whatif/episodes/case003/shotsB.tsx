@@ -8,8 +8,6 @@ import {BOARD} from './board';
 import {AMBER, Board, Caption, Clip, CountUp, Credit, I, IconCard, Plate, Pleading, Sfx, Slide, SlidePiece, T, TEAL} from './parts';
 import type {ShotProps} from './timeline';
 
-const CR_ORIG = 'Dexter (Showtime, 2006–2013)';
-const CR_RES = 'Dexter: Resurrection (Paramount+)';
 const Badge: React.FC<{label: string}> = ({label}) => <SlidePiece id="exb" label={label} x={1330} y={180} at={20} rot={6} w={420} glow={0.4} />;
 
 /** A typed quotation on a clean card, with its source. */
@@ -230,7 +228,6 @@ export const S24: React.FC<ShotProps> = ({cue}) => (
 			</div>
 		</Piece>
 		<Clip n="eo_suit" x={1300} y={340} w={760} rot={2} on={cue('better') - 6} rate={0.6} />
-		<Credit text={CR_ORIG} x={1040} y={680} id="s24cr" at={cue('better')} />
 		<QuoteCard text="most definitely made for TV" source="Jennifer Shen, former San Diego police crime-lab director, to Looper" x={110} y={760} w={1000} at={cue('definitely') - 6} id="s24q" size={56} accent={AMBER} />
 		<Sfx n="slap0" at={cue("isn't")} />
 		<Sfx n="slap1" at={cue('full')} />
@@ -256,7 +253,6 @@ export const S26: React.FC<ShotProps> = ({d}) => (
 export const S27: React.FC<ShotProps> = ({cue}) => (
 	<Board dark>
 		<Clip n="r2_office" x={1300} y={420} w={900} rot={1.5} on={0} rate={0.6} />
-		<Credit text={CR_RES} x={1000} y={800} id="s27cr" dark />
 		<Ransom id="s27r" text="IT'S DEXTER" x={110} y={170} size={120} rot={-3} at={cue('dexter')} />
 		{(['hiding', 'taking', 'changing'] as const).map((w, i) => (
 			<SlidePiece key={w} id={`s27${w}`} label={`EVIDENCE\n${w.toUpperCase()}`} x={140 + i * 40} y={420 + i * 160} at={cue(w)} rot={-5 + i * 4} w={440} />

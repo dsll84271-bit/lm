@@ -8,7 +8,6 @@ import {BOARD} from './board';
 import {AMBER, Board, Caption, Clip, Coin, Credit, I, IconCard, Plate, Sfx, SlideBox, SlidePiece, T, TEAL, TenDots} from './parts';
 import type {ShotProps} from './timeline';
 
-const CR_RES = 'Dexter: Resurrection (Paramount+)';
 const Badge: React.FC<{label: string}> = ({label}) => <SlidePiece id="exb" label={label} x={1330} y={180} at={20} rot={6} w={420} glow={0.4} />;
 
 /** A clock face whose hand sweeps; it ticks on every beat. */
@@ -136,8 +135,7 @@ export const S39: React.FC<ShotProps> = ({cue}) => {
 			<Ransom id="s39r" text="LINKAGE BLINDNESS" x={110} y={850} size={96} rot={-2} at={cue('linkage')} />
 			<Credit text="Term coined by criminologist Steven Egger, 1984" x={120} y={1000} id="s39cr" at={cue('linkage') + 10} />
 			{useCurrentFrame() >= cue('depends') - 16 && <Clip n="r2_board" x={1480} y={420} w={700} rot={2} on={cue('depends') - 10} rate={0.5} />}
-			<Credit text={CR_RES} x={1240} y={720} id="s39cr2" at={cue('depends')} />
-			<MarkerNote id="s39m" text="dexter depends on it" x={1250} y={800} at={cue('depends')} size={50} rot={-3} color={TEAL} />
+			<MarkerNote id="s39m" text="dexter depends on it" x={1430} y={750} at={cue('depends')} size={50} rot={-3} color={TEAL} />
 			<Sfx n="slap0" at={cue('dots') - 16} />
 			<Sfx n="scribble" at={cue('dots') + 14} />
 			<Sfx n="slap1" at={cue('linkage')} />
@@ -207,8 +205,8 @@ const Tree: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
 export const S41: React.FC<ShotProps> = ({cue}) => (
 	<Board>
 		<TitleCard fig={6} title="The Golden State Killer" sub="Caught April 2018, Sacramento" at={cue('golden') - 4} id="s41t" />
-		<Ransom id="s41r" text="DECADES LATER" x={110} y={500} size={80} rot={-3} at={cue('decades')} />
-		<MarkerNote id="s41m" text="public genealogy website" x={120} y={720} at={cue('genealogy')} size={50} rot={-2} color={TEAL} />
+		<Ransom id="s41r" text="DECADES LATER" x={110} y={640} size={80} rot={-3} at={cue('decades')} />
+		<MarkerNote id="s41m" text="public genealogy website" x={120} y={860} at={cue('genealogy')} size={50} rot={-2} color={TEAL} />
 		<Tree at={cue('dna') - 4} x={1400} y={200} />
 		<Sfx n="slap0" at={cue('golden') - 4} />
 		<Sfx n="slap1" at={cue('decades')} />
@@ -277,7 +275,6 @@ export const S45: React.FC<ShotProps> = ({d, cue}) => (
 		<IconCard k="tree" label="650+ cases" sub="solved by genetic genealogy, to end of 2023" x={150} y={200} at={cue('six') - 4} id="s45a" rot={-2} />
 		<IconCard k="camera" label="20 billion" sub="plate scans a month (company figure)" x={620} y={240} at={cue('billion') - 6} id="s45b" rot={2} accent={AMBER} />
 		<Clip n="r2_news" x={1450} y={430} w={640} rot={2} on={cue('company') - 10} rate={0.6} />
-		<Credit text={CR_RES} x={1230} y={700} id="s45cr" at={cue('company')} dark />
 		<Caption text="Dexter's routine was built for a world before this" x={150} y={900} at={cue('routine')} id="s45m" size={30} />
 		<Sfx n="slap0" at={cue('six') - 4} />
 		<Sfx n="slap1" at={cue('billion') - 6} />
@@ -368,8 +365,7 @@ export const S52: React.FC<ShotProps> = ({d, cue}) => {
 			{frame < closeAt + 10 && (
 				<Board dark>
 					<Clip n="r2_street" x={760} y={480} w={1000} rot={-1} on={0} rate={0.6} />
-					<Credit text={CR_RES} x={330} y={900} id="s52cr" dark />
-					<Tag id="s52t" text="Season finale · New Year's Day" x={1300} y={300} rot={2} at={cue('finale')} size={30} />
+					<Tag id="s52t" text="Finale · New Year's Day" x={1300} y={300} rot={2} at={cue('finale')} size={30} />
 					<MarkerNote id="s52m" text="now you know." x={1320} y={420} at={cue('know')} size={70} color="#F2D59A" rot={-3} />
 				</Board>
 			)}

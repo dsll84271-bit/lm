@@ -3,7 +3,20 @@
  * scanlines, glow and glass glare, so low-resolution clips read as a broadcast.
  */
 import React from 'react';
-import {AbsoluteFill, Img, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Freeze, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame} from 'remotion';
+
+/**
+ * Plays a clip from the moment the set switches on. Clips long enough are looped;
+ * short ones hold on their last frame (like a paused tape) instead of running out.
+ */
+const Tape: React.FC<{src: string; startFrom: number; rate: number; len?: number}> = ({src, startFrom, rate, len}) => {
+	const frame = useCurrentFrame();
+	const video = <OffthreadVideo src={staticFile(src)} startFrom={startFrom} playbackRate={rate} muted style={{width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.06)'}} />;
+	if (!len) return video;
+	const n = Math.max(2, Math.floor(((len - startFrom / 30) * 30) / rate) - 2);
+	if (n >= 90) return <Loop durationInFrames={n} layout="none">{video}</Loop>;
+	return frame >= n ? <Freeze frame={n}>{video}</Freeze> : video;
+};
 
 export const TV: React.FC<{
 	src?: string; // video path under public/
@@ -18,7 +31,8 @@ export const TV: React.FC<{
 	grade?: 'colour' | 'warm' | 'mono';
 	rate?: number; // playback speed of the clip
 	tint?: string; // a colour washed over the picture (the case accent)
-}> = ({src, image, children, rate = 1, tint, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
+	len?: number; // the clip's length in seconds (lets it loop or hold instead of running out)
+}> = ({src, image, children, rate = 1, tint, len, startFrom = 0, x = 960, y = 540, w = 1100, rot = 0, on = 0, grade = 'warm'}) => {
 	const frame = useCurrentFrame();
 	const h = w * 0.78;
 	const sw = w * 0.7,
@@ -56,7 +70,11 @@ export const TV: React.FC<{
 			<div style={{position: 'absolute', left: w * 0.08, top: h * 0.08 + w * 0.03, width: sw, height: sh, borderRadius: `${w * 0.06}px / ${w * 0.07}px`, overflow: 'hidden', background: '#0b0d0c'}}>
 				{t >= 0 && (
 					<div style={{position: 'absolute', inset: 0, transform: `scaleY(${open < 1 ? Math.max(0.01, open) : 1})`, filter: `${filter} brightness(${flick})`}}>
-						{src && <OffthreadVideo src={staticFile(src)} startFrom={startFrom} playbackRate={rate} muted style={{width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.06)'}} />}
+						{src && (
+								<Sequence from={on} layout="none">
+									<Tape src={src} startFrom={startFrom} rate={rate} len={len} />
+								</Sequence>
+							)}
 						{image && <Img src={staticFile(image)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${1.06 + t * 0.0006})`}} />}
 						{children}
 					</div>

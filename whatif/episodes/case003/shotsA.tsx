@@ -8,8 +8,6 @@ import {BOARD} from './board';
 import {AMBER, Board, Caption, Clip, CountUp, Credit, I, IconCard, NIGHT, Plate, Pleading, Sfx, SlidePiece, T, TEAL} from './parts';
 import type {ShotProps} from './timeline';
 
-const CR_ORIG = 'Dexter (Showtime, 2006–2013)';
-const CR_RES = 'Dexter: Resurrection (Paramount+)';
 
 // 1 · twenty years of television's favourite killer: by day, by night
 export const S01: React.FC<ShotProps> = ({cue}) => {
@@ -20,8 +18,7 @@ export const S01: React.FC<ShotProps> = ({cue}) => {
 	return (
 		<Board dark>
 			<AbsoluteFill style={{background: `radial-gradient(ellipse at 70% 45%, ${TEAL}33 0%, rgba(0,0,0,0) 55%)`}} />
-			<Clip key={clip} n={clip} x={1270} y={500} w={980} rot={1.2} on={clip === 'eo_hall' ? 2 : 0} rate={0.5} />
-			<Credit text={CR_ORIG} x={950} y={950} id="s1cr" dark />
+			<Clip key={clip} n={clip} x={1270} y={500} w={980} rot={1.2} on={clip === 'eo_hall' ? 2 : clip === 'eo_slide' ? day - 4 : night - 4} rate={0.5} />
 			<Ransom id="s1a" text="20 YEARS" x={110} y={270} size={120} rot={-3} at={cue('twenty')} />
 			<div style={{position: 'absolute', left: 120, top: 470, fontFamily: 'Caslon', fontStyle: 'italic', fontSize: 58, color: '#E9E4D8', opacity: lerp(frame, cue('favourite') - 6, cue('favourite') + 6, 0, 1)}}>
 				television's favourite killer.
@@ -41,7 +38,6 @@ export const S01: React.FC<ShotProps> = ({cue}) => {
 export const S02: React.FC<ShotProps> = ({cue}) => (
 	<Board dark>
 		<Clip n="r1_wake" x={760} y={500} w={1080} rot={-1} on={0} rate={0.55} />
-		<Credit text={CR_RES} x={330} y={960} id="s2cr" dark />
 		<Tag id="s2a" text="Resurrection · Season 2" x={1330} y={230} rot={2} at={cue('resurrection')} size={26} />
 		<Piece id="s2b" x={1380} y={330} rot={-2} at={cue('friday')}>
 			<div style={{width: 420, background: '#FBF8EF', boxShadow: '6px 9px 16px rgba(0,0,0,.4)'}}>
@@ -138,7 +134,6 @@ export const S07: React.FC<ShotProps> = ({cue}) => (
 		<Tag id="s7t" text="First, the fiction" x={110} y={100} rot={-2} at={0} size={34} />
 		<BookCover at={cue('novel')} />
 		<Clip n="eo_suit" x={1230} y={470} w={860} rot={1.5} on={cue('showtime')} rate={0.6} />
-		<Credit text={CR_ORIG} x={950} y={880} id="s7cr" at={cue('showtime') + 6} />
 		<Tag id="s7m" text="Michael C. Hall as Dexter Morgan" x={880} y={120} rot={1.5} at={cue('michael')} size={28} />
 		<Ransom id="s7r" text="8 SEASONS" x={620} y={900} size={100} rot={-2} at={cue('eight')} />
 		<Sfx n="slap0" at={cue('novel')} />
@@ -189,7 +184,6 @@ export const S09: React.FC<ShotProps> = ({d, cue}) => {
 	return (
 		<Board dark>
 			<Clip n="r1_close" x={1420} y={300} w={620} rot={2} on={0} rate={0.6} />
-			<Credit text={CR_RES} x={1200} y={560} id="s9cr" dark />
 			<div style={{position: 'absolute', left: 110, top: 600, fontFamily: 'Caslon', fontSize: 74, color: '#E9E4D8', lineHeight: 1.15}}>
 				{a.slice(0, na)}
 				<span style={{opacity: 0}}>{a.slice(na)}</span>

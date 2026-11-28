@@ -650,6 +650,91 @@
      960
     ]
    ]
+  },
+  {
+   "id": "case003-dookhan",
+   "ep": "case003",
+   "start": 331.1,
+   "end": 360.38,
+   "hook": [
+    "ONE CHEMIST GOT",
+    "21,587 CASES THROWN OUT"
+   ],
+   "crop": [
+    [
+     331.1,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case003-oneinnine",
+   "ep": "case003",
+   "start": 198.43,
+   "end": 238.68,
+   "hook": [
+    "REAL EXPERTS GOT",
+    "1 IN 9 ANSWERS WRONG"
+   ],
+   "crop": [
+    [
+     198.43,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case003-joebryan",
+   "ep": "case003",
+   "start": 238.99,
+   "end": 281.24,
+   "hook": [
+    "40 HOURS OF TRAINING.",
+    "33 YEARS IN PRISON."
+   ],
+   "crop": [
+    [
+     238.99,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case003-coinflip",
+   "ep": "case003",
+   "start": 423.27,
+   "end": 462.42,
+   "hook": [
+    "HOW LONG WOULD DEXTER",
+    "REALLY LAST?"
+   ],
+   "crop": [
+    [
+     423.27,
+     1920,
+     960
+    ]
+   ]
+  },
+  {
+   "id": "case003-onedata",
+   "ep": "case003",
+   "start": 474.46,
+   "end": 511.45,
+   "hook": [
+    "HOW REAL KILLERS",
+    "ACTUALLY GET CAUGHT"
+   ],
+   "crop": [
+    [
+     474.46,
+     1920,
+     960
+    ]
+   ]
   }
  ]
 }
