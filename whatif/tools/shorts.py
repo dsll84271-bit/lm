@@ -127,7 +127,7 @@ def time_line(text, a, b, audio, sr):
     return out
 
 
-DOCS = {"doc01": "docs/ep01-why-florida", "case001": "docs/case001-the-reaping", "case002": "docs/case002-real-scrooge"}  # documentary narration folders (repo root)
+DOCS = {"doc01": "docs/ep01-why-florida", "case001": "docs/case001-the-reaping", "case002": "docs/case002-real-scrooge", "case003": "docs/case003-dexter-courtroom"}  # documentary narration folders (repo root)
 
 
 def doc_words(ep):

@@ -151,11 +151,11 @@ export const CaseBrief: React.FC<{t: CaseTheme; qs: string[]; ats: number[]; x?:
 		<Piece id={id} x={x} y={y} rot={rot} at={0}>
 			<div
 				style={{
-					width: 980,
-					padding: '30px 46px 40px',
+					width: 1180,
+					padding: '34px 50px 44px',
 					backgroundColor: '#FBF8EF',
-					backgroundImage: 'repeating-linear-gradient(#FBF8EF 0 63px,#B9D3E6 63px 65px)',
-					backgroundPosition: '0 98px',
+					backgroundImage: 'repeating-linear-gradient(#FBF8EF 0 78px,#B9D3E6 78px 80px)',
+					backgroundPosition: '0 104px',
 					boxShadow: '8px 14px 26px rgba(0,0,0,.35)',
 					borderTop: `16px solid ${t.accent}`,
 				}}
@@ -167,9 +167,9 @@ export const CaseBrief: React.FC<{t: CaseTheme; qs: string[]; ats: number[]; x?:
 				{qs.map((q, i) => {
 					const n = Math.max(0, Math.floor((f2 - ats[i]) * 1.6));
 					return (
-						<div key={i} style={{display: 'flex', gap: 22, alignItems: 'baseline', marginTop: 16, height: 48, opacity: f2 >= ats[i] ? 1 : 0}}>
-							<div style={{fontFamily: 'Bebas', fontSize: 52, color: t.accent, width: 40}}>{i + 1}</div>
-							<div style={{fontFamily: 'Elite', fontSize: 38, color: V.ink, whiteSpace: 'nowrap'}}>
+						<div key={i} style={{display: 'flex', gap: 24, alignItems: 'baseline', marginTop: 20, height: 60, opacity: f2 >= ats[i] ? 1 : 0}}>
+							<div style={{fontFamily: 'Bebas', fontSize: 64, color: t.accent, width: 44}}>{i + 1}</div>
+							<div style={{fontFamily: 'Elite', fontSize: 46, color: V.ink, whiteSpace: 'nowrap'}}>
 								{q.slice(0, n)}
 								<span style={{opacity: 0}}>{q.slice(n)}</span>
 							</div>

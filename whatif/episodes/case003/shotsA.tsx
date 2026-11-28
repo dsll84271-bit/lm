@@ -113,7 +113,7 @@ export const S05: React.FC<ShotProps> = ({d, cue}) => <Ident t={T} d={d} welcome
 export const S06: React.FC<ShotProps> = ({cue}) => (
 	<Board>
 		<SlidePiece id="s6s1" label={'CASE 003\nBRIEF'} x={120} y={120} at={0} rot={-8} w={300} />
-		<CaseBrief t={T} qs={['Would his science get into court?', 'What if the man in the lab is the criminal?', 'How long would he really survive?']} ats={[cue('one'), cue('two'), cue('three', 1)]} x={460} y={240} />
+		<CaseBrief t={T} qs={['Would his science get into court?', 'What if the man in the lab is the criminal?', 'How long would he really survive?']} ats={[cue('one'), cue('two'), cue('three', 1)]} x={380} y={250} />
 		<S n="pin" at={2} />
 		<Sfx n="type0" at={cue('one')} v={0.3} />
 		<Sfx n="type1" at={cue('two')} v={0.3} />
