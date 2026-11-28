@@ -173,14 +173,12 @@ export const S08: React.FC<ShotProps> = ({cue}) => (
 );
 
 // 9 · the idea the show rests on → the suspect goes up on the evidence board
-export const S09: React.FC<ShotProps> = ({d, cue}) => {
+export const S09: React.FC<ShotProps> = ({cue}) => {
 	const f2 = useTwos();
 	const a = 'The man the system trusts most';
 	const b = 'is the one it should trust least.';
 	const na = Math.max(0, Math.floor((f2 - cue('man')) * 1.3));
 	const nb = Math.max(0, Math.floor((f2 - cue('is')) * 1.3));
-	const toBoard = cue('least') + 24;
-	if (useCurrentFrame() >= toBoard) return <EvidenceBoard t={T} items={BOARD} shown={0} newAt={4} d={d - toBoard} />;
 	return (
 		<Board dark>
 			<Clip n="r1_close" x={1420} y={300} w={620} rot={2} on={0} rate={0.6} />

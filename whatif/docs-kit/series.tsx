@@ -278,7 +278,10 @@ export const EvidenceBoard: React.FC<{t: CaseTheme; items: BoardItem[]; shown: n
 	const target = items[Math.min(items.length - 1, focus ?? (newAt !== undefined ? shown : Math.max(0, shown - 1)))];
 	const cx = target ? target.x + target.w / 2 : 960;
 	const cy = target ? target.y + (target.h ?? target.w * 0.75) / 2 : 540;
-	const zoomIn = newAt !== undefined ? interpolate(frame, [0, Math.max(1, newAt - 4), newAt + 30, d], [1.0, 1.0, 1.32, 1.4], {...clamp, easing: Easing.inOut(Easing.quad)}) : interpolate(frame, [0, d], [1.06, 1.0], clamp);
+	const z1 = Math.max(1, (newAt ?? 0) - 4);
+	const z2 = Math.max(z1 + 1, (newAt ?? 0) + 30);
+	const z3 = Math.max(z2 + 1, d);
+	const zoomIn = newAt !== undefined ? interpolate(frame, [0, z1, z2, z3], [1.0, 1.0, 1.32, 1.4], {...clamp, easing: Easing.inOut(Easing.quad)}) : interpolate(frame, [0, Math.max(1, d)], [1.06, 1.0], clamp);
 	const k = (zoomIn - 1) / 0.4;
 	const tx = (960 - cx) * k;
 	const ty = (540 - cy) * k;
